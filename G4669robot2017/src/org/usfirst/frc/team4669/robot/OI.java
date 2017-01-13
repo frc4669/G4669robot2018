@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4669.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import org.usfirst.frc.team4669.robot.commands.ExampleCommand;
 
@@ -38,10 +39,14 @@ public class OI {
 	private Joystick leftStick = new Joystick(0);
 	private Joystick rightStick = new Joystick(1);
 	
-	public double leftY () {
-		leftStick.get
-		
+	public double leftY() {
+		return leftStick.getY();
 	}
+	
+	public double rightY() {
+		return rightStick.getY();
+	}
+	
 	
 	
 }

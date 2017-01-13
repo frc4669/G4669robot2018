@@ -27,13 +27,13 @@ public class DriveTrain extends Subsystem {
     	rightDrive(speed);
     }
     
-    public void leftDrive(int speed) {
+    public void leftDrive(double speed) {
     	leftMotor1.set(speed);
     	leftMotor2.set(speed);
 
     }
     
-    public void rightDrive(int speed) {
+    public void rightDrive(double speed) {
     	rightMotor1.set(speed);
     	rightMotor2.set(speed);
     }

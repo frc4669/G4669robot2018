@@ -40,6 +40,7 @@ public class OI {
 	
 	public double leftY () {
 		leftStick.get
+		
 	}
 	
 	

@@ -35,7 +35,12 @@ public class OI {
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
 	
+	private Joystick leftStick = new Joystick(0);
+	private Joystick rightStick = new Joystick(1);
 	
+	public double leftY () {
+		leftStick.get
+	}
 	
 	
 }

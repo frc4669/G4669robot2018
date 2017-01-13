@@ -21,8 +21,10 @@ public class TankDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drive.leftDrive(Robot.oi.leftY());
-    	Robot.drive.rightDrive(Robot.oi.rightY());
+    	System.out.println(Robot.oi.leftY());
+    	System.out.println(Robot.oi.rightY());
+    	Robot.drive.driveForward(Robot.oi.leftY(), Robot.oi.rightY());
+    	System.out.println("Teleworking");
     }
 
     // Make this return true when this Command no longer needs to run execute()

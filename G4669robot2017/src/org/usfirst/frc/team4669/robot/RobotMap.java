@@ -13,13 +13,19 @@ public class RobotMap {
     // public static int rightMotor = 2;
 	
 	//Front left motor
-	public static final int driveTrainLeft1 = 8;
+	public static final int driveTrainFrontLeft = 8;
 	//Front right motor
-    public static final int driveTrainLeft2 = 7;
+    public static final int driveTrainRearLeft = 5;
     //Rear left motor
-	public static final int driveTrainRight1 = 5;
+	public static final int driveTrainFrontRight = 7;
 	//Rear right motor
-	public static final int driveTrainRight2 = 4;
+	public static final int driveTrainRearRight = 4;
+
+	// Reverse output of motors if moving backwords
+	public static final boolean reverseOutputTrain = true;
+	
+	public static final int leftJoystick = 1;
+	public static final int rightJoystick = 0;
     
     // If you are using multiple modules, make sure to define both the port
     // number and the module. For example you with a rangefinder:

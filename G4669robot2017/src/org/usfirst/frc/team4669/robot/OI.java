@@ -1,6 +1,11 @@
 package org.usfirst.frc.team4669.robot;
 
+import org.usfirst.frc.team4669.robot.commands.DriveForward;
+import org.usfirst.frc.team4669.robot.commands.Turn45Degrees;
+import org.usfirst.frc.team4669.robot.commands.ZeroSensors;
+
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -33,9 +38,19 @@ public class OI {
     // Start the command when the button is released  and let it run the command
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
+	private Joystick leftStick;
+	private Joystick rightStick ;
 	
-	private Joystick leftStick = new Joystick(RobotMap.leftJoystick);
-	private Joystick rightStick = new Joystick(RobotMap.rightJoystick);
+	public OI() {
+		leftStick = new Joystick(RobotMap.leftJoystick);
+		rightStick = new Joystick(RobotMap.rightJoystick);
+		
+		SmartDashboard.putData("Zero Sensors", new ZeroSensors());
+		SmartDashboard.putData("Turn45Degrees", new Turn45Degrees());
+		SmartDashboard.putData("DriveForward", new DriveForward());
+	}
+	
+	
 	
 	public double leftY() {
 		return leftStick.getY();

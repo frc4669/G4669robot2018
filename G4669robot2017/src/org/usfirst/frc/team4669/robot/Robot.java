@@ -6,6 +6,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc.team4669.robot.commands.ExampleCommand;
+import org.usfirst.frc.team4669.robot.commands.TankDrive;
+import org.usfirst.frc.team4669.robot.commands.Turn45Degrees;
 import org.usfirst.frc.team4669.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4669.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -18,10 +20,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * creating this project, you must also update the manifest file in the resource
  * directory.
  */
+
 public class Robot extends IterativeRobot {
 
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
-	public static final DriveTrain driveTrain = new DriveTrain();
+	public static DriveTrain driveTrain = new DriveTrain();
 	public static OI oi;
 
     Command autonomousCommand;
@@ -33,9 +36,13 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		oi = new OI();
+		
+		driveTrain.calibrateGyro();
+		driveTrain.zeroEncoders();
+		
         chooser = new SendableChooser();
-        chooser.addDefault("Default Auto", new ExampleCommand());
-//        chooser.addObject("My Auto", new MyAutoCommand());
+        chooser.addDefault("Default Auto", new TankDrive());
+        chooser.addObject("My Auto", new Turn45Degrees());
         SmartDashboard.putData("Auto mode", chooser);
     }
 	
@@ -63,18 +70,7 @@ public class Robot extends IterativeRobot {
 	 */
     public void autonomousInit() {
         autonomousCommand = (Command) chooser.getSelected();
-        
-		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
-		switch(autoSelected) {
-		case "My Auto":
-			autonomousCommand = new MyAutoCommand();
-			break;
-		case "Default Auto":
-		default:
-			autonomousCommand = new ExampleCommand();
-			break;
-		} */
-    	
+    	 
     	// schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
     }
@@ -83,6 +79,7 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
+//    	execute();
         Scheduler.getInstance().run();
     }
 
@@ -98,6 +95,7 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
+    	execute();
         Scheduler.getInstance().run();
     }
     
@@ -106,5 +104,11 @@ public class Robot extends IterativeRobot {
      */
     public void testPeriodic() {
         LiveWindow.run();
+    }
+    
+    public void execute() {
+    	SmartDashboard.putNumber("Gyro", driveTrain.getGyroAngle());
+    	SmartDashboard.putNumber("Left Enocder", driveTrain.getLeftEncoder());
+    	SmartDashboard.putNumber("Right Encoder", driveTrain.getRightEncoder());
     }
 }

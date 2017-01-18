@@ -29,7 +29,7 @@ public class DriveForward extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if (Robot.driveTrain.getRightEncoder() == 360 || Robot.driveTrain.getRightEncoder() == 358 || Robot.driveTrain.getRightEncoder() >= 362) return true;
+    	if (Robot.driveTrain.getRightEncoder() >= 16000) return true;
         	return false;
         
     }

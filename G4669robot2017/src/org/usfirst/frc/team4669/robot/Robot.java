@@ -46,7 +46,9 @@ public class Robot extends IterativeRobot {
         chooser.addDefault("Default Auto", new TankDrive());
         chooser.addObject("My Auto", new Turn45Degrees());
         chooser.addObject("TEST", new DriveForward());
+        
         SmartDashboard.putData("Auto mode", chooser);
+        
     }
 	
 	/**

@@ -7,13 +7,14 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class Turn45Degrees extends Command {
+public class Turn180Degrees extends Command {
 
-    public Turn45Degrees() {
+    public Turn180Degrees() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	
     	requires(Robot.driveTrain);
+    	
     }
 
     // Called just before this Command runs the first time
@@ -23,23 +24,19 @@ public class Turn45Degrees extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	System.out.println("Turning");
-    	Robot.driveTrain.driveForward(-0.25,0.25);
-    	
+    	Robot.driveTrain.driveForward(-0.5, 0.5);
+    	isFinished();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if (Robot.driveTrain.getGyroAngle() <= -45) {
-        	return true;
-        }
-        else {
-        	return false;
-        }
+    	if (Robot.driveTrain.getGyroAngle() >= 182) return true;
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.driveTrain.stop();
     }
 
     // Called when another command which requires one or more of the same

@@ -40,11 +40,15 @@ public class OI {
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
 	private Joystick leftStick;
-	private Joystick rightStick ;
+	private Joystick rightStick;
+	
 	
 	public OI() {
 		leftStick = new Joystick(RobotMap.leftJoystick);
+		
+		// Fuel Launcher Joystick
 		rightStick = new Joystick(RobotMap.rightJoystick);
+		//StringBuilder _sb = new StringBuilder();
 		
 		SmartDashboard.putData("Zero Sensors", new ZeroSensors());
 		SmartDashboard.putData("Turn45Degrees", new Turn45Degrees());
@@ -61,6 +65,15 @@ public class OI {
 	public double rightY() {
 		return rightStick.getY();
 	}
+	
+	public boolean getRawButton(int button) {
+		return rightStick.getRawButton(button);
+	}
+	/**
+	public StringBuilder get_sb() {
+		return Robot.oi._sb.toString();
+	}
+	*/
 	
 	
 	

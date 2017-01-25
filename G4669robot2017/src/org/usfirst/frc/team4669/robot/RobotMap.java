@@ -20,11 +20,16 @@ public class RobotMap {
 	public static final int driveTrainFrontRight = 7;
 	//Rear right motor
 	public static final int driveTrainRearRight = 4;
+	
+	//Launch motor
+	public static final int singleLaunchMotor = 1;
 
 	// Reverse output of motors if moving backwords
 	public static final boolean reverseOutputTrain = true;
 	
 	public static final int leftJoystick = 1;
+	
+	// Launch Joystick
 	public static final int rightJoystick = 0;
     
     // If you are using multiple modules, make sure to define both the port

@@ -12,6 +12,9 @@ import org.usfirst.frc.team4669.robot.commands.TankDrive;
 import org.usfirst.frc.team4669.robot.commands.Turn45Degrees;
 import org.usfirst.frc.team4669.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4669.robot.subsystems.ExampleSubsystem;
+//import org.usfirst.frc.team4669.robot.subsystems.FuelLauncher;
+import org.usfirst.frc.team4669.robot.subsystems.FuelLauncher;
+
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -27,6 +30,7 @@ public class Robot extends IterativeRobot {
 
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static DriveTrain driveTrain = new DriveTrain();
+	public static FuelLauncher fuelLauncher = new FuelLauncher();
 	public static OI oi;
 
     Command autonomousCommand;
@@ -39,8 +43,8 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		oi = new OI();
 		
-		driveTrain.calibrateGyro();
-		driveTrain.zeroEncoders();
+		//driveTrain.calibrateGyro();
+		//driveTrain.zeroEncoders();
 		
         chooser = new SendableChooser();
         chooser.addDefault("Default Auto", new TankDrive());
@@ -100,6 +104,8 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
+    	
+    	
     	execute();
         Scheduler.getInstance().run();
     }
@@ -112,8 +118,8 @@ public class Robot extends IterativeRobot {
     }
     
     public void execute() {
-    	SmartDashboard.putNumber("Gyro", driveTrain.getGyroAngle());
-    	SmartDashboard.putNumber("Left Enocder", driveTrain.getLeftEncoder());
-    	SmartDashboard.putNumber("Right Encoder", driveTrain.getRightEncoder());
+//    	SmartDashboard.putNumber("Gyro", driveTrain.getGyroAngle());
+//    	SmartDashboard.putNumber("Left Enocder", driveTrain.getLeftEncoder());
+//    	SmartDashboard.putNumber("Right Encoder", driveTrain.getRightEncoder());
     }
 }

@@ -35,6 +35,7 @@ public class Robot extends IterativeRobot {
 
     Command autonomousCommand;
     SendableChooser chooser;
+    
 
     /**
      * This function is run when the robot is first started up and should be
@@ -52,6 +53,7 @@ public class Robot extends IterativeRobot {
         chooser.addObject("TEST", new DriveForward());
         
         SmartDashboard.putData("Auto mode", chooser);
+        SmartDashboard.putNumber("RPM", 0);
         
     }
 	

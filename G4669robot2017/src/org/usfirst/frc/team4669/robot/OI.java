@@ -39,36 +39,37 @@ public class OI {
     // Start the command when the button is released  and let it run the command
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
-	private Joystick leftStick;
-	private Joystick rightStick;
 	
+	//Joystick variables
+		private Joystick leftStick;
+		private Joystick rightStick;
 	
+		
 	public OI() {
-		leftStick = new Joystick(RobotMap.leftJoystick);
+		//Mapping joysticks
+			leftStick = new Joystick(RobotMap.leftJoystick);
+			rightStick = new Joystick(RobotMap.rightJoystick);
+			//StringBuilder _sb = new StringBuilder();
 		
-		// Fuel Launcher Joystick
-		rightStick = new Joystick(RobotMap.rightJoystick);
-		//StringBuilder _sb = new StringBuilder();
+		//SmartDashboard commands
+			SmartDashboard.putData("Zero Sensors", new ZeroSensors());
+			SmartDashboard.putData("Turn45Degrees", new Turn45Degrees());
+			SmartDashboard.putData("DriveForward", new DriveForward());
+			SmartDashboard.putData("Turn180Degrees", new Turn180Degrees());
+	}
+	
+	
+	//Getting joystick values
+		public double leftY() {
+			return leftStick.getY();
+		}
+		public double rightY() {
+			return rightStick.getY();
+		}
+		public boolean getRawButton(int button) {
+			return rightStick.getRawButton(button);
+		}
 		
-		SmartDashboard.putData("Zero Sensors", new ZeroSensors());
-		SmartDashboard.putData("Turn45Degrees", new Turn45Degrees());
-		SmartDashboard.putData("DriveForward", new DriveForward());
-		SmartDashboard.putData("Turn180Degrees", new Turn180Degrees());
-	}
-	
-	
-	
-	public double leftY() {
-		return leftStick.getY();
-	}
-	
-	public double rightY() {
-		return rightStick.getY();
-	}
-	
-	public boolean getRawButton(int button) {
-		return rightStick.getRawButton(button);
-	}
 	/**
 	public StringBuilder get_sb() {
 		return Robot.oi._sb.toString();

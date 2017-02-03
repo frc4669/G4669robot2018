@@ -12,6 +12,8 @@ import org.usfirst.frc.team4669.robot.commands.TankDrive;
 import org.usfirst.frc.team4669.robot.commands.Turn45Degrees;
 import org.usfirst.frc.team4669.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4669.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team4669.robot.subsystems.FuelFeeder;
+import org.usfirst.frc.team4669.robot.subsystems.FuelIntake;
 //import org.usfirst.frc.team4669.robot.subsystems.FuelLauncher;
 import org.usfirst.frc.team4669.robot.subsystems.FuelLauncher;
 
@@ -31,6 +33,8 @@ public class Robot extends IterativeRobot {
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static DriveTrain driveTrain = new DriveTrain();
 	public static FuelLauncher fuelLauncher = new FuelLauncher();
+	public static FuelIntake fuelIntake = new FuelIntake();
+	public static FuelFeeder fuelFeeder = new FuelFeeder();
 	public static OI oi;
 
     Command autonomousCommand;
@@ -53,7 +57,9 @@ public class Robot extends IterativeRobot {
         chooser.addObject("TEST", new DriveForward());
         
         SmartDashboard.putData("Auto mode", chooser);
-        SmartDashboard.putNumber("RPM", 0);
+        SmartDashboard.putNumber("RPM1", 0);
+        SmartDashboard.putNumber("RPM3", 0);
+        SmartDashboard.putNumber("RPM2", 0);
         
     }
 	

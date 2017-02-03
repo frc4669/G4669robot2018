@@ -51,9 +51,10 @@ public class FuelLauncher extends Subsystem {
     }
     
     public void launch() {
-    	if(Robot.oi.getRawButton(1)){
+    	if(Robot.oi.getRawButton(RobotMap.launchButton)){
         	/* Speed mode */
-        	double targetSpeed = SmartDashboard.getNumber("RPM", 0);
+    		
+        	double targetSpeed = SmartDashboard.getNumber("RPM1", 0);
         	launchMotor.changeControlMode(TalonControlMode.Speed);
         	launchMotor.set(targetSpeed); /* 1500 RPM in either direction */
 //        	_sb.append("\tMode:");

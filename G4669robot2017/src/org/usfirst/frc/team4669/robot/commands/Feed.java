@@ -7,14 +7,14 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class Intake extends Command {
+public class Feed extends Command {
 	
 	private int _loops = 0;
 
-    public Intake() {
+    public Feed() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.fuelIntake);
+    	requires(Robot.fuelFeeder);
     }
 
     // Called just before this Command runs the first time
@@ -27,15 +27,16 @@ public class Intake extends Command {
     		
     		_loops = 0;
      	}
-    	Robot.fuelIntake.intake();
+    	Robot.fuelFeeder.feed();
     }
+    
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if (Robot.oi.getRawButton(3)) return false;
-    	else {
-    		return true;
-    	}
+        if (Robot.oi.getRawButton(2)) return false;
+        else {
+        	return true;
+        }
     }
 
     // Called once after isFinished returns true

@@ -1,12 +1,13 @@
 package org.usfirst.frc.team4669.robot.subsystems;
 import org.usfirst.frc.team4669.robot.Robot;
 import org.usfirst.frc.team4669.robot.RobotMap;
-import org.usfirst.frc.team4669.robot.commands.Launch;
+import org.usfirst.frc.team4669.robot.commands.Intake;
 
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.TalonControlMode;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -24,7 +25,7 @@ public class FuelIntake extends Subsystem {
 			//Motor setup
 				intakeMotor.enable();
 				intakeMotor.reverseSensor(false);
-				intakeMotor.configEncoderCodesPerRev(360); // if using FeedbackDevice.QuadEncoder
+				intakeMotor.configEncoderCodesPerRev(4096); // if using FeedbackDevice.QuadEncoder
 				intakeMotor.setPosition(0.0);
 				//launcherMotor.configPotentiometerTurns(XXX);, // if using FeedbackDevice.AnalogEncoder or AnalogPot
 			
@@ -45,13 +46,13 @@ public class FuelIntake extends Subsystem {
 		    public void initDefaultCommand() {
 		        // Set the default command for a subsystem here.
 		        //setDefaultCommand(new MySpecialCommand());
-		    	//setDefaultCommand(new Intake());
+		    	setDefaultCommand(new Intake());
 		    }
 	    
 	    //Intake command
 		    public void intake() {
-		    	if(Robot.oi.getRawButton(2)){
-		        	double targetSpeed = 1000;
+		    	if(Robot.oi.getRawButton(RobotMap.intakeButton)){
+		        	double targetSpeed = SmartDashboard.getNumber("RPM3", 0);
 		        	intakeMotor.changeControlMode(TalonControlMode.Speed);
 		        	intakeMotor.set(targetSpeed);
 		    	} 

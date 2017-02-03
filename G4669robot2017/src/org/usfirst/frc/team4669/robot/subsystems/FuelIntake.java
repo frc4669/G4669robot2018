@@ -67,6 +67,10 @@ public class FuelIntake extends Subsystem {
 	    	return intakeMotor.getEncPosition();
 	    }
 	    
+	    public double getEncoderVel() {
+	    	return intakeMotor.getEncVelocity();
+	    }
+	    
 	    //Zero encoder
 	    public void zeroEncoder(){
 	    	intakeMotor.setPosition(0);

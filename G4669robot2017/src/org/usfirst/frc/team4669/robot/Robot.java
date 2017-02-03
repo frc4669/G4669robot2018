@@ -60,6 +60,7 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("RPM1", 0);
         SmartDashboard.putNumber("RPM3", 0);
         SmartDashboard.putNumber("RPM2", 0);
+        SmartDashboard.putNumber("EncoderVel", Robot.fuelIntake.getEncoderVel());
         
     }
 	

@@ -29,7 +29,7 @@ public class FuelFeeder extends Subsystem {
 		
 		//Motor setup
 			feederMotor.enable();
-			feederMotor.reverseSensor(false);
+			feederMotor.reverseSensor(true);
 			feederMotor.configEncoderCodesPerRev(4096); // if using FeedbackDevice.QuadEncoder
 			feederMotor.setPosition(0.0);
 			//launcherMotor.configPotentiometerTurns(XXX);, // if using FeedbackDevice.AnalogEncoder or AnalogPot

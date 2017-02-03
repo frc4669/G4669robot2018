@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4669.robot.commands;
 
 import org.usfirst.frc.team4669.robot.Robot;
+import org.usfirst.frc.team4669.robot.RobotMap;
 
 import com.ctre.CANTalon.TalonControlMode;
 
@@ -42,7 +43,7 @@ public class Launch extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if (Robot.oi.getRawButton(1)) return false;
+    	if (Robot.oi.getRawButton(RobotMap.launchButton)) return false;
     	else {
     		return true;
     	}

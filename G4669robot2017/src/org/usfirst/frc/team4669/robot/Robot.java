@@ -14,7 +14,6 @@ import org.usfirst.frc.team4669.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4669.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team4669.robot.subsystems.FuelFeeder;
 import org.usfirst.frc.team4669.robot.subsystems.FuelIntake;
-//import org.usfirst.frc.team4669.robot.subsystems.FuelLauncher;
 import org.usfirst.frc.team4669.robot.subsystems.FuelLauncher;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -37,42 +36,42 @@ public class Robot extends IterativeRobot {
 	public static FuelFeeder fuelFeeder = new FuelFeeder();
 	public static OI oi;
 
-    Command autonomousCommand;
-    SendableChooser chooser;
-    
+	Command autonomousCommand;
+	SendableChooser chooser;
 
-    /**
-     * This function is run when the robot is first started up and should be
-     * used for any initialization code.
-     */
-    public void robotInit() {
+
+	/**
+	 * This function is run when the robot is first started up and should be
+	 * used for any initialization code.
+	 */
+	public void robotInit() {
 		oi = new OI();
-		
+
 		//driveTrain.calibrateGyro();
 		//driveTrain.zeroEncoders();
-		
-        chooser = new SendableChooser();
-        chooser.addDefault("Default Auto", new TankDrive());
-        chooser.addObject("My Auto", new Turn45Degrees());
-        chooser.addObject("TEST", new DriveForward());
-        
-        SmartDashboard.putData("Auto mode", chooser);
-        SmartDashboard.putNumber("RPM1", 0);
-        SmartDashboard.putNumber("RPM3", 0);
-        SmartDashboard.putNumber("RPM2", 0);
-        SmartDashboard.putNumber("EncoderVel", Robot.fuelIntake.getEncoderVel());
-        
-    }
-	
-	/**
-     * This function is called once each time the robot enters Disabled mode.
-     * You can use it to reset any subsystem information you want to clear when
-	 * the robot is disabled.
-     */
-    public void disabledInit(){
 
-    }
-	
+		chooser = new SendableChooser();
+		chooser.addDefault("Default Auto", new TankDrive());
+		chooser.addObject("My Auto", new Turn45Degrees());
+		chooser.addObject("TEST", new DriveForward());
+
+		SmartDashboard.putData("Auto mode", chooser);
+		SmartDashboard.putNumber("RPM1", 0);
+		SmartDashboard.putNumber("RPM3", 0);
+		SmartDashboard.putNumber("RPM2", 0);
+		SmartDashboard.putNumber("EncoderVel", Robot.fuelLauncher.getEncoderVel());
+
+	}
+
+	/**
+	 * This function is called once each time the robot enters Disabled mode.
+	 * You can use it to reset any subsystem information you want to clear when
+	 * the robot is disabled.
+	 */
+	public void disabledInit(){
+
+	}
+
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 	}
@@ -86,49 +85,50 @@ public class Robot extends IterativeRobot {
 	 * You can add additional auto modes by adding additional commands to the chooser code above (like the commented example)
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
-    public void autonomousInit() {
-        autonomousCommand = (Command) chooser.getSelected();
-    	 
-    	// schedule the autonomous command (example)
-        if (autonomousCommand != null) autonomousCommand.start();
-    }
+	public void autonomousInit() {
+		autonomousCommand = (Command) chooser.getSelected();
 
-    /**
-     * This function is called periodically during autonomous
-     */
-    public void autonomousPeriodic() {
-    	execute();
-        Scheduler.getInstance().run();
-    }
+		// schedule the autonomous command (example)
+		if (autonomousCommand != null) autonomousCommand.start();
+	}
 
-    public void teleopInit() {
+	/**
+	 * This function is called periodically during autonomous
+	 */
+	public void autonomousPeriodic() {
+		updateSmartDashboard();
+		Scheduler.getInstance().run();
+	}
+
+	public void teleopInit() {
 		// This makes sure that the autonomous stops running when
-        // teleop starts running. If you want the autonomous to 
-        // continue until interrupted by another command, remove
-        // this line or comment it out.
-        if (autonomousCommand != null) autonomousCommand.cancel();
-    }
+		// teleop starts running. If you want the autonomous to 
+		// continue until interrupted by another command, remove
+		// this line or comment it out.
+		if (autonomousCommand != null) autonomousCommand.cancel();
+	}
 
-    /**
-     * This function is called periodically during operator control
-     */
-    public void teleopPeriodic() {
-    	
-    	
-    	execute();
-        Scheduler.getInstance().run();
-    }
-    
-    /**
-     * This function is called periodically during test mode
-     */
-    public void testPeriodic() {
-        LiveWindow.run();
-    }
-    
-    public void execute() {
-//    	SmartDashboard.putNumber("Gyro", driveTrain.getGyroAngle());
-//    	SmartDashboard.putNumber("Left Enocder", driveTrain.getLeftEncoder());
-//    	SmartDashboard.putNumber("Right Encoder", driveTrain.getRightEncoder());
-    }
+	/**
+	 * This function is called periodically during operator control
+	 */
+	public void teleopPeriodic() {
+		updateSmartDashboard();
+		Scheduler.getInstance().run();
+	}
+
+	/**
+	 * This function is called periodically during test mode
+	 */
+	public void testPeriodic() {
+		LiveWindow.run();
+	}
+
+	public void updateSmartDashboard() {
+		//    	SmartDashboard.putNumber("Gyro", driveTrain.getGyroAngle());
+		//    	SmartDashboard.putNumber("Left Enocder", driveTrain.getLeftEncoder());
+		//    	SmartDashboard.putNumber("Right Encoder", driveTrain.getRightEncoder());
+		SmartDashboard.putNumber("Left Y Axis", Robot.oi.leftY());
+    	SmartDashboard.putNumber("Right Y Axis", Robot.oi.rightY());
+    	SmartDashboard.putNumber("EncoderVel", Robot.fuelIntake.getEncoderVel());
+	}
 }

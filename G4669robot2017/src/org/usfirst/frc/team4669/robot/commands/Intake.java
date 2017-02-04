@@ -5,12 +5,9 @@ import org.usfirst.frc.team4669.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
 public class Intake extends Command {
 	
-	private int _loops = 0;
+	private int loops = 0;
 
     public Intake() {
         // Use requires() here to declare subsystem dependencies
@@ -24,9 +21,9 @@ public class Intake extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(++_loops >= 10) {
+    	if(++loops >= 10) {
     		
-    		_loops = 0;
+    		loops = 0;
      	}
     	Robot.fuelIntake.intake();
     }

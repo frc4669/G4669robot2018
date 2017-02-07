@@ -42,6 +42,7 @@ public class OI {
 
 	//Joystick variables
 	private Joystick leftStick;
+	
 	private Joystick rightStick;
 
 	public OI() {
@@ -74,7 +75,13 @@ public class OI {
 	}
 	 */
 
+	public Joystick getLeftStick() {
+		return leftStick;
+	}
 
+	public Joystick getRightStick() {
+		return rightStick;
+	}
 
 }
 

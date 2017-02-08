@@ -327,7 +327,7 @@ public class DriveTrain extends Subsystem {
 					 * timeout. Really this is so that you can unplug your talon in
 					 * the middle of an MP and react to it.
 					 */
-					System.out.print("state 2");
+					
 					if (_status.isUnderrun == false) {
 						_loopTimeout = kNumLoopsTimeout;
 					}

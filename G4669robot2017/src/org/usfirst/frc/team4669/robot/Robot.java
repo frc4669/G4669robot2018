@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.usfirst.frc.team4669.robot.commands.DriveForward;
+import org.usfirst.frc.team4669.robot.commands.DriveTrainMotionProfile;
 import org.usfirst.frc.team4669.robot.commands.ExampleCommand;
 import org.usfirst.frc.team4669.robot.commands.TankDrive;
 import org.usfirst.frc.team4669.robot.commands.Turn45Degrees;
@@ -86,8 +87,9 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
 	public void autonomousInit() {
-		autonomousCommand = (Command) chooser.getSelected();
-
+//		autonomousCommand = (Command) chooser.getSelected();
+		driveTrain.setupMotionProfile();
+		autonomousCommand = new DriveTrainMotionProfile();
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null) autonomousCommand.start();
 	}

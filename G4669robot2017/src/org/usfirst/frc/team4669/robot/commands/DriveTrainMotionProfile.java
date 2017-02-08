@@ -1,5 +1,7 @@
 package org.usfirst.frc.team4669.robot.commands;
 
+import java.util.Arrays;
+
 import org.usfirst.frc.team4669.robot.Robot;
 
 import com.ctre.CANTalon;
@@ -34,16 +36,17 @@ public class DriveTrainMotionProfile extends Command {
 
 		/* get the left joystick axis on Logitech Gampead */
 		double leftYjoystick = -1 * Robot.oi.getLeftStick().getY(); /* multiple by -1 so joystick forward is positive */
-
+//		System.out.print(Arrays.toString(btns));
+//		System.out.println(leftYjoystick);
 		/* call this periodically, and catch the output.  Only apply it if user wants to run MP. */
 		Robot.driveTrain.control();
-		
-		if (btns[5] == false) { /* Check button 5 (top left shoulder on the logitech gamead). */
+
+		if (btns[5] == true) { /* Check button 5 (top left shoulder on the logitech gamead). */
 			/*
 			 * If it's not being pressed, just do a simple drive.  This
 			 * could be a RobotDrive class or custom drivetrain logic.
 			 * The point is we want the switch in and out of MP Control mode.*/
-		
+			
 			/* button5 is off so straight drive */
 			Robot.driveTrain.changeControlMode(TalonControlMode.Voltage);
 			Robot.driveTrain.set(12.0 * leftYjoystick);
@@ -54,6 +57,7 @@ public class DriveTrainMotionProfile extends Command {
 			 * When we transition from no-press to press,
 			 * pass a "true" once to MotionProfileControl.
 			 */
+//			System.out.println("button5true");
 			Robot.driveTrain.changeControlMode(TalonControlMode.MotionProfile);
 			
 			CANTalon.SetValueMotionProfile setOutput = Robot.driveTrain.getSetValue();
@@ -63,7 +67,7 @@ public class DriveTrainMotionProfile extends Command {
 			/* if btn is pressed and was not pressed last time,
 			 * In other words we just detected the on-press event.
 			 * This will signal the robot to start a MP */
-			if( (btns[6] == true) && (_btnsLast[6] == false) ) {
+			if( (btns[6] == false) && (_btnsLast[6] == false) ) {
 				/* user just tapped button 6 */
 				Robot.driveTrain.startMotionProfile();
 			}
@@ -77,7 +81,7 @@ public class DriveTrainMotionProfile extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.driveTrain.get_state() == 0;
+        return false;
     }
 
     // Called once after isFinished returns true

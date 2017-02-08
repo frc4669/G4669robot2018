@@ -191,7 +191,12 @@ public class DriveTrain extends Subsystem {
 	 * every 10ms.
 	 */
 	class PeriodicRunnable implements java.lang.Runnable {
-	    public void run() {  frontLeftMotor.processMotionProfileBuffer();    }
+	    public void run() {  
+	    	frontLeftMotor.processMotionProfileBuffer();
+	    	rearLeftMotor.processMotionProfileBuffer();
+	    	frontRightMotor.processMotionProfileBuffer();
+	    	rearRightMotor.processMotionProfileBuffer();
+	    }
 	}
 	Notifier _notifer = new Notifier(new PeriodicRunnable());
 	
@@ -244,6 +249,7 @@ public class DriveTrain extends Subsystem {
 	 * Called every loop.
 	 */
 	public void control() {
+		
 		/* Get the motion profile status every loop */
 		frontLeftMotor.getMotionProfileStatus(_status);
 		rearLeftMotor.getMotionProfileStatus(_status);
@@ -279,6 +285,7 @@ public class DriveTrain extends Subsystem {
 			 */
 			set_state(0);
 			_loopTimeout = -1;
+			
 		} else {
 			/*
 			 * we are in MP control mode. That means: starting Mps, checking Mp
@@ -289,8 +296,9 @@ public class DriveTrain extends Subsystem {
 				case 0: /* wait for application to tell us to start an MP */
 					if (_bStart) {
 						_bStart = false;
-	
+						
 						_setValue = CANTalon.SetValueMotionProfile.Disable;
+						
 						startFilling();
 						/*
 						 * MP is being sent to CAN bus, wait a small amount of time
@@ -303,6 +311,7 @@ public class DriveTrain extends Subsystem {
 						 * wait for MP to stream to Talon, really just the first few
 						 * points
 						 */
+					
 					/* do we have a minimum numberof points in Talon */
 					if (_status.btmBufferCnt > kMinPointsInTalon) {
 						/* start (once) the motion profile */
@@ -318,6 +327,7 @@ public class DriveTrain extends Subsystem {
 					 * timeout. Really this is so that you can unplug your talon in
 					 * the middle of an MP and react to it.
 					 */
+					System.out.print("state 2");
 					if (_status.isUnderrun == false) {
 						_loopTimeout = kNumLoopsTimeout;
 					}
@@ -364,9 +374,9 @@ public class DriveTrain extends Subsystem {
 		 * 		the duration in ms
 		 */
 		
-		double acc = 2;
-		double dec = 1;
-		double maxV = 10;
+		double acc = .2;
+		double dec = .1;
+		double maxV = 1.0;
 		double beginPos = 0;
 		double endPos = 6;
 		double interval = .01; 
@@ -506,6 +516,13 @@ public class DriveTrain extends Subsystem {
 	}
 
 	public void set(double value) {
+		frontLeftMotor.set(value);
+		rearLeftMotor.set(value);
+		frontRightMotor.set(value);
+		rearRightMotor.set(value);
+	}
+	
+	public void set(int value) {
 		frontLeftMotor.set(value);
 		rearLeftMotor.set(value);
 		frontRightMotor.set(value);

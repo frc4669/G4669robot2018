@@ -30,8 +30,8 @@ public class RobotMap {
 	//DRIVER STATION	
 	// Reverse output of motors if moving backwords
 	public static final boolean reverseOutputTrain = true;
-	public static final int leftJoystick = 1;
-	public static final int rightJoystick = 0;
+	public static final int leftJoystick = 0;
+	public static final int rightJoystick = 1;
 
 	public static final int launchButton = 1;
 	public static final int intakeButton = 3;

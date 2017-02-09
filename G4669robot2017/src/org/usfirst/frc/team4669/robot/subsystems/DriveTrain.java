@@ -115,6 +115,10 @@ public class DriveTrain extends Subsystem {
     	return frontRightMotor.getEncPosition();
     }
     
+    public double getEnconderVel() {
+    	return frontRightMotor.getEncVelocity();
+    }
+    
     public void zeroEncoders() {
     	frontLeftMotor.setPosition(0);
     	frontRightMotor.setPosition(0);
@@ -402,7 +406,7 @@ public class DriveTrain extends Subsystem {
 			maxVDir = -maxV * 60;
 		} else {
 			direction = 1;
-			maxVDir = maxV * 60;
+			maxVDir = -maxV * 60;
 		}
 		double maxVDuration; 
 		if (positionChange*direction < accLength+decLength) { // triangular profile

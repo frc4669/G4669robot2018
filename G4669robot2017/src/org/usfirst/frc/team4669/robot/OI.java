@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4669.robot;
 
 import org.usfirst.frc.team4669.robot.commands.DriveForward;
+import org.usfirst.frc.team4669.robot.commands.Turn;
 import org.usfirst.frc.team4669.robot.commands.Turn180Degrees;
 import org.usfirst.frc.team4669.robot.commands.Turn45Degrees;
 import org.usfirst.frc.team4669.robot.commands.ZeroSensors;
@@ -53,9 +54,10 @@ public class OI {
 
 		//SmartDashboard commands
 		SmartDashboard.putData("Zero Sensors", new ZeroSensors());
-		SmartDashboard.putData("Turn45Degrees", new Turn45Degrees());
+		SmartDashboard.putData("Turn45DegreesLeft", new Turn(45));
+		SmartDashboard.putData("Turn45DegreesRight", new Turn(-45));
 		SmartDashboard.putData("DriveForward", new DriveForward());
-		SmartDashboard.putData("Turn180Degrees", new Turn180Degrees());
+		SmartDashboard.putData("Turn180Degrees", new Turn(180));
 	}
 
 	//Getting joystick values

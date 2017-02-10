@@ -126,9 +126,9 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void updateSmartDashboard() {
-		//    	SmartDashboard.putNumber("Gyro", driveTrain.getGyroAngle());
-		//    	SmartDashboard.putNumber("Left Enocder", driveTrain.getLeftEncoder());
-		//    	SmartDashboard.putNumber("Right Encoder", driveTrain.getRightEncoder());
+		    	SmartDashboard.putNumber("Gyro", driveTrain.getGyroAngle());
+		    	SmartDashboard.putNumber("Left Enocder", driveTrain.getLeftEncoder());
+		    	SmartDashboard.putNumber("Right Encoder", driveTrain.getRightEncoder());
 		SmartDashboard.putNumber("Left Y Axis", Robot.oi.leftY());
     	SmartDashboard.putNumber("Right Y Axis", Robot.oi.rightY());
     	SmartDashboard.putNumber("EncoderVel", Robot.fuelIntake.getEncoderVel());

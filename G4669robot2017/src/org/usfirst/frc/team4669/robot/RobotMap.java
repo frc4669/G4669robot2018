@@ -37,6 +37,19 @@ public class RobotMap {
 	public static final int intakeButton = 3;
 	public static final int feedButton = 2;
 
+	
+	//DRIVE TRAIN SPEED PROPORTION
+		public static final double driveTrainSpeedProportion = 0.85;	
+	
+	// OTHER
+	public static final double wheelDiameter = 7.65;
+	public static final double wheelBase = 16.5;
+	/**
+	 * Calculates circumference of wheel given diameter.
+	 */
+    public static final double wheelCircumference = Math.PI * wheelDiameter;
+	
+	public static final double encoderCountConstant  = wheelCircumference / 1440;
 	// If you are using multiple modules, make sure to define both the port
 	// number and the module. For example you with a rangefinder:
 	// public static int rangefinderPort = 1;

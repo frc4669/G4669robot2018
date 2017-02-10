@@ -3,7 +3,7 @@ package org.usfirst.frc.team4669.robot.subsystems;
 import org.usfirst.frc.team4669.robot.RobotMap;
 import org.usfirst.frc.team4669.robot.commands.TankDrive;
 
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.ADXRS810_Gyro;
 import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -73,7 +73,7 @@ public class DriveTrain extends Subsystem {
 		rearRightMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		rearRightMotor.configEncoderCodesPerRev(360);
 		
-		analogGyro = new ADXRS450_Gyro();
+		analogGyro = new ADXRS810_Gyro();
 		
 	}
 	
@@ -87,6 +87,10 @@ public class DriveTrain extends Subsystem {
     
     public void drive(double outputMag, double outputCurv) {
     	driveTrain.drive(outputMag, outputCurv);
+    }
+    
+    public void setDrive(double speed, double turnrate) {
+    	driveTrain.drive(speed, turnrate);
     }
     
     public void stop() {

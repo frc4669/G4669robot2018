@@ -1,22 +1,19 @@
 
 package org.usfirst.frc.team4669.robot;
 
-import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-
-import org.usfirst.frc.team4669.robot.commands.DriveForward;
 import org.usfirst.frc.team4669.robot.commands.DriveTrainMotionProfile;
-import org.usfirst.frc.team4669.robot.commands.ExampleCommand;
 import org.usfirst.frc.team4669.robot.commands.TankDrive;
-import org.usfirst.frc.team4669.robot.commands.Turn45Degrees;
+import org.usfirst.frc.team4669.robot.commands.Turn;
 import org.usfirst.frc.team4669.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4669.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team4669.robot.subsystems.FuelFeeder;
 import org.usfirst.frc.team4669.robot.subsystems.FuelIntake;
 import org.usfirst.frc.team4669.robot.subsystems.FuelLauncher;
 
+import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -38,8 +35,8 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 
 	Command autonomousCommand;
-	SendableChooser chooser;
-
+	SendableChooser<Command> chooser;
+	Turn turn = new Turn(0);
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -50,17 +47,21 @@ public class Robot extends IterativeRobot {
 
 		//driveTrain.calibrateGyro();
 		//driveTrain.zeroEncoders();
-
-		chooser = new SendableChooser();
+		
+		
+		
+		chooser = new SendableChooser<Command>();
 		chooser.addDefault("Default Auto", new TankDrive());
-		chooser.addObject("My Auto", new Turn45Degrees());
-		chooser.addObject("TEST", new DriveForward());
+		chooser.addObject("My Auto", turn);
+//		chooser.addObject("TEST", new DriveForward());
+//		chooser.addObject("TurnTest", new Turn());
 
 		SmartDashboard.putData("Auto mode", chooser);
 		SmartDashboard.putNumber("RPM1", 0);
 		SmartDashboard.putNumber("RPM3", 0);
 		SmartDashboard.putNumber("RPM2", 0);
-		SmartDashboard.putNumber("EncoderVel", Robot.fuelLauncher.getEncoderVel());
+		SmartDashboard.putNumber("Turn Angle", 0);
+//		SmartDashboard.putNumber("EncoderVel", Robot.fuelLauncher.getEncoderVel());
 
 	}
 
@@ -74,6 +75,7 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void disabledPeriodic() {
+		updateSmartDashboard();
 		Scheduler.getInstance().run();
 	}
 
@@ -126,11 +128,13 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void updateSmartDashboard() {
-		    	SmartDashboard.putNumber("Gyro", driveTrain.getGyroAngle());
-		    	SmartDashboard.putNumber("Left Enocder", driveTrain.getLeftEncoder());
-		    	SmartDashboard.putNumber("Right Encoder", driveTrain.getRightEncoder());
+		turn.setDegree(SmartDashboard.getNumber("TurnDegrees", 0));
+    	SmartDashboard.putNumber("Gyro", driveTrain.getGyroAngle());
+    	SmartDashboard.putNumber("Left Enocder", driveTrain.getLeftEncoder());
+    	SmartDashboard.putNumber("Right Encoder", driveTrain.getRightEncoder());
 		SmartDashboard.putNumber("Left Y Axis", Robot.oi.leftY());
     	SmartDashboard.putNumber("Right Y Axis", Robot.oi.rightY());
+    	SmartDashboard.putNumber("LaunchVel", Robot.fuelLauncher.getEncoderVel());
     	SmartDashboard.putNumber("EncoderVel", Robot.fuelIntake.getEncoderVel());
     	SmartDashboard.putNumber("driveEncVel", Robot.driveTrain.getEnconderVel());
 	}

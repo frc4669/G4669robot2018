@@ -10,13 +10,14 @@ import edu.wpi.first.wpilibj.command.Command;
 public class Turn extends Command {
 	
 	private double degree;
-	private double gyroAngle;
+	private double initialAngle;
+	
 
     public Turn(double degree) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.driveTrain);
-    	gyroAngle = Robot.driveTrain.getGyroAngle();
+    	initialAngle = Robot.driveTrain.getGyroAngle();
     	this.degree = degree;
     }
 
@@ -41,13 +42,15 @@ public class Turn extends Command {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	//Stop turning once robot turns past specified angle
-        if (degree < 0 && gyroAngle <= degree + gyroAngle) {
+        if (degree < 0 && Robot.driveTrain.getGyroAngle() <= degree + initialAngle) {
     		return true;
     	}
-    	else if (degree > 0 && gyroAngle >= degree + gyroAngle) {
+    	else if (degree > 0 && Robot.driveTrain.getGyroAngle() >= degree + initialAngle) {
     		return true;
     	}
-    	else return false;
+    	else {
+    		return false;
+    	}
     }
 
     // Called once after isFinished returns true
@@ -58,5 +61,10 @@ public class Turn extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
+    } 
+    
+    public void setDegree(double degree) {
+    	this.degree = degree;
     }
 }

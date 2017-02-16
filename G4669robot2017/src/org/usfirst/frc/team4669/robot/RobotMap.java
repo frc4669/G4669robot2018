@@ -24,9 +24,6 @@ public class RobotMap {
 	public static final int intakeMotor = 3;
 	public static final int feederMotor = 2; 
 
-	//TEST MOTORS
-	public static final int TESTIntakeMotor = 3;
-
 	//DRIVER STATION	
 	// Reverse output of motors if moving backwords
 	public static final boolean reverseOutputTrain = true;
@@ -42,8 +39,8 @@ public class RobotMap {
 		public static final double driveTrainSpeedProportion = 0.85;	
 	
 	// OTHER
-	public static final double wheelDiameter = 7.65;
-	public static final double wheelBase = 16.5;
+	public static final double wheelDiameter = 3.25;
+	public static final double wheelBase = 29; //figure out real distance later
 	/**
 	 * Calculates circumference of wheel given diameter.
 	 */

@@ -36,7 +36,7 @@ public class Robot extends IterativeRobot {
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser;
-	Turn turn = new Turn(0);
+//	Turn turn = new Turn(0);
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -52,7 +52,7 @@ public class Robot extends IterativeRobot {
 		
 		chooser = new SendableChooser<Command>();
 		chooser.addDefault("Default Auto", new TankDrive());
-		chooser.addObject("My Auto", turn);
+//		chooser.addObject("My Auto", turn);
 //		chooser.addObject("TEST", new DriveForward());
 //		chooser.addObject("TurnTest", new Turn());
 
@@ -90,8 +90,8 @@ public class Robot extends IterativeRobot {
 	 */
 	public void autonomousInit() {
 //		autonomousCommand = (Command) chooser.getSelected();
-		driveTrain.setupMotionProfile();
-		autonomousCommand = new DriveTrainMotionProfile();
+//		driveTrain.setupMotionProfile();
+		autonomousCommand = new Turn(30);
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null) autonomousCommand.start();
 	}
@@ -100,7 +100,7 @@ public class Robot extends IterativeRobot {
 	 * This function is called periodically during autonomous
 	 */
 	public void autonomousPeriodic() {
-		updateSmartDashboard();
+//		updateSmartDashboard();
 		Scheduler.getInstance().run();
 	}
 
@@ -116,7 +116,7 @@ public class Robot extends IterativeRobot {
 	 * This function is called periodically during operator control
 	 */
 	public void teleopPeriodic() {
-		updateSmartDashboard();
+//		updateSmartDashboard();
 		Scheduler.getInstance().run();
 	}
 
@@ -128,7 +128,7 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void updateSmartDashboard() {
-		turn.setDegree(SmartDashboard.getNumber("TurnDegrees", 0));
+//		turn.setDegree(SmartDashboard.getNumber("TurnDegrees", 0));
     	SmartDashboard.putNumber("Gyro", driveTrain.getGyroAngle());
     	SmartDashboard.putNumber("Left Enocder", driveTrain.getLeftEncoder());
     	SmartDashboard.putNumber("Right Encoder", driveTrain.getRightEncoder());

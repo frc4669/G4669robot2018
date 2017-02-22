@@ -42,6 +42,7 @@ public class RobotMap {
 	public static final int doorSpeed = 0;//value in RPM relative to motor
 
 	
+	
 	//DRIVE TRAIN SPEED PROPORTION
 		public static final double driveTrainSpeedProportion = 0.85;	
 	

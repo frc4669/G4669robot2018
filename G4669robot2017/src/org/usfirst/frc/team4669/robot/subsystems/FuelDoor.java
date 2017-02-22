@@ -62,7 +62,10 @@ public class FuelDoor extends Subsystem {
     
     public void openAndClose(){
     	if (direction == 1 && doorMotor.isFwdLimitSwitchClosed()){
-    		
+    			open();
+    	}
+    	if (direction ==  -1 && doorMotor.isRevLimitSwitchClosed()){
+    		close();
     	}
     }
     

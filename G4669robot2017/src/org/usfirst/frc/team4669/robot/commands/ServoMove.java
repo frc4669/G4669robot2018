@@ -26,7 +26,7 @@ public class ServoMove extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if(Robot.oi.getRawButton(5) || Robot.oi.getRawButton(3)) return true;
+    	if(Robot.oi.getRightRawButton(5) || Robot.oi.getRightRawButton(3)) return true;
     	else return false;
     }
 

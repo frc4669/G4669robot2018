@@ -52,7 +52,7 @@ public class FuelFeeder extends Subsystem {
 
 	//Feeder command
 	public void feed() {
-		if(Robot.oi.getRawButton(RobotMap.feedButton)){
+		if(Robot.oi.getRightRawButton(RobotMap.feedButton)){
 			double targetSpeed = SmartDashboard.getNumber("RPM2", 0);
 			feederMotor.changeControlMode(TalonControlMode.Speed);
 			feederMotor.set(targetSpeed);

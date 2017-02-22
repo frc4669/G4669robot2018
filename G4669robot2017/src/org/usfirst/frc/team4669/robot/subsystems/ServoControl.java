@@ -34,8 +34,8 @@ public class ServoControl extends Subsystem {
     
     public void buttonControl(){
     	//servo1
-    	if(Robot.oi.getServoStick().getRawButton(5)) servoMove(getServo1(), 170); //moves servo to max with 5 push
-    	if(Robot.oi.getServoStick().getRawButton(3)) servoMove(getServo1(), 0); //moves servo to min with 3 push
+    	if(Robot.oi.getServoStick().getRightRawButton(5)) servoMove(getServo1(), 170); //moves servo to max with 5 push
+    	if(Robot.oi.getServoStick().getRightRawButton(3)) servoMove(getServo1(), 0); //moves servo to min with 3 push
     	
     	//servo2 
     	

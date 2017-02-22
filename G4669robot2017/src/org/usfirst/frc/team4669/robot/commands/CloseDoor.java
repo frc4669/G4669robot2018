@@ -1,18 +1,15 @@
 package org.usfirst.frc.team4669.robot.commands;
 
-import org.usfirst.frc.team4669.robot.Robot;
-import org.usfirst.frc.team4669.robot.RobotMap;
-
 import edu.wpi.first.wpilibj.command.Command;
 
-public class Intake extends Command {
-	
-	private int loops = 0;
+/**
+ *
+ */
+public class CloseDoor extends Command {
 
-    public Intake() {
+    public CloseDoor() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.fuelIntake);
     }
 
     // Called just before this Command runs the first time
@@ -21,19 +18,11 @@ public class Intake extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(++loops >= 10) {
-    		
-    		loops = 0;
-     	}
-    	Robot.fuelIntake.intake();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if (Robot.oi.getRightRawButton(RobotMap.intakeButton)) return false;
-    	else {
-    		return true;
-    	}
+        return false;
     }
 
     // Called once after isFinished returns true

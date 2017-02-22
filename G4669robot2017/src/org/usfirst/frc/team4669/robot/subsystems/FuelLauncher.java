@@ -47,7 +47,7 @@ public class FuelLauncher extends Subsystem {
 	}
 
 	public void launch() {
-		if(Robot.oi.getRawButton(RobotMap.launchButton)){
+		if(Robot.oi.getRightRawButton(RobotMap.launchButton)){
 			/* Speed mode */
 
 			double targetSpeed = SmartDashboard.getNumber("RPM1", 0);

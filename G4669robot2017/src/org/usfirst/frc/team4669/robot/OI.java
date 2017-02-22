@@ -41,7 +41,6 @@ public class OI {
 
 	//Joystick variables
 	private Joystick leftStick;
-	
 	private Joystick rightStick;
 
 	public OI() {
@@ -56,6 +55,12 @@ public class OI {
 		SmartDashboard.putData("Turn45DegreesRight", new Turn(-45));
 		SmartDashboard.putData("DriveForward", new DriveForward(45));
 		SmartDashboard.putData("Turn180Degrees", new Turn(180));
+		SmartDashboard.putNumber("RPM1", 0);
+		SmartDashboard.putNumber("RPM3", 0);
+		SmartDashboard.putNumber("RPM2", 0);
+		SmartDashboard.putNumber("Turn Angle", 0);
+		SmartDashboard.putNumber("EncoderVel", Robot.fuelLauncher.getEncoderVel());
+
 	}
 
 	//Getting joystick values
@@ -65,23 +70,24 @@ public class OI {
 	public double rightY() {
 		return rightStick.getY();
 	}
-	public boolean getRawButton(int button) {
+	
+	public boolean getLeftRawButton(int button) {
+		return leftStick.getRawButton(button);
+	}
+	public boolean getRightRawButton(int button) {
 		return rightStick.getRawButton(button);
 	}
-
+	
+	public Joystick getLeftStick() {
+		return leftStick;
+	}
+	public Joystick getRightStick() {
+		return rightStick;
+	}
 	/**
 	public StringBuilder get_sb() {
 		return Robot.oi._sb.toString();
 	}
 	 */
-
-	public Joystick getLeftStick() {
-		return leftStick;
-	}
-
-	public Joystick getRightStick() {
-		return rightStick;
-	}
-
 }
 

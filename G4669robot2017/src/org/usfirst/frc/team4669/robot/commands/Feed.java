@@ -31,7 +31,7 @@ public class Feed extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if (Robot.oi.getRawButton(RobotMap.feedButton)) return false;
+        if (Robot.oi.getRightRawButton(RobotMap.feedButton)) return false;
         else {
         	return true;
         }

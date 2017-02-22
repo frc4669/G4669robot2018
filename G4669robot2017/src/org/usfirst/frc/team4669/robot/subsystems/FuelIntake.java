@@ -48,7 +48,7 @@ public class FuelIntake extends Subsystem {
 
 	//Intake command
 	public void intake() {
-		if(Robot.oi.getRawButton(RobotMap.intakeButton)){
+		if(Robot.oi.getRightRawButton(RobotMap.intakeButton)){
 			double targetSpeed = SmartDashboard.getNumber("RPM3", 0);
 			intakeMotor.changeControlMode(TalonControlMode.Speed);
 			intakeMotor.set(targetSpeed);

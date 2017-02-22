@@ -41,8 +41,6 @@ public class RobotMap {
 	//DOOR CONSTANT
 	//RPM for opening the door
 	public static final int doorSpeed = 0;//value in RPM relative to motor
-
-	
 	
 	
 	//DRIVE TRAIN SPEED PROPORTION

@@ -1,9 +1,7 @@
 
 package org.usfirst.frc.team4669.robot;
 
-import org.usfirst.frc.team4669.robot.commands.DriveTrainMotionProfile;
 import org.usfirst.frc.team4669.robot.commands.TankDrive;
-import org.usfirst.frc.team4669.robot.commands.Turn;
 import org.usfirst.frc.team4669.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4669.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team4669.robot.subsystems.FuelFeeder;
@@ -36,7 +34,6 @@ public class Robot extends IterativeRobot {
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser;
-//	Turn turn = new Turn(0);
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -45,8 +42,8 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 
-		//driveTrain.calibrateGyro();
-		//driveTrain.zeroEncoders();
+		driveTrain.calibrateGyro();
+		driveTrain.zeroEncoders();
 		
 		
 		
@@ -57,12 +54,7 @@ public class Robot extends IterativeRobot {
 //		chooser.addObject("TurnTest", new Turn());
 
 		SmartDashboard.putData("Auto mode", chooser);
-		SmartDashboard.putNumber("RPM1", 0);
-		SmartDashboard.putNumber("RPM3", 0);
-		SmartDashboard.putNumber("RPM2", 0);
-		SmartDashboard.putNumber("Turn Angle", 0);
-//		SmartDashboard.putNumber("EncoderVel", Robot.fuelLauncher.getEncoderVel());
-
+		
 	}
 
 	/**
@@ -89,9 +81,7 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
 	public void autonomousInit() {
-//		autonomousCommand = (Command) chooser.getSelected();
-//		driveTrain.setupMotionProfile();
-		autonomousCommand = new Turn(30);
+		autonomousCommand = (Command) chooser.getSelected();
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null) autonomousCommand.start();
 	}
@@ -100,7 +90,7 @@ public class Robot extends IterativeRobot {
 	 * This function is called periodically during autonomous
 	 */
 	public void autonomousPeriodic() {
-//		updateSmartDashboard();
+		updateSmartDashboard();
 		Scheduler.getInstance().run();
 	}
 
@@ -116,7 +106,7 @@ public class Robot extends IterativeRobot {
 	 * This function is called periodically during operator control
 	 */
 	public void teleopPeriodic() {
-//		updateSmartDashboard();
+		updateSmartDashboard();
 		Scheduler.getInstance().run();
 	}
 
@@ -135,7 +125,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Left Y Axis", Robot.oi.leftY());
     	SmartDashboard.putNumber("Right Y Axis", Robot.oi.rightY());
     	SmartDashboard.putNumber("LaunchVel", Robot.fuelLauncher.getEncoderVel());
-    	SmartDashboard.putNumber("EncoderVel", Robot.fuelIntake.getEncoderVel());
+    	SmartDashboard.putNumber("IntakeVel", Robot.fuelIntake.getEncoderVel());
     	SmartDashboard.putNumber("driveEncVel", Robot.driveTrain.getEnconderVel());
 	}
 }

@@ -107,7 +107,7 @@ public class DriveTrain extends Subsystem {
     
     public double calculateTurningValue(double direction) {
     	double turningValue = kAngleSetpoint - analogGyro.getAngle() * kP;
-    	turningValue = Math.copySign(turningValue, direction);
+    	turningValue = Math  .copySign(turningValue, direction);
     	return turningValue;
     }
     

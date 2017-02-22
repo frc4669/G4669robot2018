@@ -22,8 +22,10 @@ public class RobotMap {
 	//Other subsystem motors
 	public static final int launchMotor = 7;
 	public static final int intakeMotor = 3;
-	public static final int feederMotor = 6; 
-
+	public static final int feederMotor = 2; 
+	public static final int doorMotor = 6;
+	
+	
 	//DRIVER STATION	
 	// Reverse output of motors if moving backwords
 	public static final boolean reverseOutputTrain = true;
@@ -33,7 +35,15 @@ public class RobotMap {
 	public static final int launchButton = 1;
 	public static final int intakeButton = 3;
 	public static final int feedButton = 2;
+	public static final int openDoorButton = 4;
+	public static final int closeDoorButton = 5;
+	
+	//DOOR CONSTANT
+	//RPM for opening the door
+	public static final int doorSpeed = 0;//value in RPM relative to motor
 
+	
+	
 	
 	//DRIVE TRAIN SPEED PROPORTION
 		public static final double driveTrainSpeedProportion = 0.85;	

@@ -30,7 +30,6 @@ public class Launch extends Command {
 		}
 		
 		Robot.fuelLauncher.launch();
-		System.out.println("Launching");
 
 		// System.out.println(Robot.oi._sb.toString());
 

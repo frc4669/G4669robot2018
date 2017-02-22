@@ -16,13 +16,13 @@ public class RobotMap {
 	//Drivetrain motors
 	public static final int driveTrainFrontLeft = 8;
 	public static final int driveTrainRearLeft = 5;
-	public static final int driveTrainFrontRight = 7;
+	public static final int driveTrainFrontRight = 1;
 	public static final int driveTrainRearRight = 4;
 
 	//Other subsystem motors
-	public static final int launchMotor = 1;
+	public static final int launchMotor = 7;
 	public static final int intakeMotor = 3;
-	public static final int feederMotor = 2; 
+	public static final int feederMotor = 6; 
 
 	//DRIVER STATION	
 	// Reverse output of motors if moving backwords

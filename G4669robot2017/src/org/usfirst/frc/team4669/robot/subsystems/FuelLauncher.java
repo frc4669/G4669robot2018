@@ -21,7 +21,7 @@ public class FuelLauncher extends Subsystem {
 
 		launchMotor.enable();
 		launchMotor.reverseSensor(false);
-		launchMotor.configEncoderCodesPerRev(4096); // if using FeedbackDevice.QuadEncoder
+		launchMotor.configEncoderCodesPerRev(360); // if using FeedbackDevice.QuadEncoder
 		launchMotor.setPosition(0.0);
 		//launcherMotor.configPotentiometerTurns(XXX);, // if using FeedbackDevice.AnalogEncoder or AnalogPot
 

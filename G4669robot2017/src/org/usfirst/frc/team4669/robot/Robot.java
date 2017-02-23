@@ -1,7 +1,10 @@
 
 package org.usfirst.frc.team4669.robot;
 
-import org.usfirst.frc.team4669.robot.commands.TankDrive;
+import org.usfirst.frc.team4669.robot.commands.DoNothing;
+import org.usfirst.frc.team4669.robot.commands.DriveForward;
+import org.usfirst.frc.team4669.robot.commands.LeftGearLiftAuto;
+import org.usfirst.frc.team4669.robot.commands.RightGearLiftAuto;
 import org.usfirst.frc.team4669.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4669.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team4669.robot.subsystems.FuelDoor;
@@ -33,6 +36,7 @@ public class Robot extends IterativeRobot {
 	public static FuelFeeder fuelFeeder = new FuelFeeder();
 	public static FuelDoor door = new FuelDoor();
 	public static OI oi;
+	public static F310 f310;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser;
@@ -43,6 +47,7 @@ public class Robot extends IterativeRobot {
 	 */
 	public void robotInit() {
 		oi = new OI();
+		f310 = new F310();
 
 		driveTrain.calibrateGyro();
 		driveTrain.zeroEncoders();
@@ -50,10 +55,10 @@ public class Robot extends IterativeRobot {
 		
 		
 		chooser = new SendableChooser<Command>();
-		chooser.addDefault("Default Auto", new TankDrive());
-//		chooser.addObject("My Auto", turn);
-//		chooser.addObject("TEST", new DriveForward());
-//		chooser.addObject("TurnTest", new Turn());
+		chooser.addDefault("Do Nothing", new DoNothing());
+		chooser.addObject("Center Gear Lift", new DriveForward(80));
+		chooser.addObject("Left Gear Lift", new LeftGearLiftAuto());
+		chooser.addObject("Right Gear Lift", new RightGearLiftAuto());
 
 		SmartDashboard.putData("Auto mode", chooser);
 		

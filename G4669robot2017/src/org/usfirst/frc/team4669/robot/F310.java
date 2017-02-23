@@ -43,11 +43,11 @@ public class F310 {
 	}
 	
 	public boolean getBlueButton() {
-		return f310.getRawButton(3);
+		return f310.getRawButton(2);
 	}
 	
 	public boolean getOrangeButton() {
-		return f310.getRawButton(2);
+		return f310.getRawButton(3);
 	}
 	
 	public boolean getLeftShoulderButton() {

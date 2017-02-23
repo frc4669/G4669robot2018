@@ -27,7 +27,6 @@ public class DriveTrain extends Subsystem {
 	private CANTalon frontRightMotor;
 	private CANTalon rearRightMotor;
 	
-	
 	private RobotDrive driveTrain;
 	
 	private Gyro analogGyro;

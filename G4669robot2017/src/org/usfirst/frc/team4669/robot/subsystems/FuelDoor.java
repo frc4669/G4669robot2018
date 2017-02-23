@@ -76,6 +76,12 @@ public class FuelDoor extends Subsystem {
     public boolean isBackwardLimitSwitchClosed(){
     	return doorMotor.isRevLimitSwitchClosed();
     }
+
+	public void stop() {
+		doorMotor.changeControlMode(TalonControlMode.Speed);
+		doorMotor.set(0);
+		
+	}
     
 }
 

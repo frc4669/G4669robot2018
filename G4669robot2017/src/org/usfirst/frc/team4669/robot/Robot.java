@@ -4,6 +4,7 @@ package org.usfirst.frc.team4669.robot;
 import org.usfirst.frc.team4669.robot.commands.TankDrive;
 import org.usfirst.frc.team4669.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4669.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team4669.robot.subsystems.FuelDoor;
 import org.usfirst.frc.team4669.robot.subsystems.FuelFeeder;
 import org.usfirst.frc.team4669.robot.subsystems.FuelIntake;
 import org.usfirst.frc.team4669.robot.subsystems.FuelLauncher;
@@ -30,6 +31,7 @@ public class Robot extends IterativeRobot {
 	public static FuelLauncher fuelLauncher = new FuelLauncher();
 	public static FuelIntake fuelIntake = new FuelIntake();
 	public static FuelFeeder fuelFeeder = new FuelFeeder();
+	public static FuelDoor door = new FuelDoor();
 	public static OI oi;
 
 	Command autonomousCommand;

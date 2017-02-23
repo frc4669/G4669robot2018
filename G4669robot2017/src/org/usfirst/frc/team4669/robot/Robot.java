@@ -52,14 +52,11 @@ public class Robot extends IterativeRobot {
 		driveTrain.calibrateGyro();
 		driveTrain.zeroEncoders();
 		
-		
-		
 		chooser = new SendableChooser<Command>();
 		chooser.addDefault("Do Nothing", new DoNothing());
 		chooser.addObject("Center Gear Lift", new DriveForward(80));
 		chooser.addObject("Left Gear Lift", new LeftGearLiftAuto());
 		chooser.addObject("Right Gear Lift", new RightGearLiftAuto());
-
 		SmartDashboard.putData("Auto mode", chooser);
 		
 	}

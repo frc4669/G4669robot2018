@@ -7,12 +7,10 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class Intake extends Command {
 	
-	private int loops = 0;
-
-    public Intake() {
+	public Intake() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.fuelIntake);
+    	requires(Robot.fuelIntakeElevator);
     }
 
     // Called just before this Command runs the first time
@@ -21,19 +19,19 @@ public class Intake extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(++loops >= 10) {
-    		
-    		loops = 0;
-     	}
-    	Robot.fuelIntake.intake();
+    	if (Robot.oi.getRightRawButton(RobotMap.intakeButton)) {
+    		Robot.fuelIntakeElevator.intake();
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if (Robot.oi.getRightRawButton(RobotMap.intakeButton)) return false;
-    	else {
-    		return true;
-    	}
+    	if (Robot.oi.getRightRawButton(RobotMap.intakeButton)) {
+			return false;
+		}
+		else {
+			return true;
+		}
     }
 
     // Called once after isFinished returns true

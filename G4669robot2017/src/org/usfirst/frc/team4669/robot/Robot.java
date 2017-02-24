@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team4669.robot;
 
+import org.usfirst.frc.team4669.robot.commands.CenterGearLiftAuto;
 import org.usfirst.frc.team4669.robot.commands.DoNothing;
 import org.usfirst.frc.team4669.robot.commands.DriveForward;
 import org.usfirst.frc.team4669.robot.commands.LeftGearLiftAuto;
@@ -9,7 +10,7 @@ import org.usfirst.frc.team4669.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4669.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team4669.robot.subsystems.FuelDoor;
 import org.usfirst.frc.team4669.robot.subsystems.FuelFeeder;
-import org.usfirst.frc.team4669.robot.subsystems.FuelIntake;
+import org.usfirst.frc.team4669.robot.subsystems.FuelIntakeElevator;
 import org.usfirst.frc.team4669.robot.subsystems.FuelLauncher;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -32,7 +33,7 @@ public class Robot extends IterativeRobot {
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static DriveTrain driveTrain = new DriveTrain();
 	public static FuelLauncher fuelLauncher = new FuelLauncher();
-	public static FuelIntake fuelIntake = new FuelIntake();
+	public static FuelIntakeElevator fuelIntakeElevator = new FuelIntakeElevator();
 	public static FuelFeeder fuelFeeder = new FuelFeeder();
 	public static FuelDoor door = new FuelDoor();
 	public static OI oi;
@@ -54,7 +55,7 @@ public class Robot extends IterativeRobot {
 		
 		chooser = new SendableChooser<Command>();
 		chooser.addDefault("Do Nothing", new DoNothing());
-		chooser.addObject("Center Gear Lift", new DriveForward(80));
+		chooser.addObject("Center Gear Lift", new CenterGearLiftAuto());
 		chooser.addObject("Left Gear Lift", new LeftGearLiftAuto());
 		chooser.addObject("Right Gear Lift", new RightGearLiftAuto());
 		SmartDashboard.putData("Auto mode", chooser);
@@ -122,14 +123,13 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void updateSmartDashboard() {
-//		turn.setDegree(SmartDashboard.getNumber("TurnDegrees", 0));
     	SmartDashboard.putNumber("Gyro", driveTrain.getGyroAngle());
     	SmartDashboard.putNumber("Left Enocder", driveTrain.getLeftEncoder());
     	SmartDashboard.putNumber("Right Encoder", driveTrain.getRightEncoder());
 		SmartDashboard.putNumber("Left Y Axis", Robot.oi.leftY());
     	SmartDashboard.putNumber("Right Y Axis", Robot.oi.rightY());
     	SmartDashboard.putNumber("LaunchVel", Robot.fuelLauncher.getEncoderVel());
-    	SmartDashboard.putNumber("IntakeVel", Robot.fuelIntake.getEncoderVel());
+    	SmartDashboard.putNumber("IntakeVel", Robot.fuelIntakeElevator.getEncoderVel());
     	SmartDashboard.putNumber("driveEncVel", Robot.driveTrain.getEnconderVel());
 	}
 }

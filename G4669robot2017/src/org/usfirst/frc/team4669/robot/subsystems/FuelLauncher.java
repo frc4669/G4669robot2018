@@ -1,6 +1,5 @@
 package org.usfirst.frc.team4669.robot.subsystems;
 
-import org.usfirst.frc.team4669.robot.Robot;
 import org.usfirst.frc.team4669.robot.RobotMap;
 import org.usfirst.frc.team4669.robot.commands.Launch;
 import com.ctre.CANTalon;
@@ -47,26 +46,16 @@ public class FuelLauncher extends Subsystem {
 	}
 
 	public void launch() {
-		if(Robot.oi.getRightRawButton(RobotMap.launchButton)){
 			/* Speed mode */
-
-			double targetSpeed = SmartDashboard.getNumber("RPM1", 0);
+			double targetSpeed = SmartDashboard.getNumber("LaunchRPM", 0);
 			launchMotor.changeControlMode(TalonControlMode.Speed);
 			launchMotor.set(targetSpeed); /* 1500 RPM in either direction */
-			//        	_sb.append("\tMode:");
-			//        	_sb.append(launcherMotor.getControlMode());
-			//        	/* append more signals to print when in speed mode. */
-			//            _sb.append("\terr:");
-			//            _sb.append(launcherMotor.getClosedLoopError());
-			//            _sb.append("\ttrg:");
-			//            _sb.append(targetSpeed);
-
-		} else {
-			/* Percent voltage mode */
-			launchMotor.set(0);
-		}
 	}
 
+	public void stop() {
+		/* Percent voltage mode? */
+		launchMotor.set(0);
+	}
 
 	public double getEncoder() {
 		return launchMotor.getEncPosition();

@@ -55,9 +55,9 @@ public class OI {
 		SmartDashboard.putData("Turn45DegreesRight", new Turn(-45));
 		SmartDashboard.putData("DriveForward", new DriveForward(45));
 		SmartDashboard.putData("Turn180Degrees", new Turn(180));
-		SmartDashboard.putNumber("RPM1", 0);
-		SmartDashboard.putNumber("RPM3", 0);
-		SmartDashboard.putNumber("RPM2", 0);
+		SmartDashboard.putNumber("LaunchRPM", 0);
+		SmartDashboard.putNumber("IntakeRPM", 0);
+		SmartDashboard.putNumber("FeedRPM", 0);
 		SmartDashboard.putNumber("Turn Angle", 0);
 		SmartDashboard.putNumber("EncoderVel", Robot.fuelLauncher.getEncoderVel());
 

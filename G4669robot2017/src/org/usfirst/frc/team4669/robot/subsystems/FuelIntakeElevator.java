@@ -9,13 +9,13 @@ import com.ctre.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class FuelIntake extends Subsystem {
+public class FuelIntakeElevator extends Subsystem {
 	//SETUP
 	//Variable for intake motor.
 	private CANTalon intakeMotor;
 
 	//Initiate intake motor.
-	public FuelIntake() {
+	public FuelIntakeElevator() {
 		super();
 		intakeMotor = new CANTalon(RobotMap.intakeMotor);
 
@@ -49,7 +49,7 @@ public class FuelIntake extends Subsystem {
 	//Intake command
 	public void intake() {
 		if(Robot.oi.getRightRawButton(RobotMap.intakeButton)){
-			double targetSpeed = SmartDashboard.getNumber("RPM3", 0);
+			double targetSpeed = SmartDashboard.getNumber("IntakeRPM", 0);
 			intakeMotor.changeControlMode(TalonControlMode.Speed);
 			intakeMotor.set(targetSpeed);
 		} 

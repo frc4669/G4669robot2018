@@ -7,8 +7,6 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class Launch extends Command {
 
-	private int loops = 0;
-
 	public Launch() {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
@@ -23,22 +21,16 @@ public class Launch extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		
-		if(++loops >= 10) {
-
-			loops = 0;
+		if (Robot.oi.getRightRawButton(RobotMap.launchButton)) {
+				Robot.fuelLauncher.launch();
 		}
-		
-		Robot.fuelLauncher.launch();
-
-		// System.out.println(Robot.oi._sb.toString());
-
-		// SmartDashboard.putNumber("Motor Speed" , TalonControlMode.Voltage);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		if (Robot.oi.getRightRawButton(RobotMap.launchButton)) return false;
+		if (Robot.oi.getRightRawButton(RobotMap.launchButton)) {
+			return false;
+		}
 		else {
 			return true;
 		}
@@ -46,12 +38,13 @@ public class Launch extends Command {
 
 	// Called once after isFinished returns true
 	protected void end() {
-		
+		Robot.fuelLauncher.stop();
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
+		end();
 	}
 }
 

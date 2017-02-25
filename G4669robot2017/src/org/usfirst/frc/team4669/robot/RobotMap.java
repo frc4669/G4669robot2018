@@ -14,7 +14,7 @@ public class RobotMap {
 
 	//SUBSYSTEMS
 	//Drivetrain motors
-	public static final int driveTrainFrontLeft = 8;
+	public static final int driveTrainFrontLeft = 2;
 	public static final int driveTrainRearLeft = 5;
 	public static final int driveTrainFrontRight = 1;
 	public static final int driveTrainRearRight = 4;
@@ -22,7 +22,7 @@ public class RobotMap {
 	//Other subsystem motors
 	public static final int launchMotor = 7;
 	public static final int intakeMotor = 3;
-	public static final int feederMotor = 2; 
+	public static final int feederMotor = 8; 
 	public static final int doorMotor = 6;
 	
 	

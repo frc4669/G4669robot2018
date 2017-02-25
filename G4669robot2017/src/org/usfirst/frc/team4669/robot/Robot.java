@@ -3,7 +3,7 @@ package org.usfirst.frc.team4669.robot;
 
 import org.usfirst.frc.team4669.robot.commands.CenterGearLiftAuto;
 import org.usfirst.frc.team4669.robot.commands.DoNothing;
-import org.usfirst.frc.team4669.robot.commands.DriveForward;
+import org.usfirst.frc.team4669.robot.commands.DriveMotionMagic;
 import org.usfirst.frc.team4669.robot.commands.LeftGearLiftAuto;
 import org.usfirst.frc.team4669.robot.commands.RightGearLiftAuto;
 import org.usfirst.frc.team4669.robot.subsystems.DriveTrain;
@@ -86,7 +86,8 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
 	public void autonomousInit() {
-		autonomousCommand = (Command) chooser.getSelected();
+//		autonomousCommand = (Command) chooser.getSelected();
+		autonomousCommand = new DriveMotionMagic(1000);
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null) autonomousCommand.start();
 	}

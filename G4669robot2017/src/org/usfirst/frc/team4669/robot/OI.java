@@ -45,13 +45,15 @@ public class OI {
 	public static double DEFAULT_PID_P = 0.07;
 	public static double DEFAULT_PID_I = 0.001;
 	public static double DEFAULT_PID_D = 0.7;
+	public static double DEFAULT_PID_F = 0.25;
 	public static AtomicReference<Double> TALON_P_LEFT = new AtomicReference<Double>(DEFAULT_PID_P);
 	public static AtomicReference<Double> TALON_P_RIGHT = new AtomicReference<Double>(DEFAULT_PID_P);
 	public static AtomicReference<Double> TALON_I_LEFT = new AtomicReference<Double>(DEFAULT_PID_I);
 	public static AtomicReference<Double> TALON_I_RIGHT = new AtomicReference<Double>(DEFAULT_PID_I);
 	public static AtomicReference<Double> TALON_D_LEFT = new AtomicReference<Double>(DEFAULT_PID_D);
 	public static AtomicReference<Double> TALON_D_RIGHT = new AtomicReference<Double>(DEFAULT_PID_D);
-	
+	public static AtomicReference<Double> TALON_F_LEFT = new AtomicReference<Double>(DEFAULT_PID_F);
+	public static AtomicReference<Double> TALON_F_RIGHT = new AtomicReference<Double>(DEFAULT_PID_F);
 	
 	//Joystick variables
 	private Joystick leftStick;
@@ -81,6 +83,8 @@ public class OI {
 		SmartDashboard.putNumber("PID_P_RIGHT", TALON_P_RIGHT.get());
 		SmartDashboard.putNumber("PID_I_RIGHT", TALON_I_RIGHT.get());
 		SmartDashboard.putNumber("PID_D_RIGHT", TALON_D_RIGHT.get());
+		SmartDashboard.putNumber("PID_F_LEFT", TALON_F_LEFT.get());
+		SmartDashboard.putNumber("PID_F_RIGHT", TALON_F_RIGHT.get());
 	}
 
 	//Getting joystick values

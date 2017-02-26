@@ -51,7 +51,15 @@ public class DriveTrain extends Subsystem {
 		
 	}
 	
-	public void setPID(double pLeft, double iLeft, double dLeft, double pRight, double iRight, double dRight) {
+	public void setPID(
+			double pLeft, 
+			double iLeft, 
+			double dLeft, 
+			double pRight, 
+			double iRight, 
+			double dRight,
+			double fLeft,
+			double fRight) {
 		frontLeftMotor.setP(pLeft);
 		rearLeftMotor.setP(pLeft);
 		frontRightMotor.setP(pRight);
@@ -64,6 +72,10 @@ public class DriveTrain extends Subsystem {
 		rearLeftMotor.setD(dLeft);
 		frontRightMotor.setD(dRight);
 		rearRightMotor.setD(dRight);
+		frontLeftMotor.setF(fLeft);
+		rearLeftMotor.setF(fLeft);
+		frontRightMotor.setF(fRight);
+		rearRightMotor.setF(fRight);
 	}
 	
 	public void setupLeftMotor(CANTalon talon) {
@@ -77,7 +89,7 @@ public class DriveTrain extends Subsystem {
 		talon.configNominalOutputVoltage(+0.0f, -0.0f);
 		talon.configPeakOutputVoltage(+12.0f, -12.0f);
 		talon.setProfile(0);
-		talon.setF(0.25);
+		talon.setF(OI.TALON_F_LEFT.get());
 		talon.setP(OI.TALON_P_LEFT.get());
 		talon.setI(OI.TALON_I_LEFT.get());
 		talon.setD(OI.TALON_D_LEFT.get());
@@ -96,7 +108,7 @@ public class DriveTrain extends Subsystem {
 		talon.configNominalOutputVoltage(+0.0f, -0.0f);
 		talon.configPeakOutputVoltage(+12.0f, -12.0f);
 		talon.setProfile(0);
-		talon.setF(0.25);
+		talon.setF(OI.TALON_F_RIGHT.get());
 		talon.setP(OI.TALON_P_RIGHT.get());
 		talon.setI(OI.TALON_I_RIGHT.get());
 		talon.setD(OI.TALON_D_RIGHT.get());

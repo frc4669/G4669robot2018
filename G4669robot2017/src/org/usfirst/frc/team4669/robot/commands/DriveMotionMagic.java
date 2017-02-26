@@ -35,9 +35,17 @@ public class DriveMotionMagic extends Command {
     			SmartDashboard.getNumber("PID_D_LEFT", OI.DEFAULT_PID_D),
     			SmartDashboard.getNumber("PID_P_RIGHT", OI.DEFAULT_PID_P),
     			SmartDashboard.getNumber("PID_I_RIGHT", OI.DEFAULT_PID_I),
-    			SmartDashboard.getNumber("PID_D_RIGHT", OI.DEFAULT_PID_D)
+    			SmartDashboard.getNumber("PID_D_RIGHT", OI.DEFAULT_PID_D),
+    			SmartDashboard.getNumber("PID_F_LEFT", OI.DEFAULT_PID_F),
+    			SmartDashboard.getNumber("PID_F_RIGHT", OI.DEFAULT_PID_F)
     	);
     	Robot.driveTrain.driveMotionMagic(distanceToTravel);
+    	try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
     // Make this return true when this Command no longer needs to run execute()

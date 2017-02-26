@@ -47,10 +47,10 @@ public class OI {
 	public static double DEFAULT_PID_D = 0.7;
 	public static AtomicReference<Double> TALON_P_LEFT = new AtomicReference<Double>(DEFAULT_PID_P);
 	public static AtomicReference<Double> TALON_P_RIGHT = new AtomicReference<Double>(DEFAULT_PID_P);
-	public static AtomicReference<Double> TALON_I_LEFT = new AtomicReference<Double>(DEFAULT_PID_P);
-	public static AtomicReference<Double> TALON_I_RIGHT = new AtomicReference<Double>(DEFAULT_PID_P);
-	public static AtomicReference<Double> TALON_D_LEFT = new AtomicReference<Double>(DEFAULT_PID_P);
-	public static AtomicReference<Double> TALON_D_RIGHT = new AtomicReference<Double>(DEFAULT_PID_P);
+	public static AtomicReference<Double> TALON_I_LEFT = new AtomicReference<Double>(DEFAULT_PID_I);
+	public static AtomicReference<Double> TALON_I_RIGHT = new AtomicReference<Double>(DEFAULT_PID_I);
+	public static AtomicReference<Double> TALON_D_LEFT = new AtomicReference<Double>(DEFAULT_PID_D);
+	public static AtomicReference<Double> TALON_D_RIGHT = new AtomicReference<Double>(DEFAULT_PID_D);
 	
 	
 	//Joystick variables

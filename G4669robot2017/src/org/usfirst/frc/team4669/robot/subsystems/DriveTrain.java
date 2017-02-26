@@ -51,6 +51,21 @@ public class DriveTrain extends Subsystem {
 		
 	}
 	
+	public void setPID(double pLeft, double iLeft, double dLeft, double pRight, double iRight, double dRight) {
+		frontLeftMotor.setP(pLeft);
+		rearLeftMotor.setP(pLeft);
+		frontRightMotor.setP(pRight);
+		rearRightMotor.setP(pRight);
+		frontLeftMotor.setI(iLeft);
+		rearLeftMotor.setI(iLeft);
+		frontRightMotor.setI(iRight);
+		rearRightMotor.setI(iRight);
+		frontLeftMotor.setD(dLeft);
+		rearLeftMotor.setD(dLeft);
+		frontRightMotor.setD(dRight);
+		rearRightMotor.setD(dRight);
+	}
+	
 	public void setupLeftMotor(CANTalon talon) {
 		talon.enable();
 		talon.changeControlMode(TalonControlMode.PercentVbus);
@@ -131,7 +146,11 @@ public class DriveTrain extends Subsystem {
     	return frontRightMotor.getEncPosition();
     }
     
-    public double getEnconderVel() {
+    public double getLeftEnconderVel() {
+    	return frontLeftMotor.getEncVelocity();
+    }
+    
+    public double getRightEnconderVel() {
     	return frontRightMotor.getEncVelocity();
     }
     

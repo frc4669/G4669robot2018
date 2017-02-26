@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4669.robot.subsystems;
 
+import org.usfirst.frc.team4669.robot.OI;
 import org.usfirst.frc.team4669.robot.RobotMap;
 import org.usfirst.frc.team4669.robot.commands.TankDrive;
 
@@ -62,9 +63,9 @@ public class DriveTrain extends Subsystem {
 		talon.configPeakOutputVoltage(+12.0f, -12.0f);
 		talon.setProfile(0);
 		talon.setF(0.25);
-		talon.setP(0.07);
-		talon.setI(0.001);
-		talon.setD(0.7);
+		talon.setP(OI.TALON_P_LEFT.get());
+		talon.setI(OI.TALON_I_LEFT.get());
+		talon.setD(OI.TALON_D_LEFT.get());
 		talon.setMotionMagicCruiseVelocity(300);
 		talon.setMotionMagicAcceleration(300);
 	}
@@ -81,9 +82,9 @@ public class DriveTrain extends Subsystem {
 		talon.configPeakOutputVoltage(+12.0f, -12.0f);
 		talon.setProfile(0);
 		talon.setF(0.25);
-		talon.setP(0.07);
-		talon.setI(0.001);
-		talon.setD(0.7);
+		talon.setP(OI.TALON_P_RIGHT.get());
+		talon.setI(OI.TALON_I_RIGHT.get());
+		talon.setD(OI.TALON_D_RIGHT.get());
 		talon.setMotionMagicCruiseVelocity(300);
 		talon.setMotionMagicAcceleration(300);
 	}

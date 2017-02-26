@@ -1,5 +1,7 @@
 package org.usfirst.frc.team4669.robot;
 
+import java.util.concurrent.atomic.AtomicReference;
+
 import org.usfirst.frc.team4669.robot.commands.DriveForward;
 import org.usfirst.frc.team4669.robot.commands.Turn;
 import org.usfirst.frc.team4669.robot.commands.ZeroSensors;
@@ -39,6 +41,18 @@ public class OI {
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
 
+	// PID variables with default vals
+	public static double DEFAULT_PID_P = 0.07;
+	public static double DEFAULT_PID_I = 0.001;
+	public static double DEFAULT_PID_D = 0.7;
+	public static AtomicReference<Double> TALON_P_LEFT = new AtomicReference<Double>(DEFAULT_PID_P);
+	public static AtomicReference<Double> TALON_P_RIGHT = new AtomicReference<Double>(DEFAULT_PID_P);
+	public static AtomicReference<Double> TALON_I_LEFT = new AtomicReference<Double>(DEFAULT_PID_P);
+	public static AtomicReference<Double> TALON_I_RIGHT = new AtomicReference<Double>(DEFAULT_PID_P);
+	public static AtomicReference<Double> TALON_D_LEFT = new AtomicReference<Double>(DEFAULT_PID_P);
+	public static AtomicReference<Double> TALON_D_RIGHT = new AtomicReference<Double>(DEFAULT_PID_P);
+	
+	
 	//Joystick variables
 	private Joystick leftStick;
 	private Joystick rightStick;
@@ -60,7 +74,13 @@ public class OI {
 		SmartDashboard.putNumber("FeedRPM", 0);
 		SmartDashboard.putNumber("Turn Angle", 0);
 		SmartDashboard.putNumber("EncoderVel", Robot.fuelLauncher.getEncoderVel());
-
+		//PID SmartDashboard vals
+		SmartDashboard.putNumber("PID_P_LEFT", TALON_P_LEFT.get());
+		SmartDashboard.putNumber("PID_I_LEFT", TALON_I_LEFT.get());
+		SmartDashboard.putNumber("PID_D_LEFT", TALON_D_LEFT.get());
+		SmartDashboard.putNumber("PID_P_RIGHT", TALON_P_RIGHT.get());
+		SmartDashboard.putNumber("PID_I_RIGHT", TALON_I_RIGHT.get());
+		SmartDashboard.putNumber("PID_D_RIGHT", TALON_D_RIGHT.get());
 	}
 
 	//Getting joystick values

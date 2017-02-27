@@ -17,7 +17,7 @@ public class FuelIntakeElevator extends Subsystem {
 	//Initiate intake motor.
 	public FuelIntakeElevator() {
 		super();
-		intakeMotor = new CANTalon(RobotMap.intakeMotor);
+		intakeMotor = new CANTalon(RobotMap.intakeElevatorMotor);
 
 		//Motor setup
 		intakeMotor.enable();

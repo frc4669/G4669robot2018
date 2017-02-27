@@ -129,7 +129,8 @@ public class Robot extends IterativeRobot {
     	SmartDashboard.putNumber("Right Encoder", driveTrain.getRightEncoder());
 		SmartDashboard.putNumber("Left Y Axis", Robot.oi.leftY());
     	SmartDashboard.putNumber("Right Y Axis", Robot.oi.rightY());
-    	SmartDashboard.putNumber("LaunchVel", Robot.fuelLauncher.getEncoderVel());
+    	SmartDashboard.putNumber("LeftLaunchVel", Robot.fuelLauncher.getLeftEncoderVel());
+    	SmartDashboard.putNumber("RightLaunchVel", Robot.fuelLauncher.getRightEncoderVel());
     	SmartDashboard.putNumber("IntakeVel", Robot.fuelIntakeElevator.getEncoderVel());
     	SmartDashboard.putNumber("driveLeftEncVel", Robot.driveTrain.getLeftEnconderVel());
     	SmartDashboard.putNumber("driveRightEncVel", Robot.driveTrain.getRightEnconderVel());

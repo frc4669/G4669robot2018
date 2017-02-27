@@ -20,7 +20,7 @@ public class FuelDoor extends Subsystem {
 	
 	public FuelDoor() {
 		super();
-		doorMotor = new CANTalon(RobotMap.launchMotor);
+		doorMotor = new CANTalon(RobotMap.launchMotorLeft);
 
 		doorMotor.enable();
 		doorMotor.reverseSensor(false);

@@ -22,10 +22,10 @@ public class DriveTrain extends Subsystem {
 	private static final double kP = 0.005;
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-	private CANTalon frontLeftMotor;
-	private CANTalon rearLeftMotor;
-	private CANTalon frontRightMotor;
-	private CANTalon rearRightMotor;
+	private CANTalon topLeftMotor;
+	private CANTalon bottomLeftMotor;
+	private CANTalon topRightMotor;
+	private CANTalon bottomRightMotor;
 	
 	private RobotDrive driveTrain;
 	
@@ -33,17 +33,17 @@ public class DriveTrain extends Subsystem {
 	
 	public DriveTrain() {
 		super();
-		frontLeftMotor = new CANTalon(RobotMap.driveTrainFrontLeft);
-		rearLeftMotor = new CANTalon(RobotMap.driveTrainRearLeft);
-		frontRightMotor = new CANTalon(RobotMap.driveTrainFrontRight);
-		rearRightMotor = new CANTalon(RobotMap.driveTrainRearRight);
+		topLeftMotor = new CANTalon(RobotMap.driveTrainTopLeft);
+		bottomLeftMotor = new CANTalon(RobotMap.driveTrainBottomLeft);
+		topRightMotor = new CANTalon(RobotMap.driveTrainTopRight);
+		bottomRightMotor = new CANTalon(RobotMap.driveTrainBottomRight);
 		
-		driveTrain = new RobotDrive(frontLeftMotor, rearLeftMotor, frontRightMotor, rearRightMotor);
+		driveTrain = new RobotDrive(topLeftMotor, bottomLeftMotor, topRightMotor, bottomRightMotor);
 		
-		setupLeftMotor(frontLeftMotor);
-		setupLeftMotor(rearLeftMotor);
-		setupRightMotor(frontRightMotor);
-		setupRightMotor(rearRightMotor);
+		setupLeftMotor(topLeftMotor);
+		setupLeftMotor(bottomLeftMotor);
+		setupRightMotor(topRightMotor);
+		setupRightMotor(bottomRightMotor);
 		
 		analogGyro = new ADXRS450_Gyro();
 		
@@ -60,22 +60,22 @@ public class DriveTrain extends Subsystem {
 			double dRight,
 			double fLeft,
 			double fRight) {
-		frontLeftMotor.setP(pLeft);
-		rearLeftMotor.setP(pLeft);
-		frontRightMotor.setP(pRight);
-		rearRightMotor.setP(pRight);
-		frontLeftMotor.setI(iLeft);
-		rearLeftMotor.setI(iLeft);
-		frontRightMotor.setI(iRight);
-		rearRightMotor.setI(iRight);
-		frontLeftMotor.setD(dLeft);
-		rearLeftMotor.setD(dLeft);
-		frontRightMotor.setD(dRight);
-		rearRightMotor.setD(dRight);
-		frontLeftMotor.setF(fLeft);
-		rearLeftMotor.setF(fLeft);
-		frontRightMotor.setF(fRight);
-		rearRightMotor.setF(fRight);
+		topLeftMotor.setP(pLeft);
+		bottomLeftMotor.setP(pLeft);
+		topRightMotor.setP(pRight);
+		bottomRightMotor.setP(pRight);
+		topLeftMotor.setI(iLeft);
+		bottomLeftMotor.setI(iLeft);
+		topRightMotor.setI(iRight);
+		bottomRightMotor.setI(iRight);
+		topLeftMotor.setD(dLeft);
+		bottomLeftMotor.setD(dLeft);
+		topRightMotor.setD(dRight);
+		bottomRightMotor.setD(dRight);
+		topLeftMotor.setF(fLeft);
+		bottomLeftMotor.setF(fLeft);
+		topRightMotor.setF(fRight);
+		bottomRightMotor.setF(fRight);
 	}
 	
 	public void setupLeftMotor(CANTalon talon) {
@@ -151,39 +151,39 @@ public class DriveTrain extends Subsystem {
     }
     
     public double getLeftEncoder() {
-    	return frontLeftMotor.getEncPosition();
+    	return topLeftMotor.getEncPosition();
     }
     
     public double getRightEncoder() {
-    	return frontRightMotor.getEncPosition();
+    	return topRightMotor.getEncPosition();
     }
     
     public double getLeftEnconderVel() {
-    	return frontLeftMotor.getEncVelocity();
+    	return topLeftMotor.getEncVelocity();
     }
     
     public double getRightEnconderVel() {
-    	return frontRightMotor.getEncVelocity();
+    	return topRightMotor.getEncVelocity();
     }
     
     public void zeroEncoders() {
-    	frontLeftMotor.setPosition(0);
-    	frontRightMotor.setPosition(0);
+    	topLeftMotor.setPosition(0);
+    	topRightMotor.setPosition(0);
     }
     
     public void changeControlMode(TalonControlMode mode) {
-    	frontLeftMotor.changeControlMode(mode);
-    	rearLeftMotor.changeControlMode(mode);
-    	frontRightMotor.changeControlMode(mode);
-    	rearRightMotor.changeControlMode(mode);
+    	topLeftMotor.changeControlMode(mode);
+    	bottomLeftMotor.changeControlMode(mode);
+    	topRightMotor.changeControlMode(mode);
+    	bottomRightMotor.changeControlMode(mode);
     }
     
     public void driveMotionMagic(double targetEncPosition) {
     	changeControlMode(TalonControlMode.MotionMagic);
-    	frontLeftMotor.set(-targetEncPosition);
-    	rearLeftMotor.set(-targetEncPosition);
-    	frontRightMotor.set(targetEncPosition);
-    	rearRightMotor.set(targetEncPosition);
+    	topLeftMotor.set(-targetEncPosition);
+    	bottomLeftMotor.set(-targetEncPosition);
+    	topRightMotor.set(targetEncPosition);
+    	bottomRightMotor.set(targetEncPosition);
     }
 	
 }

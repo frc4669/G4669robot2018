@@ -12,30 +12,89 @@ public class FuelLauncher extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 
-	private CANTalon launchMotor;
+	private CANTalon launchMotorLeft;
+	private CANTalon launchMotorRight;
+	private CANTalon feederMotorLeft;
+	private CANTalon feederMotorRight;
 
 	public FuelLauncher() {
 		super();
-		launchMotor = new CANTalon(RobotMap.launchMotor);
 
-		launchMotor.enable();
-		launchMotor.reverseSensor(false);
-		launchMotor.configEncoderCodesPerRev(360); // if using FeedbackDevice.QuadEncoder
-		launchMotor.setPosition(0.0);
+		launchMotorLeft = new CANTalon(RobotMap.launchMotorLeft);
+
+		launchMotorLeft.enable();
+		launchMotorLeft.reverseSensor(false);
+		launchMotorLeft.configEncoderCodesPerRev(360); // if using FeedbackDevice.QuadEncoder
+		launchMotorLeft.setPosition(0.0);
 		//launcherMotor.configPotentiometerTurns(XXX);, // if using FeedbackDevice.AnalogEncoder or AnalogPot
 
+		/* set the peak and nominal outputs, 12V means full */
+		launchMotorLeft.configNominalOutputVoltage(+0.0f, -0.0f);
+		launchMotorLeft.configPeakOutputVoltage(+12.0f, -12.0f);
+		/* set closed loop gains in slot0 */
+		launchMotorLeft.setProfile(0);
+		launchMotorLeft.setF(0.027271);
+		launchMotorLeft.setP(0.110);
+		launchMotorLeft.setI(0.00011); 
+		launchMotorLeft.setD(1.1);
+
+		launchMotorRight = new CANTalon(RobotMap.launchMotorRight);
+
+		launchMotorRight.enable();
+		launchMotorRight.reverseSensor(false);
+		launchMotorRight.configEncoderCodesPerRev(360); // if using FeedbackDevice.QuadEncoder
+		launchMotorRight.setPosition(0.0);
+		//launcherMotor.configPotentiometerTurns(XXX);, // if using FeedbackDevice.AnalogEncoder or AnalogPot
 
 		/* set the peak and nominal outputs, 12V means full */
-		launchMotor.configNominalOutputVoltage(+0.0f, -0.0f);
-		launchMotor.configPeakOutputVoltage(+12.0f, -12.0f);
-
+		launchMotorRight.configNominalOutputVoltage(+0.0f, -0.0f);
+		launchMotorRight.configPeakOutputVoltage(+12.0f, -12.0f);
 		/* set closed loop gains in slot0 */
+		launchMotorRight.setProfile(0);
+		launchMotorRight.setF(0.027271);
+		launchMotorRight.setP(0.110);
+		launchMotorRight.setI(0.00011); 
+		launchMotorRight.setD(1.1);
 
-		launchMotor.setProfile(0);
-		launchMotor.setF(0.027271);
-		launchMotor.setP(0.110);
-		launchMotor.setI(0.00011); 
-		launchMotor.setD(1.1);
+		feederMotorLeft = new CANTalon(RobotMap.feederMotorLeft);
+
+		//Motor setup
+		feederMotorLeft.enable();
+		feederMotorLeft.reverseSensor(false);
+		feederMotorLeft.configEncoderCodesPerRev(4096); // if using FeedbackDevice.QuadEncoder
+		feederMotorLeft.setPosition(0.0);
+		//launcherMotor.configPotentiometerTurns(XXX);, // if using FeedbackDevice.AnalogEncoder or AnalogPot
+
+		//set the peak and nominal outputs, 12V means full
+		feederMotorLeft.configNominalOutputVoltage(+0.0f, -0.0f);
+		feederMotorLeft.configPeakOutputVoltage(+12.0f, -12.0f);
+
+		//set closed loop gains in slot0
+		feederMotorLeft.setProfile(0);
+		feederMotorLeft.setF(0.027271);
+		feederMotorLeft.setP(0.110);
+		feederMotorLeft.setI(0.00011); 
+		feederMotorLeft.setD(1.1);
+
+		feederMotorRight = new CANTalon(RobotMap.feederMotorRight);
+
+		//Motor setup
+		feederMotorRight.enable();
+		feederMotorRight.reverseSensor(false);
+		feederMotorRight.configEncoderCodesPerRev(4096); // if using FeedbackDevice.QuadEncoder
+		feederMotorRight.setPosition(0.0);
+		//launcherMotor.configPotentiometerTurns(XXX);, // if using FeedbackDevice.AnalogEncoder or AnalogPot
+
+		//set the peak and nominal outputs, 12V means full
+		feederMotorRight.configNominalOutputVoltage(+0.0f, -0.0f);
+		feederMotorRight.configPeakOutputVoltage(+12.0f, -12.0f);
+
+		//set closed loop gains in slot0
+		feederMotorRight.setProfile(0);
+		feederMotorRight.setF(0.027271);
+		feederMotorRight.setP(0.110);
+		feederMotorRight.setI(0.00011); 
+		feederMotorRight.setD(1.1);
 
 	}
 
@@ -46,28 +105,54 @@ public class FuelLauncher extends Subsystem {
 	}
 
 	public void launch() {
-			/* Speed mode */
-			double targetSpeed = SmartDashboard.getNumber("LaunchRPM", 0);
-			launchMotor.changeControlMode(TalonControlMode.Speed);
-			launchMotor.set(targetSpeed); /* 1500 RPM in either direction */
+		/* Speed mode */
+		double speedTolerance = SmartDashboard.getNumber("ShooterSpeedTolerance", 0);
+		double targetSpeed = SmartDashboard.getNumber("LaunchRPM", 0);
+		double feederVbus = 0.3;
+		launchMotorLeft.changeControlMode(TalonControlMode.Speed);
+		launchMotorLeft.set(targetSpeed); /* 1500 RPM in either direction */
+		if (Math.abs(launchMotorLeft.getEncVelocity() - targetSpeed) < speedTolerance) {
+			feederMotorLeft.changeControlMode(TalonControlMode.PercentVbus);
+			feederMotorLeft.set(feederVbus);
+		}
+		else {
+			feederMotorLeft.set(0);
+		}
+		launchMotorRight.changeControlMode(TalonControlMode.Speed);
+		launchMotorRight.set(targetSpeed); /* 1500 RPM in either direction */
+		if (Math.abs(launchMotorRight.getEncVelocity() - targetSpeed) < speedTolerance) {
+			feederMotorRight.changeControlMode(TalonControlMode.PercentVbus);
+			feederMotorRight.set(feederVbus);
+		}
+		else {
+			feederMotorRight.set(0);
+		}
 	}
 
 	public void stop() {
-		/* Percent voltage mode? */
-		launchMotor.set(0);
+		launchMotorLeft.set(0);
+		launchMotorRight.set(0);
 	}
 
-	public double getEncoder() {
-		return launchMotor.getEncPosition();
+	public double getLeftEncoder() {
+		return launchMotorLeft.getEncPosition();
 	}
 
-	public double getEncoderVel() {
-		return launchMotor.getEncVelocity();
+	public double getLeftEncoderVel() {
+		return launchMotorLeft.getEncVelocity();
+	}
+	
+	public double getRightEncoder() {
+		return launchMotorLeft.getEncPosition();
 	}
 
-	public void zeroEncoder(){
-		launchMotor.setPosition(0);
+	public double getRightEncoderVel() {
+		return launchMotorLeft.getEncVelocity();
+	}
 
+	public void zeroEncoders(){
+		launchMotorLeft.setPosition(0);
+		launchMotorRight.setPosition(0);
 	}
 
 }

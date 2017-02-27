@@ -22,7 +22,7 @@ public class FuelFeeder extends Subsystem {
 	//Initiate feeder motor.
 	public FuelFeeder() {
 		super();
-		feederMotor = new CANTalon(RobotMap.feederMotor);
+		feederMotor = new CANTalon(RobotMap.feederMotorLeft);
 
 		//Motor setup
 		feederMotor.enable();

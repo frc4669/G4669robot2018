@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.Joystick;
 
 public class F310 {
 	
+	//x on back switch, mode light off
 	private Joystick f310;
 	
 	public F310() {

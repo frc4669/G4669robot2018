@@ -21,10 +21,6 @@ public class Feed extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(++loops >= 10) {
-    		
-    		loops = 0;
-     	}
     	Robot.fuelFeeder.feed();
     }
     

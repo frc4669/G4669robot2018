@@ -53,12 +53,16 @@ public class FuelFeeder extends Subsystem {
 	//Feeder command
 	public void feed() {
 		if(Robot.oi.getRightRawButton(RobotMap.feedButton)){
-			double targetSpeed = SmartDashboard.getNumber("FeedRPM", 0);
-			feederMotor.changeControlMode(TalonControlMode.Speed);
-			feederMotor.set(targetSpeed);
+//			double targetSpeed = SmartDashboard.getNumber("FeedRPM", 0);
+//			feederMotor.changeControlMode(TalonControlMode.Speed);
+//			feederMotor.set(targetSpeed);
+			/* Percent voltage mode */
+			feederMotor.changeControlMode(TalonControlMode.PercentVbus);
+			feederMotor.set(0.30);
 		} 
 		else {
 			/* Percent voltage mode */
+			feederMotor.changeControlMode(TalonControlMode.PercentVbus);
 			feederMotor.set(0);
 		}
 	}

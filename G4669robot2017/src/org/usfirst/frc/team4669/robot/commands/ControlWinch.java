@@ -1,18 +1,18 @@
 package org.usfirst.frc.team4669.robot.commands;
 
 import org.usfirst.frc.team4669.robot.Robot;
-import org.usfirst.frc.team4669.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class Feed extends Command {
-	
-	private int loops = 0;
+/**
+ *
+ */
+public class ControlWinch extends Command {
 
-    public Feed() {
+    public ControlWinch() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.fuelFeeder);
+    	requires(Robot.ropeWinch);
     }
 
     // Called just before this Command runs the first time
@@ -21,24 +21,22 @@ public class Feed extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.fuelFeeder.feed();
+    	Robot.ropeWinch.run(Robot.oi.getLeftStick().getY());
     }
-    
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if (Robot.oi.getRightRawButton(RobotMap.feedButton)) return false;
-        else {
-        	return true;
-        }
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.ropeWinch.run(0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }

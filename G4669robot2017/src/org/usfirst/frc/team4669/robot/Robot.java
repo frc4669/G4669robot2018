@@ -9,9 +9,9 @@ import org.usfirst.frc.team4669.robot.commands.RightGearLiftAuto;
 import org.usfirst.frc.team4669.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4669.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team4669.robot.subsystems.FuelDoor;
-import org.usfirst.frc.team4669.robot.subsystems.FuelFeeder;
 import org.usfirst.frc.team4669.robot.subsystems.FuelIntakeElevator;
 import org.usfirst.frc.team4669.robot.subsystems.FuelLauncher;
+import org.usfirst.frc.team4669.robot.subsystems.RopeWinch;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -34,8 +34,8 @@ public class Robot extends IterativeRobot {
 	public static DriveTrain driveTrain = new DriveTrain();
 	public static FuelLauncher fuelLauncher = new FuelLauncher();
 	public static FuelIntakeElevator fuelIntakeElevator = new FuelIntakeElevator();
-	public static FuelFeeder fuelFeeder = new FuelFeeder();
 	public static FuelDoor door = new FuelDoor();
+	public static RopeWinch ropeWinch = new RopeWinch();
 	public static OI oi;
 	public static F310 f310;
 

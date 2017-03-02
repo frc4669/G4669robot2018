@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.ctre.*;
 import com.ctre.CANTalon.FeedbackDevice;
@@ -89,7 +90,6 @@ public class DriveTrain extends Subsystem {
 		talon.enableBrakeMode(true);
 		talon.reverseOutput(!RobotMap.reverseOutputTrain);
 		talon.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		talon.configEncoderCodesPerRev(360);
 		talon.configNominalOutputVoltage(+0.0f, -0.0f);
 		talon.configPeakOutputVoltage(+12.0f, -12.0f);
 		talon.setProfile(0);
@@ -108,7 +108,6 @@ public class DriveTrain extends Subsystem {
 		talon.enableBrakeMode(true);
 		talon.reverseOutput(RobotMap.reverseOutputTrain);
 		talon.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		talon.configEncoderCodesPerRev(360);
 		talon.configNominalOutputVoltage(+0.0f, -0.0f);
 		talon.configPeakOutputVoltage(+12.0f, -12.0f);
 		talon.setProfile(0);
@@ -125,7 +124,7 @@ public class DriveTrain extends Subsystem {
     }
     
     public void driveForward(double speedLeft, double speedRight) {
-    	driveTrain.tankDrive(-1*speedLeft, -1*speedRight, false);
+    	driveTrain.tankDrive(speedLeft, speedRight, true);
     }
     
     public void drive(double outputMag, double outputCurv) {
@@ -189,6 +188,13 @@ public class DriveTrain extends Subsystem {
     	topRightMotor.set(targetEncPosition);
 //    	bottomRightMotor.set(targetEncPosition);
     }
+    
+    public void turn(double angle) {
+		double d = RobotMap.wheelBase * Math.PI * angle / 360.0 / RobotMap.wheelDiameter / Math.PI * 360*4;
+		changeControlMode(TalonControlMode.MotionMagic);
+    	topLeftMotor.set(d);
+    	topRightMotor.set(d);
+	}
 	
 }
     

@@ -2,7 +2,10 @@ package org.usfirst.frc.team4669.robot.subsystems;
 
 import org.usfirst.frc.team4669.robot.RobotMap;
 import org.usfirst.frc.team4669.robot.commands.Launch;
+import org.usfirst.frc.team4669.robot.commands.LaunchAndIntake;
+
 import com.ctre.CANTalon;
+import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -24,7 +27,9 @@ public class FuelLauncher extends Subsystem {
 
 		launchMotorLeft.enable();
 		launchMotorLeft.reverseSensor(false);
-		launchMotorLeft.configEncoderCodesPerRev(360); // if using FeedbackDevice.QuadEncoder
+		launchMotorLeft.reverseOutput(false);
+		launchMotorLeft.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
+		launchMotorLeft.configEncoderCodesPerRev(4096); // if using FeedbackDevice.QuadEncoder
 		launchMotorLeft.setPosition(0.0);
 		//launcherMotor.configPotentiometerTurns(XXX);, // if using FeedbackDevice.AnalogEncoder or AnalogPot
 
@@ -42,7 +47,9 @@ public class FuelLauncher extends Subsystem {
 
 		launchMotorRight.enable();
 		launchMotorRight.reverseSensor(false);
-		launchMotorRight.configEncoderCodesPerRev(360); // if using FeedbackDevice.QuadEncoder
+		launchMotorRight.reverseOutput(true);
+		launchMotorRight.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
+		launchMotorRight.configEncoderCodesPerRev(4096); // if using FeedbackDevice.QuadEncoder
 		launchMotorRight.setPosition(0.0);
 		//launcherMotor.configPotentiometerTurns(XXX);, // if using FeedbackDevice.AnalogEncoder or AnalogPot
 
@@ -61,6 +68,8 @@ public class FuelLauncher extends Subsystem {
 		//Motor setup
 		feederMotorLeft.enable();
 		feederMotorLeft.reverseSensor(false);
+		feederMotorLeft.reverseOutput(false);
+		feederMotorLeft.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
 		feederMotorLeft.configEncoderCodesPerRev(4096); // if using FeedbackDevice.QuadEncoder
 		feederMotorLeft.setPosition(0.0);
 		//launcherMotor.configPotentiometerTurns(XXX);, // if using FeedbackDevice.AnalogEncoder or AnalogPot
@@ -81,6 +90,8 @@ public class FuelLauncher extends Subsystem {
 		//Motor setup
 		feederMotorRight.enable();
 		feederMotorRight.reverseSensor(false);
+		feederMotorRight.reverseOutput(false);
+		feederMotorRight.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
 		feederMotorRight.configEncoderCodesPerRev(4096); // if using FeedbackDevice.QuadEncoder
 		feederMotorRight.setPosition(0.0);
 		//launcherMotor.configPotentiometerTurns(XXX);, // if using FeedbackDevice.AnalogEncoder or AnalogPot
@@ -101,32 +112,32 @@ public class FuelLauncher extends Subsystem {
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 		//setDefaultCommand(new MySpecialCommand());
-		setDefaultCommand(new Launch());
+		setDefaultCommand(new LaunchAndIntake());
 	}
 
 	public void launch() {
 		/* Speed mode */
 		double speedTolerance = SmartDashboard.getNumber("ShooterSpeedTolerance", 0);
 		double targetSpeed = SmartDashboard.getNumber("LaunchRPM", 0);
-		double feederVbus = 0.3;
+		double feederVbus = 0.5;
 		launchMotorLeft.changeControlMode(TalonControlMode.Speed);
 		launchMotorLeft.set(targetSpeed); /* 1500 RPM in either direction */
-		if (Math.abs(launchMotorLeft.getEncVelocity() - targetSpeed) < speedTolerance) {
-			feederMotorLeft.changeControlMode(TalonControlMode.PercentVbus);
-			feederMotorLeft.set(feederVbus);
-		}
-		else {
-			feederMotorLeft.set(0);
-		}
-		launchMotorRight.changeControlMode(TalonControlMode.Speed);
-		launchMotorRight.set(targetSpeed); /* 1500 RPM in either direction */
-		if (Math.abs(launchMotorRight.getEncVelocity() - targetSpeed) < speedTolerance) {
-			feederMotorRight.changeControlMode(TalonControlMode.PercentVbus);
-			feederMotorRight.set(feederVbus);
-		}
-		else {
-			feederMotorRight.set(0);
-		}
+//		if (Math.abs(launchMotorLeft.getEncVelocity()/6.8- targetSpeed) < speedTolerance) {
+//			feederMotorLeft.changeControlMode(TalonControlMode.PercentVbus);
+//			feederMotorLeft.set(feederVbus);
+//		}
+//		else {
+//			feederMotorLeft.set(0);
+//		}
+//		launchMotorRight.changeControlMode(TalonControlMode.Speed);
+//		launchMotorRight.set(-targetSpeed); /* 1500 RPM in either direction */
+//		if (Math.abs(launchMotorRight.getEncVelocity()/2.4 +targetSpeed) < speedTolerance) {
+//			feederMotorRight.changeControlMode(TalonControlMode.PercentVbus);
+//			feederMotorRight.set(feederVbus);
+//		}
+//		else {
+//			feederMotorRight.set(0);
+//		}
 	}
 
 	public void stop() {
@@ -143,11 +154,11 @@ public class FuelLauncher extends Subsystem {
 	}
 	
 	public double getRightEncoder() {
-		return launchMotorLeft.getEncPosition();
+		return launchMotorRight.getEncPosition();
 	}
 
 	public double getRightEncoderVel() {
-		return launchMotorLeft.getEncVelocity();
+		return launchMotorRight.getEncVelocity();
 	}
 
 	public void zeroEncoders(){

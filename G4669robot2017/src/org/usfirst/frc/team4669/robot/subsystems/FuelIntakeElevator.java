@@ -48,16 +48,15 @@ public class FuelIntakeElevator extends Subsystem {
 
 	//Intake command
 	public void intake() {
-		if(Robot.oi.getRightRawButton(RobotMap.intakeButton)){
-			double targetSpeed = SmartDashboard.getNumber("IntakeRPM", 0);
-			intakeMotor.changeControlMode(TalonControlMode.Speed);
-			intakeMotor.set(targetSpeed);
-		} 
-		else {
-			/* Percent voltage mode */
-			intakeMotor.set(0);
-		}
+		double targetSpeed = SmartDashboard.getNumber("IntakeRPM", 0);
+		intakeMotor.changeControlMode(TalonControlMode.Speed);
+		intakeMotor.set(targetSpeed);
+	} 
+	public void stop() {
+		/* Percent voltage mode */
+		intakeMotor.set(0);
 	}
+
 
 	//Get encoder pos.
 	public double getEncoder() {

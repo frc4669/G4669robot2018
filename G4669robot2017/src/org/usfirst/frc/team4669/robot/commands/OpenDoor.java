@@ -26,7 +26,7 @@ public class OpenDoor extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return Robot.door.isBackwardLimitSwitchClosed();
+    	return Robot.door.isReverseLimitSwitchClosed();
     }
 
     // Called once after isFinished returns true

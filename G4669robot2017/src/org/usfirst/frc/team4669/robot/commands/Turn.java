@@ -36,7 +36,7 @@ public class Turn extends Command {
     	else if (degree > 0) {
     		Robot.driveTrain.driveForward(-0.5, 0.5);
     	}
-    	else isFinished();
+    	else end();
     }
 
     // Make this return true when this Command no longer needs to run execute()

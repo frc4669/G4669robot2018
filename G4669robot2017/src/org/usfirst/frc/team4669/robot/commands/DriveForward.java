@@ -36,10 +36,7 @@ public class DriveForward extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		if (distanceToTravel < driveTrain.getRightEncoder()) return true;
-		else {
-			return false;
-		}
+		return distanceToTravel < driveTrain.getRightEncoder();
 	}
 
 	// Called once after isFinished returns true

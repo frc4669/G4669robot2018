@@ -40,12 +40,6 @@ public class DriveMotionMagic extends Command {
     			SmartDashboard.getNumber("PID_F_RIGHT", OI.DEFAULT_PID_F)
     	);
     	Robot.driveTrain.driveMotionMagic(distanceToTravel);
-    	try {
-			Thread.sleep(500);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -55,10 +49,12 @@ public class DriveMotionMagic extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.driveTrain.stop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }

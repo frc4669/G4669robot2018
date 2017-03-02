@@ -14,23 +14,25 @@ public class RobotMap {
 
 	//SUBSYSTEMS
 	//Drivetrain motors
-	public static final int driveTrainTopLeft = 2;
-	public static final int driveTrainBottomLeft = 5;
+	public static final int driveTrainTopLeft = 5;
+	public static final int driveTrainBottomLeft = 4;
 	public static final int driveTrainTopRight = 1;
-	public static final int driveTrainBottomRight = 4;
+	public static final int driveTrainBottomRight = 2;
 
 	//Other subsystem motors
 	public static final int launchMotorLeft = 7;
-	public static final int launchMotorRight = 0;
+	public static final int launchMotorRight = 3;
 	public static final int feederMotorLeft = 10; 
-	public static final int feederMotorRight = 0; 
+	public static final int feederMotorRight = 11; 
 	public static final int intakeElevatorMotor = 8;
-	public static final int doorMotor = 6;
+	public static final int doorMotor = 9;
+	public static final int climbMotor = 6;
+	
 	
 	
 	//DRIVER STATION	
 	// Reverse output of motors if moving backwords
-	public static final boolean reverseOutputTrain = true;
+	public static final boolean reverseOutputTrain = false;
 	public static final int leftJoystick = 0;
 	public static final int rightJoystick = 1;
 
@@ -46,11 +48,11 @@ public class RobotMap {
 	
 	
 	//DRIVE TRAIN SPEED PROPORTION
-		public static final double driveTrainSpeedProportion = 0.85;	
+	public static final double driveTrainSpeedProportion = 0.85;	
 	
 	// OTHER
 	public static final double wheelDiameter = 3.25;
-	public static final double wheelBase = 29; //figure out real distance later
+	public static final double wheelBase = 27.4; //figure out real distance later
 	/**
 	 * Calculates circumference of wheel given diameter.
 	 */

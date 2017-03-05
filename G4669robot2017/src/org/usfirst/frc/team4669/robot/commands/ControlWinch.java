@@ -21,7 +21,7 @@ public class ControlWinch extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.ropeWinch.run(Robot.oi.getLeftStick().getY());
+    	Robot.ropeWinch.run(Math.abs(Robot.oi.getLeftStick().getY()));
     }
 
     // Make this return true when this Command no longer needs to run execute()

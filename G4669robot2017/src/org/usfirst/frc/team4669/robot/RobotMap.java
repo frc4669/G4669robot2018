@@ -21,12 +21,12 @@ public class RobotMap {
 
 	//Other subsystem motors
 	public static final int launchMotorLeft = 7;
-	public static final int launchMotorRight = 3;
+	public static final int launchMotorRight = 6;
 	public static final int feederMotorLeft = 10; 
 	public static final int feederMotorRight = 11; 
 	public static final int intakeElevatorMotor = 8;
 	public static final int doorMotor = 9;
-	public static final int climbMotor = 6;
+	public static final int climbMotor = 3;
 	
 	
 	

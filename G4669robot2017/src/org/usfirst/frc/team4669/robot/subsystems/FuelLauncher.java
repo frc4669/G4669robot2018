@@ -47,7 +47,7 @@ public class FuelLauncher extends Subsystem {
 
 		launchMotorRight.enable();
 		launchMotorRight.reverseSensor(false);
-		launchMotorRight.reverseOutput(true);
+		launchMotorRight.reverseOutput(false);
 		launchMotorRight.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
 		launchMotorRight.configEncoderCodesPerRev(4096); // if using FeedbackDevice.QuadEncoder
 		launchMotorRight.setPosition(0.0);
@@ -122,22 +122,22 @@ public class FuelLauncher extends Subsystem {
 		double feederVbus = 0.5;
 		launchMotorLeft.changeControlMode(TalonControlMode.Speed);
 		launchMotorLeft.set(targetSpeed); /* 1500 RPM in either direction */
-//		if (Math.abs(launchMotorLeft.getEncVelocity()/6.8- targetSpeed) < speedTolerance) {
-//			feederMotorLeft.changeControlMode(TalonControlMode.PercentVbus);
-//			feederMotorLeft.set(feederVbus);
-//		}
-//		else {
-//			feederMotorLeft.set(0);
-//		}
-//		launchMotorRight.changeControlMode(TalonControlMode.Speed);
-//		launchMotorRight.set(-targetSpeed); /* 1500 RPM in either direction */
-//		if (Math.abs(launchMotorRight.getEncVelocity()/2.4 +targetSpeed) < speedTolerance) {
-//			feederMotorRight.changeControlMode(TalonControlMode.PercentVbus);
-//			feederMotorRight.set(feederVbus);
-//		}
-//		else {
-//			feederMotorRight.set(0);
-//		}
+		if (Math.abs(launchMotorLeft.getEncVelocity()/6.8- targetSpeed) < speedTolerance) {
+			feederMotorLeft.changeControlMode(TalonControlMode.PercentVbus);
+			feederMotorLeft.set(feederVbus);
+		}
+		else {
+			feederMotorLeft.set(0);
+		}
+		launchMotorRight.changeControlMode(TalonControlMode.Speed);
+		launchMotorRight.set(-targetSpeed); /* 1500 RPM in either direction */
+		if (Math.abs(launchMotorRight.getEncVelocity()/6.8 +targetSpeed) < speedTolerance) {
+			feederMotorRight.changeControlMode(TalonControlMode.PercentVbus);
+			feederMotorRight.set(-feederVbus);
+		}
+		else {
+			feederMotorRight.set(0);
+		}
 	}
 
 	public void stop() {
@@ -158,6 +158,7 @@ public class FuelLauncher extends Subsystem {
 	}
 
 	public double getRightEncoderVel() {
+		System.out.println(launchMotorRight.getEncVelocity());
 		return launchMotorRight.getEncVelocity();
 	}
 

@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import com.ctre.*;
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
@@ -85,7 +87,7 @@ public class DriveTrain extends Subsystem {
 		talon.enable();
 		talon.changeControlMode(TalonControlMode.PercentVbus);
 		talon.setSafetyEnabled(false);
-		talon.enableBrakeMode(true);
+		talon.enableBrakeMode(false);
 		talon.reverseOutput(!RobotMap.reverseOutputTrain);
 		talon.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		talon.configNominalOutputVoltage(+0.0f, -0.0f);
@@ -95,15 +97,15 @@ public class DriveTrain extends Subsystem {
 		talon.setP(OI.TALON_P_LEFT.get());
 		talon.setI(OI.TALON_I_LEFT.get());
 		talon.setD(OI.TALON_D_LEFT.get());
-		talon.setMotionMagicCruiseVelocity(300);
-		talon.setMotionMagicAcceleration(300);
+		talon.setMotionMagicCruiseVelocity(937);
+		talon.setMotionMagicAcceleration(937);
 	}
 	
 	public void setupRightMotor(CANTalon talon) {
 		talon.enable();
 		talon.changeControlMode(TalonControlMode.PercentVbus);
 		talon.setSafetyEnabled(false);
-		talon.enableBrakeMode(true);
+		talon.enableBrakeMode(false);
 		talon.reverseOutput(RobotMap.reverseOutputTrain);
 		talon.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		talon.configNominalOutputVoltage(+0.0f, -0.0f);
@@ -113,8 +115,8 @@ public class DriveTrain extends Subsystem {
 		talon.setP(OI.TALON_P_RIGHT.get());
 		talon.setI(OI.TALON_I_RIGHT.get());
 		talon.setD(OI.TALON_D_RIGHT.get());
-		talon.setMotionMagicCruiseVelocity(300);
-		talon.setMotionMagicAcceleration(300);
+		talon.setMotionMagicCruiseVelocity(937);
+		talon.setMotionMagicAcceleration(937);
 	}
 	
     public void initDefaultCommand() {
@@ -122,7 +124,7 @@ public class DriveTrain extends Subsystem {
     }
     
     public void driveForward(double speedLeft, double speedRight) {
-    	driveTrain.tankDrive(speedLeft, speedRight, true);
+    	driveTrain.tankDrive(speedLeft, speedRight, false);
     }
     
     public void drive(double outputMag, double outputCurv) {
@@ -131,6 +133,10 @@ public class DriveTrain extends Subsystem {
     
     public void setDrive(double speed, double turnrate) {
     	driveTrain.drive(speed, turnrate);
+    }
+    
+    public void setSpeed(double speed) {
+    	topLeftMotor.set(speed);
     }
     
     public void stop() {
@@ -147,7 +153,7 @@ public class DriveTrain extends Subsystem {
     
     public double calculateTurningValue(double direction) {
     	double turningValue = kAngleSetpoint - analogGyro.getAngle() * kP;
-    	turningValue = Math  .copySign(turningValue, direction);
+    	turningValue = Math.copySign(turningValue, direction);
     	return turningValue;
     }
     

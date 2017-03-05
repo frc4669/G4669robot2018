@@ -4,6 +4,8 @@ import org.usfirst.frc.team4669.robot.OI;
 import org.usfirst.frc.team4669.robot.Robot;
 import org.usfirst.frc.team4669.robot.RobotMap;
 
+import com.ctre.CANTalon.TalonControlMode;
+
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -39,7 +41,9 @@ public class DriveMotionMagic extends Command {
     			SmartDashboard.getNumber("PID_F_LEFT", OI.DEFAULT_PID_F),
     			SmartDashboard.getNumber("PID_F_RIGHT", OI.DEFAULT_PID_F)
     	);
-    	Robot.driveTrain.driveMotionMagic(distanceToTravel);
+//    	Robot.driveTrain.driveMotionMagic(distanceToTravel);
+    	Robot.driveTrain.changeControlMode(TalonControlMode.Speed);
+    	Robot.driveTrain.setSpeed(SmartDashboard.getNumber("IntakeRPM", 0));
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -20,7 +20,7 @@ public class RopeWinch extends Subsystem {
 	//Initiate intake motor.
 	public RopeWinch() {
 		super();
-		winchMotor = new CANTalon(RobotMap.intakeElevatorMotor);
+		winchMotor = new CANTalon(RobotMap.climbMotor);
 
 		//Motor setup
 		winchMotor.enable();

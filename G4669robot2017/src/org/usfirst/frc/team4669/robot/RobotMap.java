@@ -37,7 +37,7 @@ public class RobotMap {
 	public static final int rightJoystick = 1;
 
 	public static final int launchButton = 1;
-	public static final int intakeButton = 3;
+//	public static final int intakeButton = 3;
 	public static final int feedButton = 2;
 	public static final int openDoorButton = 4;
 	public static final int closeDoorButton = 5;

@@ -1,8 +1,6 @@
 package org.usfirst.frc.team4669.robot.commands;
 
 import org.usfirst.frc.team4669.robot.Robot;
-import org.usfirst.frc.team4669.robot.RobotMap;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 public class Intake extends Command {
@@ -24,7 +22,7 @@ public class Intake extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if (Robot.oi.getRightRawButton(RobotMap.intakeButton)) {
+    	if (Robot.f310.getRightShoulderButton()) {
 			return false;
 		}
 		else {

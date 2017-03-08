@@ -121,19 +121,19 @@ public class FuelLauncher extends Subsystem {
 		double targetSpeed = SmartDashboard.getNumber("LaunchRPM", 0);
 		double feederVbus = 0.5;
 		launchMotorLeft.changeControlMode(TalonControlMode.Speed);
-		launchMotorLeft.set(targetSpeed); /* 1500 RPM in either direction */
+		launchMotorLeft.set(-targetSpeed); /* 1500 RPM in either direction */
 		if (Math.abs(launchMotorLeft.getEncVelocity()/6.8- targetSpeed) < speedTolerance) {
 			feederMotorLeft.changeControlMode(TalonControlMode.PercentVbus);
-			feederMotorLeft.set(feederVbus);
+			feederMotorLeft.set(-feederVbus);
 		}
 		else {
 			feederMotorLeft.set(0);
 		}
 		launchMotorRight.changeControlMode(TalonControlMode.Speed);
-		launchMotorRight.set(-targetSpeed); /* 1500 RPM in either direction */
+		launchMotorRight.set(targetSpeed); /* 1500 RPM in either direction */
 		if (Math.abs(launchMotorRight.getEncVelocity()/6.8 +targetSpeed) < speedTolerance) {
 			feederMotorRight.changeControlMode(TalonControlMode.PercentVbus);
-			feederMotorRight.set(-feederVbus);
+			feederMotorRight.set(feederVbus);
 		}
 		else {
 			feederMotorRight.set(0);

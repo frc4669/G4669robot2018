@@ -14,7 +14,7 @@ public class F310 {
 	public double getLeftX() {
 		return f310.getRawAxis(0);
 	}
-	
+	//TankDrive
 	public double getLeftY() {
 		return f310.getRawAxis(1);
 	}
@@ -31,14 +31,15 @@ public class F310 {
 		return f310.getRawAxis(4);
 	}
 	
+	//ControlWinch
 	public double getRightY() {
 		return f310.getRawAxis(5);
 	}
-	
+	//OpenDoor
 	public boolean getGreenButton() {
 		return f310.getRawButton(0);
 	}
-	
+	//CloseDoor
 	public boolean getRedButton() {
 		return f310.getRawButton(1);
 	}

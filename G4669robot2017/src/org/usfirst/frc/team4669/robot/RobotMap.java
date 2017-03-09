@@ -35,12 +35,14 @@ public class RobotMap {
 	public static final boolean reverseOutputTrain = false;
 	public static final int leftJoystick = 0;
 	public static final int rightJoystick = 1;
-
-	public static final int launchButton = 1;
-//	public static final int intakeButton = 3;
+	//Left Joystick Controls
+	
+	//Right Joystick Controls
+	public static final int launchButton = 3;
+	public static final int intakeButton = 1;
 	public static final int feedButton = 2;
-	public static final int openDoorButton = 4;
-	public static final int closeDoorButton = 5;
+//	public static final int openDoorButton = 4;
+//	public static final int closeDoorButton = 5;
 	
 	//DOOR CONSTANT
 	//RPM for opening the door

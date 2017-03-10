@@ -7,6 +7,8 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class Launch extends Command {
 
+	boolean running = false;
+	
 	public Launch() {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
@@ -16,24 +18,29 @@ public class Launch extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-
+		
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		if (Robot.oi.getRightRawButton(RobotMap.launchButton)) {
-				Robot.fuelLauncher.launch();
+			if (!running) {
+				Robot.fuelLauncher.startLaunch();
+				running = true;
+			}
+			Robot.fuelLauncher.launch();
+		}
+		else {
+			if (running) {
+				Robot.fuelLauncher.stop();
+				running = false;
+			}
 		}
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		if (Robot.oi.getRightRawButton(RobotMap.launchButton)) {
-			return false;
-		}
-		else {
-			return true;
-		}
+		return false;
 	}
 
 	// Called once after isFinished returns true

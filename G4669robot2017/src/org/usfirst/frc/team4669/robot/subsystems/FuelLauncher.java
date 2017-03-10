@@ -37,11 +37,13 @@ public class FuelLauncher extends Subsystem {
 		launchMotorLeft.configNominalOutputVoltage(+0.0f, -0.0f);
 		launchMotorLeft.configPeakOutputVoltage(+12.0f, -12.0f);
 		/* set closed loop gains in slot0 */
+		launchMotorLeft.changeControlMode(TalonControlMode.Speed);
 		launchMotorLeft.setProfile(0);
-		launchMotorLeft.setF(0.027271);
-		launchMotorLeft.setP(0.110);
-		launchMotorLeft.setI(0.00011); 
-		launchMotorLeft.setD(1.1);
+		launchMotorLeft.setF(0.03);
+		launchMotorLeft.setP(0.17);
+		launchMotorLeft.setI(0); 
+		launchMotorLeft.setD(20);
+		launchMotorLeft.setCloseLoopRampRate(2);
 
 		launchMotorRight = new CANTalon(RobotMap.launchMotorRight);
 
@@ -57,11 +59,13 @@ public class FuelLauncher extends Subsystem {
 		launchMotorRight.configNominalOutputVoltage(+0.0f, -0.0f);
 		launchMotorRight.configPeakOutputVoltage(+12.0f, -12.0f);
 		/* set closed loop gains in slot0 */
+		launchMotorRight.changeControlMode(TalonControlMode.Speed);
 		launchMotorRight.setProfile(0);
-		launchMotorRight.setF(0.027271);
-		launchMotorRight.setP(0.110);
-		launchMotorRight.setI(0.00011); 
-		launchMotorRight.setD(1.1);
+		launchMotorRight.setF(0.03);
+		launchMotorRight.setP(0.17);
+		launchMotorRight.setI(0); 
+		launchMotorRight.setD(20);
+		launchMotorRight.setCloseLoopRampRate(2);
 
 		feederMotorLeft = new CANTalon(RobotMap.feederMotorLeft);
 
@@ -79,11 +83,12 @@ public class FuelLauncher extends Subsystem {
 		feederMotorLeft.configPeakOutputVoltage(+12.0f, -12.0f);
 
 		//set closed loop gains in slot0
+		feederMotorLeft.changeControlMode(TalonControlMode.Speed);
 		feederMotorLeft.setProfile(0);
-		feederMotorLeft.setF(0.027271);
+		feederMotorLeft.setF(0);
 		feederMotorLeft.setP(0.110);
-		feederMotorLeft.setI(0.00011); 
-		feederMotorLeft.setD(1.1);
+		feederMotorLeft.setI(0); 
+		feederMotorLeft.setD(0);
 
 		feederMotorRight = new CANTalon(RobotMap.feederMotorRight);
 
@@ -101,39 +106,40 @@ public class FuelLauncher extends Subsystem {
 		feederMotorRight.configPeakOutputVoltage(+12.0f, -12.0f);
 
 		//set closed loop gains in slot0
+		feederMotorRight.changeControlMode(TalonControlMode.Speed);
 		feederMotorRight.setProfile(0);
-		feederMotorRight.setF(0.027271);
+		feederMotorRight.setF(0);
 		feederMotorRight.setP(0.110);
-		feederMotorRight.setI(0.00011); 
-		feederMotorRight.setD(1.1);
+		feederMotorRight.setI(0); 
+		feederMotorRight.setD(0);
 
 	}
 
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 		//setDefaultCommand(new MySpecialCommand());
-		setDefaultCommand(new LaunchAndIntake());
+		setDefaultCommand(new Launch());
+	}
+	
+	public void startLaunch() {
+		double targetSpeed = SmartDashboard.getNumber("LaunchRPM", 0);
+		launchMotorLeft.set(-targetSpeed); /* 1500 RPM in either direction */
+		launchMotorRight.set(targetSpeed); /* 1500 RPM in either direction */
 	}
 
 	public void launch() {
 		/* Speed mode */
 		double speedTolerance = SmartDashboard.getNumber("ShooterSpeedTolerance", 0);
 		double targetSpeed = SmartDashboard.getNumber("LaunchRPM", 0);
-		double feederVbus = 0.5;
-		launchMotorLeft.changeControlMode(TalonControlMode.Speed);
-		launchMotorLeft.set(-targetSpeed); /* 1500 RPM in either direction */
-		if (Math.abs(launchMotorLeft.getEncVelocity()/6.8- targetSpeed) < speedTolerance) {
-			feederMotorLeft.changeControlMode(TalonControlMode.PercentVbus);
-			feederMotorLeft.set(-feederVbus);
+		double feederSpeed = 5;
+		if (Math.abs(launchMotorLeft.getSpeed()+ targetSpeed) < speedTolerance) {
+			feederMotorLeft.set(feederSpeed);
 		}
 		else {
 			feederMotorLeft.set(0);
 		}
-		launchMotorRight.changeControlMode(TalonControlMode.Speed);
-		launchMotorRight.set(targetSpeed); /* 1500 RPM in either direction */
-		if (Math.abs(launchMotorRight.getEncVelocity()/6.8 +targetSpeed) < speedTolerance) {
-			feederMotorRight.changeControlMode(TalonControlMode.PercentVbus);
-			feederMotorRight.set(feederVbus);
+		if (Math.abs(launchMotorRight.getSpeed() -targetSpeed) < speedTolerance) {
+			feederMotorRight.set(-feederSpeed);
 		}
 		else {
 			feederMotorRight.set(0);
@@ -143,6 +149,8 @@ public class FuelLauncher extends Subsystem {
 	public void stop() {
 		launchMotorLeft.set(0);
 		launchMotorRight.set(0);
+		feederMotorLeft.set(0);
+		feederMotorRight.set(0);
 	}
 
 	public double getLeftEncoder() {
@@ -153,6 +161,10 @@ public class FuelLauncher extends Subsystem {
 		return launchMotorLeft.getEncVelocity();
 	}
 	
+	public double getLeftEncoderSpeed() {
+		return launchMotorLeft.getSpeed();
+	}
+	
 	public double getRightEncoder() {
 		return launchMotorRight.getEncPosition();
 	}
@@ -161,10 +173,16 @@ public class FuelLauncher extends Subsystem {
 		System.out.println(launchMotorRight.getEncVelocity());
 		return launchMotorRight.getEncVelocity();
 	}
-
+	public double getRightEncoderSpeed() {
+		return launchMotorRight.getSpeed();
+	}
 	public void zeroEncoders(){
 		launchMotorLeft.setPosition(0);
 		launchMotorRight.setPosition(0);
+	}
+	
+	public double getLeftError() {
+		return launchMotorLeft.getError();
 	}
 
 }

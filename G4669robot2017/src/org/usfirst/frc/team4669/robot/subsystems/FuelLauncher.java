@@ -37,13 +37,12 @@ public class FuelLauncher extends Subsystem {
 		launchMotorLeft.configNominalOutputVoltage(+0.0f, -0.0f);
 		launchMotorLeft.configPeakOutputVoltage(+12.0f, -12.0f);
 		/* set closed loop gains in slot0 */
-		launchMotorLeft.changeControlMode(TalonControlMode.Speed);
 		launchMotorLeft.setProfile(0);
 		launchMotorLeft.setF(0.03);
 		launchMotorLeft.setP(0.17);
 		launchMotorLeft.setI(0); 
 		launchMotorLeft.setD(20);
-		launchMotorLeft.setCloseLoopRampRate(2);
+		launchMotorLeft.changeControlMode(TalonControlMode.Speed);
 
 		launchMotorRight = new CANTalon(RobotMap.launchMotorRight);
 
@@ -59,13 +58,12 @@ public class FuelLauncher extends Subsystem {
 		launchMotorRight.configNominalOutputVoltage(+0.0f, -0.0f);
 		launchMotorRight.configPeakOutputVoltage(+12.0f, -12.0f);
 		/* set closed loop gains in slot0 */
-		launchMotorRight.changeControlMode(TalonControlMode.Speed);
 		launchMotorRight.setProfile(0);
 		launchMotorRight.setF(0.03);
 		launchMotorRight.setP(0.17);
 		launchMotorRight.setI(0); 
 		launchMotorRight.setD(20);
-		launchMotorRight.setCloseLoopRampRate(2);
+		launchMotorRight.changeControlMode(TalonControlMode.Speed);
 
 		feederMotorLeft = new CANTalon(RobotMap.feederMotorLeft);
 

@@ -165,12 +165,12 @@ public class DriveTrain extends Subsystem {
     	return topRightMotor.getEncPosition();
     }
     
-    public double getLeftEnconderVel() {
-    	return topLeftMotor.getEncVelocity();
+    public double getLeftEnconderSpeed() {
+    	return topLeftMotor.getSpeed();
     }
     
-    public double getRightEnconderVel() {
-    	return topRightMotor.getEncVelocity();
+    public double getRightEnconderSpeed() {
+    	return topRightMotor.getSpeed();
     }
     
     public void zeroEncoders() {

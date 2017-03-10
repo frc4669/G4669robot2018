@@ -7,7 +7,6 @@ import org.usfirst.frc.team4669.robot.commands.DriveMotionMagic;
 import org.usfirst.frc.team4669.robot.commands.LeftGearLiftAuto;
 import org.usfirst.frc.team4669.robot.commands.RightGearLiftAuto;
 import org.usfirst.frc.team4669.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team4669.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team4669.robot.subsystems.FuelDoor;
 import org.usfirst.frc.team4669.robot.subsystems.FuelIntakeElevator;
 import org.usfirst.frc.team4669.robot.subsystems.FuelLauncher;
@@ -30,7 +29,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
 
-	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static DriveTrain driveTrain = new DriveTrain();
 	public static FuelLauncher fuelLauncher = new FuelLauncher();
 	public static FuelIntakeElevator fuelIntakeElevator = new FuelIntakeElevator();
@@ -129,13 +127,12 @@ public class Robot extends IterativeRobot {
     	SmartDashboard.putNumber("Right Encoder", driveTrain.getRightEncoder());
 		SmartDashboard.putNumber("Left Y Axis", Robot.oi.leftY());
     	SmartDashboard.putNumber("Right Y Axis", Robot.oi.rightY());
-    	SmartDashboard.putNumber("LeftLaunchVel", Robot.fuelLauncher.getLeftEncoderVel());
-    	SmartDashboard.putNumber("RightLaunchVel", Robot.fuelLauncher.getRightEncoderVel());    
+//    	SmartDashboard.putNumber("LeftLaunchVel", Robot.fuelLauncher.getLeftEncoderVel());
+//    	SmartDashboard.putNumber("RightLaunchVel", Robot.fuelLauncher.getRightEncoderVel());    
     	SmartDashboard.putNumber("IntakeVel", Robot.fuelIntakeElevator.getEncoderVel());
     	SmartDashboard.putNumber("LeftLaunchSpeed", Robot.fuelLauncher.getLeftEncoderSpeed());
-    	SmartDashboard.putNumber("LeftLaunchVoltage", Robot.fuelLauncher.getLeftError());
     	SmartDashboard.putNumber("RightLaunchSpeed", Robot.fuelLauncher.getRightEncoderSpeed());
-    	SmartDashboard.putNumber("driveLeftEncVel", Robot.driveTrain.getLeftEnconderVel());
-    	SmartDashboard.putNumber("driveRightEncVel", Robot.driveTrain.getRightEnconderVel());
+    	SmartDashboard.putNumber("driveLeftEncVel", Robot.driveTrain.getLeftEnconderSpeed());
+    	SmartDashboard.putNumber("driveRightEncVel", Robot.driveTrain.getRightEnconderSpeed());
 	}
 }

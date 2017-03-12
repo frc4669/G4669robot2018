@@ -81,7 +81,7 @@ public class FuelLauncher extends Subsystem {
 		feederMotorLeft.configPeakOutputVoltage(+12.0f, -12.0f);
 
 		//set closed loop gains in slot0
-		feederMotorLeft.changeControlMode(TalonControlMode.Speed);
+		feederMotorLeft.changeControlMode(TalonControlMode.PercentVbus);
 		feederMotorLeft.setProfile(0);
 		feederMotorLeft.setF(0);
 		feederMotorLeft.setP(0.110);
@@ -104,7 +104,7 @@ public class FuelLauncher extends Subsystem {
 		feederMotorRight.configPeakOutputVoltage(+12.0f, -12.0f);
 
 		//set closed loop gains in slot0
-		feederMotorRight.changeControlMode(TalonControlMode.Speed);
+		feederMotorRight.changeControlMode(TalonControlMode.PercentVbus);
 		feederMotorRight.setProfile(0);
 		feederMotorRight.setF(0);
 		feederMotorRight.setP(0.110);
@@ -129,7 +129,7 @@ public class FuelLauncher extends Subsystem {
 		/* Speed mode */
 		double speedTolerance = SmartDashboard.getNumber("ShooterSpeedTolerance", 0);
 		double targetSpeed = SmartDashboard.getNumber("LaunchRPM", 0);
-		double feederSpeed = 5;
+		double feederSpeed = 0.5;
 		if (Math.abs(launchMotorLeft.getSpeed()+ targetSpeed) < speedTolerance) {
 			feederMotorLeft.set(feederSpeed);
 		}

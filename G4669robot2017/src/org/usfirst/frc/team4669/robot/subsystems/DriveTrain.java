@@ -28,7 +28,7 @@ public class DriveTrain extends Subsystem {
 	private CANTalon topRightMotor;
 	private CANTalon bottomRightMotor;
 	
-	private RobotDrive driveTrain;
+//	private RobotDrive driveTrain;
 	
 	private Gyro analogGyro;
 	
@@ -41,15 +41,61 @@ public class DriveTrain extends Subsystem {
 		topRightMotor = new CANTalon(RobotMap.driveTrainTopRight);
 		bottomRightMotor = new CANTalon(RobotMap.driveTrainBottomRight);
 		
-		driveTrain = new RobotDrive(topLeftMotor, bottomLeftMotor, topRightMotor, bottomRightMotor);
+//		driveTrain = new RobotDrive(topLeftMotor, bottomLeftMotor, topRightMotor, bottomRightMotor);
 		
-		setupLeftMotor(topLeftMotor);
-//		setupLeftMotor(bottomLeftMotor);
-		setupRightMotor(topRightMotor);
-//		setupRightMotor(bottomRightMotor);
+//		setupLeftMotor(topLeftMotor);
+////		setupLeftMotor(bottomLeftMotor);
+//		setupRightMotor(topRightMotor);
+////		setupRightMotor(bottomRightMotor);
+		
+		double velocity = 400.0;
+		double accel = 100.0;
+		
+		topLeftMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		topLeftMotor.reverseSensor(false);
+		topLeftMotor.configEncoderCodesPerRev(1440); // if using
+		// FeedbackDevice.QuadEncoder
+		// _talon.configPotentiometerTurns(XXX), // if using
+		// FeedbackDevice.AnalogEncoder or AnalogPot
+
+		/* set the peak and nominal outputs, 12V means full */
+		topLeftMotor.configNominalOutputVoltage(+0.0f, -0.0f);
+		topLeftMotor.configPeakOutputVoltage(+12.0f, -12.0f);
+		/* set closed loop gains in slot0 - see documentation */
+		topLeftMotor.setProfile(0);
+		topLeftMotor.setF(0.3739);
+		topLeftMotor.setP(0.3);
+		topLeftMotor.setI(0);
+		topLeftMotor.setD(16);
+		/* set acceleration and vcruise velocity - see documentation */
+		topLeftMotor.setMotionMagicCruiseVelocity(velocity);
+		topLeftMotor.setMotionMagicAcceleration(accel);
+		topLeftMotor.setPosition(0);
 
 		bottomLeftMotor.changeControlMode(TalonControlMode.Follower);
 		bottomLeftMotor.set(topLeftMotor.getDeviceID());
+		
+		topRightMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		topRightMotor.reverseSensor(false);
+//		topRightMotor.reverseOutput(true);
+		topRightMotor.configEncoderCodesPerRev(1440); // if using
+		// FeedbackDevice.QuadEncoder
+		// _talon.configPotentiometerTurns(XXX), // if using
+		// FeedbackDevice.AnalogEncoder or AnalogPot
+
+		/* set the peak and nominal outputs, 12V means full */
+		topRightMotor.configNominalOutputVoltage(+0.0f, -0.0f);
+		topRightMotor.configPeakOutputVoltage(+12.0f, -12.0f);
+		/* set closed loop gains in slot0 - see documentation */
+		topRightMotor.setProfile(0);
+		topRightMotor.setF(0.3739);
+		topRightMotor.setP(0.3);
+		topRightMotor.setI(0);
+		topRightMotor.setD(16);
+		/* set acceleration and vcruise velocity - see documentation */
+		topRightMotor.setMotionMagicCruiseVelocity(velocity); //855
+		topRightMotor.setMotionMagicAcceleration(accel); //855
+		topRightMotor.setPosition(0);
 		
 		bottomRightMotor.changeControlMode(TalonControlMode.Follower);
 		bottomRightMotor.set(topRightMotor.getDeviceID());
@@ -84,39 +130,37 @@ public class DriveTrain extends Subsystem {
 	}
 	
 	public void setupLeftMotor(CANTalon talon) {
-		talon.enable();
+//		talon.enable();
 		talon.changeControlMode(TalonControlMode.PercentVbus);
-		talon.setSafetyEnabled(false);
-		talon.enableBrakeMode(false);
+//		talon.enableBrakeMode(false);
 		talon.reverseOutput(!RobotMap.reverseOutputTrain);
 		talon.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		talon.configNominalOutputVoltage(+0.0f, -0.0f);
 		talon.configPeakOutputVoltage(+12.0f, -12.0f);
-		talon.setProfile(0);
-		talon.setF(OI.TALON_F_LEFT.get());
-		talon.setP(OI.TALON_P_LEFT.get());
-		talon.setI(OI.TALON_I_LEFT.get());
-		talon.setD(OI.TALON_D_LEFT.get());
-		talon.setMotionMagicCruiseVelocity(937);
-		talon.setMotionMagicAcceleration(937);
+//		talon.setProfile(0);
+//		talon.setF(OI.TALON_F_LEFT.get());
+//		talon.setP(OI.TALON_P_LEFT.get());
+//		talon.setI(OI.TALON_I_LEFT.get());
+//		talon.setD(OI.TALON_D_LEFT.get());
+//		talon.setMotionMagicCruiseVelocity(937);
+//		talon.setMotionMagicAcceleration(937);
 	}
 	
 	public void setupRightMotor(CANTalon talon) {
-		talon.enable();
+//		talon.enable();
 		talon.changeControlMode(TalonControlMode.PercentVbus);
-		talon.setSafetyEnabled(false);
-		talon.enableBrakeMode(false);
+//		talon.enableBrakeMode(false);
 		talon.reverseOutput(RobotMap.reverseOutputTrain);
 		talon.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		talon.configNominalOutputVoltage(+0.0f, -0.0f);
 		talon.configPeakOutputVoltage(+12.0f, -12.0f);
-		talon.setProfile(0);
-		talon.setF(OI.TALON_F_RIGHT.get());
-		talon.setP(OI.TALON_P_RIGHT.get());
-		talon.setI(OI.TALON_I_RIGHT.get());
-		talon.setD(OI.TALON_D_RIGHT.get());
-		talon.setMotionMagicCruiseVelocity(937);
-		talon.setMotionMagicAcceleration(937);
+//		talon.setProfile(0);
+//		talon.setF(OI.TALON_F_RIGHT.get());
+//		talon.setP(OI.TALON_P_RIGHT.get());
+//		talon.setI(OI.TALON_I_RIGHT.get());
+//		talon.setD(OI.TALON_D_RIGHT.get());
+//		talon.setMotionMagicCruiseVelocity(937);
+//		talon.setMotionMagicAcceleration(937);
 	}
 	
     public void initDefaultCommand() {
@@ -124,23 +168,28 @@ public class DriveTrain extends Subsystem {
     }
     
     public void driveForward(double speedLeft, double speedRight) {
-    	driveTrain.tankDrive(speedLeft, speedRight, false);
+//    	driveTrain.tankDrive(speedLeft, speedRight, false);
+    	topLeftMotor.changeControlMode(TalonControlMode.PercentVbus);
+    	topLeftMotor.set(speedLeft);
+    	topRightMotor.changeControlMode(TalonControlMode.PercentVbus);
+    	topRightMotor.set(speedRight);
     }
     
     public void drive(double outputMag, double outputCurv) {
-    	driveTrain.drive(outputMag, outputCurv);
+//    	driveTrain.drive(outputMag, outputCurv);
     }
     
     public void setDrive(double speed, double turnrate) {
-    	driveTrain.drive(speed, turnrate);
+//    	driveTrain.drive(speed, turnrate);
     }
     
     public void setSpeed(double speed) {
+    	topLeftMotor.changeControlMode(TalonControlMode.Speed);
     	topLeftMotor.set(speed);
     }
     
     public void stop() {
-    	driveTrain.tankDrive(0, 0);
+//    	driveTrain.tankDrive(0, 0);
     }
     
     public void calibrateGyro() {

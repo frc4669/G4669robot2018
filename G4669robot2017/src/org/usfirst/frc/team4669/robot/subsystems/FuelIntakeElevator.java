@@ -54,6 +54,7 @@ public class FuelIntakeElevator extends Subsystem {
 	} 
 	public void stop() {
 		/* Percent voltage mode */
+		intakeMotor.changeControlMode(TalonControlMode.PercentVbus);
 		intakeMotor.set(0);
 	}
 

@@ -1,15 +1,11 @@
 package org.usfirst.frc.team4669.robot.subsystems;
 
-import org.usfirst.frc.team4669.robot.OI;
 import org.usfirst.frc.team4669.robot.RobotMap;
 import org.usfirst.frc.team4669.robot.commands.TankDrive;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import com.ctre.*;
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
@@ -102,77 +98,77 @@ public class DriveTrain extends Subsystem {
 		
 	}
 	
-	public void setPID(
-			double pLeft, 
-			double iLeft, 
-			double dLeft, 
-			double pRight, 
-			double iRight, 
-			double dRight,
-			double fLeft,
-			double fRight) {
-		topLeftMotor.setP(pLeft);
-//		bottomLeftMotor.setP(pLeft);
-		topRightMotor.setP(pRight);
-//		bottomRightMotor.setP(pRight);
-		topLeftMotor.setI(iLeft);
-//		bottomLeftMotor.setI(iLeft);
-		topRightMotor.setI(iRight);
-//		bottomRightMotor.setI(iRight);
-		topLeftMotor.setD(dLeft);
-//		bottomLeftMotor.setD(dLeft);
-		topRightMotor.setD(dRight);
-//		bottomRightMotor.setD(dRight);
-		topLeftMotor.setF(fLeft);
-//		bottomLeftMotor.setF(fLeft);
-		topRightMotor.setF(fRight);
-//		bottomRightMotor.setF(fRight);
-	}
+//	public void setPID(
+//			double pLeft, 
+//			double iLeft, 
+//			double dLeft, 
+//			double pRight, 
+//			double iRight, 
+//			double dRight,
+//			double fLeft,
+//			double fRight) {
+//		topLeftMotor.setP(pLeft);
+////		bottomLeftMotor.setP(pLeft);
+//		topRightMotor.setP(pRight);
+////		bottomRightMotor.setP(pRight);
+//		topLeftMotor.setI(iLeft);
+////		bottomLeftMotor.setI(iLeft);
+//		topRightMotor.setI(iRight);
+////		bottomRightMotor.setI(iRight);
+//		topLeftMotor.setD(dLeft);
+////		bottomLeftMotor.setD(dLeft);
+//		topRightMotor.setD(dRight);
+////		bottomRightMotor.setD(dRight);
+//		topLeftMotor.setF(fLeft);
+////		bottomLeftMotor.setF(fLeft);
+//		topRightMotor.setF(fRight);
+////		bottomRightMotor.setF(fRight);
+//	}
 	
-	public void setupLeftMotor(CANTalon talon) {
-//		talon.enable();
-		talon.changeControlMode(TalonControlMode.PercentVbus);
-//		talon.enableBrakeMode(false);
-		talon.reverseOutput(!RobotMap.reverseOutputTrain);
-		talon.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		talon.configNominalOutputVoltage(+0.0f, -0.0f);
-		talon.configPeakOutputVoltage(+12.0f, -12.0f);
-//		talon.setProfile(0);
-//		talon.setF(OI.TALON_F_LEFT.get());
-//		talon.setP(OI.TALON_P_LEFT.get());
-//		talon.setI(OI.TALON_I_LEFT.get());
-//		talon.setD(OI.TALON_D_LEFT.get());
-//		talon.setMotionMagicCruiseVelocity(937);
-//		talon.setMotionMagicAcceleration(937);
-	}
-	
-	public void setupRightMotor(CANTalon talon) {
-//		talon.enable();
-		talon.changeControlMode(TalonControlMode.PercentVbus);
-//		talon.enableBrakeMode(false);
-		talon.reverseOutput(RobotMap.reverseOutputTrain);
-		talon.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		talon.configNominalOutputVoltage(+0.0f, -0.0f);
-		talon.configPeakOutputVoltage(+12.0f, -12.0f);
-//		talon.setProfile(0);
-//		talon.setF(OI.TALON_F_RIGHT.get());
-//		talon.setP(OI.TALON_P_RIGHT.get());
-//		talon.setI(OI.TALON_I_RIGHT.get());
-//		talon.setD(OI.TALON_D_RIGHT.get());
-//		talon.setMotionMagicCruiseVelocity(937);
-//		talon.setMotionMagicAcceleration(937);
-	}
+//	public void setupLeftMotor(CANTalon talon) {
+////		talon.enable();
+//		talon.changeControlMode(TalonControlMode.PercentVbus);
+////		talon.enableBrakeMode(false);
+//		talon.reverseOutput(!RobotMap.reverseOutputTrain);
+//		talon.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+//		talon.configNominalOutputVoltage(+0.0f, -0.0f);
+//		talon.configPeakOutputVoltage(+12.0f, -12.0f);
+////		talon.setProfile(0);
+////		talon.setF(OI.TALON_F_LEFT.get());
+////		talon.setP(OI.TALON_P_LEFT.get());
+////		talon.setI(OI.TALON_I_LEFT.get());
+////		talon.setD(OI.TALON_D_LEFT.get());
+////		talon.setMotionMagicCruiseVelocity(937);
+////		talon.setMotionMagicAcceleration(937);
+//	}
+//	
+//	public void setupRightMotor(CANTalon talon) {
+////		talon.enable();
+//		talon.changeControlMode(TalonControlMode.PercentVbus);
+////		talon.enableBrakeMode(false);
+//		talon.reverseOutput(RobotMap.reverseOutputTrain);
+//		talon.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+//		talon.configNominalOutputVoltage(+0.0f, -0.0f);
+//		talon.configPeakOutputVoltage(+12.0f, -12.0f);
+////		talon.setProfile(0);
+////		talon.setF(OI.TALON_F_RIGHT.get());
+////		talon.setP(OI.TALON_P_RIGHT.get());
+////		talon.setI(OI.TALON_I_RIGHT.get());
+////		talon.setD(OI.TALON_D_RIGHT.get());
+////		talon.setMotionMagicCruiseVelocity(937);
+////		talon.setMotionMagicAcceleration(937);
+//	}
 	
     public void initDefaultCommand() {
     	setDefaultCommand(new TankDrive());
     }
     
-    public void driveForward(double speedLeft, double speedRight) {
+    public void driveForward(double vBusLeft, double vBusRight) {
 //    	driveTrain.tankDrive(speedLeft, speedRight, false);
     	topLeftMotor.changeControlMode(TalonControlMode.PercentVbus);
-    	topLeftMotor.set(speedLeft);
+    	topLeftMotor.set(vBusLeft);
     	topRightMotor.changeControlMode(TalonControlMode.PercentVbus);
-    	topRightMotor.set(speedRight);
+    	topRightMotor.set(-vBusRight);
     }
     
     public void drive(double outputMag, double outputCurv) {

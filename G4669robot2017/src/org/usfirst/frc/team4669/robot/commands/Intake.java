@@ -24,7 +24,9 @@ public class Intake extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if (Robot.oi.getRightRawButton(RobotMap.intakeButton)) {
+    	if (Robot.oi.getRightRawButton(RobotMap.intakeButton) 
+    			|| Robot.oi.getRightRawButton(RobotMap.launchButton)
+    			|| Math.abs(Robot.f310.getLeftY()) > 0.1) {
 			return false;
 		}
 		else {

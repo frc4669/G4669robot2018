@@ -12,6 +12,7 @@ import org.usfirst.frc.team4669.robot.subsystems.FuelIntakeElevator;
 import org.usfirst.frc.team4669.robot.subsystems.FuelLauncher;
 import org.usfirst.frc.team4669.robot.subsystems.RopeWinch;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -36,6 +37,7 @@ public class Robot extends IterativeRobot {
 	public static RopeWinch ropeWinch = new RopeWinch();
 	public static OI oi;
 	public static F310 f310;
+	public static DriverStation driverStation;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser;
@@ -70,6 +72,7 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void disabledPeriodic() {
+		driverStation = DriverStation.getInstance();
 		updateSmartDashboard();
 		Scheduler.getInstance().run();
 	}
@@ -130,9 +133,10 @@ public class Robot extends IterativeRobot {
 //    	SmartDashboard.putNumber("LeftLaunchVel", Robot.fuelLauncher.getLeftEncoderVel());
 //    	SmartDashboard.putNumber("RightLaunchVel", Robot.fuelLauncher.getRightEncoderVel());    
     	SmartDashboard.putNumber("IntakeVel", Robot.fuelIntakeElevator.getEncoderVel());
-    	SmartDashboard.putNumber("LeftLaunchSpeed", Robot.fuelLauncher.getLeftEncoderSpeed());
+//    	SmartDashboard.putNumber("LeftLaunchSpeed", Robot.fuelLauncher.getLeftEncoderSpeed());
     	SmartDashboard.putNumber("RightLaunchSpeed", Robot.fuelLauncher.getRightEncoderSpeed());
     	SmartDashboard.putNumber("driveLeftEncVel", Robot.driveTrain.getLeftEnconderSpeed());
     	SmartDashboard.putNumber("driveRightEncVel", Robot.driveTrain.getRightEnconderSpeed());
+    	SmartDashboard.putNumber("doorPosition", Robot.door.getPosition());
 	}
 }

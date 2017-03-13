@@ -1,31 +1,54 @@
 package org.usfirst.frc.team4669.robot.commands;
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.command.WaitCommand;
+import org.usfirst.frc.team4669.robot.Robot;
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class OpenAndCloseDoor extends CommandGroup {
+public class OpenAndCloseDoor extends Command {
 
-    public OpenAndCloseDoor() {
-        // Add Commands here:
-        // e.g. addSequential(new Command1());
-        //      addSequential(new Command2());
-        // these will run in order.
-    	addSequential(new OpenDoor());
-    	addSequential(new WaitCommand(1));
-    	addSequential(new CloseDoor());
-        // To run multiple commands at the same time,
-        // use addParallel()
-        // e.g. addParallel(new Command1());
-        //      addSequential(new Command2());
-        // Command1 and Command2 will run in parallel.
+	public OpenAndCloseDoor() {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+    	requires(Robot.door);
+    }
 
-        // A command group will require all of the subsystems that each member
-        // would require.
-        // e.g. if Command1 requires chassis, and Command2 requires arm,
-        // a CommandGroup containing them would require both the chassis and the
-        // arm.
+    // Called just before this Command runs the first time
+    protected void initialize() {
+    }
+
+    // Called repeatedly when this Command is scheduled to run
+    protected void execute() {
+    	if (Robot.door.isDoorOpen()) {
+    		Robot.door.zeroDoor();
+    	}
+    	if (Robot.f310.getLeftY() < -0.1 && !Robot.door.isDoorOpen()) {
+//    		System.out.println("open");
+    		Robot.door.open();
+    	}
+    	else if (Robot.f310.getLeftY() > 0.1 && !Robot.door.isDoorClosed()) {
+    		Robot.door.close();
+    	}
+    	else if (Robot.f310.getLeftY() > -0.1 && Robot.f310.getLeftY() < 0.1) {
+    		Robot.door.stop();
+    	}
+    	
+    }
+
+    // Make this return true when this Command no longer needs to run execute()
+    protected boolean isFinished() {
+        return false;
+    }
+
+    // Called once after isFinished returns true
+    protected void end() {
+    	Robot.door.stop();
+    }
+
+    // Called when another command which requires one or more of the same
+    // subsystems is scheduled to run
+    protected void interrupted() {
+    	end();
     }
 }

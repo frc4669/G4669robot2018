@@ -38,15 +38,15 @@ public class RobotMap {
 	//Left Joystick Controls
 	
 	//Right Joystick Controls
-	public static final int launchButton = 3;
+	public static final int launchButton = 2;
 	public static final int intakeButton = 1;
-	public static final int feedButton = 2;
+//	public static final int feedButton = 3;
 //	public static final int openDoorButton = 4;
 //	public static final int closeDoorButton = 5;
 	
 	//DOOR CONSTANT
-	//RPM for opening the door
-	public static final int doorSpeed = 0;//value in RPM relative to motor
+	//PercentVBus for opening the door
+	public static final double doorSpeed = 0.5;//value in PercentVbus
 	
 	
 	//DRIVE TRAIN SPEED PROPORTION

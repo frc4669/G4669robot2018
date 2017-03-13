@@ -1,13 +1,14 @@
 package org.usfirst.frc.team4669.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
  *
  */
-public class LaunchAndLoad extends CommandGroup {
+public class LaunchAndMoveAuto extends CommandGroup {
 
-    public LaunchAndLoad() {
+    public LaunchAndMoveAuto() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -18,9 +19,9 @@ public class LaunchAndLoad extends CommandGroup {
         // e.g. addParallel(new Command1());
         //      addSequential(new Command2());
         // Command1 and Command2 will run in parallel.
-    	addParallel(new Launch());
-    	addSequential(new LoadFuel());
-
+    	addParallel(new AutoLaunch());
+    	addSequential(new WaitCommand(10));
+    	addSequential(new DriveMotionMagic(-74));
         // A command group will require all of the subsystems that each member
         // would require.
         // e.g. if Command1 requires chassis, and Command2 requires arm,

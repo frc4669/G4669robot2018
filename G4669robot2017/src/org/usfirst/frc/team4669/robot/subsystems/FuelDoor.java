@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4669.robot.subsystems;
 
 import org.usfirst.frc.team4669.robot.RobotMap;
+import org.usfirst.frc.team4669.robot.commands.OpenAndCloseDoor;
 
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.TalonControlMode;
@@ -13,7 +14,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class FuelDoor extends Subsystem {
 	
 	private CANTalon doorMotor; //change motor to specific motor
-	private int direction = 1;
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -22,7 +22,7 @@ public class FuelDoor extends Subsystem {
 		super();
 		doorMotor = new CANTalon(RobotMap.doorMotor);
 
-		doorMotor.enable();
+//		doorMotor.enable();
 		doorMotor.reverseSensor(false);
 		doorMotor.configEncoderCodesPerRev(4096); // if using FeedbackDevice.QuadEncoder
 		doorMotor.setPosition(0.0);
@@ -45,41 +45,41 @@ public class FuelDoor extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+    	setDefaultCommand(new OpenAndCloseDoor());
     }
     
     // doorSpeed is negative
     public void open() {
-    		doorMotor.changeControlMode(TalonControlMode.Speed);
-    		doorMotor.set(-1 * RobotMap.doorSpeed);
+    		doorMotor.changeControlMode(TalonControlMode.PercentVbus);
+    		doorMotor.set(RobotMap.doorSpeed);
     }
     
     // doorSpeed is positive
     public void close(){
-    		doorMotor.changeControlMode(TalonControlMode.Speed);
-    		doorMotor.set(RobotMap.doorSpeed);
+    		doorMotor.changeControlMode(TalonControlMode.PercentVbus);
+    		doorMotor.set(-0.5*RobotMap.doorSpeed);
     }
     
-    public void openAndClose(){
-    	if (direction == 1 && doorMotor.isFwdLimitSwitchClosed()){
-    		open();
-    	}
-    	if (direction ==  -1 && doorMotor.isRevLimitSwitchClosed()){
-    		close();
-    	}
-    }
-    
-    public boolean isForwardLimitSwitchClosed(){
+    public boolean isDoorClosed(){
     	return doorMotor.isFwdLimitSwitchClosed();
     }
     
-    public boolean isReverseLimitSwitchClosed(){
+    public boolean isDoorOpen(){
     	return doorMotor.isRevLimitSwitchClosed();
     }
 
 	public void stop() {
-		doorMotor.changeControlMode(TalonControlMode.Speed);
+		doorMotor.changeControlMode(TalonControlMode.PercentVbus);
 		doorMotor.set(0);
 		
+	}
+
+	public void zeroDoor() {
+		doorMotor.setPosition(0);
+	}
+	
+	public double getPosition() {
+		return doorMotor.getPosition();
 	}
     
 }

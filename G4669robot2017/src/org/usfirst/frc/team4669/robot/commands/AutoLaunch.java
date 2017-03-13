@@ -1,19 +1,19 @@
 package org.usfirst.frc.team4669.robot.commands;
 
 import org.usfirst.frc.team4669.robot.Robot;
-import org.usfirst.frc.team4669.robot.RobotMap;
-
 import edu.wpi.first.wpilibj.command.Command;
 
-public class Launch extends Command {
+public class AutoLaunch extends Command {
 
 	boolean running = false;
 	
-	public Launch() {
+	public AutoLaunch() {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 
 		requires(Robot.fuelLauncher);
+		requires(Robot.door);
+		requires(Robot.fuelIntakeElevator);
 	}
 
 	// Called just before this Command runs the first time
@@ -23,8 +23,7 @@ public class Launch extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		if (Robot.oi.getRightRawButton(RobotMap.launchButton)
-				|| Math.abs(Robot.f310.getLeftY()) > 0.1) {
+		if (Robot.driverStation.isAutonomous()) {
 			if (!running) {
 				Robot.fuelLauncher.startLaunch();
 				running = true;
@@ -41,7 +40,7 @@ public class Launch extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return false;
+		return !Robot.driverStation.isAutonomous();
 	}
 
 	// Called once after isFinished returns true

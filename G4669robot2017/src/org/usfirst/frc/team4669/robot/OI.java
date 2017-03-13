@@ -71,28 +71,38 @@ public class OI {
 		SmartDashboard.putData("Turn45DegreesRight", new Turn(-45));
 		SmartDashboard.putData("DriveForward", new DriveForward(45));
 		SmartDashboard.putData("Turn180Degrees", new Turn(180));
-		SmartDashboard.putNumber("LaunchRPM", 3500);
-		SmartDashboard.putNumber("IntakeRPM", 100);
+		SmartDashboard.putNumber("LaunchRPM", 3300);
+		SmartDashboard.putNumber("IntakeRPM", 150);
 		SmartDashboard.putNumber("FeedRPM", 100);
 		SmartDashboard.putNumber("Turn Angle", 0);
 		SmartDashboard.putNumber("ShooterSpeedTolerance", 100);
-		//PID SmartDashboard vals
-		SmartDashboard.putNumber("PID_P_LEFT", TALON_P_LEFT.get());
-		SmartDashboard.putNumber("PID_I_LEFT", TALON_I_LEFT.get());
-		SmartDashboard.putNumber("PID_D_LEFT", TALON_D_LEFT.get());
-		SmartDashboard.putNumber("PID_P_RIGHT", TALON_P_RIGHT.get());
-		SmartDashboard.putNumber("PID_I_RIGHT", TALON_I_RIGHT.get());
-		SmartDashboard.putNumber("PID_D_RIGHT", TALON_D_RIGHT.get());
-		SmartDashboard.putNumber("PID_F_LEFT", TALON_F_LEFT.get());
-		SmartDashboard.putNumber("PID_F_RIGHT", TALON_F_RIGHT.get());
+//		//PID SmartDashboard vals
+//		SmartDashboard.putNumber("PID_P_LEFT", TALON_P_LEFT.get());
+//		SmartDashboard.putNumber("PID_I_LEFT", TALON_I_LEFT.get());
+//		SmartDashboard.putNumber("PID_D_LEFT", TALON_D_LEFT.get());
+//		SmartDashboard.putNumber("PID_P_RIGHT", TALON_P_RIGHT.get());
+//		SmartDashboard.putNumber("PID_I_RIGHT", TALON_I_RIGHT.get());
+//		SmartDashboard.putNumber("PID_D_RIGHT", TALON_D_RIGHT.get());
+//		SmartDashboard.putNumber("PID_F_LEFT", TALON_F_LEFT.get());
+//		SmartDashboard.putNumber("PID_F_RIGHT", TALON_F_RIGHT.get());
 	}
 
 	//Getting joystick values
 	public double leftY() {
-		return leftStick.getY();
+		if (Math.abs(leftStick.getY())>0.1) { 
+			return leftStick.getY();
+		}
+		else {
+			return 0;
+		}
 	}
 	public double rightY() {
-		return rightStick.getY();
+		if (Math.abs(rightStick.getY())>0.1) { 
+			return rightStick.getY();
+		}
+		else {
+			return 0;
+		}
 	}
 	
 	public boolean getLeftRawButton(int button) {

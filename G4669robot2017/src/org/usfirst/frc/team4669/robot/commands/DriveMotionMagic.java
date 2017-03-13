@@ -12,6 +12,7 @@ public class DriveMotionMagic extends Command {
 
 	private double distanceToTravel;
 	private double distance;
+	private double rotationToTravel;
 
 	public DriveMotionMagic(double distance) {
         super();
@@ -19,12 +20,13 @@ public class DriveMotionMagic extends Command {
         // eg. requires(chassis);
         this.distance = distance;
         distanceToTravel = distance / RobotMap.encoderCountConstant;
+        rotationToTravel = distance / (4*RobotMap.wheelCircumference);
         requires(Robot.driveTrain);
     }
 
     // Called once when the command executes
     protected void initialize() {
-    	Robot.driveTrain.driveMotionMagic(distance/42);    	
+    	Robot.driveTrain.driveMotionMagic(rotationToTravel);    	
     }
 
     // Called repeatedly when this Command is scheduled to run

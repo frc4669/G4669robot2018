@@ -1,6 +1,6 @@
 package org.usfirst.frc.team4669.robot;
 
-import java.util.concurrent.atomic.AtomicReference;
+//import java.util.concurrent.atomic.AtomicReference;
 
 import org.usfirst.frc.team4669.robot.commands.DriveForward;
 import org.usfirst.frc.team4669.robot.commands.Turn;
@@ -41,20 +41,20 @@ public class OI {
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
 
-	// PID variables with default vals
-	public static double DEFAULT_PID_P = 0.07;
-	public static double DEFAULT_PID_I = 0.001;
-	public static double DEFAULT_PID_D = 0.7;
-	public static double DEFAULT_PID_F = 0.25;
-	public static AtomicReference<Double> TALON_P_LEFT = new AtomicReference<Double>(DEFAULT_PID_P);
-	public static AtomicReference<Double> TALON_P_RIGHT = new AtomicReference<Double>(DEFAULT_PID_P);
-	public static AtomicReference<Double> TALON_I_LEFT = new AtomicReference<Double>(DEFAULT_PID_I);
-	public static AtomicReference<Double> TALON_I_RIGHT = new AtomicReference<Double>(DEFAULT_PID_I);
-	public static AtomicReference<Double> TALON_D_LEFT = new AtomicReference<Double>(DEFAULT_PID_D);
-	public static AtomicReference<Double> TALON_D_RIGHT = new AtomicReference<Double>(DEFAULT_PID_D);
-	public static AtomicReference<Double> TALON_F_LEFT = new AtomicReference<Double>(DEFAULT_PID_F);
-	public static AtomicReference<Double> TALON_F_RIGHT = new AtomicReference<Double>(DEFAULT_PID_F);
-	
+//	// PID variables with default vals
+//	public static double DEFAULT_PID_P = 0.07;
+//	public static double DEFAULT_PID_I = 0.001;
+//	public static double DEFAULT_PID_D = 0.7;
+//	public static double DEFAULT_PID_F = 0.25;
+//	public static AtomicReference<Double> TALON_P_LEFT = new AtomicReference<Double>(DEFAULT_PID_P);
+//	public static AtomicReference<Double> TALON_P_RIGHT = new AtomicReference<Double>(DEFAULT_PID_P);
+//	public static AtomicReference<Double> TALON_I_LEFT = new AtomicReference<Double>(DEFAULT_PID_I);
+//	public static AtomicReference<Double> TALON_I_RIGHT = new AtomicReference<Double>(DEFAULT_PID_I);
+//	public static AtomicReference<Double> TALON_D_LEFT = new AtomicReference<Double>(DEFAULT_PID_D);
+//	public static AtomicReference<Double> TALON_D_RIGHT = new AtomicReference<Double>(DEFAULT_PID_D);
+//	public static AtomicReference<Double> TALON_F_LEFT = new AtomicReference<Double>(DEFAULT_PID_F);
+//	public static AtomicReference<Double> TALON_F_RIGHT = new AtomicReference<Double>(DEFAULT_PID_F);
+//	
 	//Joystick variables
 	private Joystick leftStick;
 	private Joystick rightStick;
@@ -71,8 +71,8 @@ public class OI {
 		SmartDashboard.putData("Turn45DegreesRight", new Turn(-45));
 		SmartDashboard.putData("DriveForward", new DriveForward(45));
 		SmartDashboard.putData("Turn180Degrees", new Turn(180));
-		SmartDashboard.putNumber("LaunchRPM", 3300);
-		SmartDashboard.putNumber("IntakeRPM", 150);
+		SmartDashboard.putNumber("LaunchRPM", 3200);
+		SmartDashboard.putNumber("IntakeRPM", 120);
 		SmartDashboard.putNumber("FeedRPM", 100);
 		SmartDashboard.putNumber("Turn Angle", 0);
 		SmartDashboard.putNumber("ShooterSpeedTolerance", 100);

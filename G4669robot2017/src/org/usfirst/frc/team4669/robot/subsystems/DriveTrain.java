@@ -45,7 +45,7 @@ public class DriveTrain extends Subsystem {
 ////		setupRightMotor(bottomRightMotor);
 		
 		double velocity = 400.0;
-		double accel = 100.0;
+		double accel = 50.0;
 		
 		topLeftMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		topLeftMotor.reverseSensor(false);

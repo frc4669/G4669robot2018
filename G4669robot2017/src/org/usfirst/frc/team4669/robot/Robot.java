@@ -1,9 +1,11 @@
 
 package org.usfirst.frc.team4669.robot;
 
+import org.usfirst.frc.team4669.robot.commands.AutoLaunch;
 import org.usfirst.frc.team4669.robot.commands.CenterGearLiftAuto;
 import org.usfirst.frc.team4669.robot.commands.DoNothing;
 import org.usfirst.frc.team4669.robot.commands.DriveMotionMagic;
+import org.usfirst.frc.team4669.robot.commands.LaunchAndMoveAuto;
 import org.usfirst.frc.team4669.robot.commands.LeftGearLiftAuto;
 import org.usfirst.frc.team4669.robot.commands.RightGearLiftAuto;
 import org.usfirst.frc.team4669.robot.subsystems.DriveTrain;
@@ -55,6 +57,8 @@ public class Robot extends IterativeRobot {
 		
 		chooser = new SendableChooser<Command>();
 		chooser.addDefault("Do Nothing", new DoNothing());
+		chooser.addObject("Auto Launch", new AutoLaunch());
+		chooser.addObject("Super Auto Launch", new LaunchAndMoveAuto());
 		chooser.addObject("Center Gear Lift", new CenterGearLiftAuto());
 		chooser.addObject("Left Gear Lift", new LeftGearLiftAuto());
 		chooser.addObject("Right Gear Lift", new RightGearLiftAuto());
@@ -87,8 +91,7 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
 	public void autonomousInit() {
-//		autonomousCommand = (Command) chooser.getSelected();
-		autonomousCommand = new DriveMotionMagic(1000);
+		autonomousCommand = (Command) chooser.getSelected();
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null) autonomousCommand.start();
 	}

@@ -20,13 +20,14 @@ public class DriveMotionMagic extends Command {
         // eg. requires(chassis);
         this.distance = distance;
         distanceToTravel = distance / RobotMap.encoderCountConstant;
-        rotationToTravel = distance / (4*RobotMap.wheelCircumference);
         requires(Robot.driveTrain);
     }
 
     // Called once when the command executes
     protected void initialize() {
-    	Robot.driveTrain.driveMotionMagic(rotationToTravel);    	
+//    	System.out.println(distance);
+//    	System.out.println(distance/40.8);
+    	Robot.driveTrain.driveMotionMagic(-72/40.8);    	
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -48,8 +49,9 @@ public class DriveMotionMagic extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Math.abs(Robot.driveTrain.getLeftEncoder()) > distanceToTravel 
-        		&& Math.abs(Robot.driveTrain.getRightEncoder()) > distanceToTravel ;
+//        return Math.abs(Robot.driveTrain.getLeftEncoder()) > distanceToTravel 
+//        		&& Math.abs(Robot.driveTrain.getRightEncoder()) > distanceToTravel ;
+    	return false;
     }
 
     // Called once after isFinished returns true

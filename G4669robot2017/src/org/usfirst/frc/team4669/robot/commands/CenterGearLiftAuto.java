@@ -18,7 +18,7 @@ public class CenterGearLiftAuto extends CommandGroup {
         // e.g. addParallel(new Command1());
         //      addSequential(new Command2());
         // Command1 and Command2 will run in parallel.
-    	addSequential(new DriveMotionMagic(-74));
+    	addSequential(new DriveMotionMagic(-64));
 
         // A command group will require all of the subsystems that each member
         // would require.

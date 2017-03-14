@@ -44,7 +44,7 @@ public class DriveTrain extends Subsystem {
 //		setupRightMotor(topRightMotor);
 ////		setupRightMotor(bottomRightMotor);
 		
-		double velocity = 400.0;
+		double velocity = 200.0;
 		double accel = 50.0;
 		
 		topLeftMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
@@ -72,8 +72,8 @@ public class DriveTrain extends Subsystem {
 		bottomLeftMotor.set(topLeftMotor.getDeviceID());
 		
 		topRightMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		topRightMotor.reverseSensor(false);
-//		topRightMotor.reverseOutput(true);
+		topRightMotor.reverseSensor(true);
+		topRightMotor.reverseOutput(true);
 		topRightMotor.configEncoderCodesPerRev(1440); // if using
 		// FeedbackDevice.QuadEncoder
 		// _talon.configPotentiometerTurns(XXX), // if using
@@ -231,9 +231,11 @@ public class DriveTrain extends Subsystem {
     }
     
     public void driveMotionMagic(double targetEncPosition) {
-    	changeControlMode(TalonControlMode.MotionMagic);
-    	topLeftMotor.set(-targetEncPosition);
+//    	changeControlMode(TalonControlMode.MotionMagic);
+    	topLeftMotor.changeControlMode(TalonControlMode.MotionMagic);
+    	topLeftMotor.set(targetEncPosition);
 //    	bottomLeftMotor.set(-targetEncPosition);
+    	topRightMotor.changeControlMode(TalonControlMode.MotionMagic);
     	topRightMotor.set(targetEncPosition);
 //    	bottomRightMotor.set(targetEncPosition);
     }

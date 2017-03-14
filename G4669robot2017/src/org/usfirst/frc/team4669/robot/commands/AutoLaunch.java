@@ -12,8 +12,8 @@ public class AutoLaunch extends Command {
 		// eg. requires(chassis);
 
 		requires(Robot.fuelLauncher);
-		requires(Robot.door);
-		requires(Robot.fuelIntakeElevator);
+//		requires(Robot.door);
+//		requires(Robot.fuelIntakeElevator);
 	}
 
 	// Called just before this Command runs the first time

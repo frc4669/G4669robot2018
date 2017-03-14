@@ -61,11 +61,11 @@ public class FuelDoor extends Subsystem {
     }
     
     public boolean isDoorClosed(){
-    	return doorMotor.isFwdLimitSwitchClosed();
+    	return doorMotor.isRevLimitSwitchClosed();
     }
     
     public boolean isDoorOpen(){
-    	return doorMotor.isRevLimitSwitchClosed();
+    	return doorMotor.isFwdLimitSwitchClosed();
     }
 
 	public void stop() {

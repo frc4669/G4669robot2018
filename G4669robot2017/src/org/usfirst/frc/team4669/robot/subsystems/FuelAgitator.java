@@ -2,8 +2,6 @@ package org.usfirst.frc.team4669.robot.subsystems;
 
 import org.usfirst.frc.team4669.robot.RobotMap;
 import org.usfirst.frc.team4669.robot.commands.ControlAgitator;
-import org.usfirst.frc.team4669.robot.commands.ControlWinch;
-
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.TalonControlMode;
 

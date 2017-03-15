@@ -241,10 +241,16 @@ public class DriveTrain extends Subsystem {
     }
     
     public void turn(double angle) {
-		double d = RobotMap.wheelBase * Math.PI * angle / 360.0 / RobotMap.wheelDiameter / Math.PI * 360*4;
+		//double d = ((RobotMap.wheelBase * Math.PI) * (angle / 360.0) / RobotMap.wheelDiameter / Math.PI * 360*4)/40.8;
+		double d = ((RobotMap.wheelBase * Math.PI) * (angle / 360.0)) / 40.8;
 		changeControlMode(TalonControlMode.MotionMagic);
     	topLeftMotor.set(d);
-    	topRightMotor.set(d);
+    	topRightMotor.set(-d);
+	}
+
+	public double getPosition() {
+		// TODO Auto-generated method stub
+		return topLeftMotor.getPosition();
 	}
 	
 }

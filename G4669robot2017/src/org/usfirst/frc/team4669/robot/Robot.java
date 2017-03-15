@@ -8,6 +8,7 @@ import org.usfirst.frc.team4669.robot.commands.DriveMotionMagic;
 import org.usfirst.frc.team4669.robot.commands.LaunchAndMoveAuto;
 import org.usfirst.frc.team4669.robot.commands.LeftGearLiftAuto;
 import org.usfirst.frc.team4669.robot.commands.RightGearLiftAuto;
+import org.usfirst.frc.team4669.robot.commands.TurnMotionMagic;
 import org.usfirst.frc.team4669.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4669.robot.subsystems.FuelDoor;
 import org.usfirst.frc.team4669.robot.subsystems.FuelIntakeElevator;
@@ -62,6 +63,7 @@ public class Robot extends IterativeRobot {
 		chooser.addObject("Center Gear Lift", new CenterGearLiftAuto());
 		chooser.addObject("Left Gear Lift", new LeftGearLiftAuto());
 		chooser.addObject("Right Gear Lift", new RightGearLiftAuto());
+		chooser.addObject("turn", new TurnMotionMagic(10));
 		SmartDashboard.putData("Auto mode", chooser);
 		
 	}

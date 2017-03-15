@@ -1,18 +1,19 @@
 package org.usfirst.frc.team4669.robot.commands;
 
 import org.usfirst.frc.team4669.robot.Robot;
+import org.usfirst.frc.team4669.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class ControlWinch extends Command {
+public class AutoIntake extends Command {
 
-    public ControlWinch() {
+	public AutoIntake() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.ropeWinch);
+    	requires(Robot.fuelIntakeElevator);
     }
 
     // Called just before this Command runs the first time
@@ -21,17 +22,17 @@ public class ControlWinch extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.ropeWinch.run(-Math.abs(Robot.f310.getLeftY()));
+    	Robot.fuelIntakeElevator.intake();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+    	return !Robot.driverStation.isAutonomous();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.ropeWinch.run(0);
+    	Robot.fuelIntakeElevator.stop();
     }
 
     // Called when another command which requires one or more of the same

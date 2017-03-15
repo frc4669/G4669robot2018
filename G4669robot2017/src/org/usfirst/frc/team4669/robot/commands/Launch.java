@@ -24,7 +24,7 @@ public class Launch extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		if (Robot.oi.getRightRawButton(RobotMap.launchButton)
-				|| Math.abs(Robot.f310.getLeftY()) > 0.1) {
+				|| Math.abs(Robot.f310.getRightY()) > 0.1) {
 			if (!running) {
 				Robot.fuelLauncher.startLaunch();
 				running = true;

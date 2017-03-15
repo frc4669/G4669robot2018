@@ -1,10 +1,12 @@
 package org.usfirst.frc.team4669.robot.commands;
 
 import org.usfirst.frc.team4669.robot.Robot;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 public class TankDrive extends Command {
+	
+	int direction = 1;
+	boolean motionMagicRunning = false;
 
     public TankDrive() {
         // Use requires() here to declare subsystem dependencies
@@ -19,7 +21,29 @@ public class TankDrive extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	//Robot.driveTrain.driveForward(-Robot.f310.getLeftY(), -Robot.f310.getRightY());
-    	Robot.driveTrain.driveForward(-Robot.oi.leftY(), -Robot.oi.rightY());
+    	if (Robot.oi.getLeftRawButton(2)) {
+    		direction =  -1;
+    	}
+    	else if (Robot.oi.getLeftRawButton(3)) {
+    		direction = 1;
+    	}
+    	if (Robot.oi.getLeftRawButton(1) && !motionMagicRunning) {
+    		Robot.driveTrain.zeroEncoders();
+    		Robot.driveTrain.driveMotionMagic(6/40.8);
+    		motionMagicRunning = true;
+		}
+		else if (motionMagicRunning 
+				&& Math.abs(6/40.8 - Robot.driveTrain.getPosition()) < 0.1) {
+				motionMagicRunning = false;
+		}
+		else if (!motionMagicRunning) {
+			if (direction == 1) {
+				Robot.driveTrain.driveForward(-Robot.oi.leftY(), -Robot.oi.rightY());
+			}
+			else {
+				Robot.driveTrain.driveForward(Robot.oi.rightY(), Robot.oi.leftY());
+			}
+		}
 //    	Robot.driveTrain.setSpeed(1000);
     }
 

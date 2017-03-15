@@ -1,14 +1,11 @@
 
 package org.usfirst.frc.team4669.robot;
 
-import org.usfirst.frc.team4669.robot.commands.AutoLaunch;
 import org.usfirst.frc.team4669.robot.commands.CenterGearLiftAuto;
 import org.usfirst.frc.team4669.robot.commands.DoNothing;
-import org.usfirst.frc.team4669.robot.commands.DriveMotionMagic;
 import org.usfirst.frc.team4669.robot.commands.LaunchAndMoveAuto;
 import org.usfirst.frc.team4669.robot.commands.LeftGearLiftAuto;
 import org.usfirst.frc.team4669.robot.commands.RightGearLiftAuto;
-import org.usfirst.frc.team4669.robot.commands.TurnMotionMagic;
 import org.usfirst.frc.team4669.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4669.robot.subsystems.FuelAgitator;
 import org.usfirst.frc.team4669.robot.subsystems.FuelDoor;
@@ -20,7 +17,6 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -61,12 +57,10 @@ public class Robot extends IterativeRobot {
 		
 		chooser = new SendableChooser<Command>();
 		chooser.addDefault("Do Nothing", new DoNothing());
-		chooser.addObject("Auto Launch", new AutoLaunch());
-		chooser.addObject("Super Auto Launch", new LaunchAndMoveAuto());
+		chooser.addObject("Launch and Move", new LaunchAndMoveAuto());
 		chooser.addObject("Center Gear Lift", new CenterGearLiftAuto());
 		chooser.addObject("Left Gear Lift", new LeftGearLiftAuto());
 		chooser.addObject("Right Gear Lift", new RightGearLiftAuto());
-		chooser.addObject("turn", new TurnMotionMagic(10));
 		SmartDashboard.putData("Auto mode", chooser);
 		
 	}

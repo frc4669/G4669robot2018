@@ -23,14 +23,14 @@ public class OpenAndCloseDoor extends Command {
     	if (Robot.door.isDoorOpen()) {
     		Robot.door.zeroDoor();
     	}
-    	if (Robot.f310.getLeftY() < -0.1 && !Robot.door.isDoorOpen()) {
+    	if (Robot.f310.getRightY() < -0.1 && !Robot.door.isDoorOpen()) {
 //    		System.out.println("open");
     		Robot.door.open();
     	}
-    	else if (Robot.f310.getLeftY() > 0.1 && !Robot.door.isDoorClosed()) {
+    	else if (Robot.f310.getRightY() > 0.1 && !Robot.door.isDoorClosed()) {
     		Robot.door.close();
     	}
-    	else if (Robot.f310.getLeftY() > -0.1 && Robot.f310.getLeftY() < 0.1) {
+    	else if (Robot.f310.getRightY() > -0.1 && Robot.f310.getRightY() < 0.1) {
     		Robot.door.stop();
     	}
     	

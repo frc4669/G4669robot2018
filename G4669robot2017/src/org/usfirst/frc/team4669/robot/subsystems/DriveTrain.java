@@ -186,6 +186,8 @@ public class DriveTrain extends Subsystem {
     
     public void stop() {
 //    	driveTrain.tankDrive(0, 0);
+    	topLeftMotor.set(0);
+    	topRightMotor.set(0);
     }
     
     public void calibrateGyro() {
@@ -242,7 +244,7 @@ public class DriveTrain extends Subsystem {
     
     public void turn(double angle) {
 		//double d = ((RobotMap.wheelBase * Math.PI) * (angle / 360.0) / RobotMap.wheelDiameter / Math.PI * 360*4)/40.8;
-		double d = ((RobotMap.wheelBase * Math.PI) * (angle / 360.0)) / 40.8;
+		double d = ((RobotMap.wheelBase * Math.PI) * (angle / 360.0)) / RobotMap.distancePerRotation;
 		changeControlMode(TalonControlMode.MotionMagic);
     	topLeftMotor.set(d);
     	topRightMotor.set(-d);

@@ -32,7 +32,7 @@ public class TurnMotionMagic extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Math.abs((((RobotMap.wheelBase * Math.PI) * (angle / 360.0)) / 40.8) - Robot.driveTrain.getPosition()) < 0.05;
+        return Math.abs((((RobotMap.wheelBase * Math.PI) * (angle / 360.0)) / RobotMap.distancePerRotation) - Robot.driveTrain.getPosition()) < 0.05;
     }
 
     // Called once after isFinished returns true

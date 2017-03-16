@@ -26,7 +26,7 @@ public class Intake extends Command {
     protected boolean isFinished() {
     	if (Robot.oi.getRightRawButton(RobotMap.intakeButton) 
     			|| Robot.oi.getRightRawButton(RobotMap.launchButton)
-    			|| Math.abs(Robot.f310.getLeftY()) > 0.1
+    			|| Math.abs(Robot.f310.getRightY()) > 0.1
     			|| Math.abs(Robot.oi.leftY()) > 0.1
     			|| Math.abs(Robot.oi.rightY()) > 0.1) {
 			return false;

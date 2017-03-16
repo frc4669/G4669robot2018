@@ -89,7 +89,7 @@ public class OI {
 
 	//Getting joystick values
 	public double leftY() {
-		if (Math.abs(leftStick.getY())>0.1) { 
+		if (Math.abs(leftStick.getY())>0.35) { 
 			return leftStick.getY();
 		}
 		else {
@@ -97,7 +97,7 @@ public class OI {
 		}
 	}
 	public double rightY() {
-		if (Math.abs(rightStick.getY())>0.1) { 
+		if (Math.abs(rightStick.getY())>0.35) { 
 			return rightStick.getY();
 		}
 		else {

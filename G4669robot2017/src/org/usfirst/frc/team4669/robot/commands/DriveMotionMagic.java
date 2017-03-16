@@ -28,7 +28,7 @@ public class DriveMotionMagic extends Command {
 //    	System.out.println(distance);
 //    	System.out.println(distance/40.8);
     	Robot.driveTrain.zeroEncoders();
-    	Robot.driveTrain.driveMotionMagic(distance/40.8);    	
+    	Robot.driveTrain.driveMotionMagic(distance/RobotMap.distancePerRotation);    	
     }
 
     // Called repeatedly when this Command is scheduled to run

@@ -46,7 +46,7 @@ public class RobotMap {
 	
 	//DOOR CONSTANT
 	//PercentVBus for opening the door
-	public static final double doorSpeed = 0.5;//value in PercentVbus
+	public static final double doorSpeed = 0.75;//value in PercentVbus
 	
 	
 	//DRIVE TRAIN SPEED PROPORTION
@@ -66,5 +66,6 @@ public class RobotMap {
 	// public static int rangefinderPort = 1;
 	// public static int rangefinderModule = 1;
 	public static final int f310 = 2;
+	public static final double distancePerRotation = 40.8;
 }
 

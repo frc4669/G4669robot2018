@@ -19,7 +19,9 @@ public class LaunchAndMoveAuto extends CommandGroup {
         // e.g. addParallel(new Command1());
         //      addSequential(new Command2());
         // Command1 and Command2 will run in parallel.
+    	addSequential(new TurnMotionMagic(45));
     	addParallel(new AutoLaunch());
+    	addParallel(new AutoIntake());
     	addSequential(new WaitCommand(7));
     	addSequential(new DriveMotionMagic(-74));
         // A command group will require all of the subsystems that each member

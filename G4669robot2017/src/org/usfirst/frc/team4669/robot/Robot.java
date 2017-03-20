@@ -144,5 +144,7 @@ public class Robot extends IterativeRobot {
     	SmartDashboard.putNumber("driveLeftEncVel", Robot.driveTrain.getLeftEnconderSpeed());
     	SmartDashboard.putNumber("driveRightEncVel", Robot.driveTrain.getRightEnconderSpeed());
     	SmartDashboard.putNumber("doorPosition", Robot.door.getPosition());
+    	SmartDashboard.putNumber("VisionDistance", visionTable.getNumber("distance", 0));
+    	SmartDashboard.putNumber("VisionAngle", visionTable.getNumber("angle", 0));
 	}
 }

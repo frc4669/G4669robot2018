@@ -35,14 +35,22 @@ public class RobotMap {
 	public static final boolean reverseOutputTrain = false;
 	public static final int leftJoystick = 0;
 	public static final int rightJoystick = 1;
+	
+	
 	//Left Joystick Controls
+	public static final int intakeFrontButton = 3;
+	public static final int gearHolderFrontButton = 2;
+	public static final int moveBackButton = 1;
+	
 	
 	//Right Joystick Controls
 	public static final int launchButton = 2;
 	public static final int intakeButton = 1;
+	public static final int turn180Button = 4;
 //	public static final int feedButton = 3;
 //	public static final int openDoorButton = 4;
 //	public static final int closeDoorButton = 5;
+	
 	
 	//DOOR CONSTANT
 	//PercentVBus for opening the door
@@ -57,6 +65,7 @@ public class RobotMap {
 	public static final double wheelBase = 27.4; //figure out real distance later
 	/**
 	 * Calculates circumference of wheel given diameter.
+	 * 
 	 */
     public static final double wheelCircumference = Math.PI * wheelDiameter;
 	

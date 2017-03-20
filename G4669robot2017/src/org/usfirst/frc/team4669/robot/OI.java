@@ -89,16 +89,32 @@ public class OI {
 
 	//Getting joystick values
 	public double leftY() {
-		if (Math.abs(leftStick.getY())>0.35) { 
-			return leftStick.getY();
+		double joystickValue = leftStick.getY();
+		double joystickOffset = 0.075;
+		double absJoystickValue = Math.abs(joystickValue);
+		if (absJoystickValue > joystickOffset) {
+			double speed = absJoystickValue;
+			speed = (speed*speed) + joystickOffset;
+			if (joystickValue > 0) 
+				return speed;
+			else
+				return -speed;
 		}
 		else {
 			return 0;
 		}
 	}
 	public double rightY() {
-		if (Math.abs(rightStick.getY())>0.35) { 
-			return rightStick.getY();
+		double joystickValue = rightStick.getY();
+		double joystickOffset = 0.075;
+		double absJoystickValue = Math.abs(joystickValue);
+		if (absJoystickValue > joystickOffset) {
+			double speed = absJoystickValue;
+			speed = (speed*speed) + joystickOffset;
+			if (joystickValue > 0) 
+				return speed;
+			else
+				return -speed;
 		}
 		else {
 			return 0;

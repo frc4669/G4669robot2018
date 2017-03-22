@@ -71,7 +71,7 @@ public class OI {
 		SmartDashboard.putData("Turn45DegreesRight", new Turn(-45));
 		SmartDashboard.putData("DriveForward", new DriveForward(45));
 		SmartDashboard.putData("Turn180Degrees", new Turn(180));
-		SmartDashboard.putNumber("LaunchRPM", 3200);
+		SmartDashboard.putNumber("LaunchRPM", 3100);
 		SmartDashboard.putNumber("IntakeRPM", 120);
 		SmartDashboard.putNumber("FeedRPM", 100);
 		SmartDashboard.putNumber("Turn Angle", 0);

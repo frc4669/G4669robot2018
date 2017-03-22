@@ -63,6 +63,9 @@ public class DriveTrain extends Subsystem {
 		topLeftMotor.setP(0.3);
 		topLeftMotor.setI(0);
 		topLeftMotor.setD(16);
+		//Current Limit on Drive Motors to Wall Proof Robot
+		topLeftMotor.setCurrentLimit(15);
+		topLeftMotor.EnableCurrentLimit(true);
 		/* set acceleration and vcruise velocity - see documentation */
 		topLeftMotor.setMotionMagicCruiseVelocity(velocity);
 		topLeftMotor.setMotionMagicAcceleration(accel);
@@ -70,6 +73,9 @@ public class DriveTrain extends Subsystem {
 
 		bottomLeftMotor.changeControlMode(TalonControlMode.Follower);
 		bottomLeftMotor.set(topLeftMotor.getDeviceID());
+		//Current Limit on Drive Motors to Wall Proof Robot
+		bottomLeftMotor.setCurrentLimit(15);
+		bottomLeftMotor.EnableCurrentLimit(true);
 		
 		topRightMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		topRightMotor.reverseSensor(true);
@@ -88,6 +94,9 @@ public class DriveTrain extends Subsystem {
 		topRightMotor.setP(0.3);
 		topRightMotor.setI(0);
 		topRightMotor.setD(16);
+		//Current Limit on Drive Motors to Wall Proof Robot
+		topRightMotor.setCurrentLimit(15);
+		topRightMotor.EnableCurrentLimit(true);
 		/* set acceleration and vcruise velocity - see documentation */
 		topRightMotor.setMotionMagicCruiseVelocity(velocity); //855
 		topRightMotor.setMotionMagicAcceleration(accel); //855
@@ -95,6 +104,9 @@ public class DriveTrain extends Subsystem {
 		
 		bottomRightMotor.changeControlMode(TalonControlMode.Follower);
 		bottomRightMotor.set(topRightMotor.getDeviceID());
+		//Current Limit on Drive Motors to Wall Proof Robot
+		bottomRightMotor.setCurrentLimit(15);
+		bottomRightMotor.EnableCurrentLimit(true);
 		
 	}
 	

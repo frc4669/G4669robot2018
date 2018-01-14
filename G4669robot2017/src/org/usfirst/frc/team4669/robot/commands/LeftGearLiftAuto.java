@@ -18,9 +18,10 @@ public class LeftGearLiftAuto extends CommandGroup {
         // e.g. addParallel(new Command1());
         //      addSequential(new Command2());
         // Command1 and Command2 will run in parallel.
-//    	addSequential(new DriveMotionMagic(-72));
-//    	addSequential(new TurnMotionMagic(60));
-//    	addSequential(new DriveMotionMagic(-30));
+    	addSequential(new DriveMotionMagic(-72));
+    	addSequential(new TurnMotionMagic(60));
+    	addSequential(new TurnToGoal());
+    	addSequential(new DriveMotionMagic(-TurnToGoal.distance));
         // A command group will require all of the subsystems that each member
         // would require.
         // e.g. if Command1 requires chassis, and Command2 requires arm,

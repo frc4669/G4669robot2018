@@ -3,22 +3,19 @@ package org.usfirst.frc.team4669.robot;
 
 import org.usfirst.frc.team4669.robot.commands.CenterGearLiftAuto;
 import org.usfirst.frc.team4669.robot.commands.DoNothing;
-import org.usfirst.frc.team4669.robot.commands.LaunchAndMoveAuto;
-import org.usfirst.frc.team4669.robot.commands.LeftGearLiftAuto;
-import org.usfirst.frc.team4669.robot.commands.RightGearLiftAuto;
+//import org.usfirst.frc.team4669.robot.commands.LaunchAndMoveAuto;
 import org.usfirst.frc.team4669.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team4669.robot.subsystems.FuelAgitator;
-import org.usfirst.frc.team4669.robot.subsystems.FuelDoor;
-import org.usfirst.frc.team4669.robot.subsystems.FuelIntakeElevator;
-import org.usfirst.frc.team4669.robot.subsystems.FuelLauncher;
-import org.usfirst.frc.team4669.robot.subsystems.RopeWinch;
+//import org.usfirst.frc.team4669.robot.subsystems.FuelAgitator;
+//import org.usfirst.frc.team4669.robot.subsystems.FuelDoor;
+//import org.usfirst.frc.team4669.robot.subsystems.FuelIntakeElevator;
+//import org.usfirst.frc.team4669.robot.subsystems.FuelLauncher;
+//import org.usfirst.frc.team4669.robot.subsystems.RopeWinch;
 
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.networktables.NetworkTable;
+
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -30,18 +27,17 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * directory.
  */
 
-public class Robot extends IterativeRobot {
+public class Robot extends TimedRobot {
 
 	public static DriveTrain driveTrain = new DriveTrain();
-	public static FuelLauncher fuelLauncher = new FuelLauncher();
-	public static FuelIntakeElevator fuelIntakeElevator = new FuelIntakeElevator();
-	public static FuelDoor door = new FuelDoor();
-	public static RopeWinch ropeWinch = new RopeWinch();
-	public static FuelAgitator fuelAgitator = new FuelAgitator();
+//	public static FuelLauncher fuelLauncher = new FuelLauncher();
+//	public static FuelIntakeElevator fuelIntakeElevator = new FuelIntakeElevator();
+//	public static FuelDoor door = new FuelDoor();
+//	public static RopeWinch ropeWinch = new RopeWinch();
+//	public static FuelAgitator fuelAgitator = new FuelAgitator();
 	public static OI oi;
 	public static F310 f310;
 	public static DriverStation driverStation;
-	public static NetworkTable visionTable;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser;
@@ -54,17 +50,14 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		f310 = new F310();
 		
-		visionTable = NetworkTable.getTable("vision");
 
 		driveTrain.calibrateGyro();
 		driveTrain.zeroEncoders();
 		
 		chooser = new SendableChooser<Command>();
 		chooser.addDefault("Do Nothing", new DoNothing());
-		chooser.addObject("Launch and Move", new LaunchAndMoveAuto());
+//		chooser.addObject("Launch and Move", new LaunchAndMoveAuto());
 		chooser.addObject("Center Gear Lift", new CenterGearLiftAuto());
-		chooser.addObject("Left Gear Lift", new LeftGearLiftAuto());
-		chooser.addObject("Right Gear Lift", new RightGearLiftAuto());
 		SmartDashboard.putData("Auto mode", chooser);
 		
 	}
@@ -127,7 +120,6 @@ public class Robot extends IterativeRobot {
 	 * This function is called periodically during test mode
 	 */
 	public void testPeriodic() {
-		LiveWindow.run();
 	}
 
 	public void updateSmartDashboard() {
@@ -138,13 +130,11 @@ public class Robot extends IterativeRobot {
     	SmartDashboard.putNumber("Right Y Axis", Robot.oi.rightY());
 //    	SmartDashboard.putNumber("LeftLaunchVel", Robot.fuelLauncher.getLeftEncoderVel());
 //    	SmartDashboard.putNumber("RightLaunchVel", Robot.fuelLauncher.getRightEncoderVel());    
-    	SmartDashboard.putNumber("IntakeVel", Robot.fuelIntakeElevator.getEncoderVel());
+//    	SmartDashboard.putNumber("IntakeVel", Robot.fuelIntakeElevator.getEncoderVel());
 //    	SmartDashboard.putNumber("LeftLaunchSpeed", Robot.fuelLauncher.getLeftEncoderSpeed());
-    	SmartDashboard.putNumber("RightLaunchSpeed", Robot.fuelLauncher.getRightEncoderSpeed());
+//    	SmartDashboard.putNumber("RightLaunchSpeed", Robot.fuelLauncher.getRightEncoderSpeed());
     	SmartDashboard.putNumber("driveLeftEncVel", Robot.driveTrain.getLeftEnconderSpeed());
     	SmartDashboard.putNumber("driveRightEncVel", Robot.driveTrain.getRightEnconderSpeed());
-    	SmartDashboard.putNumber("doorPosition", Robot.door.getPosition());
-    	SmartDashboard.putNumber("VisionCenterX", visionTable.getNumber("centerX", 0));
-    	SmartDashboard.putNumber("VisionWidth", visionTable.getNumber("width", 0));
+//    	SmartDashboard.putNumber("doorPosition", Robot.door.getPosition());
 	}
 }

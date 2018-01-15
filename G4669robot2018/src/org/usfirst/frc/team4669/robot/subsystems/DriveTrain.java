@@ -6,9 +6,10 @@ import org.usfirst.frc.team4669.robot.commands.TankDrive;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
-import com.ctre.*;
-import com.ctre.CANTalon.FeedbackDevice;
-import com.ctre.CANTalon.TalonControlMode;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 /**
  *
@@ -19,10 +20,14 @@ public class DriveTrain extends Subsystem {
 	private static final double kP = 0.005;
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-	private CANTalon topLeftMotor;
-	private CANTalon bottomLeftMotor;
-	private CANTalon topRightMotor;
-	private CANTalon bottomRightMotor;
+	private WPI_TalonSRX topLeftMotor;
+	private WPI_TalonSRX bottomLeftMotor;
+	private WPI_TalonSRX topRightMotor;
+	private WPI_TalonSRX bottomRightMotor;
+	
+	private int timeout = 1;
+	private int slotIdx = 0;
+	private int pidIdx = 0;
 	
 //	private RobotDrive driveTrain;
 	
@@ -32,10 +37,10 @@ public class DriveTrain extends Subsystem {
 		super();
 		analogGyro = new ADXRS450_Gyro();
 		
-		topLeftMotor = new CANTalon(RobotMap.driveTrainTopLeft);
-		bottomLeftMotor = new CANTalon(RobotMap.driveTrainBottomLeft);
-		topRightMotor = new CANTalon(RobotMap.driveTrainTopRight);
-		bottomRightMotor = new CANTalon(RobotMap.driveTrainBottomRight);
+		topLeftMotor = new WPI_TalonSRX(RobotMap.driveTrainTopLeft);
+		bottomLeftMotor = new WPI_TalonSRX(RobotMap.driveTrainBottomLeft);
+		topRightMotor = new WPI_TalonSRX(RobotMap.driveTrainTopRight);
+		bottomRightMotor = new WPI_TalonSRX(RobotMap.driveTrainBottomRight);
 		
 //		driveTrain = new RobotDrive(topLeftMotor, bottomLeftMotor, topRightMotor, bottomRightMotor);
 		
@@ -44,69 +49,70 @@ public class DriveTrain extends Subsystem {
 //		setupRightMotor(topRightMotor);
 ////		setupRightMotor(bottomRightMotor);
 		
-		double velocity = 200.0;
-		double accel = 50.0;
+		int velocity = 200;
+		int accel = 50;
 		
-		topLeftMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		topLeftMotor.reverseSensor(false);
-		topLeftMotor.configEncoderCodesPerRev(1440); // if using
+		topLeftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,pidIdx,timeout);
+		topLeftMotor.setInverted(false);
+		//topLeftMotor.configEncoderCodesPerRev(1440); // if using
 		// FeedbackDevice.QuadEncoder
 		// _talon.configPotentiometerTurns(XXX), // if using
 		// FeedbackDevice.AnalogEncoder or AnalogPot
 
 		/* set the peak and nominal outputs, 12V means full */
-		topLeftMotor.configNominalOutputVoltage(+0.0f, -0.0f);
-		topLeftMotor.configPeakOutputVoltage(+12.0f, -12.0f);
+		topLeftMotor.configNominalOutputForward(0, timeout);
+		topLeftMotor.configNominalOutputReverse(0, timeout);
+		topLeftMotor.configPeakOutputForward(1, timeout);
+		topLeftMotor.configPeakOutputReverse(-1, timeout);
 		/* set closed loop gains in slot0 - see documentation */
-		topLeftMotor.setProfile(0);
-		topLeftMotor.setF(0.3739);
-		topLeftMotor.setP(0.3);
-		topLeftMotor.setI(0);
-		topLeftMotor.setD(16);
+		topLeftMotor.selectProfileSlot(slotIdx,pidIdx);
+		topLeftMotor.config_kF(slotIdx,0.3739,timeout);
+		topLeftMotor.config_kP(slotIdx,0.3,timeout);
+		topLeftMotor.config_kI(slotIdx,0,timeout);
+		topLeftMotor.config_kD(slotIdx,16,timeout);
 		//Current Limit on Drive Motors to Wall Proof Robot
-		topLeftMotor.setCurrentLimit(15);
-		topLeftMotor.EnableCurrentLimit(true);
+		topLeftMotor.configContinuousCurrentLimit(15,timeout);
+		topLeftMotor.enableCurrentLimit(true);
 		/* set acceleration and vcruise velocity - see documentation */
-		topLeftMotor.setMotionMagicCruiseVelocity(velocity);
-		topLeftMotor.setMotionMagicAcceleration(accel);
-		topLeftMotor.setPosition(0);
+		topLeftMotor.configMotionCruiseVelocity(velocity,timeout);
+		topLeftMotor.configMotionAcceleration(accel,timeout);
+		topLeftMotor.setSelectedSensorPosition(0,pidIdx,timeout);
 
-		bottomLeftMotor.changeControlMode(TalonControlMode.Follower);
-		bottomLeftMotor.set(topLeftMotor.getDeviceID());
+		bottomLeftMotor.set(ControlMode.Follower, topLeftMotor.getDeviceID());
 		//Current Limit on Drive Motors to Wall Proof Robot
-		bottomLeftMotor.setCurrentLimit(15);
-		bottomLeftMotor.EnableCurrentLimit(true);
+		bottomLeftMotor.configContinuousCurrentLimit(15,timeout);
+		bottomLeftMotor.enableCurrentLimit(true);
 		
-		topRightMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		topRightMotor.reverseSensor(true);
-		topRightMotor.reverseOutput(true);
-		topRightMotor.configEncoderCodesPerRev(1440); // if using
+		topRightMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,pidIdx,timeout);
+		topRightMotor.setInverted(false);
+		//topRightMotor.configEncoderCodesPerRev(1440); // if using
 		// FeedbackDevice.QuadEncoder
 		// _talon.configPotentiometerTurns(XXX), // if using
 		// FeedbackDevice.AnalogEncoder or AnalogPot
 
 		/* set the peak and nominal outputs, 12V means full */
-		topRightMotor.configNominalOutputVoltage(+0.0f, -0.0f);
-		topRightMotor.configPeakOutputVoltage(+12.0f, -12.0f);
+		topRightMotor.configNominalOutputForward(0, timeout);
+		topRightMotor.configNominalOutputReverse(0, timeout);
+		topRightMotor.configPeakOutputForward(1, timeout);
+		topRightMotor.configPeakOutputReverse(-1, timeout);
 		/* set closed loop gains in slot0 - see documentation */
-		topRightMotor.setProfile(0);
-		topRightMotor.setF(0.3739);
-		topRightMotor.setP(0.3);
-		topRightMotor.setI(0);
-		topRightMotor.setD(16);
+		topRightMotor.selectProfileSlot(slotIdx, pidIdx);
+		topRightMotor.config_kF(slotIdx,0.3739,timeout);
+		topRightMotor.config_kP(slotIdx,0.3,timeout);
+		topRightMotor.config_kI(slotIdx,0,timeout);
+		topRightMotor.config_kD(slotIdx,16,timeout);
 		//Current Limit on Drive Motors to Wall Proof Robot
-		topRightMotor.setCurrentLimit(15);
-		topRightMotor.EnableCurrentLimit(true);
+		topRightMotor.configContinuousCurrentLimit(15,timeout);
+		topRightMotor.enableCurrentLimit(true);
 		/* set acceleration and vcruise velocity - see documentation */
-		topRightMotor.setMotionMagicCruiseVelocity(velocity); //855
-		topRightMotor.setMotionMagicAcceleration(accel); //855
-		topRightMotor.setPosition(0);
+		topRightMotor.configMotionCruiseVelocity(velocity,timeout); //855
+		topRightMotor.configMotionAcceleration(accel,timeout); //855
+		topRightMotor.setSelectedSensorPosition(0,pidIdx,timeout);
 		
-		bottomRightMotor.changeControlMode(TalonControlMode.Follower);
-		bottomRightMotor.set(topRightMotor.getDeviceID());
+		bottomRightMotor.set(ControlMode.Follower, topRightMotor.getDeviceID());
 		//Current Limit on Drive Motors to Wall Proof Robot
-		bottomRightMotor.setCurrentLimit(15);
-		bottomRightMotor.EnableCurrentLimit(true);
+		bottomRightMotor.configContinuousCurrentLimit(15,timeout);
+		bottomRightMotor.enableCurrentLimit(true);
 		
 	}
 	
@@ -137,7 +143,7 @@ public class DriveTrain extends Subsystem {
 ////		bottomRightMotor.setF(fRight);
 //	}
 	
-//	public void setupLeftMotor(CANTalon talon) {
+//	public void setupLeftMotor(WPI_TalonSRX talon) {
 ////		talon.enable();
 //		talon.changeControlMode(TalonControlMode.PercentVbus);
 ////		talon.enableBrakeMode(false);
@@ -154,7 +160,7 @@ public class DriveTrain extends Subsystem {
 ////		talon.setMotionMagicAcceleration(937);
 //	}
 //	
-//	public void setupRightMotor(CANTalon talon) {
+//	public void setupRightMotor(WPI_TalonSRX talon) {
 ////		talon.enable();
 //		talon.changeControlMode(TalonControlMode.PercentVbus);
 ////		talon.enableBrakeMode(false);
@@ -177,10 +183,8 @@ public class DriveTrain extends Subsystem {
     
     public void driveForward(double vBusLeft, double vBusRight) {
 //    	driveTrain.tankDrive(speedLeft, speedRight, false);
-    	topLeftMotor.changeControlMode(TalonControlMode.PercentVbus);
-    	topLeftMotor.set(vBusLeft);
-    	topRightMotor.changeControlMode(TalonControlMode.PercentVbus);
-    	topRightMotor.set(-vBusRight);
+    	topLeftMotor.set(ControlMode.PercentOutput,vBusLeft);
+    	topRightMotor.set(ControlMode.PercentOutput,-vBusRight);
     }
     
     public void drive(double outputMag, double outputCurv) {
@@ -192,8 +196,8 @@ public class DriveTrain extends Subsystem {
     }
     
     public void setSpeed(double speed) {
-    	topLeftMotor.changeControlMode(TalonControlMode.Speed);
-    	topLeftMotor.set(speed);
+    	topLeftMotor.set(ControlMode.Velocity,speed);
+    	topRightMotor.set(ControlMode.Velocity,speed);
     }
     
     public void stop() {
@@ -217,54 +221,51 @@ public class DriveTrain extends Subsystem {
     }
     
     public double getLeftEncoder() {
-    	return topLeftMotor.getEncPosition();
+    	return topLeftMotor.getSensorCollection().getQuadraturePosition();
     }
     
     public double getRightEncoder() {
-    	return topRightMotor.getEncPosition();
+    	return topRightMotor.getSensorCollection().getQuadraturePosition();
     }
     
     public double getLeftEnconderSpeed() {
-    	return topLeftMotor.getSpeed();
+    	return topLeftMotor.getSensorCollection().getQuadratureVelocity();
     }
     
     public double getRightEnconderSpeed() {
-    	return topRightMotor.getSpeed();
+    	return topRightMotor.getSensorCollection().getQuadratureVelocity();
     }
     
     public void zeroEncoders() {
-    	topLeftMotor.setPosition(0);
-    	topRightMotor.setPosition(0);
+    	topLeftMotor.setSelectedSensorPosition(0,pidIdx,timeout);
+    	topRightMotor.setSelectedSensorPosition(0,pidIdx,timeout);
     }
     
-    public void changeControlMode(TalonControlMode mode) {
-    	topLeftMotor.changeControlMode(mode);
+//    public void changeControlMode(ControlMode mode) {
+//    	topLeftMotor.set(mode);
 //    	bottomLeftMotor.changeControlMode(mode);
-    	topRightMotor.changeControlMode(mode);
+//    	topRightMotor.set(mode);
 //    	bottomRightMotor.changeControlMode(mode);
-    }
+//    }
     
     public void driveMotionMagic(double targetEncPosition) {
 //    	changeControlMode(TalonControlMode.MotionMagic);
-    	topLeftMotor.changeControlMode(TalonControlMode.MotionMagic);
-    	topLeftMotor.set(targetEncPosition);
+    	topLeftMotor.set(ControlMode.MotionMagic,targetEncPosition);
 //    	bottomLeftMotor.set(-targetEncPosition);
-    	topRightMotor.changeControlMode(TalonControlMode.MotionMagic);
-    	topRightMotor.set(targetEncPosition);
+    	topRightMotor.set(ControlMode.MotionMagic,targetEncPosition);
 //    	bottomRightMotor.set(targetEncPosition);
     }
     
     public void turn(double angle) {
 		//double d = ((RobotMap.wheelBase * Math.PI) * (angle / 360.0) / RobotMap.wheelDiameter / Math.PI * 360*4)/40.8;
 		double d = ((RobotMap.wheelBase * Math.PI) * (angle / 360.0)) / RobotMap.distancePerRotation;
-		changeControlMode(TalonControlMode.MotionMagic);
-    	topLeftMotor.set(d);
-    	topRightMotor.set(-d);
+		topLeftMotor.set(ControlMode.MotionMagic,d);
+    	topRightMotor.set(ControlMode.MotionMagic,d);
 	}
 
 	public double getPosition() {
 		// TODO Auto-generated method stub
-		return topLeftMotor.getPosition();
+		return topLeftMotor.getSensorCollection().getQuadraturePosition();
 	}
 	
 }

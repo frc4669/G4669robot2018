@@ -1,4 +1,3 @@
-
 package org.usfirst.frc.team4669.robot;
 
 import org.usfirst.frc.team4669.robot.commands.CenterGearLiftAuto;

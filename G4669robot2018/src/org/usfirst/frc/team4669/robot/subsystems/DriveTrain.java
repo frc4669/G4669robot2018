@@ -2,6 +2,7 @@ package org.usfirst.frc.team4669.robot.subsystems;
 
 import org.usfirst.frc.team4669.robot.RobotMap;
 import org.usfirst.frc.team4669.robot.commands.TankDrive;
+import org.usfirst.frc.team4669.robot.commands.ArcadeDrive;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -178,7 +179,7 @@ public class DriveTrain extends Subsystem {
 //	}
 	
     public void initDefaultCommand() {
-    	setDefaultCommand(new TankDrive());
+    	setDefaultCommand(new ArcadeDrive());
     }
     
     public void driveForward(double vBusLeft, double vBusRight) {

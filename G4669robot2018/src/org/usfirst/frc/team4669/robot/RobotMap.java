@@ -20,15 +20,7 @@ public class RobotMap {
 	public static final int driveTrainBottomRight = 1; //1
 
 	//Other subsystem motors
-//	public static final int launchMotorLeft = 6;
-	public static final int launchMotorRight = 7;
-//	public static final int feederMotorLeft = 11; 
-	public static final int feederMotorRight = 10; 
-	public static final int intakeElevatorMotor = 8;
-	public static final int doorMotor = 9;
-	public static final int climbMotor = 3;
-	public static final int agitatorMotor = 6;
-	
+	public static final int leftIntake = 6;
 	
 	//DRIVER STATION	
 	// Reverse output of motors if moving backwords
@@ -58,7 +50,12 @@ public class RobotMap {
 	
 	
 	//DRIVE TRAIN SPEED PROPORTION
-	public static final double driveTrainSpeedProportion = 0.85;	
+	public static final double driveTrainSpeedProportion = 0.85;
+	
+	//NEW TALON SRX STUFF
+	public static int timeout = 20;
+	public static int slotIdx = 0;
+	public static int pidIdx = 0;
 	
 	// OTHER
 	public static final double wheelDiameter = 3.25;

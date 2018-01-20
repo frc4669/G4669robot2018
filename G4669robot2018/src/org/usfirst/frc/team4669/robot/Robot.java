@@ -2,6 +2,7 @@ package org.usfirst.frc.team4669.robot;
 
 import org.usfirst.frc.team4669.robot.commands.CenterGearLiftAuto;
 import org.usfirst.frc.team4669.robot.commands.DoNothing;
+import org.usfirst.frc.team4669.robot.subsystems.CubeIntake;
 //import org.usfirst.frc.team4669.robot.commands.LaunchAndMoveAuto;
 import org.usfirst.frc.team4669.robot.subsystems.DriveTrain;
 //import org.usfirst.frc.team4669.robot.subsystems.FuelAgitator;
@@ -34,9 +35,10 @@ public class Robot extends TimedRobot {
 //	public static FuelDoor door = new FuelDoor();
 //	public static RopeWinch ropeWinch = new RopeWinch();
 //	public static FuelAgitator fuelAgitator = new FuelAgitator();
-	public static OI oi;
-	public static F310 f310;
+	public static OI oi = new OI();
+	public static F310 f310 = new F310();
 	public static DriverStation driverStation;
+	public static CubeIntake cubeIntake =  new CubeIntake();
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser;
@@ -46,10 +48,6 @@ public class Robot extends TimedRobot {
 	 * used for any initialization code.
 	 */
 	public void robotInit() {
-		oi = new OI();
-		f310 = new F310();
-		
-
 		driveTrain.calibrateGyro();
 		
 		driveTrain.zeroEncoders();

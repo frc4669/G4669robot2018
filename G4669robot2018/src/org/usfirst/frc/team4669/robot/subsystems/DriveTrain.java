@@ -27,10 +27,9 @@ public class DriveTrain extends Subsystem {
 	private WPI_TalonSRX topRightMotor;
 	private WPI_TalonSRX bottomRightMotor;
 	
-	private int timeout = 20;
-	private int slotIdx = 0;
-	private int pidIdx = 0;
-	
+	int timeout = RobotMap.timeout;
+	int slotIdx = RobotMap.timeout;
+	int pidIdx = RobotMap.timeout;
 	
 	private Gyro analogGyro;
 	

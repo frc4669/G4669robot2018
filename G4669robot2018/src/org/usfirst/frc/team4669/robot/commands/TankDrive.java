@@ -10,6 +10,9 @@ public class TankDrive extends Command {
 	int direction = -1;
 	boolean motionMagicRunning = false;
 	boolean motionMagic180 = false;
+	boolean turnRunning = false;
+	double turnAngle;
+	double initialAngle;
 
     public TankDrive() {
         // Use requires() here to declare subsystem dependencies
@@ -22,8 +25,20 @@ public class TankDrive extends Command {
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
+    protected void execute() { 
     	//Robot.driveTrain.driveForward(-Robot.f310.getLeftY(), -Robot.f310.getRightY());
+    	if (Robot.f310.getDPadPOV()!=-1&& !turnRunning) {
+    		turnAngle = Robot.f310.getDPadPOV();
+    		initialAngle = Robot.driveTrain.getGyroAngle();
+    		turnRunning = true;
+    	}
+    	else if (turnRunning) {
+    		Robot.driveTrain.turnTo(turnAngle);
+    	}
+    	else if (turnRunning && (turnAngle < 0 && Robot.driveTrain.getGyroAngle() <= turnAngle + initialAngle) ||
+    			(turnAngle > 0 && Robot.driveTrain.getGyroAngle() >= turnAngle + initialAngle)) {
+    		turnRunning = false;
+    	}
     	if (Robot.oi.getLeftRawButton(RobotMap.gearHolderFrontButton)) {
     		direction =  -1;
     	}
@@ -49,12 +64,12 @@ public class TankDrive extends Command {
 				&& Math.abs((((RobotMap.wheelBase * Math.PI) * (180 / 360.0)) / RobotMap.distancePerRotation) - Robot.driveTrain.getPosition()) < 0.05) {
 				motionMagic180 = false;
 		}
-		else if (!motionMagicRunning && !motionMagic180) {
+		else if (!motionMagicRunning && !motionMagic180 && !turnRunning) {
 			if (direction == 1) {
 				Robot.driveTrain.driveForward(-Robot.oi.leftY(), -Robot.oi.rightY());
 			}
 			else {
-				Robot.driveTrain.driveForward(Robot.oi.rightY(), Robot.oi.leftY());
+				Robot.driveTrain.driveForward(Robot.oi.leftY(), Robot.oi.rightY());
 			}
 		}
     	

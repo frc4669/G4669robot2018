@@ -37,43 +37,43 @@ public class F310 {
 	}
 	//OpenDoor
 	public boolean getGreenButton() {
-		return f310.getRawButton(0);
-	}
-	//CloseDoor
-	public boolean getRedButton() {
 		return f310.getRawButton(1);
 	}
-	
-	public boolean getBlueButton() {
+	//Stop Bot
+	public boolean getRedButton() {
 		return f310.getRawButton(2);
 	}
 	
-	public boolean getOrangeButton() {
+	public boolean getBlueButton() {
 		return f310.getRawButton(3);
 	}
 	
-	public boolean getLeftShoulderButton() {
+	public boolean getOrangeButton() {
 		return f310.getRawButton(4);
 	}
 	
-	public boolean getRightShoulderButton() {
+	public boolean getLeftShoulderButton() {
 		return f310.getRawButton(5);
 	}
 	
-	public boolean getBackButton() {
+	public boolean getRightShoulderButton() {
 		return f310.getRawButton(6);
 	}
 	
-	public boolean getStartButton() {
+	public boolean getBackButton() {
 		return f310.getRawButton(7);
 	}
 	
-	public boolean getLeftJoyButton() {
+	public boolean getStartButton() {
 		return f310.getRawButton(8);
 	}
 	
-	public boolean getRightJoyButton() {
+	public boolean getLeftJoyButton() {
 		return f310.getRawButton(9);
+	}
+	
+	public boolean getRightJoyButton() {
+		return f310.getRawButton(10);
 	}
 	
 	public double getDPadPOV() {

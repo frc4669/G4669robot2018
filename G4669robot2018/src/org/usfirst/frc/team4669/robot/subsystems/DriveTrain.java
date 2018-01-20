@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4669.robot.subsystems;
 
+import org.usfirst.frc.team4669.robot.Robot;
 import org.usfirst.frc.team4669.robot.RobotMap;
 import org.usfirst.frc.team4669.robot.commands.TankDrive;
 import org.usfirst.frc.team4669.robot.commands.ArcadeDrive;
@@ -26,11 +27,10 @@ public class DriveTrain extends Subsystem {
 	private WPI_TalonSRX topRightMotor;
 	private WPI_TalonSRX bottomRightMotor;
 	
-	private int timeout = 1;
+	private int timeout = 20;
 	private int slotIdx = 0;
 	private int pidIdx = 0;
 	
-//	private RobotDrive driveTrain;
 	
 	private Gyro analogGyro;
 	
@@ -43,13 +43,6 @@ public class DriveTrain extends Subsystem {
 		topRightMotor = new WPI_TalonSRX(RobotMap.driveTrainTopRight);
 		bottomRightMotor = new WPI_TalonSRX(RobotMap.driveTrainBottomRight);
 		
-//		driveTrain = new RobotDrive(topLeftMotor, bottomLeftMotor, topRightMotor, bottomRightMotor);
-		
-//		setupLeftMotor(topLeftMotor);
-////		setupLeftMotor(bottomLeftMotor);
-//		setupRightMotor(topRightMotor);
-////		setupRightMotor(bottomRightMotor);
-		
 		int velocity = 200;
 		int accel = 50;
 		
@@ -60,7 +53,7 @@ public class DriveTrain extends Subsystem {
 		// _talon.configPotentiometerTurns(XXX), // if using
 		// FeedbackDevice.AnalogEncoder or AnalogPot
 
-		/* set the peak and nominal outputs, 12V means full */
+		/* set the peak and nominal outputs, 1 means full */
 		topLeftMotor.configNominalOutputForward(0, timeout);
 		topLeftMotor.configNominalOutputReverse(0, timeout);
 		topLeftMotor.configPeakOutputForward(1, timeout);
@@ -117,66 +110,6 @@ public class DriveTrain extends Subsystem {
 		
 	}
 	
-//	public void setPID(
-//			double pLeft, 
-//			double iLeft, 
-//			double dLeft, 
-//			double pRight, 
-//			double iRight, 
-//			double dRight,
-//			double fLeft,
-//			double fRight) {
-//		topLeftMotor.setP(pLeft);
-////		bottomLeftMotor.setP(pLeft);
-//		topRightMotor.setP(pRight);
-////		bottomRightMotor.setP(pRight);
-//		topLeftMotor.setI(iLeft);
-////		bottomLeftMotor.setI(iLeft);
-//		topRightMotor.setI(iRight);
-////		bottomRightMotor.setI(iRight);
-//		topLeftMotor.setD(dLeft);
-////		bottomLeftMotor.setD(dLeft);
-//		topRightMotor.setD(dRight);
-////		bottomRightMotor.setD(dRight);
-//		topLeftMotor.setF(fLeft);
-////		bottomLeftMotor.setF(fLeft);
-//		topRightMotor.setF(fRight);
-////		bottomRightMotor.setF(fRight);
-//	}
-	
-//	public void setupLeftMotor(WPI_TalonSRX talon) {
-////		talon.enable();
-//		talon.changeControlMode(TalonControlMode.PercentVbus);
-////		talon.enableBrakeMode(false);
-//		talon.reverseOutput(!RobotMap.reverseOutputTrain);
-//		talon.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-//		talon.configNominalOutputVoltage(+0.0f, -0.0f);
-//		talon.configPeakOutputVoltage(+12.0f, -12.0f);
-////		talon.setProfile(0);
-////		talon.setF(OI.TALON_F_LEFT.get());
-////		talon.setP(OI.TALON_P_LEFT.get());
-////		talon.setI(OI.TALON_I_LEFT.get());
-////		talon.setD(OI.TALON_D_LEFT.get());
-////		talon.setMotionMagicCruiseVelocity(937);
-////		talon.setMotionMagicAcceleration(937);
-//	}
-//	
-//	public void setupRightMotor(WPI_TalonSRX talon) {
-////		talon.enable();
-//		talon.changeControlMode(TalonControlMode.PercentVbus);
-////		talon.enableBrakeMode(false);
-//		talon.reverseOutput(RobotMap.reverseOutputTrain);
-//		talon.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-//		talon.configNominalOutputVoltage(+0.0f, -0.0f);
-//		talon.configPeakOutputVoltage(+12.0f, -12.0f);
-////		talon.setProfile(0);
-////		talon.setF(OI.TALON_F_RIGHT.get());
-////		talon.setP(OI.TALON_P_RIGHT.get());
-////		talon.setI(OI.TALON_I_RIGHT.get());
-////		talon.setD(OI.TALON_D_RIGHT.get());
-////		talon.setMotionMagicCruiseVelocity(937);
-////		talon.setMotionMagicAcceleration(937);
-//	}
 	
     public void initDefaultCommand() {
     	setDefaultCommand(new ArcadeDrive());
@@ -263,6 +196,17 @@ public class DriveTrain extends Subsystem {
 		topLeftMotor.set(ControlMode.MotionMagic,d);
     	topRightMotor.set(ControlMode.MotionMagic,d);
 	}
+    
+    public void turnTo(double degree) {
+		//If it is negative, turn clockwise
+    	if (degree < 0) {
+    		Robot.driveTrain.driveForward(0.5, -0.5);
+    	}
+    	//If it is positive, turn counterclockwise
+    	else if (degree > 0) {
+    		Robot.driveTrain.driveForward(-0.5, 0.5);
+    	}
+    }
 
 	public double getPosition() {
 		// TODO Auto-generated method stub

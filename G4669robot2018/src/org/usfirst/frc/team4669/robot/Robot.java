@@ -51,6 +51,7 @@ public class Robot extends TimedRobot {
 		
 
 		driveTrain.calibrateGyro();
+		
 		driveTrain.zeroEncoders();
 		
 		chooser = new SendableChooser<Command>();
@@ -127,13 +128,8 @@ public class Robot extends TimedRobot {
     	SmartDashboard.putNumber("Right Encoder", driveTrain.getRightEncoder());
 		SmartDashboard.putNumber("Left Y Axis", Robot.oi.leftY());
     	SmartDashboard.putNumber("Right Y Axis", Robot.oi.rightY());
-//    	SmartDashboard.putNumber("LeftLaunchVel", Robot.fuelLauncher.getLeftEncoderVel());
-//    	SmartDashboard.putNumber("RightLaunchVel", Robot.fuelLauncher.getRightEncoderVel());    
-//    	SmartDashboard.putNumber("IntakeVel", Robot.fuelIntakeElevator.getEncoderVel());
-//    	SmartDashboard.putNumber("LeftLaunchSpeed", Robot.fuelLauncher.getLeftEncoderSpeed());
-//    	SmartDashboard.putNumber("RightLaunchSpeed", Robot.fuelLauncher.getRightEncoderSpeed());
     	SmartDashboard.putNumber("driveLeftEncVel", Robot.driveTrain.getLeftEnconderSpeed());
     	SmartDashboard.putNumber("driveRightEncVel", Robot.driveTrain.getRightEnconderSpeed());
-//    	SmartDashboard.putNumber("doorPosition", Robot.door.getPosition());
+    	SmartDashboard.putNumber("POV Angle", Robot.f310.getDPadPOV());
 	}
 }

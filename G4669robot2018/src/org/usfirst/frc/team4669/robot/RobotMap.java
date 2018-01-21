@@ -20,7 +20,8 @@ public class RobotMap {
 	public static final int driveTrainBottomRight = 1; //1
 
 	//Other subsystem motors
-	public static final int leftIntake = 6;
+	public static final int leftIntake = 7;
+	public static final int rightIntake = 8;
 	
 	//DRIVER STATION	
 	// Reverse output of motors if moving backwords

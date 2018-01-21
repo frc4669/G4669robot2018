@@ -28,8 +28,8 @@ public class DriveTrain extends Subsystem {
 	private WPI_TalonSRX bottomRightMotor;
 	
 	int timeout = RobotMap.timeout;
-	int slotIdx = RobotMap.timeout;
-	int pidIdx = RobotMap.timeout;
+	int slotIdx = RobotMap.slotIdx;
+	int pidIdx = RobotMap.pidIdx;
 	
 	private Gyro analogGyro;
 	
@@ -161,11 +161,11 @@ public class DriveTrain extends Subsystem {
     	return topRightMotor.getSensorCollection().getQuadraturePosition();
     }
     
-    public double getLeftEnconderSpeed() {
+    public double getLeftEncoderSpeed() {
     	return topLeftMotor.getSensorCollection().getQuadratureVelocity();
     }
     
-    public double getRightEnconderSpeed() {
+    public double getRightEncoderSpeed() {
     	return topRightMotor.getSensorCollection().getQuadratureVelocity();
     }
     

@@ -20,11 +20,14 @@ public class CubeIntakeCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.f310.getRightShoulderButton()){
-    		Robot.cubeIntake.stop();
+		if(Robot.f310.getGreenButton()){
+    		Robot.cubeIntake.intake();
     	} 
-    	else{
-    		Robot.cub
+		else if(Robot.f310.getOrangeButton()){
+    		Robot.cubeIntake.releaseCube();
+    	} 
+		else {
+    		Robot.cubeIntake.stop();
     	}
     }
 

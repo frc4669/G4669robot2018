@@ -1,18 +1,19 @@
 package org.usfirst.frc.team4669.robot.commands;
 
 import org.usfirst.frc.team4669.robot.Robot;
+import org.usfirst.frc.team4669.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class DriveStraightOnly extends Command {
+public class ElevatorCommand extends Command {
 
-    public DriveStraightOnly() {
+    public ElevatorCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.driveTrain);
+    	 requires(Robot.elevator);
     }
 
     // Called just before this Command runs the first time
@@ -21,8 +22,26 @@ public class DriveStraightOnly extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double stickValue = Robot.oi.rightY();
-    	Robot.driveTrain.drive(stickValue, Robot.driveTrain.calculateTurningValue(stickValue));
+    	if (Robot.oi.getLeftRawButton(RobotMap.stopElevatorButton)){
+    		Robot.elevator.stop();
+    	} 
+    	else {
+    		if (Robot.oi.getLeftRawButton(RobotMap.groundElevatorButton)){
+    			Robot.elevator.groundHeight();
+    		}
+    		else if(Robot.oi.getLeftRawButton(RobotMap.switchElevatorButton)){
+    			Robot.elevator.switchHeight();
+    		}
+    		else if(Robot.oi.getLeftRawButton(RobotMap.midElevatorButton)){
+    			Robot.elevator.midHeight();
+    		}
+    		else if(Robot.oi.getLeftRawButton(RobotMap.maxElevatorButton)){
+    			Robot.elevator.maxHeight();
+    		}
+    		else {
+    			Robot.elevator.changeHeight(Robot.oi.leftY());
+    		}
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -32,12 +51,10 @@ public class DriveStraightOnly extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.driveTrain.stop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.driveTrain.stop();
     }
 }

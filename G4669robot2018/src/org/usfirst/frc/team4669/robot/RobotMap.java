@@ -22,32 +22,27 @@ public class RobotMap {
 	//Other subsystem motors
 	public static final int leftIntake = 7;
 	public static final int rightIntake = 8;
+	public static final int elevator = 99;
 	
 	//DRIVER STATION	
-	// Reverse output of motors if moving backwords
+	// Reverse output of motors if moving backwards
 	public static final boolean reverseOutputTrain = false;
 	public static final int leftJoystick = 0;
 	public static final int rightJoystick = 1;
 	
 	
 	//Left Joystick Controls
-	public static final int intakeFrontButton = 3;
-	public static final int gearHolderFrontButton = 2;
-	public static final int moveBackButton= 1;
+	public static final int stopElevatorButton= 1;
+	public static final int groundElevatorButton= 2;
+	public static final int maxElevatorButton= 3;
+	public static final int midElevatorButton= 4;
+	public static final int switchElevatorButton= 5;
 	
 	
 	//Right Joystick Controls
-	public static final int launchButton = 2;
-	public static final int intakeButton = 1;
-	public static final int turn180Button = 4;
-//	public static final int feedButton = 3;
-//	public static final int openDoorButton = 4;
-//	public static final int closeDoorButton = 5;
 	
 	
 	//DOOR CONSTANT
-	//PercentVBus for opening the door
-	public static final double doorSpeed = 0.75;//value in PercentVbus
 	
 	
 	//DRIVE TRAIN SPEED PROPORTION

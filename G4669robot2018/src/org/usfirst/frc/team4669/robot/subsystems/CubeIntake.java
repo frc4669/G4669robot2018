@@ -1,7 +1,7 @@
 package org.usfirst.frc.team4669.robot.subsystems;
 
 import org.usfirst.frc.team4669.robot.RobotMap;
-import org.usfirst.frc.team4669.robot.commands.CubeIntakeCommand;
+import org.usfirst.frc.team4669.robot.commands.Intake;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -14,17 +14,18 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class CubeIntake extends Subsystem {
-
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
 	
 	private WPI_TalonSRX leftIntakeMotor;
 	private WPI_TalonSRX rightIntakeMotor;
 	
-	int timeout = RobotMap.timeout;
-	int slotIdx = RobotMap.slotIdx;
-	int pidIdx = RobotMap.pidIdx;
+	private int timeout = RobotMap.timeout;
+	private int slotIdx = RobotMap.slotIdx;
+	private int pidIdx = RobotMap.pidIdx;
+
+    // Put methods for controlling this subsystem
+    // here. Call these from Commands.
 	
+
 	public CubeIntake(){
 		super();
 		leftIntakeMotor =  new WPI_TalonSRX(RobotMap.leftIntake);
@@ -67,32 +68,37 @@ public class CubeIntake extends Subsystem {
 //		rightIntakeMotor.configMotionAcceleration(50, timeout);
 		
 		leftIntakeMotor.setSensorPhase(true);
+		rightIntakeMotor.setSensorPhase(false);
+		
+		leftIntakeMotor.setInverted(false);
+		rightIntakeMotor.setInverted(true);
 	}
 	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        setDefaultCommand(new CubeIntakeCommand());
+    	//setDefaultCommand(new MySpecialCommand());
+        setDefaultCommand(new Intake());
     }
     
     public void intake(){
-//    	double speed = SmartDashboard.getNumber("Intake Speed", 500.0);
-//		leftIntakeMotor.set(ControlMode.Velocity,speed);
-//		rightIntakeMotor.set(ControlMode.Velocity,speed);
-    	leftIntakeMotor.set(ControlMode.Velocity,6000);
-    	rightIntakeMotor.set(ControlMode.Velocity,-6000);
+    	double speed = SmartDashboard.getNumber("CubeIntakeVel", 6000);
+		leftIntakeMotor.set(ControlMode.PercentOutput,0.5);
+		rightIntakeMotor.set(ControlMode.PercentOutput,-0.5);
+//    	leftIntakeMotor.set(ControlMode.Velocity,speed);
+//    	rightIntakeMotor.set(ControlMode.Velocity,-speed);
     }
     
     public void releaseCube(){
-//    	double speed = SmartDashboard.getNumber("Release Speed", 500.0);
-//		leftIntakeMotor.set(ControlMode.Velocity,speed);
-//		rightIntakeMotor.set(ControlMode.Velocity,speed);
-    	leftIntakeMotor.set(ControlMode.Velocity,-6000);
-    	rightIntakeMotor.set(ControlMode.Velocity,6000);
+    	double speed = SmartDashboard.getNumber("CubeReleaseVel", 6000);
+		leftIntakeMotor.set(ControlMode.PercentOutput,-0.5);
+		rightIntakeMotor.set(ControlMode.PercentOutput,0.5);
+//    	leftIntakeMotor.set(ControlMode.Velocity,-speed);
+//    	rightIntakeMotor.set(ControlMode.Velocity,speed);
     }
     
     public void stop(){
-		leftIntakeMotor.set(ControlMode.Velocity,0);
-		rightIntakeMotor.set(ControlMode.Velocity,0);
+		leftIntakeMotor.set(0);
+		rightIntakeMotor.set(0);
     }
     
     //Getting  encoder velocities and position

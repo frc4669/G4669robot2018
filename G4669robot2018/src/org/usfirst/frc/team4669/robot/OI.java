@@ -2,8 +2,6 @@ package org.usfirst.frc.team4669.robot;
 
 //import java.util.concurrent.atomic.AtomicReference;
 
-import org.usfirst.frc.team4669.robot.commands.DriveForward;
-import org.usfirst.frc.team4669.robot.commands.Turn;
 import org.usfirst.frc.team4669.robot.commands.ZeroSensors;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -67,15 +65,9 @@ public class OI {
 
 		//SmartDashboard commands
 		SmartDashboard.putData("Zero Sensors", new ZeroSensors());
-		SmartDashboard.putData("Turn45DegreesLeft", new Turn(45));
-		SmartDashboard.putData("Turn45DegreesRight", new Turn(-45));
-		SmartDashboard.putData("DriveForward", new DriveForward(45));
-		SmartDashboard.putData("Turn180Degrees", new Turn(180));
-		SmartDashboard.putNumber("LaunchRPM", 3100);
-		SmartDashboard.putNumber("IntakeRPM", 120);
-		SmartDashboard.putNumber("FeedRPM", 100);
-		SmartDashboard.putNumber("Turn Angle", 0);
-		SmartDashboard.putNumber("ShooterSpeedTolerance", 100);
+		SmartDashboard.putNumber("CubeReleaseVel",0);
+    	SmartDashboard.putNumber("CubeIntakeVel",0);
+    	
 //		//PID SmartDashboard vals
 //		SmartDashboard.putNumber("PID_P_LEFT", TALON_P_LEFT.get());
 //		SmartDashboard.putNumber("PID_I_LEFT", TALON_I_LEFT.get());

@@ -59,8 +59,8 @@ public class ArcadeDrive extends Command {
 	    	
 	    	//Joystick driving
 	    	else if (!turnRunning){
-		    	left = Robot.f310.getLeftY() - Robot.f310.getLeftX();
-		    	right = Robot.f310.getLeftY() + Robot.f310.getLeftX();
+		    	left = Robot.f310.getLeftY() - Robot.f310.getRightX();
+		    	right = Robot.f310.getLeftY() + Robot.f310.getRightX();
 		    	driveTrain.driveForward(left, right);
 	    	}
     	}

@@ -39,27 +39,27 @@ public class TankDrive extends Command {
     			(turnAngle > 0 && Robot.driveTrain.getGyroAngle() >= turnAngle + initialAngle)) {
     		turnRunning = false;
     	}
-    	if (Robot.oi.getLeftRawButton(RobotMap.gearHolderFrontButton)) {
-    		direction =  -1;
-    	}
-    	else if (Robot.oi.getLeftRawButton(RobotMap.intakeFrontButton)) {
-    		direction = 1;
-    	}
-    	
-    	if (Robot.oi.getLeftRawButton(RobotMap.moveBackButton) && !motionMagicRunning) {
-    		Robot.driveTrain.zeroEncoders();
-    		Robot.driveTrain.driveMotionMagic(12/40.8);
-    		motionMagicRunning = true;
-		}
-		else if (motionMagicRunning 
-				&& Math.abs(12/40.8 - Robot.driveTrain.getPosition()) < 0.1) {
-				motionMagicRunning = false;
-		}
-		else if (Robot.oi.getLeftRawButton(RobotMap.turn180Button) && !motionMagic180) {
-    		Robot.driveTrain.zeroEncoders();
-    		Robot.driveTrain.turn(180);
-    		motionMagic180 = true;
-		}       
+//    	if (Robot.oi.getLeftRawButton(RobotMap.gearHolderFrontButton)) {
+//    		direction =  -1;
+//    	}
+//    	else if (Robot.oi.getLeftRawButton(RobotMap.intakeFrontButton)) {
+//    		direction = 1;
+//    	}
+//    	
+//    	if (Robot.oi.getLeftRawButton(RobotMap.moveBackButton) && !motionMagicRunning) {
+//    		Robot.driveTrain.zeroEncoders();
+//    		Robot.driveTrain.driveMotionMagic(12/40.8);
+//    		motionMagicRunning = true;
+//		}
+//		else if (motionMagicRunning 
+//				&& Math.abs(12/40.8 - Robot.driveTrain.getPosition()) < 0.1) {
+//				motionMagicRunning = false;
+//		}
+//		else if (Robot.oi.getLeftRawButton(RobotMap.turn180Button) && !motionMagic180) {
+//    		Robot.driveTrain.zeroEncoders();
+//    		Robot.driveTrain.turn(180);
+//    		motionMagic180 = true;
+//		}       
 		else if (motionMagic180 
 				&& Math.abs((((RobotMap.wheelBase * Math.PI) * (180 / 360.0)) / RobotMap.distancePerRotation) - Robot.driveTrain.getPosition()) < 0.05) {
 				motionMagic180 = false;

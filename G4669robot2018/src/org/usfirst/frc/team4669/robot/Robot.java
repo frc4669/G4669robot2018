@@ -1,6 +1,5 @@
 package org.usfirst.frc.team4669.robot;
 
-import org.usfirst.frc.team4669.robot.commands.CenterGearLiftAuto;
 import org.usfirst.frc.team4669.robot.commands.DoNothing;
 import org.usfirst.frc.team4669.robot.subsystems.CubeIntake;
 //import org.usfirst.frc.team4669.robot.commands.LaunchAndMoveAuto;
@@ -10,6 +9,7 @@ import org.usfirst.frc.team4669.robot.subsystems.DriveTrain;
 //import org.usfirst.frc.team4669.robot.subsystems.FuelIntakeElevator;
 //import org.usfirst.frc.team4669.robot.subsystems.FuelLauncher;
 //import org.usfirst.frc.team4669.robot.subsystems.RopeWinch;
+import org.usfirst.frc.team4669.robot.subsystems.Elevator;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -39,6 +39,7 @@ public class Robot extends TimedRobot {
 	public static F310 f310 = new F310();
 	public static DriverStation driverStation;
 	public static CubeIntake cubeIntake =  new CubeIntake();
+	public static Elevator elevator = new Elevator();
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser;
@@ -54,8 +55,6 @@ public class Robot extends TimedRobot {
 		
 		chooser = new SendableChooser<Command>();
 		chooser.addDefault("Do Nothing", new DoNothing());
-//		chooser.addObject("Launch and Move", new LaunchAndMoveAuto());
-		chooser.addObject("Center Gear Lift", new CenterGearLiftAuto());
 		SmartDashboard.putData("Auto mode", chooser);
 		
 	}

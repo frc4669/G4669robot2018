@@ -83,7 +83,7 @@ public class DriveTrain extends Subsystem {
 		// _talon.configPotentiometerTurns(XXX), // if using
 		// FeedbackDevice.AnalogEncoder or AnalogPot
 
-		/* set the peak and nominal outputs, 12V means full */
+		/* set the peak and nominal outputs, 1 means full */
 		topRightMotor.configNominalOutputForward(0, timeout);
 		topRightMotor.configNominalOutputReverse(0, timeout);
 		topRightMotor.configPeakOutputForward(1, timeout);
@@ -115,17 +115,8 @@ public class DriveTrain extends Subsystem {
     }
     
     public void driveForward(double vBusLeft, double vBusRight) {
-//    	driveTrain.tankDrive(speedLeft, speedRight, false);
     	topLeftMotor.set(ControlMode.PercentOutput,vBusLeft);
     	topRightMotor.set(ControlMode.PercentOutput,-vBusRight);
-    }
-    
-    public void drive(double outputMag, double outputCurv) {
-//    	driveTrain.drive(outputMag, outputCurv);
-    }
-    
-    public void setDrive(double speed, double turnrate) {
-//    	driveTrain.drive(speed, turnrate);
     }
     
     public void setSpeed(double speed) {
@@ -134,7 +125,6 @@ public class DriveTrain extends Subsystem {
     }
     
     public void stop() {
-//    	driveTrain.tankDrive(0, 0);
     	topLeftMotor.set(0);
     	topRightMotor.set(0);
     }
@@ -174,19 +164,9 @@ public class DriveTrain extends Subsystem {
     	topRightMotor.setSelectedSensorPosition(0,pidIdx,timeout);
     }
     
-//    public void changeControlMode(ControlMode mode) {
-//    	topLeftMotor.set(mode);
-//    	bottomLeftMotor.changeControlMode(mode);
-//    	topRightMotor.set(mode);
-//    	bottomRightMotor.changeControlMode(mode);
-//    }
-    
     public void driveMotionMagic(double targetEncPosition) {
-//    	changeControlMode(TalonControlMode.MotionMagic);
     	topLeftMotor.set(ControlMode.MotionMagic,targetEncPosition);
-//    	bottomLeftMotor.set(-targetEncPosition);
     	topRightMotor.set(ControlMode.MotionMagic,targetEncPosition);
-//    	bottomRightMotor.set(targetEncPosition);
     }
     
     public void turn(double angle) {

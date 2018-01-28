@@ -14,14 +14,14 @@ public class RobotMap {
 
 	//SUBSYSTEMS
 	//Drivetrain motors
-	public static final int driveTrainTopLeft = 13; //8
-	public static final int driveTrainBottomLeft = 3; //3
-	public static final int driveTrainTopRight = 12; //5
-	public static final int driveTrainBottomRight = 1; //1
+	public static final int driveTrainTopLeft = 2; //8
+	public static final int driveTrainBottomLeft = 8; //3
+	public static final int driveTrainTopRight = 7; //5
+	public static final int driveTrainBottomRight = 3; //1
 
 	//Other subsystem motors
-	public static final int leftIntake = 7;
-	public static final int rightIntake = 8;
+	public static final int leftIntake = 97;
+	public static final int rightIntake = 98;
 	public static final int elevator = 99;
 	
 	//DRIVER STATION	
@@ -29,6 +29,7 @@ public class RobotMap {
 	public static final boolean reverseOutputTrain = false;
 	public static final int leftJoystick = 0;
 	public static final int rightJoystick = 1;
+	public static final int f310 = 2;
 	
 	
 	//Left Joystick Controls
@@ -67,7 +68,9 @@ public class RobotMap {
 	// number and the module. For example you with a rangefinder:
 	// public static int rangefinderPort = 1;
 	// public static int rangefinderModule = 1;
-	public static final int f310 = 2;
+	
 	public static final double distancePerRotation = 40.8;
+	
+	public static final int angleTolerance = 5;
 }
 

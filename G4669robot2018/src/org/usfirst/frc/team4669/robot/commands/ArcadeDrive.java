@@ -1,28 +1,31 @@
 package org.usfirst.frc.team4669.robot.commands;
 
 import org.usfirst.frc.team4669.robot.Robot;
+import org.usfirst.frc.team4669.robot.RobotMap;
 import org.usfirst.frc.team4669.robot.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
 public class ArcadeDrive extends Command {
-	DriveTrain driveTrain = Robot.driveTrain;
+//	DriveTrain driveTrain = Robot.driveTrain;
 	
 	double left; //left motor
 	double right; //right motor
 	
 	boolean turnRunning = false;
+	boolean clockwise = false;
 	double turnAngle;
 	double initialAngle;
-	double turnHeading;
-
+	double currentAngle;
+	
     public ArcadeDrive() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(driveTrain);
+    	requires(Robot.driveTrain);
     }
 
     // Called just before this Command runs the first time
@@ -33,37 +36,42 @@ public class ArcadeDrive extends Command {
     protected void execute() {
     	
     	//button2 stop
+    	if (Robot.driveTrain.getGyroAngle()>=0&&Robot.driveTrain.getGyroAngle()<=360) currentAngle = Robot.driveTrain.getGyroAngle();
+    	if (Robot.driveTrain.getGyroAngle() > 360) currentAngle = Robot.driveTrain.getGyroAngle()%360;
+    	if (Robot.driveTrain.getGyroAngle() < 0) currentAngle = Robot.driveTrain.getGyroAngle()+360;
     	if(Robot.f310.getRedButton()){
     		turnRunning = false;
-    		driveTrain.stop();
+    		Robot.driveTrain.stop();
     	}
     	else{
 	    	//Using the DPad for Turning
-	    	if (Robot.f310.getDPadPOV()!=-1 && !turnRunning) {
+    		if (Robot.f310.getDPadPOV()!=-1 && !turnRunning) {
 	    		turnAngle = Robot.f310.getDPadPOV();
-	    		if(turnAngle>180){
-	    			turnAngle -= 360;
+	    		initialAngle = currentAngle;
+	    		if (((turnAngle-initialAngle)>=180&&turnAngle>initialAngle)||  //Shortest path to turn counterclockwise
+	    			((turnAngle-initialAngle)>=-180&&turnAngle<initialAngle)){
+	    			clockwise = true;
 	    		}
-	    		initialAngle = driveTrain.getGyroAngle()%360;
-	    		turnHeading = driveTrain.calculateTurningValue(turnAngle);
 	    		turnRunning = true;
 	    	}
 	    	else if (turnRunning &&
-	    			((Math.abs(turnHeading%360-driveTrain.getGyroAngle()%360)<2))){
+	    			((Math.abs(turnAngle%360-currentAngle)<RobotMap.angleTolerance)))
+	    	{
 	    		turnRunning = false;
-	    		driveTrain.stop();
+	    		Robot.driveTrain.stop();
 	    	}
 	    	else if (turnRunning) {
-	    		driveTrain.turnTo(turnAngle);
+	    		Robot.driveTrain.turnTo(clockwise);
 	    	}
 	    	
 	    	//Joystick driving
-	    	else if (!turnRunning){
+	    	if (!turnRunning){
 		    	left = Robot.f310.getLeftY() - Robot.f310.getRightX();
 		    	right = Robot.f310.getLeftY() + Robot.f310.getRightX();
-		    	driveTrain.driveForward(left, right);
+		    	Robot.driveTrain.driveForward(left, right);
 	    	}
     	}
+    	SmartDashboard.putNumber("Current Angle", currentAngle);
     }
 
     // Make this return true when this Command no longer needs to run execute()

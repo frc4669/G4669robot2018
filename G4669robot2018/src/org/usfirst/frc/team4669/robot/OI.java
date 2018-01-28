@@ -2,7 +2,7 @@ package org.usfirst.frc.team4669.robot;
 
 //import java.util.concurrent.atomic.AtomicReference;
 
-import org.usfirst.frc.team4669.robot.commands.ZeroSensors;
+//import org.usfirst.frc.team4669.robot.commands.ZeroSensors;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -64,7 +64,7 @@ public class OI {
 		//StringBuilder _sb = new StringBuilder();
 
 		//SmartDashboard commands
-		SmartDashboard.putData("Zero Sensors", new ZeroSensors());
+//		SmartDashboard.putData("Zero Sensors", new ZeroSensors());
 		SmartDashboard.putNumber("CubeReleaseVel",0);
     	SmartDashboard.putNumber("CubeIntakeVel",0);
     	

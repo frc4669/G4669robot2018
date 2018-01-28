@@ -63,18 +63,12 @@ public class DriveTrain extends Subsystem {
 		topLeftMotor.config_kP(slotIdx,0.3,timeout);
 		topLeftMotor.config_kI(slotIdx,0,timeout);
 		topLeftMotor.config_kD(slotIdx,16,timeout);
-		//Current Limit on Drive Motors to Wall Proof Robot
-		topLeftMotor.configContinuousCurrentLimit(15,timeout);
-		topLeftMotor.enableCurrentLimit(true);
 		/* set acceleration and vcruise velocity - see documentation */
 		topLeftMotor.configMotionCruiseVelocity(velocity,timeout);
 		topLeftMotor.configMotionAcceleration(accel,timeout);
 		topLeftMotor.setSelectedSensorPosition(0,pidIdx,timeout);
 
 		bottomLeftMotor.set(ControlMode.Follower, topLeftMotor.getDeviceID());
-		//Current Limit on Drive Motors to Wall Proof Robot
-		bottomLeftMotor.configContinuousCurrentLimit(15,timeout);
-		bottomLeftMotor.enableCurrentLimit(true);
 		
 		topRightMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,pidIdx,timeout);
 		topRightMotor.setInverted(false);
@@ -94,9 +88,6 @@ public class DriveTrain extends Subsystem {
 		topRightMotor.config_kP(slotIdx,0.3,timeout);
 		topRightMotor.config_kI(slotIdx,0,timeout);
 		topRightMotor.config_kD(slotIdx,16,timeout);
-		//Current Limit on Drive Motors to Wall Proof Robot
-		topRightMotor.configContinuousCurrentLimit(15,timeout);
-		topRightMotor.enableCurrentLimit(true);
 		/* set acceleration and vcruise velocity - see documentation */
 		topRightMotor.configMotionCruiseVelocity(velocity,timeout); //855
 		topRightMotor.configMotionAcceleration(accel,timeout); //855
@@ -104,8 +95,6 @@ public class DriveTrain extends Subsystem {
 		
 		bottomRightMotor.set(ControlMode.Follower, topRightMotor.getDeviceID());
 		//Current Limit on Drive Motors to Wall Proof Robot
-		bottomRightMotor.configContinuousCurrentLimit(15,timeout);
-		bottomRightMotor.enableCurrentLimit(true);
 		
 	}
 	
@@ -115,8 +104,8 @@ public class DriveTrain extends Subsystem {
     }
     
     public void driveForward(double vBusLeft, double vBusRight) {
-    	topLeftMotor.set(ControlMode.PercentOutput,vBusLeft);
-    	topRightMotor.set(ControlMode.PercentOutput,-vBusRight);
+    	topLeftMotor.set(ControlMode.PercentOutput,0.3*-vBusLeft);
+    	topRightMotor.set(ControlMode.PercentOutput,0.3*vBusRight);
     }
     
     public void setSpeed(double speed) {
@@ -125,8 +114,8 @@ public class DriveTrain extends Subsystem {
     }
     
     public void stop() {
-    	topLeftMotor.set(0);
-    	topRightMotor.set(0);
+    	topLeftMotor.set(ControlMode.PercentOutput,0);
+    	topRightMotor.set(ControlMode.PercentOutput,0);
     }
     
     public void calibrateGyro() {
@@ -176,13 +165,13 @@ public class DriveTrain extends Subsystem {
     	topRightMotor.set(ControlMode.MotionMagic,d);
 	}
     
-    public void turnTo(double degree) {
+    public void turnTo(boolean clockwise) {
 		//If it is negative, turn clockwise
-    	if (degree < 0) {
+    	if (clockwise) {
     		Robot.driveTrain.driveForward(0.5, -0.5);
     	}
     	//If it is positive, turn counterclockwise
-    	else if (degree > 0) {
+    	else {
     		Robot.driveTrain.driveForward(-0.5, 0.5);
     	}
     }
@@ -192,6 +181,13 @@ public class DriveTrain extends Subsystem {
 		return topLeftMotor.getSensorCollection().getQuadraturePosition();
 	}
 	
+	public double getLeftCurrent() {
+		return topLeftMotor.getOutputCurrent();
+	}
+	
+	public double getRightCurrent() {
+		return topRightMotor.getOutputCurrent();
+	}
 }
     
     

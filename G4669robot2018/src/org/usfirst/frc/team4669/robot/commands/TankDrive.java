@@ -11,6 +11,7 @@ public class TankDrive extends Command {
 	boolean motionMagicRunning = false;
 	boolean motionMagic180 = false;
 	boolean turnRunning = false;
+	boolean clockwise = false;
 	double turnAngle;
 	double initialAngle;
 
@@ -33,7 +34,7 @@ public class TankDrive extends Command {
     		turnRunning = true;
     	}
     	else if (turnRunning) {
-    		Robot.driveTrain.turnTo(turnAngle);
+    		Robot.driveTrain.turnTo(clockwise);
     	}
     	else if (turnRunning && (turnAngle < 0 && Robot.driveTrain.getGyroAngle() <= turnAngle + initialAngle) ||
     			(turnAngle > 0 && Robot.driveTrain.getGyroAngle() >= turnAngle + initialAngle)) {

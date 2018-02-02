@@ -30,16 +30,16 @@ public class ElevatorCommand extends Command {
     			Robot.elevator.groundHeight();
     		}
     		else if(Robot.oi.getLeftRawButton(RobotMap.switchElevatorButton)){
-    			Robot.elevator.switchHeight();
+    			Robot.elevator.setHeight(RobotMap.elevatorSwitch);
     		}
     		else if(Robot.oi.getLeftRawButton(RobotMap.midElevatorButton)){
-    			Robot.elevator.midHeight();
+    			Robot.elevator.setHeight(RobotMap.elevatorMid);
     		}
     		else if(Robot.oi.getLeftRawButton(RobotMap.maxElevatorButton)){
-    			Robot.elevator.maxHeight();
+    			Robot.elevator.setHeight(RobotMap.elevatorMax);
     		}
     		else {
-    			Robot.elevator.changeHeight(Robot.oi.leftY());
+    			Robot.elevator.customHeight(Robot.oi.leftY());
     		}
     	}
     }

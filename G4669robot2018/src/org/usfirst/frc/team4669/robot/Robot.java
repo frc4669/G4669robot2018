@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4669.robot;
 
 import org.usfirst.frc.team4669.robot.commands.DoNothing;
+import org.usfirst.frc.team4669.robot.commands.DriveForward;
 import org.usfirst.frc.team4669.robot.subsystems.CubeIntake;
 //import org.usfirst.frc.team4669.robot.commands.LaunchAndMoveAuto;
 import org.usfirst.frc.team4669.robot.subsystems.DriveTrain;
@@ -40,6 +41,7 @@ public class Robot extends TimedRobot {
 	public static DriverStation driverStation;
 	public static CubeIntake cubeIntake =  new CubeIntake();
 	public static Elevator elevator = new Elevator();
+	public static String gameData;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser;
@@ -55,6 +57,7 @@ public class Robot extends TimedRobot {
 		
 		chooser = new SendableChooser<Command>();
 		chooser.addDefault("Do Nothing", new DoNothing());
+		chooser.addObject("Drive Forward", new DriveForward());
 		SmartDashboard.putData("Auto mode", chooser);
 		
 	}
@@ -70,6 +73,7 @@ public class Robot extends TimedRobot {
 
 	public void disabledPeriodic() {
 		driverStation = DriverStation.getInstance();
+		gameData = driverStation.getGameSpecificMessage();
 		updateSmartDashboard();
 		Scheduler.getInstance().run();
 	}
@@ -120,19 +124,18 @@ public class Robot extends TimedRobot {
 	}
 
 	public void updateSmartDashboard() {
-    	SmartDashboard.putNumber("Gyro", driveTrain.getGyroAngle());
-    	//SmartDashboard.putNumber("Left Enocder", driveTrain.getLeftEncoder());
-    	//SmartDashboard.putNumber("Right Encoder", driveTrain.getRightEncoder());
-		SmartDashboard.putNumber("Left Y Axis", Robot.f310.getLeftY());
+//    	SmartDashboard.putNumber("Gyro", driveTrain.getGyroAngle());
+    	SmartDashboard.putNumber("Left Encoder", driveTrain.getLeftEncoder());
+    	SmartDashboard.putNumber("Right Encoder", driveTrain.getRightEncoder());
 //    	SmartDashboard.putNumber("Right Y Axis", Robot.oi.rightY());
-    	//SmartDashboard.putNumber("driveLeftEncVel", Robot.driveTrain.getLeftEncoderSpeed());
-    	//SmartDashboard.putNumber("driveRightEncVel", Robot.driveTrain.getRightEncoderSpeed());
-    	SmartDashboard.putNumber("POV Angle", Robot.f310.getDPadPOV());
+    	SmartDashboard.putNumber("driveLeftEncVel", Robot.driveTrain.getLeftEncoderSpeed());
+    	SmartDashboard.putNumber("driveRightEncVel", Robot.driveTrain.getRightEncoderSpeed());
+//    	SmartDashboard.putNumber("POV Angle", Robot.f310.getDPadPOV());
 //    	SmartDashboard.putNumber("Intake Left Enc", Robot.cubeIntake.getLeftEncoder());
 //    	SmartDashboard.putNumber("Intake Right Enc", Robot.cubeIntake.getRightEncoder());
 //    	SmartDashboard.putNumber("intakeLeftEncVel", Robot.cubeIntake.getLeftEncoderSpeed());
 //    	SmartDashboard.putNumber("intakeRightEncVel", Robot.cubeIntake.getRightEncoderSpeed());
-    	SmartDashboard.putNumber("Right Current", Robot.driveTrain.getRightCurrent());
-    	SmartDashboard.putNumber("Left Current", Robot.driveTrain.getLeftCurrent());
+//    	SmartDashboard.putNumber("Right Current", Robot.driveTrain.getRightCurrent());
+//    	SmartDashboard.putNumber("Left Current", Robot.driveTrain.getLeftCurrent());
 	}
 }

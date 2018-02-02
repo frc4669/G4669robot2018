@@ -22,7 +22,7 @@ public class RobotMap {
 	//Other subsystem motors
 	public static final int leftIntake = 97;
 	public static final int rightIntake = 98;
-	public static final int elevator = 99;
+	public static final int elevator = 5;
 	
 	//DRIVER STATION	
 	// Reverse output of motors if moving backwards
@@ -43,8 +43,13 @@ public class RobotMap {
 	//Right Joystick Controls
 	
 	
-	//DOOR CONSTANT
+	//CONSTANTS
+	public static int elevatorVel = 1365;
+	public static int elevatorAccel = 340;
 	
+	public static int elevatorSwitch = 0;
+	public static int elevatorMid = 0;
+	public static int elevatorMax = 0;
 	
 	//DRIVE TRAIN SPEED PROPORTION
 	public static final double driveTrainSpeedProportion = 0.85;

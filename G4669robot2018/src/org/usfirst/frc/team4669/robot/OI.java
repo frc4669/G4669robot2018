@@ -67,6 +67,7 @@ public class OI {
 //		SmartDashboard.putData("Zero Sensors", new ZeroSensors());
 		SmartDashboard.putNumber("CubeReleaseVel",0);
     	SmartDashboard.putNumber("CubeIntakeVel",0);
+    	//SmartDashboard.putNumber("MotionMagicDistance", 0);
     	
 //		//PID SmartDashboard vals
 //		SmartDashboard.putNumber("PID_P_LEFT", TALON_P_LEFT.get());

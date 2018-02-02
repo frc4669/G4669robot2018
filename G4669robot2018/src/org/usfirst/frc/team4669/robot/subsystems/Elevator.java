@@ -44,6 +44,15 @@ public class Elevator extends Subsystem {
 		elevatorMotor.setSelectedSensorPosition(0,pidIdx,timeout);
 		elevatorMotor.setSensorPhase(false);
 		elevatorMotor.setInverted(false);
+		elevatorMotor.configMotionCruiseVelocity(RobotMap.elevatorVel, RobotMap.timeout);
+		elevatorMotor.configMotionAcceleration(RobotMap.elevatorAccel, RobotMap.timeout);
+		
+		
+		//Setting Current Limits, not sure if CURRENTly working (hehe)
+		elevatorMotor.configContinuousCurrentLimit(12, timeout);
+		elevatorMotor.configPeakCurrentLimit(15, timeout);
+		elevatorMotor.configPeakCurrentDuration(100, timeout);
+		elevatorMotor.enableCurrentLimit(true);
 		
 	}
 	
@@ -53,28 +62,24 @@ public class Elevator extends Subsystem {
     	setDefaultCommand(new ElevatorCommand());
     }
     
-    public void changeHeight(double percent)  {
-    	elevatorMotor.set(ControlMode.PercentOutput, percent);
+    public void customHeight(double percent)  {
+    	elevatorMotor.set(ControlMode.PercentOutput, 0.8*percent);
     }
     
     public void groundHeight()  {
-    	elevatorMotor.set(ControlMode.Position, 0);
+    	elevatorMotor.set(ControlMode.MotionMagic, 0);
     }
     
-    public void maxHeight()  {
-    	elevatorMotor.set(ControlMode.Position, 0);
-    }
-    
-    public void switchHeight()  {
-    	elevatorMotor.set(ControlMode.Position, 0);
-    }
-    
-    public void midHeight()  {
-    	elevatorMotor.set(ControlMode.Position, 0);
+    public void setHeight(int height)  {
+    	elevatorMotor.set(ControlMode.MotionMagic, height);
     }
     
     public void stop()  {
     	elevatorMotor.set(0);
+    }
+    
+    public double getEncoderPos(){
+    	return elevatorMotor.getSensorCollection().getQuadraturePosition();
     }
 }
 

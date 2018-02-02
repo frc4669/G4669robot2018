@@ -42,36 +42,23 @@ public class DriveTrain extends Subsystem {
 		topRightMotor = new WPI_TalonSRX(RobotMap.driveTrainTopRight);
 		bottomRightMotor = new WPI_TalonSRX(RobotMap.driveTrainBottomRight);
 		
-		int velocity = 200;
-		int accel = 50;
+		int velocity = 1365; //About 200 RPM, vel units are in sensor units per 100ms
+		int accel = 340;
 		
+		topRightMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,pidIdx,timeout);
 		topLeftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,pidIdx,timeout);
-		topLeftMotor.setInverted(false);
+		
+		topRightMotor.setInverted(false);
+		topLeftMotor.setInverted(true);
+		
+		topRightMotor.setSensorPhase(false);
+		topLeftMotor.setSensorPhase(false);
+		
 		//topLeftMotor.configEncoderCodesPerRev(1440); // if using
 		// FeedbackDevice.QuadEncoder
 		// _talon.configPotentiometerTurns(XXX), // if using
 		// FeedbackDevice.AnalogEncoder or AnalogPot
 
-		/* set the peak and nominal outputs, 1 means full */
-		topLeftMotor.configNominalOutputForward(0, timeout);
-		topLeftMotor.configNominalOutputReverse(0, timeout);
-		topLeftMotor.configPeakOutputForward(1, timeout);
-		topLeftMotor.configPeakOutputReverse(-1, timeout);
-		/* set closed loop gains in slot0 - see documentation */
-		topLeftMotor.selectProfileSlot(slotIdx,pidIdx);
-		topLeftMotor.config_kF(slotIdx,0.3739,timeout);
-		topLeftMotor.config_kP(slotIdx,0.3,timeout);
-		topLeftMotor.config_kI(slotIdx,0,timeout);
-		topLeftMotor.config_kD(slotIdx,16,timeout);
-		/* set acceleration and vcruise velocity - see documentation */
-		topLeftMotor.configMotionCruiseVelocity(velocity,timeout);
-		topLeftMotor.configMotionAcceleration(accel,timeout);
-		topLeftMotor.setSelectedSensorPosition(0,pidIdx,timeout);
-
-		bottomLeftMotor.set(ControlMode.Follower, topLeftMotor.getDeviceID());
-		
-		topRightMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,pidIdx,timeout);
-		topRightMotor.setInverted(false);
 		//topRightMotor.configEncoderCodesPerRev(1440); // if using
 		// FeedbackDevice.QuadEncoder
 		// _talon.configPotentiometerTurns(XXX), // if using
@@ -82,20 +69,48 @@ public class DriveTrain extends Subsystem {
 		topRightMotor.configNominalOutputReverse(0, timeout);
 		topRightMotor.configPeakOutputForward(1, timeout);
 		topRightMotor.configPeakOutputReverse(-1, timeout);
+		
+		topLeftMotor.configNominalOutputForward(0, timeout);
+		topLeftMotor.configNominalOutputReverse(0, timeout);
+		topLeftMotor.configPeakOutputForward(1, timeout);
+		topLeftMotor.configPeakOutputReverse(-1, timeout);
+		
 		/* set closed loop gains in slot0 - see documentation */
 		topRightMotor.selectProfileSlot(slotIdx, pidIdx);
 		topRightMotor.config_kF(slotIdx,0.3739,timeout);
 		topRightMotor.config_kP(slotIdx,0.3,timeout);
 		topRightMotor.config_kI(slotIdx,0,timeout);
 		topRightMotor.config_kD(slotIdx,16,timeout);
+		
+		topLeftMotor.selectProfileSlot(slotIdx,pidIdx);
+		topLeftMotor.config_kF(slotIdx,0.3739,timeout);
+		topLeftMotor.config_kP(slotIdx,0.3,timeout);
+		topLeftMotor.config_kI(slotIdx,0,timeout);
+		topLeftMotor.config_kD(slotIdx,16,timeout);
+		
 		/* set acceleration and vcruise velocity - see documentation */
 		topRightMotor.configMotionCruiseVelocity(velocity,timeout); //855
 		topRightMotor.configMotionAcceleration(accel,timeout); //855
 		topRightMotor.setSelectedSensorPosition(0,pidIdx,timeout);
 		
-		bottomRightMotor.set(ControlMode.Follower, topRightMotor.getDeviceID());
-		//Current Limit on Drive Motors to Wall Proof Robot
+		topLeftMotor.configMotionCruiseVelocity(velocity,timeout);
+		topLeftMotor.configMotionAcceleration(accel,timeout);
+		topLeftMotor.setSelectedSensorPosition(0,pidIdx,timeout);
 		
+		//Set Current limit 
+		topRightMotor.configContinuousCurrentLimit(12, timeout);
+		topRightMotor.configPeakCurrentLimit(15, timeout);
+		topRightMotor.configPeakCurrentDuration(100, timeout);
+		topRightMotor.enableCurrentLimit(true);
+		
+		topLeftMotor.configContinuousCurrentLimit(12, timeout);
+		topLeftMotor.configPeakCurrentLimit(15, timeout);
+		topLeftMotor.configPeakCurrentDuration(100, timeout);
+		topLeftMotor.enableCurrentLimit(true);
+		
+		//Setting bottom motors to follow top
+		bottomRightMotor.set(ControlMode.Follower, topRightMotor.getDeviceID());
+		bottomLeftMotor.set(ControlMode.Follower, topLeftMotor.getDeviceID());
 	}
 	
 	
@@ -104,7 +119,7 @@ public class DriveTrain extends Subsystem {
     }
     
     public void driveForward(double vBusLeft, double vBusRight) {
-    	topLeftMotor.set(ControlMode.PercentOutput,0.3*-vBusLeft);
+    	topLeftMotor.set(ControlMode.PercentOutput,0.3*vBusLeft);
     	topRightMotor.set(ControlMode.PercentOutput,0.3*vBusRight);
     }
     
@@ -162,7 +177,7 @@ public class DriveTrain extends Subsystem {
 		//double d = ((RobotMap.wheelBase * Math.PI) * (angle / 360.0) / RobotMap.wheelDiameter / Math.PI * 360*4)/40.8;
 		double d = ((RobotMap.wheelBase * Math.PI) * (angle / 360.0)) / RobotMap.distancePerRotation;
 		topLeftMotor.set(ControlMode.MotionMagic,d);
-    	topRightMotor.set(ControlMode.MotionMagic,d);
+    	topRightMotor.set(ControlMode.MotionMagic,-d);
 	}
     
     public void turnTo(boolean clockwise) {

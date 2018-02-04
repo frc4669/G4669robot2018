@@ -73,7 +73,6 @@ public class Robot extends TimedRobot {
 
 	public void disabledPeriodic() {
 		driverStation = DriverStation.getInstance();
-		gameData = driverStation.getGameSpecificMessage();
 		updateSmartDashboard();
 		Scheduler.getInstance().run();
 	}
@@ -88,6 +87,7 @@ public class Robot extends TimedRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
 	public void autonomousInit() {
+		gameData = driverStation.getGameSpecificMessage();
 		autonomousCommand = (Command) chooser.getSelected();
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null) autonomousCommand.start();

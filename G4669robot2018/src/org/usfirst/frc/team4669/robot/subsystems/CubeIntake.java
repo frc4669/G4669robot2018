@@ -19,7 +19,7 @@ public class CubeIntake extends Subsystem {
 	
 	private WPI_TalonSRX leftIntakeMotor;
 	private WPI_TalonSRX rightIntakeMotor;
-	private Ultrasonic ultra = new Ultrasonic(1,1);
+	//private Ultrasonic ultra = new Ultrasonic(1,1);
 	
 	private int timeout = RobotMap.timeout;
 	private int slotIdx = RobotMap.slotIdx;
@@ -49,15 +49,15 @@ public class CubeIntake extends Subsystem {
 		//Configuring PID Values
 		leftIntakeMotor.selectProfileSlot(slotIdx,pidIdx);
 		leftIntakeMotor.config_kF(slotIdx,0.03,timeout); //0.03
-		leftIntakeMotor.config_kP(slotIdx,0.17,timeout); //0.17
+		leftIntakeMotor.config_kP(slotIdx,0.2,timeout); //0.17
 		leftIntakeMotor.config_kI(slotIdx,0,timeout); //0
-		leftIntakeMotor.config_kD(slotIdx,5,timeout); //20
+		leftIntakeMotor.config_kD(slotIdx,0,timeout); //20
 		
 		rightIntakeMotor.selectProfileSlot(slotIdx,pidIdx);
 		rightIntakeMotor.config_kF(slotIdx,0.03,timeout);
 		rightIntakeMotor.config_kP(slotIdx,0.17,timeout);
 		rightIntakeMotor.config_kI(slotIdx,0,timeout); 
-		rightIntakeMotor.config_kD(slotIdx,5,timeout);
+		rightIntakeMotor.config_kD(slotIdx,20,timeout);
 		
 		leftIntakeMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,pidIdx,timeout);
 		rightIntakeMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,pidIdx,timeout);
@@ -70,11 +70,11 @@ public class CubeIntake extends Subsystem {
 //		rightIntakeMotor.configMotionCruiseVelocity(200, timeout);
 //		rightIntakeMotor.configMotionAcceleration(50, timeout);
 		
-		leftIntakeMotor.setSensorPhase(true);
-		rightIntakeMotor.setSensorPhase(false);
+		leftIntakeMotor.setSensorPhase(false);
+		rightIntakeMotor.setSensorPhase(true);
 		
 		leftIntakeMotor.setInverted(false);
-		rightIntakeMotor.setInverted(true);
+		rightIntakeMotor.setInverted(false);
 		
 		//Setting Current limits
 		
@@ -88,7 +88,7 @@ public class CubeIntake extends Subsystem {
 		rightIntakeMotor.configPeakCurrentDuration(100, timeout);
 		rightIntakeMotor.enableCurrentLimit(true);
 		
-		ultra.setAutomaticMode(true);
+		//ultra.setAutomaticMode(true);
 	}
 	
     public void initDefaultCommand() {
@@ -98,19 +98,19 @@ public class CubeIntake extends Subsystem {
     }
     
     public void intake(){
-    	double speed = SmartDashboard.getNumber("CubeIntakeVel", 6000);
-		leftIntakeMotor.set(ControlMode.PercentOutput,0.5);
-		rightIntakeMotor.set(ControlMode.PercentOutput,0.5);
-//    	leftIntakeMotor.set(ControlMode.Velocity,speed);
-//    	rightIntakeMotor.set(ControlMode.Velocity,-speed);
+    	double speed = SmartDashboard.getNumber("CubeIntakeVel", 3000);
+//		leftIntakeMotor.set(ControlMode.PercentOutput,-0.3);
+//		rightIntakeMotor.set(ControlMode.PercentOutput,-0.3);
+    	leftIntakeMotor.set(ControlMode.Velocity,-speed);
+    	rightIntakeMotor.set(ControlMode.Velocity,-speed);
     }
     
     public void releaseCube(){
-    	double speed = SmartDashboard.getNumber("CubeReleaseVel", 6000);
-		leftIntakeMotor.set(ControlMode.PercentOutput,-0.2);
-		rightIntakeMotor.set(ControlMode.PercentOutput,-0.2);
-//    	leftIntakeMotor.set(ControlMode.Velocity,-speed);
-//    	rightIntakeMotor.set(ControlMode.Velocity,speed);
+    	double speed = SmartDashboard.getNumber("CubeReleaseVel", 2000);
+//		leftIntakeMotor.set(ControlMode.PercentOutput,0.2);
+//		rightIntakeMotor.set(ControlMode.PercentOutput,0.2);
+    	leftIntakeMotor.set(ControlMode.Velocity,speed);
+    	rightIntakeMotor.set(ControlMode.Velocity,speed);
     }
     
     public void stop(){
@@ -135,8 +135,8 @@ public class CubeIntake extends Subsystem {
     	return rightIntakeMotor.getSensorCollection().getQuadratureVelocity();
     }
     
-    public double getUltrasonicInches() {
-    	return ultra.getRangeInches(); // reads the range on the ultrasonic sensor
-    }
+//    public double getUltrasonicInches() {
+//    	return ultra.getRangeInches(); // reads the range on the ultrasonic sensor
+//    }
 }
 

@@ -164,7 +164,7 @@ public class DriveTrain extends Subsystem {
     }
     
     public void zeroEncoders() {
-    	topLeftMotor.setSelectedSensorPosition(0,pidIdx,timeout);
+    	topLeftMotor.setSelectedSensorPosition(0,pidIdx,timeout); 
     	topRightMotor.setSelectedSensorPosition(0,pidIdx,timeout);
     }
     
@@ -175,7 +175,7 @@ public class DriveTrain extends Subsystem {
     
     public void turn(double angle) {
 		//double d = ((RobotMap.wheelBase * Math.PI) * (angle / 360.0) / RobotMap.wheelDiameter / Math.PI * 360*4)/40.8;
-		double d = ((RobotMap.wheelBase * Math.PI) * (angle / 360.0)) / RobotMap.distancePerRotation;
+		double d = ((RobotMap.wheelBase * Math.PI) * (angle / 360.0)) / RobotMap.encoderCountConstant;
 		topLeftMotor.set(ControlMode.MotionMagic,d);
     	topRightMotor.set(ControlMode.MotionMagic,-d);
 	}

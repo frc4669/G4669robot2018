@@ -8,10 +8,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class LeftAllScale extends CommandGroup {
-	
-	
-    public LeftAllScale() {
+public class LeftSwitchLeftScale extends CommandGroup {
+
+    public LeftSwitchLeftScale() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -36,14 +35,6 @@ public class LeftAllScale extends CommandGroup {
     		addSequential(new AutoElevator(0));
     	}
     	else if(Robot.gameData.charAt(1)=='R'){
-    		addSequential(new DriveMotionMagic(220));
-    		addSequential(new TurnMotionMagic(90-Robot.driveTrain.getGyroAngle()));
-    		addSequential(new DriveMotionMagic(210));
-    		addSequential(new TurnMotionMagic(-90-Robot.driveTrain.getGyroAngle()));
-    		addSequential(new AutoElevator(RobotMap.elevatorMid));
-    		addSequential(new DriveMotionMagic(35));
-    		addSequential(new AutoRelease());
-    		addSequential(new AutoElevator(0));
     	}
     }
 }

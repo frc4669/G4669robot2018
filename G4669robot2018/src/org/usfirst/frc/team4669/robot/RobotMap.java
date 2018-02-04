@@ -15,13 +15,13 @@ public class RobotMap {
 	//SUBSYSTEMS
 	//Drivetrain motors
 	public static final int driveTrainTopLeft = 2; //8
-	public static final int driveTrainBottomLeft = 8; //3
-	public static final int driveTrainTopRight = 7; //5
+	public static final int driveTrainBottomLeft = 98; //3
+	public static final int driveTrainTopRight = 99; //5
 	public static final int driveTrainBottomRight = 3; //1
 
 	//Other subsystem motors
-	public static final int leftIntake = 97;
-	public static final int rightIntake = 98;
+	public static final int leftIntake = 7;
+	public static final int rightIntake = 8;
 	public static final int elevator = 5;
 	
 	//DRIVER STATION	
@@ -59,8 +59,8 @@ public class RobotMap {
 	public static int slotIdx = 0;
 	public static int pidIdx = 0;
 	
-	// OTHER
-	public static final double wheelDiameter = 3.25;
+	// OTHER, units are inches
+	public static final double wheelDiameter = 4;
 	public static final double wheelBase = 27.4; //figure out real distance later
 	/**
 	 * Calculates circumference of wheel given diameter.

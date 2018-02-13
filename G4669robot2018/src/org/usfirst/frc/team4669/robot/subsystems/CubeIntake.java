@@ -48,16 +48,16 @@ public class CubeIntake extends Subsystem {
 		
 		//Configuring PID Values
 		leftIntakeMotor.selectProfileSlot(slotIdx,pidIdx);
-		leftIntakeMotor.config_kF(slotIdx,0.03,timeout); //0.03
-		leftIntakeMotor.config_kP(slotIdx,0.2,timeout); //0.17
-		leftIntakeMotor.config_kI(slotIdx,0,timeout); //0
-		leftIntakeMotor.config_kD(slotIdx,0,timeout); //20
+		leftIntakeMotor.config_kF(slotIdx,0.097,timeout); //0.03
+		leftIntakeMotor.config_kP(slotIdx,0.22,timeout); //0.17
+		leftIntakeMotor.config_kI(slotIdx,0.0011,timeout); //0
+		leftIntakeMotor.config_kD(slotIdx,30,timeout); //20
 		
 		rightIntakeMotor.selectProfileSlot(slotIdx,pidIdx);
-		rightIntakeMotor.config_kF(slotIdx,0.03,timeout);
-		rightIntakeMotor.config_kP(slotIdx,0.17,timeout);
-		rightIntakeMotor.config_kI(slotIdx,0,timeout); 
-		rightIntakeMotor.config_kD(slotIdx,20,timeout);
+		rightIntakeMotor.config_kF(slotIdx,0.097,timeout);
+		rightIntakeMotor.config_kP(slotIdx,0.22,timeout);
+		rightIntakeMotor.config_kI(slotIdx,0.0011,timeout); 
+		rightIntakeMotor.config_kD(slotIdx,22,timeout);
 		
 		leftIntakeMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,pidIdx,timeout);
 		rightIntakeMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,pidIdx,timeout);
@@ -70,8 +70,8 @@ public class CubeIntake extends Subsystem {
 //		rightIntakeMotor.configMotionCruiseVelocity(200, timeout);
 //		rightIntakeMotor.configMotionAcceleration(50, timeout);
 		
-		leftIntakeMotor.setSensorPhase(false);
-		rightIntakeMotor.setSensorPhase(true);
+		leftIntakeMotor.setSensorPhase(true);
+		rightIntakeMotor.setSensorPhase(false);
 		
 		leftIntakeMotor.setInverted(false);
 		rightIntakeMotor.setInverted(false);
@@ -98,19 +98,19 @@ public class CubeIntake extends Subsystem {
     }
     
     public void intake(){
-    	double speed = SmartDashboard.getNumber("CubeIntakeVel", 3000);
-//		leftIntakeMotor.set(ControlMode.PercentOutput,-0.3);
-//		rightIntakeMotor.set(ControlMode.PercentOutput,-0.3);
-    	leftIntakeMotor.set(ControlMode.Velocity,-speed);
-    	rightIntakeMotor.set(ControlMode.Velocity,-speed);
+    	double speed = SmartDashboard.getNumber("CubeIntakeVel", 2500);
+//		leftIntakeMotor.set(ControlMode.PercentOutput,0.3);
+//		rightIntakeMotor.set(ControlMode.PercentOutput,1);
+    	leftIntakeMotor.set(ControlMode.Velocity,speed);
+    	rightIntakeMotor.set(ControlMode.Velocity,speed);
     }
     
     public void releaseCube(){
-    	double speed = SmartDashboard.getNumber("CubeReleaseVel", 2000);
-//		leftIntakeMotor.set(ControlMode.PercentOutput,0.2);
-//		rightIntakeMotor.set(ControlMode.PercentOutput,0.2);
-    	leftIntakeMotor.set(ControlMode.Velocity,speed);
-    	rightIntakeMotor.set(ControlMode.Velocity,speed);
+    	double speed = SmartDashboard.getNumber("CubeReleaseVel", 1750);
+//		leftIntakeMotor.set(ControlMode.PercentOutput,-0.2);
+//		rightIntakeMotor.set(ControlMode.PercentOutput,-0.2);
+    	leftIntakeMotor.set(ControlMode.Velocity,-speed);
+    	rightIntakeMotor.set(ControlMode.Velocity,-speed);
     }
     
     public void stop(){

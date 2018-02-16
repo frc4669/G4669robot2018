@@ -15,14 +15,14 @@ public class RobotMap {
 	//SUBSYSTEMS
 	//Drivetrain motors
 	public static final int driveTrainTopLeft = 5; //8
-	public static final int driveTrainBottomLeft = 98; //3
-	public static final int driveTrainTopRight = 99; //5
-	public static final int driveTrainBottomRight = 3; //1
+	public static final int driveTrainBottomLeft = 6; //3
+	public static final int driveTrainTopRight = 8; //5
+	public static final int driveTrainBottomRight = 13; //1
 
 	//Other subsystem motors
-	public static final int leftIntake = 7;
-	public static final int rightIntake = 8;
-	public static final int elevator = 2;
+	public static final int leftIntake = 1;
+	public static final int rightIntake = 2;
+	public static final int elevator = 3;
 	
 	//DRIVER STATION	
 	// Reverse output of motors if moving backwards
@@ -38,18 +38,20 @@ public class RobotMap {
 	public static final int maxElevatorButton= 3;
 	public static final int midElevatorButton= 4;
 	public static final int switchElevatorButton= 5;
+	public static final int zeroEncoderElevatorButton = 9;
+	public static final int motionMagicTest = 10;
 	
 	
 	//Right Joystick Controls
 	
 	
 	//CONSTANTS
-	public static int elevatorVel = 1365;
-	public static int elevatorAccel = 340;
+	public static int elevatorVel = 785;
+	public static int elevatorAccel = 3140;
 	
-	public static int elevatorSwitch = 0;
-	public static int elevatorMid = 0;
-	public static int elevatorMax = 0;
+	public static int elevatorSwitch = -11350;
+	public static int elevatorMid = -19379;
+	public static int elevatorMax = -25290;
 	
 	//DRIVE TRAIN SPEED PROPORTION
 	public static final double driveTrainSpeedProportion = 0.85;

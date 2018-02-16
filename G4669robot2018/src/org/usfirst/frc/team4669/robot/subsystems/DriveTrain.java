@@ -50,6 +50,8 @@ public class DriveTrain extends Subsystem {
 		
 		topRightMotor.setInverted(false);
 		topLeftMotor.setInverted(true);
+		bottomRightMotor.setInverted(false);
+		bottomLeftMotor.setInverted(true);
 		
 		topRightMotor.setSensorPhase(false);
 		topLeftMotor.setSensorPhase(false);

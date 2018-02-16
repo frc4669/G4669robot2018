@@ -133,9 +133,11 @@ public class Robot extends TimedRobot {
 //    	SmartDashboard.putNumber("POV Angle", Robot.f310.getDPadPOV());
 //    	SmartDashboard.putNumber("Intake Left Enc", Robot.cubeIntake.getLeftEncoder());
 //    	SmartDashboard.putNumber("Intake Right Enc", Robot.cubeIntake.getRightEncoder());
-    	SmartDashboard.putNumber("intakeLeftEncVel", Robot.cubeIntake.getLeftEncoderSpeed());
-    	SmartDashboard.putNumber("intakeRightEncVel", Robot.cubeIntake.getRightEncoderSpeed());
+//    	SmartDashboard.putNumber("intakeLeftEncVel", Robot.cubeIntake.getLeftEncoderSpeed());
+//    	SmartDashboard.putNumber("intakeRightEncVel", Robot.cubeIntake.getRightEncoderSpeed());
 //    	SmartDashboard.putNumber("Right Current", Robot.driveTrain.getRightCurrent());
 //    	SmartDashboard.putNumber("Left Current", Robot.driveTrain.getLeftCurrent());
+		SmartDashboard.putNumber("Elevator Vel", Robot.elevator.getEncoderVel());
+		SmartDashboard.putNumber("Elevator Pos", Robot.elevator.getEncoderPos());
 	}
 }

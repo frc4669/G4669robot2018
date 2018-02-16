@@ -99,18 +99,18 @@ public class CubeIntake extends Subsystem {
     
     public void intake(){
     	double speed = SmartDashboard.getNumber("CubeIntakeVel", 2500);
-//		leftIntakeMotor.set(ControlMode.PercentOutput,0.3);
-//		rightIntakeMotor.set(ControlMode.PercentOutput,1);
-    	leftIntakeMotor.set(ControlMode.Velocity,speed);
-    	rightIntakeMotor.set(ControlMode.Velocity,speed);
+		leftIntakeMotor.set(ControlMode.PercentOutput,0.3);
+		rightIntakeMotor.set(ControlMode.PercentOutput,0.3);
+//    	leftIntakeMotor.set(ControlMode.Velocity,speed);
+//    	rightIntakeMotor.set(ControlMode.Velocity,speed);
     }
     
     public void releaseCube(){
     	double speed = SmartDashboard.getNumber("CubeReleaseVel", 1750);
-//		leftIntakeMotor.set(ControlMode.PercentOutput,-0.2);
-//		rightIntakeMotor.set(ControlMode.PercentOutput,-0.2);
-    	leftIntakeMotor.set(ControlMode.Velocity,-speed);
-    	rightIntakeMotor.set(ControlMode.Velocity,-speed);
+		leftIntakeMotor.set(ControlMode.PercentOutput,-0.2);
+		rightIntakeMotor.set(ControlMode.PercentOutput,-0.2);
+//    	leftIntakeMotor.set(ControlMode.Velocity,-speed);
+//    	rightIntakeMotor.set(ControlMode.Velocity,-speed);
     }
     
     public void stop(){

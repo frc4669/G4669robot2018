@@ -3,12 +3,17 @@ package org.usfirst.frc.team4669.robot.commands;
 import org.usfirst.frc.team4669.robot.Robot;
 import org.usfirst.frc.team4669.robot.RobotMap;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
 public class ElevatorCommand extends Command {
+	
+	double targetPos;
+	boolean motionMagicRunning = false;
 
     public ElevatorCommand() {
         // Use requires() here to declare subsystem dependencies
@@ -18,6 +23,8 @@ public class ElevatorCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.elevator.zeroEncoders();
+    	motionMagicRunning = false;
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -26,19 +33,35 @@ public class ElevatorCommand extends Command {
     		Robot.elevator.stop();
     	} 
     	else {
-    		if (Robot.oi.getLeftRawButton(RobotMap.groundElevatorButton)){
-    			Robot.elevator.groundHeight();
+    		if (Robot.oi.getLeftRawButton(RobotMap.zeroEncoderElevatorButton) && !motionMagicRunning){
+    			Robot.elevator.zeroEncoders();
     		}
-    		else if(Robot.oi.getLeftRawButton(RobotMap.switchElevatorButton)){
+    		if (Robot.oi.getLeftRawButton(RobotMap.groundElevatorButton) && !motionMagicRunning){
+    			Robot.elevator.setHeight(0);
+    			targetPos = 0;
+    			motionMagicRunning = true;
+    		}
+    		else if(Robot.oi.getLeftRawButton(RobotMap.switchElevatorButton) && !motionMagicRunning){
     			Robot.elevator.setHeight(RobotMap.elevatorSwitch);
+    			targetPos = RobotMap.elevatorSwitch;
+    			motionMagicRunning = true;
     		}
-    		else if(Robot.oi.getLeftRawButton(RobotMap.midElevatorButton)){
+    		else if(Robot.oi.getLeftRawButton(RobotMap.midElevatorButton) && !motionMagicRunning){
     			Robot.elevator.setHeight(RobotMap.elevatorMid);
+    			targetPos = RobotMap.elevatorMid;
+    			motionMagicRunning = true;
     		}
-    		else if(Robot.oi.getLeftRawButton(RobotMap.maxElevatorButton)){
+    		else if(Robot.oi.getLeftRawButton(RobotMap.maxElevatorButton) && !motionMagicRunning){
     			Robot.elevator.setHeight(RobotMap.elevatorMax);
+    			targetPos = RobotMap.elevatorMax;
+    			motionMagicRunning = true;
     		}
-    		else {
+			else if (motionMagicRunning 
+					&& Math.abs(targetPos-Robot.elevator.getEncoderPos()) < 2) {
+					motionMagicRunning = false;
+			}  		
+    		
+    		else if (!motionMagicRunning) {
     			Robot.elevator.customHeight(Robot.oi.leftY());
     		}
     	}

@@ -5,6 +5,7 @@ import org.usfirst.frc.team4669.robot.commands.ElevatorCommand;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -28,6 +29,10 @@ public class Elevator extends Subsystem {
 		super();
 		elevatorMotor = new WPI_TalonSRX(RobotMap.elevator);
 		
+		//Set relevant frame periods to be at least as fast as periodic rate 
+		elevatorMotor.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, timeout);
+		elevatorMotor.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, timeout);
+		
 		elevatorMotor.configNominalOutputForward(0, timeout);
 		elevatorMotor.configNominalOutputReverse(0, timeout);
 		elevatorMotor.configPeakOutputForward(1, timeout);
@@ -35,20 +40,22 @@ public class Elevator extends Subsystem {
 		
 		//Configuring PID Values
 		elevatorMotor.selectProfileSlot(slotIdx,pidIdx);
-		elevatorMotor.config_kF(slotIdx,0.03,timeout);
-		elevatorMotor.config_kP(slotIdx,0.17,timeout);
-		elevatorMotor.config_kI(slotIdx,0,timeout);
-		elevatorMotor.config_kD(slotIdx,5,timeout);
+		elevatorMotor.config_kF(slotIdx,0.977,timeout);
+		elevatorMotor.config_kP(slotIdx,1.056,timeout);
+		elevatorMotor.config_kI(slotIdx,0.006,timeout);
+		elevatorMotor.config_kD(slotIdx,21.12,timeout);
+		elevatorMotor.config_IntegralZone(slotIdx, 50, timeout);
 		
+		//Sets up sensor
 		elevatorMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,pidIdx,timeout);
 		elevatorMotor.setSelectedSensorPosition(0,pidIdx,timeout);
 		elevatorMotor.setSensorPhase(false);
 		elevatorMotor.setInverted(false);
+		
 		elevatorMotor.configMotionCruiseVelocity(RobotMap.elevatorVel, RobotMap.timeout);
 		elevatorMotor.configMotionAcceleration(RobotMap.elevatorAccel, RobotMap.timeout);
 		
-		
-		//Setting Current Limits, not sure if CURRENTly working (hehe)
+		//Sets current limits
 		elevatorMotor.configContinuousCurrentLimit(12, timeout);
 		elevatorMotor.configPeakCurrentLimit(15, timeout);
 		elevatorMotor.configPeakCurrentDuration(100, timeout);
@@ -63,15 +70,15 @@ public class Elevator extends Subsystem {
     }
     
     public void customHeight(double percent)  {
-    	elevatorMotor.set(ControlMode.PercentOutput, 0.8*percent);
+    	elevatorMotor.set(ControlMode.PercentOutput, percent);
     }
     
-    public void groundHeight()  {
-    	elevatorMotor.set(ControlMode.MotionMagic, 0);
-    }
-    
-    public void setHeight(int height)  {
+    public void setHeight(double height)  {
     	elevatorMotor.set(ControlMode.MotionMagic, height);
+    }
+    
+    public double getClosedLoopError(){
+    	return elevatorMotor.getClosedLoopError(0);
     }
     
     public void stop()  {
@@ -80,6 +87,18 @@ public class Elevator extends Subsystem {
     
     public double getEncoderPos(){
     	return elevatorMotor.getSensorCollection().getQuadraturePosition();
+    }
+    
+    public double getEncoderVel(){
+    	return elevatorMotor.getSensorCollection().getQuadratureVelocity();
+    }
+    
+    public double getMotorOutput(){
+    	return elevatorMotor.getMotorOutputPercent();
+    }
+    
+    public void zeroEncoders(){
+    	elevatorMotor.setSelectedSensorPosition(0,pidIdx,timeout);
     }
 }
 

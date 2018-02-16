@@ -16,6 +16,7 @@ public class ArcadeDrive extends Command {
 	double left; //left motor
 	double right; //right motor
 	
+	boolean motionMagicRunning = false;
 	boolean turnRunning = false;
 	boolean clockwise = false;
 	double turnAngle;
@@ -63,9 +64,26 @@ public class ArcadeDrive extends Command {
 	    	else if (turnRunning) {
 	    		Robot.driveTrain.turnTo(clockwise);
 	    	}
+    		
+    		//Motion Magic Stuff
+    		
+//    		if (Robot.oi.getLeftRawButton(RobotMap.moveBackButton) && !motionMagicRunning) {
+//        		Robot.driveTrain.zeroEncoders();
+//        		Robot.driveTrain.driveMotionMagic(12/40.8);
+//        		motionMagicRunning = true;
+//    		}
+//    		else if (motionMagicRunning 
+//    				&& Math.abs(12/40.8 - Robot.driveTrain.getPosition()) < 0.1) {
+//    				motionMagicRunning = false;
+//    		}
+//    		
+//			else if (motionMagic180 
+//					&& Math.abs((((RobotMap.wheelBase * Math.PI) * (180 / 360.0)) / RobotMap.distancePerRotation) - Robot.driveTrain.getPosition()) < 0.05) {
+//					motionMagic180 = false;
+//			}
 	    	
 	    	//Joystick driving
-	    	if (!turnRunning){
+			else if (!motionMagicRunning && !turnRunning){
 		    	left = Robot.f310.getLeftY() - Robot.f310.getRightX();
 		    	right = Robot.f310.getLeftY() + Robot.f310.getRightX();
 		    	Robot.driveTrain.driveForward(left, right);

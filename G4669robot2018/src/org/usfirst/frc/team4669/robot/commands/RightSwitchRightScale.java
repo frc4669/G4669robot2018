@@ -8,10 +8,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class LeftAllScale extends CommandGroup {
-	
-	
-    public LeftAllScale() {
+public class RightSwitchRightScale extends CommandGroup {
+
+    public RightSwitchRightScale() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -28,21 +27,18 @@ public class LeftAllScale extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	if (Robot.gameData.charAt(1)=='L'){
+    	if (Robot.gameData.charAt(1)=='R'){
     		addSequential(new DriveMotionMagic(230));
-    		addSequential(new TurnMotionMagic(90-Robot.driveTrain.getGyroAngle()));
+    		addSequential(new TurnMotionMagic(-90-Robot.driveTrain.getGyroAngle()));
     		addSequential(new AutoElevator(RobotMap.elevatorMid));
     		addSequential(new DriveMotionMagic(10));
     		addSequential(new AutoRelease());
     		addSequential(new AutoElevator(0));
     	}
-    	else if(Robot.gameData.charAt(1)=='R'){
+    	else if(Robot.gameData.charAt(1)=='L'&&Robot.gameData.charAt(0)=='R'){
     		addSequential(new DriveMotionMagic(217));
-    		addSequential(new TurnMotionMagic(90-Robot.driveTrain.getGyroAngle()));
-    		addSequential(new DriveMotionMagic(210));
     		addSequential(new TurnMotionMagic(-90-Robot.driveTrain.getGyroAngle()));
-    		addSequential(new AutoElevator(RobotMap.elevatorMid));
-    		addSequential(new DriveMotionMagic(35));
+    		addSequential(new AutoElevator(RobotMap.elevatorSwitch));
     		addSequential(new AutoRelease());
     		addSequential(new AutoElevator(0));
     	}

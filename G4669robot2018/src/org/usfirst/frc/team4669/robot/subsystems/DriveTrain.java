@@ -43,18 +43,18 @@ public class DriveTrain extends Subsystem {
 		bottomRightMotor = new WPI_TalonSRX(RobotMap.driveTrainBottomRight);
 		
 		int velocity = 1365; //About 200 RPM, vel units are in sensor units per 100ms
-		int accel = 340;
+		int accel = 1365;
 		
 		topRightMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,pidIdx,timeout);
 		topLeftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,pidIdx,timeout);
 		
-		topRightMotor.setInverted(false);
-		topLeftMotor.setInverted(true);
-		bottomRightMotor.setInverted(false);
-		bottomLeftMotor.setInverted(true);
+		topRightMotor.setInverted(true);
+		topLeftMotor.setInverted(false);
+		bottomRightMotor.setInverted(true);
+		bottomLeftMotor.setInverted(false);
 		
-		topRightMotor.setSensorPhase(false);
-		topLeftMotor.setSensorPhase(false);
+		topRightMotor.setSensorPhase(true);
+		topLeftMotor.setSensorPhase(true);
 		
 		//topLeftMotor.configEncoderCodesPerRev(1440); // if using
 		// FeedbackDevice.QuadEncoder
@@ -79,16 +79,16 @@ public class DriveTrain extends Subsystem {
 		
 		/* set closed loop gains in slot0 - see documentation */
 		topRightMotor.selectProfileSlot(slotIdx, pidIdx);
-		topRightMotor.config_kF(slotIdx,0.3739,timeout);
-		topRightMotor.config_kP(slotIdx,0.3,timeout);
-		topRightMotor.config_kI(slotIdx,0,timeout);
-		topRightMotor.config_kD(slotIdx,16,timeout);
+		topRightMotor.config_kF(slotIdx,0.3343,timeout);
+		topRightMotor.config_kP(slotIdx,0.4,timeout);
+		topRightMotor.config_kI(slotIdx,0.001,timeout);
+		topRightMotor.config_kD(slotIdx,15,timeout);
 		
 		topLeftMotor.selectProfileSlot(slotIdx,pidIdx);
-		topLeftMotor.config_kF(slotIdx,0.3739,timeout);
-		topLeftMotor.config_kP(slotIdx,0.3,timeout);
-		topLeftMotor.config_kI(slotIdx,0,timeout);
-		topLeftMotor.config_kD(slotIdx,16,timeout);
+		topLeftMotor.config_kF(slotIdx,0.3343,timeout); //0.3739
+		topLeftMotor.config_kP(slotIdx,0.4,timeout); //0.3
+		topLeftMotor.config_kI(slotIdx,0.001,timeout);
+		topLeftMotor.config_kD(slotIdx,15,timeout); //16
 		
 		/* set acceleration and vcruise velocity - see documentation */
 		topRightMotor.configMotionCruiseVelocity(velocity,timeout); //855
@@ -121,13 +121,13 @@ public class DriveTrain extends Subsystem {
     }
     
     public void driveForward(double vBusLeft, double vBusRight) {
-    	topLeftMotor.set(ControlMode.PercentOutput,0.3*vBusLeft);
-    	topRightMotor.set(ControlMode.PercentOutput,0.3*vBusRight);
+    	topLeftMotor.set(ControlMode.PercentOutput,vBusLeft);
+    	topRightMotor.set(ControlMode.PercentOutput,vBusRight);
     }
     
-    public void setSpeed(double speed) {
-    	topLeftMotor.set(ControlMode.Velocity,speed);
-    	topRightMotor.set(ControlMode.Velocity,speed);
+    public void setSpeed(double leftSpeed,double rightSpeed) {
+    	topLeftMotor.set(ControlMode.Velocity,leftSpeed);
+    	topRightMotor.set(ControlMode.Velocity,rightSpeed);
     }
     
     public void stop() {
@@ -171,13 +171,13 @@ public class DriveTrain extends Subsystem {
     }
     
     public void driveMotionMagic(double targetEncPosition) {
-    	topLeftMotor.set(ControlMode.MotionMagic,targetEncPosition);
-    	topRightMotor.set(ControlMode.MotionMagic,targetEncPosition);
+    	topLeftMotor.set(ControlMode.MotionMagic,-targetEncPosition);
+    	topRightMotor.set(ControlMode.MotionMagic,-targetEncPosition);
     }
     
     public void turn(double angle) {
 		//double d = ((RobotMap.wheelBase * Math.PI) * (angle / 360.0) / RobotMap.wheelDiameter / Math.PI * 360*4)/40.8;
-		double d = ((RobotMap.wheelBase * Math.PI) * (angle / 360.0)) / RobotMap.encoderCountConstant;
+		double d = (((RobotMap.wheelBase * Math.PI) * (angle / 360.0)) / RobotMap.distancePerRotation)/RobotMap.encoderCountConstant;
 		topLeftMotor.set(ControlMode.MotionMagic,d);
     	topRightMotor.set(ControlMode.MotionMagic,-d);
 	}

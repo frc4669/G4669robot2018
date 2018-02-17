@@ -20,9 +20,14 @@ public class RobotMap {
 	public static final int driveTrainBottomRight = 13; //1
 
 	//Other subsystem motors
-	public static final int leftIntake = 1;
-	public static final int rightIntake = 2;
+	public static final int leftIntake = 2;
+	public static final int rightIntake = 1;
 	public static final int elevator = 3;
+	
+	//Sensors
+	public static final int forwardLimitSwitch = 1;
+	public static final int reverseLimitSwitch = 2;
+	public static final int distanceSensor = 1;
 	
 	//DRIVER STATION	
 	// Reverse output of motors if moving backwards
@@ -63,14 +68,14 @@ public class RobotMap {
 	
 	// OTHER, units are inches
 	public static final double wheelDiameter = 4;
-	public static final double wheelBase = 27.4; //figure out real distance later
+	public static final double wheelBase = 21.75; //figure out real distance later
 	/**
 	 * Calculates circumference of wheel given diameter.
 	 * 
 	 */
     public static final double wheelCircumference = Math.PI * wheelDiameter;
 	
-	public static final double encoderCountConstant  = wheelCircumference / 1440;
+	public static final double encoderCountConstant  = wheelCircumference / 4096;
 	// If you are using multiple modules, make sure to define both the port
 	// number and the module. For example you with a rangefinder:
 	// public static int rangefinderPort = 1;

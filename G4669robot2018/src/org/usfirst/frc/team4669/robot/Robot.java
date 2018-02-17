@@ -125,11 +125,11 @@ public class Robot extends TimedRobot {
 
 	public void updateSmartDashboard() {
 //    	SmartDashboard.putNumber("Gyro", driveTrain.getGyroAngle());
-//    	SmartDashboard.putNumber("Left Encoder", driveTrain.getLeftEncoder());
-//    	SmartDashboard.putNumber("Right Encoder", driveTrain.getRightEncoder());
+    	SmartDashboard.putNumber("Left Encoder", driveTrain.getLeftEncoder());
+    	SmartDashboard.putNumber("Right Encoder", driveTrain.getRightEncoder());
 //    	SmartDashboard.putNumber("Right Y Axis", Robot.oi.rightY());
-//    	SmartDashboard.putNumber("driveLeftEncVel", Robot.driveTrain.getLeftEncoderSpeed());
-//    	SmartDashboard.putNumber("driveRightEncVel", Robot.driveTrain.getRightEncoderSpeed());
+    	SmartDashboard.putNumber("driveLeftEncVel", Robot.driveTrain.getLeftEncoderSpeed());
+    	SmartDashboard.putNumber("driveRightEncVel", Robot.driveTrain.getRightEncoderSpeed());
 //    	SmartDashboard.putNumber("POV Angle", Robot.f310.getDPadPOV());
 //    	SmartDashboard.putNumber("Intake Left Enc", Robot.cubeIntake.getLeftEncoder());
 //    	SmartDashboard.putNumber("Intake Right Enc", Robot.cubeIntake.getRightEncoder());
@@ -137,7 +137,7 @@ public class Robot extends TimedRobot {
 //    	SmartDashboard.putNumber("intakeRightEncVel", Robot.cubeIntake.getRightEncoderSpeed());
 //    	SmartDashboard.putNumber("Right Current", Robot.driveTrain.getRightCurrent());
 //    	SmartDashboard.putNumber("Left Current", Robot.driveTrain.getLeftCurrent());
-		SmartDashboard.putNumber("Elevator Vel", Robot.elevator.getEncoderVel());
-		SmartDashboard.putNumber("Elevator Pos", Robot.elevator.getEncoderPos());
+//		SmartDashboard.putNumber("Elevator Vel", Robot.elevator.getEncoderVel());
+//		SmartDashboard.putNumber("Elevator Pos", Robot.elevator.getEncoderPos());
 	}
 }

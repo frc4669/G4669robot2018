@@ -31,6 +31,8 @@ public class ArcadeDrive extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	turnRunning = false;
+    	motionMagicRunning = false;
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -42,6 +44,7 @@ public class ArcadeDrive extends Command {
     	if (Robot.driveTrain.getGyroAngle() < 0) currentAngle = Robot.driveTrain.getGyroAngle()+360;
     	if(Robot.f310.getRedButton()){
     		turnRunning = false;
+    		motionMagicRunning = false;
     		Robot.driveTrain.stop();
     	}
     	else{
@@ -67,26 +70,21 @@ public class ArcadeDrive extends Command {
     		
     		//Motion Magic Stuff
     		
-//    		if (Robot.oi.getLeftRawButton(RobotMap.moveBackButton) && !motionMagicRunning) {
-//        		Robot.driveTrain.zeroEncoders();
-//        		Robot.driveTrain.driveMotionMagic(12/40.8);
-//        		motionMagicRunning = true;
-//    		}
-//    		else if (motionMagicRunning 
-//    				&& Math.abs(12/40.8 - Robot.driveTrain.getPosition()) < 0.1) {
-//    				motionMagicRunning = false;
-//    		}
-//    		
-//			else if (motionMagic180 
-//					&& Math.abs((((RobotMap.wheelBase * Math.PI) * (180 / 360.0)) / RobotMap.distancePerRotation) - Robot.driveTrain.getPosition()) < 0.05) {
-//					motionMagic180 = false;
-//			}
-	    	
+    		if (Robot.f310.getBlueButton() && !motionMagicRunning) {
+        		Robot.driveTrain.zeroEncoders();
+        		Robot.driveTrain.driveMotionMagic(-50/RobotMap.encoderCountConstant);
+        		motionMagicRunning = true;
+    		}
+    		else if (motionMagicRunning 
+    				&& Math.abs(-50/RobotMap.encoderCountConstant - Robot.driveTrain.getPosition()) < 30) {
+				motionMagicRunning = false;
+    		}
+    		
 	    	//Joystick driving
 			else if (!motionMagicRunning && !turnRunning){
-		    	left = Robot.f310.getLeftY() - Robot.f310.getRightX();
-		    	right = Robot.f310.getLeftY() + Robot.f310.getRightX();
-		    	Robot.driveTrain.driveForward(left, right);
+		    	left = Robot.f310.getLeftY() + Robot.f310.getRightX();
+		    	right = Robot.f310.getLeftY() - Robot.f310.getRightX();
+	    		Robot.driveTrain.setSpeed(left*2400, right*2400);
 	    	}
     	}
     	SmartDashboard.putNumber("Current Angle", currentAngle);

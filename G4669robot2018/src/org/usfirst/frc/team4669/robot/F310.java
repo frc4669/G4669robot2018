@@ -12,11 +12,11 @@ public class F310 {
 	}
 	
 	public double getLeftX() {
-		return f310.getRawAxis(0);
+		return deadzone(0);
 	}
 	//TankDrive
 	public double getLeftY() {
-		return f310.getRawAxis(1);
+		return -deadzone(1);
 	}
 	
 	public double getLeftTrigger() {
@@ -28,12 +28,12 @@ public class F310 {
 	}
 	
 	public double getRightX() {
-		return f310.getRawAxis(4);
+		return deadzone(4);
 	}
 	
 	//ControlWinch
 	public double getRightY() {
-		return f310.getRawAxis(5);
+		return -deadzone(5);
 	}
 	//OpenDoor
 	public boolean getGreenButton() {
@@ -78,6 +78,23 @@ public class F310 {
 	
 	public double getDPadPOV() {
 		return f310.getPOV();
+	}
+	
+	public double deadzone(int port){
+		double joystickValue = f310.getRawAxis(port);
+		double joystickOffset = 0.075;
+		double absJoystickValue = Math.abs(joystickValue);
+		if (absJoystickValue > joystickOffset) {
+			double speed = absJoystickValue;
+			speed = (speed*speed) + joystickOffset;
+			if (joystickValue > 0) 
+				return speed;
+			else
+				return -speed;
+		}
+		else {
+			return 0;
+		}
 	}
 
 }

@@ -2,6 +2,7 @@ package org.usfirst.frc.team4669.robot;
 
 import org.usfirst.frc.team4669.robot.commands.DoNothing;
 import org.usfirst.frc.team4669.robot.commands.DriveForward;
+import org.usfirst.frc.team4669.robot.subsystems.ArmRaiser;
 import org.usfirst.frc.team4669.robot.subsystems.CubeIntake;
 //import org.usfirst.frc.team4669.robot.commands.LaunchAndMoveAuto;
 import org.usfirst.frc.team4669.robot.subsystems.DriveTrain;
@@ -42,6 +43,7 @@ public class Robot extends TimedRobot {
 	public static CubeIntake cubeIntake =  new CubeIntake();
 	public static Elevator elevator = new Elevator();
 	public static String gameData;
+	public static ArmRaiser climber = new ArmRaiser();
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser;

@@ -29,6 +29,9 @@ public class ElevatorCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	if (Robot.elevator.getForwardLimit()){
+    		Robot.elevator.zeroEncoders();
+    	}
     	if (Robot.oi.getLeftRawButton(RobotMap.stopElevatorButton)){
     		Robot.elevator.stop();
     	} 

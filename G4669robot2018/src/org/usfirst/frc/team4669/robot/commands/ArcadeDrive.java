@@ -38,10 +38,11 @@ public class ArcadeDrive extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
-    	//button2 stop
+    	
     	if (Robot.driveTrain.getGyroAngle()>=0&&Robot.driveTrain.getGyroAngle()<=360) currentAngle = Robot.driveTrain.getGyroAngle();
     	if (Robot.driveTrain.getGyroAngle() > 360) currentAngle = Robot.driveTrain.getGyroAngle()%360;
     	if (Robot.driveTrain.getGyroAngle() < 0) currentAngle = Robot.driveTrain.getGyroAngle()+360;
+    	//Red Button to stop driving
     	if(Robot.f310.getRedButton()){
     		turnRunning = false;
     		motionMagicRunning = false;
@@ -84,7 +85,22 @@ public class ArcadeDrive extends Command {
 			else if (!motionMagicRunning && !turnRunning){
 		    	left = Robot.f310.getLeftY() + Robot.f310.getRightX();
 		    	right = Robot.f310.getLeftY() - Robot.f310.getRightX();
-	    		Robot.driveTrain.setSpeed(left*2400, right*2400);
+		    	if (!Robot.elevator.getForwardLimit()){
+		    		if(left>0.3){
+		    			left = 0.3;
+		    		}
+		    		if (right>0.3){
+		    			right = 0.3;
+		    		}
+		    		if(left<-0.3){
+		    			left = -0.3;
+		    		}
+		    		if (right<-0.3){
+		    			right = -0.3;
+		    		}
+		    	}
+//	    		Robot.driveTrain.setSpeed(left*2400, right*2400);
+		    	Robot.driveTrain.driveForward(left, right);
 	    	}
     	}
     	SmartDashboard.putNumber("Current Angle", currentAngle);

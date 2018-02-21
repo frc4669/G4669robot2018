@@ -3,6 +3,7 @@ package org.usfirst.frc.team4669.robot.subsystems;
 import org.usfirst.frc.team4669.robot.RobotMap;
 import org.usfirst.frc.team4669.robot.commands.ElevatorCommand;
 
+import com.ctre.phoenix.ParamEnum;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
@@ -67,6 +68,9 @@ public class Elevator extends Subsystem {
 		elevatorMotor.configPeakCurrentDuration(100, timeout);
 		elevatorMotor.enableCurrentLimit(true);
 		
+		//Zero encoders on fwd limit
+		elevatorMotor.configSetParameter(ParamEnum.eClearPositionOnLimitF, 1, 0, 0, 10);
+
 	}
 	
     public void initDefaultCommand() {
@@ -108,11 +112,11 @@ public class Elevator extends Subsystem {
     }
     
     public boolean getForwardLimit(){
-    	return forwardLimitSwitch.get();
+    	return elevatorMotor.getSensorCollection().isFwdLimitSwitchClosed();
     }
     
     public boolean getReverseLimit(){
-    	return reverseLimitSwitch.get();
+    	return elevatorMotor.getSensorCollection().isRevLimitSwitchClosed();
     }
 }
 

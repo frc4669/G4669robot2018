@@ -100,13 +100,13 @@ public class DriveTrain extends Subsystem {
 		topLeftMotor.setSelectedSensorPosition(0,pidIdx,timeout);
 		
 		//Set Current limit 
-		topRightMotor.configContinuousCurrentLimit(12, timeout);
-		topRightMotor.configPeakCurrentLimit(15, timeout);
+		topRightMotor.configContinuousCurrentLimit(20, timeout);
+		topRightMotor.configPeakCurrentLimit(25, timeout);
 		topRightMotor.configPeakCurrentDuration(100, timeout);
 		topRightMotor.enableCurrentLimit(true);
 		
-		topLeftMotor.configContinuousCurrentLimit(12, timeout);
-		topLeftMotor.configPeakCurrentLimit(15, timeout);
+		topLeftMotor.configContinuousCurrentLimit(20, timeout);
+		topLeftMotor.configPeakCurrentLimit(25, timeout);
 		topLeftMotor.configPeakCurrentDuration(100, timeout);
 		topLeftMotor.enableCurrentLimit(true);
 		
@@ -121,8 +121,8 @@ public class DriveTrain extends Subsystem {
     }
     
     public void driveForward(double vBusLeft, double vBusRight) {
-    	topLeftMotor.set(ControlMode.PercentOutput,vBusLeft);
-    	topRightMotor.set(ControlMode.PercentOutput,vBusRight);
+    	topLeftMotor.set(ControlMode.PercentOutput,0.8*vBusLeft);
+    	topRightMotor.set(ControlMode.PercentOutput,0.8*vBusRight);
     }
     
     public void setSpeed(double leftSpeed,double rightSpeed) {

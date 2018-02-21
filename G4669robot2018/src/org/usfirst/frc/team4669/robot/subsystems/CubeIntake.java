@@ -73,7 +73,7 @@ public class CubeIntake extends Subsystem {
 		leftIntakeMotor.setSensorPhase(true);
 		rightIntakeMotor.setSensorPhase(false);
 		
-		leftIntakeMotor.setInverted(false);
+		leftIntakeMotor.setInverted(true);
 		rightIntakeMotor.setInverted(false);
 		
 		//Setting Current limits

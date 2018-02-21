@@ -14,15 +14,17 @@ public class RobotMap {
 
 	//SUBSYSTEMS
 	//Drivetrain motors
-	public static final int driveTrainTopLeft = 5; //8
-	public static final int driveTrainBottomLeft = 6; //3
-	public static final int driveTrainTopRight = 8; //5
-	public static final int driveTrainBottomRight = 13; //1
+	public static final int driveTrainTopLeft = 5;
+	public static final int driveTrainBottomLeft = 10;
+	public static final int driveTrainTopRight = 8;
+	public static final int driveTrainBottomRight = 7;
 
 	//Other subsystem motors
-	public static final int leftIntake = 2;
-	public static final int rightIntake = 1;
+	public static final int leftIntake = 1;
+	public static final int rightIntake = 2;
 	public static final int elevator = 3;
+	public static final int climber = 6;
+	public static final int armRaiser = 13;
 	
 	//Sensors
 	public static final int forwardLimitSwitch = 1;

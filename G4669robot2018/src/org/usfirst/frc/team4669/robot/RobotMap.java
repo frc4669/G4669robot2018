@@ -60,6 +60,11 @@ public class RobotMap {
 	public static int elevatorMid = -19379;
 	public static int elevatorMax = -25290;
 	
+	//FIELD MEASUREMENTS
+	public static int distToSwitchSides = 217;
+	public static int distToScaleStraight = 230;
+	public static int distLeftAndRightScales = 210;
+	
 	//DRIVE TRAIN SPEED PROPORTION
 	public static final double driveTrainSpeedProportion = 0.85;
 	

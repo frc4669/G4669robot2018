@@ -28,7 +28,7 @@ public class RightSwitchRightScale extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	if (Robot.gameData.charAt(1)=='R'){
-    		addSequential(new DriveMotionMagic(230));
+    		addSequential(new DriveMotionMagic(RobotMap.distToScaleStraight));
     		addSequential(new TurnMotionMagic(-90-Robot.driveTrain.getGyroAngle()));
     		addSequential(new AutoElevator(RobotMap.elevatorMid));
     		addSequential(new DriveMotionMagic(10));
@@ -36,7 +36,7 @@ public class RightSwitchRightScale extends CommandGroup {
     		addSequential(new AutoElevator(0));
     	}
     	else if(Robot.gameData.charAt(1)=='L'&&Robot.gameData.charAt(0)=='R'){
-    		addSequential(new DriveMotionMagic(217));
+    		addSequential(new DriveMotionMagic(RobotMap.distToSwitchSides));
     		addSequential(new TurnMotionMagic(-90-Robot.driveTrain.getGyroAngle()));
     		addSequential(new AutoElevator(RobotMap.elevatorSwitch));
     		addSequential(new AutoRelease());

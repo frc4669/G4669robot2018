@@ -20,8 +20,6 @@ public class ArcadeDrive extends Command {
 	boolean turnRunning = false;
 	boolean clockwise = false;
 	double turnAngle;
-	double initialAngle;
-	double currentAngle;
 	
     public ArcadeDrive() {
         // Use requires() here to declare subsystem dependencies
@@ -38,10 +36,6 @@ public class ArcadeDrive extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
-    	
-    	if (Robot.driveTrain.getGyroAngle()>=0&&Robot.driveTrain.getGyroAngle()<=360) currentAngle = Robot.driveTrain.getGyroAngle();
-    	if (Robot.driveTrain.getGyroAngle() > 360) currentAngle = Robot.driveTrain.getGyroAngle()%360;
-    	if (Robot.driveTrain.getGyroAngle() < 0) currentAngle = Robot.driveTrain.getGyroAngle()+360;
     	//Red Button to stop driving
     	if(Robot.f310.getRedButton()){
     		turnRunning = false;
@@ -50,23 +44,40 @@ public class ArcadeDrive extends Command {
     	}
     	else{
 	    	//Using the DPad for Turning
+//    		if (Robot.f310.getDPadPOV()!=-1 && !turnRunning) {
+//	    		turnAngle = Robot.f310.getDPadPOV();
+//	    		initialAngle = currentAngle;
+//	    		if (((turnAngle-initialAngle)>=180&&turnAngle>initialAngle)||  //Shortest path to turn counterclockwise
+//	    			((turnAngle-initialAngle)>=-180&&turnAngle<initialAngle)){
+//	    			clockwise = true;
+//	    		}
+//	    		turnRunning = true;
+//	    	}
+//	    	else if (turnRunning &&
+//	    			((Math.abs(turnAngle%360-currentAngle)<RobotMap.angleTolerance)))
+//	    	{
+//	    		turnRunning = false;
+//	    		Robot.driveTrain.stop();
+//	    	}
+//	    	else if (turnRunning) {
+//	    		Robot.driveTrain.turnTo(clockwise);
+//	    	}
+    		
     		if (Robot.f310.getDPadPOV()!=-1 && !turnRunning) {
-	    		turnAngle = Robot.f310.getDPadPOV();
-	    		initialAngle = currentAngle;
-	    		if (((turnAngle-initialAngle)>=180&&turnAngle>initialAngle)||  //Shortest path to turn counterclockwise
-	    			((turnAngle-initialAngle)>=-180&&turnAngle<initialAngle)){
-	    			clockwise = true;
+    			turnAngle = Robot.f310.getDPadPOV() - Robot.driveTrain.getGyroAngle();
+    			if (((Robot.f310.getDPadPOV()-Robot.driveTrain.getGyroAngle())>=180&&Robot.f310.getDPadPOV()>Robot.driveTrain.getGyroAngle())||  //Shortest path to turn counterclockwise
+	    			((Robot.f310.getDPadPOV()-Robot.driveTrain.getGyroAngle())>=-180&&Robot.f310.getDPadPOV()<Robot.driveTrain.getGyroAngle())){
+	    			turnAngle *= -1;
 	    		}
-	    		turnRunning = true;
+    			turnRunning = true;
 	    	}
 	    	else if (turnRunning &&
-	    			((Math.abs(turnAngle%360-currentAngle)<RobotMap.angleTolerance)))
+	    			((Math.abs(turnAngle%360-Robot.driveTrain.getGyroAngle()%360)<RobotMap.angleTolerance)))
 	    	{
 	    		turnRunning = false;
-	    		Robot.driveTrain.stop();
 	    	}
 	    	else if (turnRunning) {
-	    		Robot.driveTrain.turnTo(clockwise);
+	    		Robot.driveTrain.turn(turnAngle);
 	    	}
     		
     		//Motion Magic Stuff
@@ -103,7 +114,6 @@ public class ArcadeDrive extends Command {
 		    	Robot.driveTrain.driveForward(left, right);
 	    	}
     	}
-    	SmartDashboard.putNumber("Current Angle", currentAngle);
     }
 
     // Make this return true when this Command no longer needs to run execute()

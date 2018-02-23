@@ -1,7 +1,7 @@
 package org.usfirst.frc.team4669.robot.subsystems;
 
 import org.usfirst.frc.team4669.robot.RobotMap;
-import org.usfirst.frc.team4669.robot.commands.HookClimb;
+import org.usfirst.frc.team4669.robot.commands.ArmRaiseCommand;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -38,7 +38,7 @@ public class ArmRaiser extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
-    	setDefaultCommand(new HookClimb());
+    	setDefaultCommand(new ArmRaiseCommand());
     }
 }
 

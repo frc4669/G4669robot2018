@@ -43,7 +43,7 @@ public class Robot extends TimedRobot {
 	public static CubeIntake cubeIntake =  new CubeIntake();
 	public static Elevator elevator = new Elevator();
 	public static String gameData;
-	public static ArmRaiser climber = new ArmRaiser();
+	public static ArmRaiser armRaiser = new ArmRaiser();
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser;

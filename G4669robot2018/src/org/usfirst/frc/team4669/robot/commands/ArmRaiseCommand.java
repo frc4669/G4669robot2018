@@ -7,12 +7,12 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class HookClimb extends Command {
+public class ArmRaiseCommand extends Command {
 
-    public HookClimb() {
+    public ArmRaiseCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.climber);
+    	requires(Robot.armRaiser);
     }
 
     // Called just before this Command runs the first time
@@ -22,13 +22,13 @@ public class HookClimb extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if (Robot.f310.getLeftShoulderButton()){
-    		Robot.climber.lowerArm();
+    		Robot.armRaiser.lowerArm();
     	}
     	else if (Robot.f310.getRightShoulderButton()){
-    		Robot.climber.raiseArm();
+    		Robot.armRaiser.raiseArm();
     	}
     	else {
-    		Robot.climber.stop();
+    		Robot.armRaiser.stop();
     	}
     }
 

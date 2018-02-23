@@ -15,6 +15,8 @@ public class ArcadeDrive extends Command {
 	
 	double left; //left motor
 	double right; //right motor
+	double t_left;
+	double t_right;
 	
 	boolean motionMagicRunning = false;
 	boolean turnRunning = false;
@@ -64,11 +66,7 @@ public class ArcadeDrive extends Command {
 //	    	}
     		
     		if (Robot.f310.getDPadPOV()!=-1 && !turnRunning) {
-    			turnAngle = Robot.f310.getDPadPOV() - Robot.driveTrain.getGyroAngle();
-    			if (((Robot.f310.getDPadPOV()-Robot.driveTrain.getGyroAngle())>=180&&Robot.f310.getDPadPOV()>Robot.driveTrain.getGyroAngle())||  //Shortest path to turn counterclockwise
-	    			((Robot.f310.getDPadPOV()-Robot.driveTrain.getGyroAngle())>=-180&&Robot.f310.getDPadPOV()<Robot.driveTrain.getGyroAngle())){
-	    			turnAngle *= -1;
-	    		}
+    			turnAngle = Robot.f310.getDPadPOV() - Robot.driveTrain.getGyroAngle()%360;
     			turnRunning = true;
 	    	}
 	    	else if (turnRunning &&
@@ -94,8 +92,15 @@ public class ArcadeDrive extends Command {
     		
 	    	//Joystick driving
 			else if (!motionMagicRunning && !turnRunning){
-		    	left = Robot.f310.getLeftY() + Robot.f310.getRightX();
-		    	right = Robot.f310.getLeftY() - Robot.f310.getRightX();
+//		    	left = Robot.f310.getLeftY() + Robot.f310.getRightX();
+//		    	right = Robot.f310.getLeftY() - Robot.f310.getRightX();
+		    	
+	    		t_left = Robot.f310.getLeftY() + Robot.f310.getRightX();;
+	    		t_right = Robot.f310.getLeftY() - Robot.f310.getRightX();
+
+	    		left = t_left + skim(t_right);
+	    		right = t_right + skim(t_left);
+		    		
 		    	if (!Robot.elevator.getForwardLimit()){
 		    		if(left>0.3){
 		    			left = 0.3;
@@ -129,4 +134,13 @@ public class ArcadeDrive extends Command {
     // subsystems is scheduled to run
     protected void interrupted() {
     }
+    
+    double skim(double v) {
+		  // gain determines how much to skim off the top
+		  if (v > 1.0)
+		    return -((v - 1.0) * RobotMap.gain);
+		  else if (v < -1.0)
+		    return -((v + 1.0) * RobotMap.gain);
+		  return 0;
+		}
 }

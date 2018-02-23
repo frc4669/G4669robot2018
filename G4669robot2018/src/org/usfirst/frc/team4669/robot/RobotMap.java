@@ -60,6 +60,8 @@ public class RobotMap {
 	public static int elevatorMid = -19379;
 	public static int elevatorMax = -25290;
 	
+	public static double gain = 0.3;
+	
 	//FIELD MEASUREMENTS
 	public static int distToSwitchSides = 217;
 	public static int distToScaleStraight = 230;
@@ -90,6 +92,6 @@ public class RobotMap {
 	
 	public static final double distancePerRotation = 40.8;
 	
-	public static final int angleTolerance = 5;
+	public static final int angleTolerance = 2;
 }
 

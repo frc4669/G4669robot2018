@@ -32,7 +32,8 @@ public class DriveMotionMagic extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return Math.abs(distance/RobotMap.encoderCountConstant - Robot.driveTrain.getPosition()) < 0.1;
+    	return ((Math.abs(distance/RobotMap.encoderCountConstant - Robot.driveTrain.getPosition()) < 33)
+    			||Robot.f310.getRedButton());
     }
 
     // Called once after isFinished returns true

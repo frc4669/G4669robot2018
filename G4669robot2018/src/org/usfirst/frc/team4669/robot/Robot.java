@@ -2,6 +2,8 @@ package org.usfirst.frc.team4669.robot;
 
 import org.usfirst.frc.team4669.robot.commands.DoNothing;
 import org.usfirst.frc.team4669.robot.commands.DriveForward;
+import org.usfirst.frc.team4669.robot.commands.DriveMotionMagic;
+import org.usfirst.frc.team4669.robot.commands.TurnMotionMagic;
 import org.usfirst.frc.team4669.robot.subsystems.ArmRaiser;
 import org.usfirst.frc.team4669.robot.subsystems.CubeIntake;
 //import org.usfirst.frc.team4669.robot.commands.LaunchAndMoveAuto;
@@ -126,9 +128,11 @@ public class Robot extends TimedRobot {
 	}
 
 	public void updateSmartDashboard() {
-//    	SmartDashboard.putNumber("Gyro", driveTrain.getGyroAngle());
+    	SmartDashboard.putNumber("Gyro", driveTrain.getGyroAngle());
     	SmartDashboard.putNumber("Left Encoder", driveTrain.getLeftEncoder());
     	SmartDashboard.putNumber("Right Encoder", driveTrain.getRightEncoder());
+    	SmartDashboard.putData(new TurnMotionMagic(SmartDashboard.getNumber("TurnAngle", 90)));
+    	SmartDashboard.putData(new DriveMotionMagic(SmartDashboard.getNumber("MotionMagicDistance", 0)));
 //    	SmartDashboard.putNumber("Right Y Axis", Robot.oi.rightY());
     	SmartDashboard.putNumber("driveLeftEncVel", Robot.driveTrain.getLeftEncoderSpeed());
     	SmartDashboard.putNumber("driveRightEncVel", Robot.driveTrain.getRightEncoderSpeed());

@@ -18,8 +18,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Elevator extends Subsystem {
 	
 	private WPI_TalonSRX elevatorMotor;
-	private DigitalInput forwardLimitSwitch;
-	private DigitalInput reverseLimitSwitch;
 	
 	private int timeout = RobotMap.timeout;
 	private int slotIdx = RobotMap.slotIdx;
@@ -32,9 +30,6 @@ public class Elevator extends Subsystem {
 	public Elevator(){
 		super();
 		elevatorMotor = new WPI_TalonSRX(RobotMap.elevator);
-		
-		forwardLimitSwitch = new DigitalInput(RobotMap.forwardLimitSwitch);
-		reverseLimitSwitch = new DigitalInput(RobotMap.reverseLimitSwitch);
 		
 		//Set relevant frame periods to be at least as fast as periodic rate 
 		elevatorMotor.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, timeout);
@@ -117,6 +112,12 @@ public class Elevator extends Subsystem {
     
     public boolean getReverseLimit(){
     	return elevatorMotor.getSensorCollection().isRevLimitSwitchClosed();
+    }
+    public void positionControl(double d){
+    	elevatorMotor.set(ControlMode.Position, d);
+    }
+    public void zeroVelocity(){
+    	elevatorMotor.set(ControlMode.Velocity, 0);
     }
 }
 

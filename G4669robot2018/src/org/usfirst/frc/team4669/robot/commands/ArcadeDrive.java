@@ -65,6 +65,7 @@ public class ArcadeDrive extends Command {
 //	    		Robot.driveTrain.turnTo(clockwise);
 //	    	}
     		
+    		//Turns the Robot to D-Pad angle
     		if (Robot.f310.getDPadPOV()!=-1 && !turnRunning) {
     			turnAngle = Robot.f310.getDPadPOV() - Robot.driveTrain.getGyroAngle()%360;
     			turnRunning = true;
@@ -77,18 +78,6 @@ public class ArcadeDrive extends Command {
 	    	else if (turnRunning) {
 	    		Robot.driveTrain.turn(turnAngle);
 	    	}
-    		
-    		//Motion Magic Stuff
-    		
-    		if (Robot.f310.getBlueButton() && !motionMagicRunning) {
-        		Robot.driveTrain.zeroEncoders();
-        		Robot.driveTrain.driveMotionMagic(-50/RobotMap.encoderCountConstant);
-        		motionMagicRunning = true;
-    		}
-    		else if (motionMagicRunning 
-    				&& Math.abs(-50/RobotMap.encoderCountConstant - Robot.driveTrain.getPosition()) < 30) {
-				motionMagicRunning = false;
-    		}
     		
 	    	//Joystick driving
 			else if (!motionMagicRunning && !turnRunning){

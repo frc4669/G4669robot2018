@@ -14,6 +14,7 @@ public class ElevatorCommand extends Command {
 	
 	double targetPos;
 	boolean motionMagicRunning = false;
+	boolean positionRunning = false;
 
     public ElevatorCommand() {
         // Use requires() here to declare subsystem dependencies
@@ -62,10 +63,17 @@ public class ElevatorCommand extends Command {
 			else if (motionMagicRunning 
 					&& Math.abs(targetPos-Robot.elevator.getEncoderPos()) < 2) {
 					motionMagicRunning = false;
-			}  		
+			}
     		
     		else if (!motionMagicRunning) {
-    			Robot.elevator.customHeight(Robot.oi.leftY());
+    			if (Robot.oi.leftY()==0&&!positionRunning){
+    				Robot.elevator.zeroVelocity();
+    				positionRunning = true;
+    			} 
+    			if (Robot.oi.leftY()!=0){
+    				Robot.elevator.customHeight(Robot.oi.leftY());
+    				positionRunning = false;
+    			}
     		}
     	}
     }

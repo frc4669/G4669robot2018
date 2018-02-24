@@ -1,5 +1,8 @@
 package org.usfirst.frc.team4669.robot;
 
+import org.usfirst.frc.team4669.robot.commands.DriveMotionMagic;
+import org.usfirst.frc.team4669.robot.commands.ZeroSensors;
+
 //import java.util.concurrent.atomic.AtomicReference;
 
 //import org.usfirst.frc.team4669.robot.commands.ZeroSensors;
@@ -64,11 +67,9 @@ public class OI {
 		//StringBuilder _sb = new StringBuilder();
 
 		//SmartDashboard commands
-//		SmartDashboard.putData("Zero Sensors", new ZeroSensors());
-		SmartDashboard.putNumber("CubeIntakeVel",0);
-    	SmartDashboard.putNumber("CubeReleaseVel",0);
-    	//SmartDashboard.putNumber("MotionMagicDistance", 0);
-    	
+		SmartDashboard.putData("Zero Sensors", new ZeroSensors());
+		SmartDashboard.putNumber("MotionMagicDistance", 0);
+		SmartDashboard.putNumber("TurnAngle", 90);
 //		//PID SmartDashboard vals
 //		SmartDashboard.putNumber("PID_P_LEFT", TALON_P_LEFT.get());
 //		SmartDashboard.putNumber("PID_I_LEFT", TALON_I_LEFT.get());

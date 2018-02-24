@@ -1,7 +1,7 @@
 package org.usfirst.frc.team4669.robot.subsystems;
 
 import org.usfirst.frc.team4669.robot.RobotMap;
-import org.usfirst.frc.team4669.robot.commands.ElevatorCommand;
+import org.usfirst.frc.team4669.robot.commands.ElevatorControl;
 
 import com.ctre.phoenix.ParamEnum;
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -71,7 +71,7 @@ public class Elevator extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
-    	setDefaultCommand(new ElevatorCommand());
+    	setDefaultCommand(new ElevatorControl());
     }
     
     public void customHeight(double percent)  {

@@ -9,6 +9,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Ultrasonic;
 
 
@@ -19,7 +20,8 @@ public class CubeIntake extends Subsystem {
 	
 	private WPI_TalonSRX leftIntakeMotor;
 	private WPI_TalonSRX rightIntakeMotor;
-	//private Ultrasonic ultra = new Ultrasonic(1,1);
+	private Servo ropeServo;
+	private Ultrasonic ultra;
 	
 	private int timeout = RobotMap.timeout;
 	private int slotIdx = RobotMap.slotIdx;
@@ -31,6 +33,10 @@ public class CubeIntake extends Subsystem {
 
 	public CubeIntake(){
 		super();
+		
+		ultra = new Ultrasonic(1,1);
+		ropeServo = new Servo(0);
+		
 		leftIntakeMotor =  new WPI_TalonSRX(RobotMap.leftIntake);
 		rightIntakeMotor =  new WPI_TalonSRX(RobotMap.rightIntake);
 		
@@ -88,7 +94,7 @@ public class CubeIntake extends Subsystem {
 		rightIntakeMotor.configPeakCurrentDuration(100, timeout);
 		rightIntakeMotor.enableCurrentLimit(true);
 		
-		//ultra.setAutomaticMode(true);
+		ultra.setAutomaticMode(true);
 	}
 	
     public void initDefaultCommand() {
@@ -98,7 +104,7 @@ public class CubeIntake extends Subsystem {
     }
     
     public void intake(){
-    	double speed = SmartDashboard.getNumber("CubeIntakeVel", 2500);
+//    	double speed = SmartDashboard.getNumber("CubeIntakeVel", 2500);
 		leftIntakeMotor.set(ControlMode.PercentOutput,0.3);
 		rightIntakeMotor.set(ControlMode.PercentOutput,0.3);
 //    	leftIntakeMotor.set(ControlMode.Velocity,speed);
@@ -106,7 +112,7 @@ public class CubeIntake extends Subsystem {
     }
     
     public void releaseCube(){
-    	double speed = SmartDashboard.getNumber("CubeReleaseVel", 1750);
+//    	double speed = SmartDashboard.getNumber("CubeReleaseVel", 1750);
 		leftIntakeMotor.set(ControlMode.PercentOutput,-0.2);
 		rightIntakeMotor.set(ControlMode.PercentOutput,-0.2);
 //    	leftIntakeMotor.set(ControlMode.Velocity,-speed);
@@ -118,7 +124,11 @@ public class CubeIntake extends Subsystem {
 		rightIntakeMotor.set(0);
     }
     
-    //Getting  encoder velocities and position
+    public void releaseArms() {
+    	ropeServo.set(1);
+    }
+    
+    //Getting  encoder velocities and position, distance sensor range
     public double getLeftEncoder() {
     	return leftIntakeMotor.getSensorCollection().getQuadraturePosition();
     }
@@ -135,8 +145,8 @@ public class CubeIntake extends Subsystem {
     	return rightIntakeMotor.getSensorCollection().getQuadratureVelocity();
     }
     
-//    public double getUltrasonicInches() {
-//    	return ultra.getRangeInches(); // reads the range on the ultrasonic sensor
-//    }
+    public double getUltrasonicInches() {
+    	return ultra.getRangeInches(); // reads the range on the ultrasonic sensor
+    }
 }
 

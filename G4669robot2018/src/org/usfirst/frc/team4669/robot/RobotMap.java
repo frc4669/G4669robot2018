@@ -23,8 +23,9 @@ public class RobotMap {
 	public static final int leftIntake = 1;
 	public static final int rightIntake = 2;
 	public static final int elevator = 3;
-	public static final int climber = 6;
-	public static final int armRaiser = 13;
+	public static final int rightClimber = 13;
+	public static final int centerClimber = 6;
+	public static final int leftClimber = 9;
 	
 	//Sensors
 	public static final int forwardLimitSwitch = 1;
@@ -39,7 +40,7 @@ public class RobotMap {
 	public static final int f310 = 2;
 	
 	
-	//Left Joystick Controls
+	//Joystick Controls
 	public static final int stopElevatorButton= 1;
 	public static final int groundElevatorButton= 2;
 	public static final int maxElevatorButton= 3;
@@ -47,10 +48,6 @@ public class RobotMap {
 	public static final int switchElevatorButton= 5;
 	public static final int zeroEncoderElevatorButton = 9;
 	public static final int motionMagicTest = 10;
-	
-	
-	//Right Joystick Controls
-	
 	
 	//CONSTANTS
 	public static int elevatorVel = 785;
@@ -60,12 +57,14 @@ public class RobotMap {
 	public static int elevatorMid = -19379;
 	public static int elevatorMax = -25290;
 	
-	public static double gain = 0.3;
+	public static double gain = 0.3; //Speed to take off top for arcade drive throttle
 	
 	//FIELD MEASUREMENTS
 	public static int distToSwitchSides = 217;
 	public static int distToScaleStraight = 230;
 	public static int distLeftAndRightScales = 210;
+	public static int distFwdToSwitchCenter= 150;
+	public static int distSwitchSidesFromCenter= 40;
 	
 	//DRIVE TRAIN SPEED PROPORTION
 	public static final double driveTrainSpeedProportion = 0.85;
@@ -84,7 +83,7 @@ public class RobotMap {
 	 */
     public static final double wheelCircumference = Math.PI * wheelDiameter;
 	
-	public static final double encoderCountConstant  = wheelCircumference / 4096;
+	public static final double encoderCountConstant  = wheelCircumference / 4096; //Used to convert inches to encoder ticks
 	// If you are using multiple modules, make sure to define both the port
 	// number and the module. For example you with a rangefinder:
 	// public static int rangefinderPort = 1;
@@ -93,5 +92,6 @@ public class RobotMap {
 	public static final double distancePerRotation = wheelBase*Math.PI/4;
 	
 	public static final int angleTolerance = 2;
+
 }
 

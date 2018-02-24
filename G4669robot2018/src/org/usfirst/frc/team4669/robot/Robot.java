@@ -4,7 +4,7 @@ import org.usfirst.frc.team4669.robot.commands.DoNothing;
 import org.usfirst.frc.team4669.robot.commands.DriveForward;
 import org.usfirst.frc.team4669.robot.commands.DriveMotionMagic;
 import org.usfirst.frc.team4669.robot.commands.TurnMotionMagic;
-import org.usfirst.frc.team4669.robot.subsystems.ArmRaiser;
+import org.usfirst.frc.team4669.robot.subsystems.Climber;
 import org.usfirst.frc.team4669.robot.subsystems.CubeIntake;
 //import org.usfirst.frc.team4669.robot.commands.LaunchAndMoveAuto;
 import org.usfirst.frc.team4669.robot.subsystems.DriveTrain;
@@ -44,8 +44,9 @@ public class Robot extends TimedRobot {
 	public static DriverStation driverStation;
 	public static CubeIntake cubeIntake =  new CubeIntake();
 	public static Elevator elevator = new Elevator();
+	public static Climber climber = new Climber();
 	public static String gameData;
-	public static ArmRaiser armRaiser = new ArmRaiser();
+	public static double time;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser;
@@ -77,6 +78,8 @@ public class Robot extends TimedRobot {
 
 	public void disabledPeriodic() {
 		driverStation = DriverStation.getInstance();
+		gameData = driverStation.getGameSpecificMessage();
+		time = driverStation.getMatchTime();
 		updateSmartDashboard();
 		Scheduler.getInstance().run();
 	}
@@ -101,6 +104,7 @@ public class Robot extends TimedRobot {
 	 * This function is called periodically during autonomous
 	 */
 	public void autonomousPeriodic() {
+		time = driverStation.getMatchTime();
 		updateSmartDashboard();
 		Scheduler.getInstance().run();
 	}
@@ -117,6 +121,7 @@ public class Robot extends TimedRobot {
 	 * This function is called periodically during operator control
 	 */
 	public void teleopPeriodic() {
+		time = driverStation.getMatchTime();
 		updateSmartDashboard();
 		Scheduler.getInstance().run();
 	}

@@ -10,13 +10,13 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ElevatorCommand extends Command {
+public class ElevatorControl extends Command {
 	
 	double targetPos;
 	boolean motionMagicRunning = false;
 	boolean positionRunning = false;
 
-    public ElevatorCommand() {
+    public ElevatorControl() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	 requires(Robot.elevator);

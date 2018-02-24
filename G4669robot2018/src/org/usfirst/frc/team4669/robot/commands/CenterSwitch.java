@@ -1,5 +1,8 @@
 package org.usfirst.frc.team4669.robot.commands;
 
+import org.usfirst.frc.team4669.robot.Robot;
+import org.usfirst.frc.team4669.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -24,6 +27,23 @@ public class CenterSwitch extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	
+    	if (Robot.gameData.charAt(0)=='L') {
+    		addSequential(new DriveForward());
+    		addSequential(new TurnMotionMagic(-90));
+    		addSequential(new DriveMotionMagic(RobotMap.distSwitchSidesFromCenter));
+    		addSequential(new TurnMotionMagic(90));
+    		addSequential(new DriveMotionMagic(RobotMap.distFwdToSwitchCenter));
+    		addSequential(new AutoElevator(RobotMap.elevatorSwitch));
+    		addSequential(new AutoRelease());
+    	}
+    	else {
+    		addSequential(new DriveForward());
+    		addSequential(new TurnMotionMagic(90));
+    		addSequential(new DriveMotionMagic(RobotMap.distSwitchSidesFromCenter));
+    		addSequential(new TurnMotionMagic(-90));
+    		addSequential(new DriveMotionMagic(RobotMap.distFwdToSwitchCenter));
+    		addSequential(new AutoElevator(RobotMap.elevatorSwitch));
+    		addSequential(new AutoRelease());
+    	}
     }
 }

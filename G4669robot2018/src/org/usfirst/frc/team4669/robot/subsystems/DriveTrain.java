@@ -27,10 +27,6 @@ public class DriveTrain extends Subsystem {
 	public WPI_TalonSRX topRightMotor;
 	private WPI_TalonSRX bottomRightMotor;
 	
-	int timeout = RobotMap.timeout;
-	int slotIdx = RobotMap.slotIdx;
-	int pidIdx = RobotMap.pidIdx;
-	
 	public Gyro analogGyro;
 	
 	public DriveTrain() {
@@ -45,8 +41,8 @@ public class DriveTrain extends Subsystem {
 		int velocity = 1365; //About 200 RPM, vel units are in sensor units per 100ms
 		int accel = 1365;
 		
-		topRightMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,pidIdx,timeout);
-		topLeftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,pidIdx,timeout);
+		topRightMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,RobotMap.pidIdx,RobotMap.timeout);
+		topLeftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,RobotMap.pidIdx,RobotMap.timeout);
 		
 		topRightMotor.setInverted(true);
 		topLeftMotor.setInverted(false);
@@ -55,59 +51,49 @@ public class DriveTrain extends Subsystem {
 		
 		topRightMotor.setSensorPhase(true);
 		topLeftMotor.setSensorPhase(true);
-		
-		//topLeftMotor.configEncoderCodesPerRev(1440); // if using
-		// FeedbackDevice.QuadEncoder
-		// _talon.configPotentiometerTurns(XXX), // if using
-		// FeedbackDevice.AnalogEncoder or AnalogPot
-
-		//topRightMotor.configEncoderCodesPerRev(1440); // if using
-		// FeedbackDevice.QuadEncoder
-		// _talon.configPotentiometerTurns(XXX), // if using
-		// FeedbackDevice.AnalogEncoder or AnalogPot
 
 		/* set the peak and nominal outputs, 1 means full */
-		topRightMotor.configNominalOutputForward(0, timeout);
-		topRightMotor.configNominalOutputReverse(0, timeout);
-		topRightMotor.configPeakOutputForward(1, timeout);
-		topRightMotor.configPeakOutputReverse(-1, timeout);
+		topRightMotor.configNominalOutputForward(0, RobotMap.timeout);
+		topRightMotor.configNominalOutputReverse(0, RobotMap.timeout);
+		topRightMotor.configPeakOutputForward(1, RobotMap.timeout);
+		topRightMotor.configPeakOutputReverse(-1, RobotMap.timeout);
 		
-		topLeftMotor.configNominalOutputForward(0, timeout);
-		topLeftMotor.configNominalOutputReverse(0, timeout);
-		topLeftMotor.configPeakOutputForward(1, timeout);
-		topLeftMotor.configPeakOutputReverse(-1, timeout);
+		topLeftMotor.configNominalOutputForward(0, RobotMap.timeout);
+		topLeftMotor.configNominalOutputReverse(0, RobotMap.timeout);
+		topLeftMotor.configPeakOutputForward(1, RobotMap.timeout);
+		topLeftMotor.configPeakOutputReverse(-1, RobotMap.timeout);
 		
 		/* set closed loop gains in slot0 - see documentation */
-		topRightMotor.selectProfileSlot(slotIdx, pidIdx);
-		topRightMotor.config_kF(slotIdx,0.3343,timeout);
-		topRightMotor.config_kP(slotIdx,0.4,timeout);
-		topRightMotor.config_kI(slotIdx,0.001,timeout);
-		topRightMotor.config_kD(slotIdx,15,timeout);
+		topRightMotor.selectProfileSlot(RobotMap.slotIdx, RobotMap.pidIdx);
+		topRightMotor.config_kF(RobotMap.slotIdx,RobotMap.leftkF,RobotMap.timeout);
+		topRightMotor.config_kP(RobotMap.slotIdx,RobotMap.leftkP,RobotMap.timeout);
+		topRightMotor.config_kI(RobotMap.slotIdx,RobotMap.leftkI,RobotMap.timeout);
+		topRightMotor.config_kD(RobotMap.slotIdx,RobotMap.leftkD,RobotMap.timeout);
 		
-		topLeftMotor.selectProfileSlot(slotIdx,pidIdx);
-		topLeftMotor.config_kF(slotIdx,0.3343,timeout); //0.3739
-		topLeftMotor.config_kP(slotIdx,0.4,timeout); //0.3
-		topLeftMotor.config_kI(slotIdx,0.001,timeout);
-		topLeftMotor.config_kD(slotIdx,15,timeout); //16
+		topLeftMotor.selectProfileSlot(RobotMap.slotIdx,RobotMap.pidIdx);
+		topLeftMotor.config_kF(RobotMap.slotIdx,0.3343,RobotMap.timeout); //0.3739
+		topLeftMotor.config_kP(RobotMap.slotIdx,0.4,RobotMap.timeout); //0.3
+		topLeftMotor.config_kI(RobotMap.slotIdx,0.001,RobotMap.timeout);
+		topLeftMotor.config_kD(RobotMap.slotIdx,15,RobotMap.timeout); //16
 		
 		/* set acceleration and vcruise velocity - see documentation */
-		topRightMotor.configMotionCruiseVelocity(velocity,timeout); //855
-		topRightMotor.configMotionAcceleration(accel,timeout); //855
-		topRightMotor.setSelectedSensorPosition(0,pidIdx,timeout);
+		topRightMotor.configMotionCruiseVelocity(velocity,RobotMap.timeout); //855
+		topRightMotor.configMotionAcceleration(accel,RobotMap.timeout); //855
+		topRightMotor.setSelectedSensorPosition(0,RobotMap.pidIdx,RobotMap.timeout);
 		
-		topLeftMotor.configMotionCruiseVelocity(velocity,timeout);
-		topLeftMotor.configMotionAcceleration(accel,timeout);
-		topLeftMotor.setSelectedSensorPosition(0,pidIdx,timeout);
+		topLeftMotor.configMotionCruiseVelocity(velocity,RobotMap.timeout);
+		topLeftMotor.configMotionAcceleration(accel,RobotMap.timeout);
+		topLeftMotor.setSelectedSensorPosition(0,RobotMap.pidIdx,RobotMap.timeout);
 		
 		//Set Current limit 
-		topRightMotor.configContinuousCurrentLimit(20, timeout);
-		topRightMotor.configPeakCurrentLimit(25, timeout);
-		topRightMotor.configPeakCurrentDuration(100, timeout);
+		topRightMotor.configContinuousCurrentLimit(20, RobotMap.timeout);
+		topRightMotor.configPeakCurrentLimit(25, RobotMap.timeout);
+		topRightMotor.configPeakCurrentDuration(100, RobotMap.timeout);
 		topRightMotor.enableCurrentLimit(true);
 		
-		topLeftMotor.configContinuousCurrentLimit(20, timeout);
-		topLeftMotor.configPeakCurrentLimit(25, timeout);
-		topLeftMotor.configPeakCurrentDuration(100, timeout);
+		topLeftMotor.configContinuousCurrentLimit(20, RobotMap.timeout);
+		topLeftMotor.configPeakCurrentLimit(25, RobotMap.timeout);
+		topLeftMotor.configPeakCurrentDuration(100, RobotMap.timeout);
 		topLeftMotor.enableCurrentLimit(true);
 		
 		//Setting bottom motors to follow top
@@ -149,11 +135,11 @@ public class DriveTrain extends Subsystem {
     	return turningValue;
     }
     
-    public double getLeftEncoder() {
+    public int getLeftEncoder() {
     	return topLeftMotor.getSensorCollection().getQuadraturePosition();
     }
     
-    public double getRightEncoder() {
+    public int getRightEncoder() {
     	return topRightMotor.getSensorCollection().getQuadraturePosition();
     }
     
@@ -166,8 +152,8 @@ public class DriveTrain extends Subsystem {
     }
     
     public void zeroEncoders() {
-    	topLeftMotor.setSelectedSensorPosition(0,pidIdx,timeout); 
-    	topRightMotor.setSelectedSensorPosition(0,pidIdx,timeout);
+    	topLeftMotor.setSelectedSensorPosition(0,RobotMap.pidIdx,RobotMap.timeout); 
+    	topRightMotor.setSelectedSensorPosition(0,RobotMap.pidIdx,RobotMap.timeout);
     }
     
     public void driveMotionMagic(double targetEncPosition) {

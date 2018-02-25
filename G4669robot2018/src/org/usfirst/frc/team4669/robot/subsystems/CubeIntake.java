@@ -9,6 +9,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Ultrasonic;
 
@@ -21,7 +22,7 @@ public class CubeIntake extends Subsystem {
 	private WPI_TalonSRX leftIntakeMotor;
 	private WPI_TalonSRX rightIntakeMotor;
 	private Servo ropeServo;
-	private Ultrasonic ultra;
+	private AnalogInput distSensor;
 	
 	private int timeout = RobotMap.timeout;
 	private int slotIdx = RobotMap.slotIdx;
@@ -34,7 +35,7 @@ public class CubeIntake extends Subsystem {
 	public CubeIntake(){
 		super();
 		
-		ultra = new Ultrasonic(1,1);
+		distSensor = new AnalogInput(0);
 		ropeServo = new Servo(0);
 		
 		leftIntakeMotor =  new WPI_TalonSRX(RobotMap.leftIntake);
@@ -93,8 +94,6 @@ public class CubeIntake extends Subsystem {
 		rightIntakeMotor.configPeakCurrentLimit(15, timeout);
 		rightIntakeMotor.configPeakCurrentDuration(100, timeout);
 		rightIntakeMotor.enableCurrentLimit(true);
-		
-		ultra.setAutomaticMode(true);
 	}
 	
     public void initDefaultCommand() {
@@ -119,13 +118,17 @@ public class CubeIntake extends Subsystem {
 //    	rightIntakeMotor.set(ControlMode.Velocity,-speed);
     }
     
-    public void stop(){
+    public void stopIntake(){
 		leftIntakeMotor.set(0);
 		rightIntakeMotor.set(0);
     }
     
     public void releaseArms() {
-    	ropeServo.set(1);
+    	ropeServo.set(0);//0 means rotate full counter-clockwise, 1 means full clockwise
+    }
+    
+    public void stopServo() {
+    	ropeServo.set(0.5);//0.5 means stop
     }
     
     //Getting  encoder velocities and position, distance sensor range
@@ -145,8 +148,11 @@ public class CubeIntake extends Subsystem {
     	return rightIntakeMotor.getSensorCollection().getQuadratureVelocity();
     }
     
-    public double getUltrasonicInches() {
-    	return ultra.getRangeInches(); // reads the range on the ultrasonic sensor
+    public double getDistance() {
+    	return distSensor.getVoltage(); // reads the range on the distance sensor in voltage, 0 is farther
+    }
+    public boolean hasCube(){
+    	return getDistance() > 1;
     }
 }
 

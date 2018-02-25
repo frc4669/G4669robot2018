@@ -16,6 +16,7 @@ import org.usfirst.frc.team4669.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4669.robot.subsystems.Elevator;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -133,14 +134,14 @@ public class Robot extends TimedRobot {
 	}
 
 	public void updateSmartDashboard() {
-    	SmartDashboard.putNumber("Gyro", driveTrain.getGyroAngle());
-    	SmartDashboard.putNumber("Left Encoder", driveTrain.getLeftEncoder());
-    	SmartDashboard.putNumber("Right Encoder", driveTrain.getRightEncoder());
+    	SmartDashboard.putData("Gyro",(Sendable) driveTrain.analogGyro);
+    	SmartDashboard.putBoolean("Has Cube", cubeIntake.hasCube());
     	SmartDashboard.putData(new TurnMotionMagic(SmartDashboard.getNumber("TurnAngle", 90)));
     	SmartDashboard.putData(new DriveMotionMagic(SmartDashboard.getNumber("MotionMagicDistance", 0)));
-//    	SmartDashboard.putNumber("Right Y Axis", Robot.oi.rightY());
-    	SmartDashboard.putNumber("driveLeftEncVel", Robot.driveTrain.getLeftEncoderSpeed());
-    	SmartDashboard.putNumber("driveRightEncVel", Robot.driveTrain.getRightEncoderSpeed());
+    	SmartDashboard.putNumber("Left Position", driveTrain.getLeftEncoder());
+    	SmartDashboard.putNumber("Right Position", driveTrain.getRightEncoder());
+    	SmartDashboard.putNumber("Left Velocity", Robot.driveTrain.getLeftEncoderSpeed());
+    	SmartDashboard.putNumber("Right Velocity", Robot.driveTrain.getRightEncoderSpeed());
 //    	SmartDashboard.putNumber("POV Angle", Robot.f310.getDPadPOV());
 //    	SmartDashboard.putNumber("Intake Left Enc", Robot.cubeIntake.getLeftEncoder());
 //    	SmartDashboard.putNumber("Intake Right Enc", Robot.cubeIntake.getRightEncoder());

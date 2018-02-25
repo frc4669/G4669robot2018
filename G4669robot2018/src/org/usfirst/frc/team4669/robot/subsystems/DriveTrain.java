@@ -22,16 +22,16 @@ public class DriveTrain extends Subsystem {
 	private static final double kP = 0.005;
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-	private WPI_TalonSRX topLeftMotor;
+	public WPI_TalonSRX topLeftMotor;
 	private WPI_TalonSRX bottomLeftMotor;
-	private WPI_TalonSRX topRightMotor;
+	public WPI_TalonSRX topRightMotor;
 	private WPI_TalonSRX bottomRightMotor;
 	
 	int timeout = RobotMap.timeout;
 	int slotIdx = RobotMap.slotIdx;
 	int pidIdx = RobotMap.pidIdx;
 	
-	private Gyro analogGyro;
+	public Gyro analogGyro;
 	
 	public DriveTrain() {
 		super();
@@ -206,6 +206,7 @@ public class DriveTrain extends Subsystem {
 	public double getRightCurrent() {
 		return topRightMotor.getOutputCurrent();
 	}
+	
 }
     
     

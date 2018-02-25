@@ -7,40 +7,26 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class Intake extends Command {
+public class AutoIntake extends Command {
 
-    public Intake() {
+    public AutoIntake() {
         // Use requires() here to declare subsystem dependencies
-    	// eg. requires(chassis);
-        requires(Robot.cubeIntake);
+        // eg. requires(chassis);
+    	requires(Robot.cubeIntake);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.cubeIntake.intake();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.f310.getLeftShoulderButton()){
-    		Robot.cubeIntake.releaseArms();
-    	}
-    	else if(!Robot.f310.getLeftShoulderButton()){
-    		Robot.cubeIntake.stopServo();
-    	}
-		if(Robot.f310.getGreenButton()){
-    		Robot.cubeIntake.intake();
-    	} 
-		else if(Robot.f310.getOrangeButton()){
-    		Robot.cubeIntake.releaseCube();
-    	} 
-		else {
-    		Robot.cubeIntake.stopIntake();
-    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return Robot.cubeIntake.hasCube();
     }
 
     // Called once after isFinished returns true

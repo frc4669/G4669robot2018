@@ -33,7 +33,7 @@ public class AutoRelease extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.cubeIntake.stop();
+    	Robot.cubeIntake.stopIntake();
     }
 
     // Called when another command which requires one or more of the same

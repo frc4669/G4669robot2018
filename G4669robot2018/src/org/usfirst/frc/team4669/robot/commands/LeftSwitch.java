@@ -27,13 +27,15 @@ public class LeftSwitch extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	if(Robot.gameData.charAt(0)=='L'){
-    		addSequential(new DriveMotionMagic(180));
-    		addSequential(new AutoElevator(RobotMap.elevatorSwitch));
-    		addSequential(new AutoRelease());
-    		addSequential(new AutoElevator(0));
-    	} else{
-    		addSequential(new DriveMotionMagic(120));
+    	if(Robot.gameData.length()>0){
+	    	if(Robot.gameData.charAt(0)=='L'){
+	    		addSequential(new DriveMotionMagic(180));
+	    		addSequential(new AutoElevator(RobotMap.elevatorSwitch));
+	    		addSequential(new AutoRelease());
+	    		addSequential(new AutoElevator(0));
+	    	} else{
+	    		addSequential(new DriveMotionMagic(120));
+	    	}
     	}
     }
 }

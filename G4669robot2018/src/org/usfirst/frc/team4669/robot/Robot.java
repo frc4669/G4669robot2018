@@ -1,8 +1,17 @@
 package org.usfirst.frc.team4669.robot;
 
+import org.usfirst.frc.team4669.robot.commands.CenterSwitch;
 import org.usfirst.frc.team4669.robot.commands.DoNothing;
 import org.usfirst.frc.team4669.robot.commands.DriveForward;
 import org.usfirst.frc.team4669.robot.commands.DriveMotionMagic;
+import org.usfirst.frc.team4669.robot.commands.DriveSpeedControl;
+import org.usfirst.frc.team4669.robot.commands.LeftAllScale;
+import org.usfirst.frc.team4669.robot.commands.LeftSideToRightScalePath;
+import org.usfirst.frc.team4669.robot.commands.LeftSwitch;
+import org.usfirst.frc.team4669.robot.commands.LeftSwitchLeftScale;
+import org.usfirst.frc.team4669.robot.commands.RightAllScale;
+import org.usfirst.frc.team4669.robot.commands.RightSwitch;
+import org.usfirst.frc.team4669.robot.commands.RightSwitchRightScale;
 import org.usfirst.frc.team4669.robot.commands.TurnMotionMagic;
 import org.usfirst.frc.team4669.robot.subsystems.Climber;
 import org.usfirst.frc.team4669.robot.subsystems.CubeIntake;
@@ -46,11 +55,12 @@ public class Robot extends TimedRobot {
 	public static CubeIntake cubeIntake =  new CubeIntake();
 	public static Elevator elevator = new Elevator();
 	public static Climber climber = new Climber();
-	public static String gameData;
+	public static String gameData = "";
 	public static double time;
 
 	Command autonomousCommand;
-	SendableChooser<Command> chooser;
+	SendableChooser<String> chooser;
+	String autonomousString;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -61,9 +71,18 @@ public class Robot extends TimedRobot {
 		
 		driveTrain.zeroEncoders();
 		
-		chooser = new SendableChooser<Command>();
-		chooser.addDefault("Do Nothing", new DoNothing());
-		chooser.addObject("Drive Forward", new DriveForward());
+		chooser = new SendableChooser<String>();
+		chooser.addDefault("Do Nothing", "Do Nothing");
+		chooser.addObject("Drive Forward", "Drive Forward");
+		chooser.addObject("Left Both Scales", "Left Both Scales");
+		chooser.addObject("Left Switch or Scale", "Left Switch or Scale");
+		chooser.addObject("Left Switch", "Left Switch");
+		chooser.addObject("Center Switch", "Center Switch");
+		chooser.addObject("Right Both Scales", "Right Both Scales");
+		chooser.addObject("Right Switch or Scale", "Right Switch or Scale");
+		chooser.addObject("Right Switch", "Right Switch");
+		chooser.addObject("Left To Right Scale", "Left To Right Scale");
+		
 		SmartDashboard.putData("Auto mode", chooser);
 		
 	}
@@ -79,10 +98,14 @@ public class Robot extends TimedRobot {
 
 	public void disabledPeriodic() {
 		driverStation = DriverStation.getInstance();
-		gameData = driverStation.getGameSpecificMessage();
 		time = driverStation.getMatchTime();
 		updateSmartDashboard();
 		Scheduler.getInstance().run();
+		if (autonomousCommand != null) autonomousCommand.cancel();
+		Robot.driveTrain.stop();
+		Robot.cubeIntake.stopIntake();
+		Robot.cubeIntake.stopServo();
+		Robot.elevator.stop();
 	}
 
 	/**
@@ -96,7 +119,38 @@ public class Robot extends TimedRobot {
 	 */
 	public void autonomousInit() {
 		gameData = driverStation.getGameSpecificMessage();
-		autonomousCommand = (Command) chooser.getSelected();
+		autonomousString = (String) chooser.getSelected();
+		if(autonomousString.equals("Do Nothing")){
+			autonomousCommand = new DoNothing();
+		}
+		else if(autonomousString.equals("Drive Forward")){
+			autonomousCommand = new DriveForward();
+		}
+		else if(autonomousString.equals("Left Both Scales")){
+			autonomousCommand = new LeftAllScale();
+		}
+		else if(autonomousString.equals("Left Switch or Scale")){
+			autonomousCommand = new LeftSwitchLeftScale();
+		}
+		else if(autonomousString.equals("Left Switch")){
+			autonomousCommand = new LeftSwitch();
+		}
+		else if(autonomousString.equals("Center Switch")){
+			autonomousCommand = new CenterSwitch();
+		}
+		else if(autonomousString.equals("Right Both Scales")){
+			autonomousCommand = new RightAllScale();
+		}
+		else if(autonomousString.equals("Right Switch or Scale")){
+			autonomousCommand = new RightSwitchRightScale();
+		}
+		else if(autonomousString.equals("Right Switch")){
+			autonomousCommand = new RightSwitch();
+		}
+		else if(autonomousString.equals("Left To Right Scale")){
+//			autonomousCommand = new LeftSideToRightScalePath();
+		}
+		
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null) autonomousCommand.start();
 	}
@@ -136,8 +190,9 @@ public class Robot extends TimedRobot {
 	public void updateSmartDashboard() {
     	SmartDashboard.putData("Gyro",(Sendable) driveTrain.analogGyro);
     	SmartDashboard.putBoolean("Has Cube", cubeIntake.hasCube());
-    	SmartDashboard.putData(new TurnMotionMagic(SmartDashboard.getNumber("TurnAngle", 90)));
-    	SmartDashboard.putData(new DriveMotionMagic(SmartDashboard.getNumber("MotionMagicDistance", 0)));
+//    	SmartDashboard.putData(new TurnMotionMagic(SmartDashboard.getNumber("TurnAngle", 90)));
+//    	SmartDashboard.putData(new DriveMotionMagic(SmartDashboard.getNumber("MotionMagicDistance", 0)));
+//    	SmartDashboard.putData(new DriveSpeedControl(SmartDashboard.getNumber("Drive Left Speed", 0),SmartDashboard.getNumber("Drive Right Speed", 0)));
     	SmartDashboard.putNumber("Left Position", driveTrain.getLeftEncoder());
     	SmartDashboard.putNumber("Right Position", driveTrain.getRightEncoder());
     	SmartDashboard.putNumber("Left Velocity", Robot.driveTrain.getLeftEncoderSpeed());

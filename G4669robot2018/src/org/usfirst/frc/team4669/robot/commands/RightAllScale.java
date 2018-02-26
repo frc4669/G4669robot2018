@@ -27,23 +27,25 @@ public class RightAllScale extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	if (Robot.gameData.charAt(1)=='R'){
-    		addSequential(new DriveMotionMagic(RobotMap.distToScaleStraight));
-    		addSequential(new TurnMotionMagic(-90-Robot.driveTrain.getGyroAngle()));
-    		addSequential(new AutoElevator(RobotMap.elevatorMid));
-    		addSequential(new DriveMotionMagic(10));
-    		addSequential(new AutoRelease());
-    		addSequential(new AutoElevator(0));
-    	}
-    	else if(Robot.gameData.charAt(1)=='L'){
-    		addSequential(new DriveMotionMagic(RobotMap.distToScaleStraight-20));
-    		addSequential(new TurnMotionMagic(-90-Robot.driveTrain.getGyroAngle()));
-    		addSequential(new DriveMotionMagic(RobotMap.distLeftAndRightScales));
-    		addSequential(new TurnMotionMagic(90-Robot.driveTrain.getGyroAngle()));
-    		addSequential(new AutoElevator(RobotMap.elevatorMid));
-    		addSequential(new DriveMotionMagic(35));
-    		addSequential(new AutoRelease());
-    		addSequential(new AutoElevator(0));
+    	if(Robot.gameData.length()>0){
+	    	if (Robot.gameData.charAt(1)=='R'){
+	    		addSequential(new DriveMotionMagic(RobotMap.distToScaleStraight));
+	    		addSequential(new TurnMotionMagic(-90-Robot.driveTrain.getGyroAngle()));
+	    		addSequential(new AutoElevator(RobotMap.elevatorMid));
+	    		addSequential(new DriveMotionMagic(10));
+	    		addSequential(new AutoRelease());
+	    		addSequential(new AutoElevator(0));
+	    	}
+	    	else if(Robot.gameData.charAt(1)=='L'){
+	    		addSequential(new DriveMotionMagic(RobotMap.distToScaleStraight-20));
+	    		addSequential(new TurnMotionMagic(-90-Robot.driveTrain.getGyroAngle()));
+	    		addSequential(new DriveMotionMagic(RobotMap.distLeftAndRightScales));
+	    		addSequential(new TurnMotionMagic(90-Robot.driveTrain.getGyroAngle()));
+	    		addSequential(new AutoElevator(RobotMap.elevatorMid));
+	    		addSequential(new DriveMotionMagic(35));
+	    		addSequential(new AutoRelease());
+	    		addSequential(new AutoElevator(0));
+	    	}
     	}
     }
 }

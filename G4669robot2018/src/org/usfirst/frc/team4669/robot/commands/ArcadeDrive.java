@@ -90,7 +90,7 @@ public class ArcadeDrive extends Command {
 	    		left = t_left + skim(t_right);
 	    		right = t_right + skim(t_left);
 		    		
-		    	if (!Robot.elevator.getForwardLimit()){
+		    	if (Robot.elevator.getEncoderPos()<-9500){
 		    		if(left>0.3){
 		    			left = 0.3;
 		    		}
@@ -105,7 +105,7 @@ public class ArcadeDrive extends Command {
 		    		}
 		    	}
 //	    		Robot.driveTrain.setSpeed(left*2400, right*2400);
-		    	Robot.driveTrain.driveForward(left, right);
+		    	Robot.driveTrain.driveForward(0.8*left, 0.8*right);
 	    	}
     	}
     }

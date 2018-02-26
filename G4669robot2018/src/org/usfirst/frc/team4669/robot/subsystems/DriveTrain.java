@@ -65,16 +65,18 @@ public class DriveTrain extends Subsystem {
 		
 		/* set closed loop gains in slot0 - see documentation */
 		topRightMotor.selectProfileSlot(RobotMap.slotIdx, RobotMap.pidIdx);
-		topRightMotor.config_kF(RobotMap.slotIdx,RobotMap.leftkF,RobotMap.timeout);
-		topRightMotor.config_kP(RobotMap.slotIdx,RobotMap.leftkP,RobotMap.timeout);
-		topRightMotor.config_kI(RobotMap.slotIdx,RobotMap.leftkI,RobotMap.timeout);
-		topRightMotor.config_kD(RobotMap.slotIdx,RobotMap.leftkD,RobotMap.timeout);
+		topRightMotor.config_kF(RobotMap.slotIdx,RobotMap.rightkF,RobotMap.timeout);
+		topRightMotor.config_kP(RobotMap.slotIdx,RobotMap.rightkP,RobotMap.timeout);
+		topRightMotor.config_kI(RobotMap.slotIdx,RobotMap.rightkI,RobotMap.timeout);
+		topRightMotor.config_kD(RobotMap.slotIdx,RobotMap.rightkD,RobotMap.timeout);
+		topRightMotor.config_IntegralZone(RobotMap.slotIdx,RobotMap.rightkIZone,RobotMap.timeout);
 		
 		topLeftMotor.selectProfileSlot(RobotMap.slotIdx,RobotMap.pidIdx);
-		topLeftMotor.config_kF(RobotMap.slotIdx,0.3343,RobotMap.timeout); //0.3739
-		topLeftMotor.config_kP(RobotMap.slotIdx,0.4,RobotMap.timeout); //0.3
-		topLeftMotor.config_kI(RobotMap.slotIdx,0.001,RobotMap.timeout);
-		topLeftMotor.config_kD(RobotMap.slotIdx,15,RobotMap.timeout); //16
+		topLeftMotor.config_kF(RobotMap.slotIdx,RobotMap.leftkF,RobotMap.timeout);
+		topLeftMotor.config_kP(RobotMap.slotIdx,RobotMap.leftkP,RobotMap.timeout);
+		topLeftMotor.config_kI(RobotMap.slotIdx,RobotMap.leftkI,RobotMap.timeout);
+		topLeftMotor.config_kD(RobotMap.slotIdx,RobotMap.leftkD,RobotMap.timeout);
+		topLeftMotor.config_IntegralZone(RobotMap.slotIdx,RobotMap.leftkIZone,RobotMap.timeout);
 		
 		/* set acceleration and vcruise velocity - see documentation */
 		topRightMotor.configMotionCruiseVelocity(velocity,RobotMap.timeout); //855
@@ -107,8 +109,8 @@ public class DriveTrain extends Subsystem {
     }
     
     public void driveForward(double vBusLeft, double vBusRight) {
-    	topLeftMotor.set(ControlMode.PercentOutput,0.8*vBusLeft);
-    	topRightMotor.set(ControlMode.PercentOutput,0.8*vBusRight);
+    	topLeftMotor.set(ControlMode.PercentOutput,vBusLeft);
+    	topRightMotor.set(ControlMode.PercentOutput,vBusRight);
     }
     
     public void setSpeed(double leftSpeed,double rightSpeed) {
@@ -123,6 +125,10 @@ public class DriveTrain extends Subsystem {
     
     public void calibrateGyro() {
     	analogGyro.calibrate();
+    }
+    
+    public void resetGyro() {
+    	analogGyro.reset();
     }
     
     public double getGyroAngle() {

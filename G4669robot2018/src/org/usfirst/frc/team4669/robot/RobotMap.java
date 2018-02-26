@@ -53,9 +53,9 @@ public class RobotMap {
 	public static final int elevatorVel = 785;
 	public static final int elevatorAccel = 3140;
 	
-	public static final int elevatorSwitch = -11350;
+	public static final int elevatorSwitch = -9000;
 	public static final int elevatorMid = -19379;
-	public static final int elevatorMax = -25290;
+	public static final int elevatorMax = -26787;
 	
 	public static final double gain = 0.3; //Speed to take off top for arcade drive throttle
 	
@@ -71,17 +71,19 @@ public class RobotMap {
 	
 	//DRIVE TRAIN PIDF VALUES
 	public static final double leftkF = 0.3343;
-	public static final double leftkP = 0.4;
-	public static final double leftkI = 0;
-	public static final double leftkD = 15;
+	public static final double leftkP = 0.45;
+	public static final double leftkI = 0.0003;
+	public static final double leftkD = 20;
+	public static final int leftkIZone = 50;
 	
 	public static final double rightkF = 0.3343;
 	public static final double rightkP = 0.4;
 	public static final double rightkI = 0;
-	public static final double rightkD = 15;
+	public static final double rightkD = 20;
+	public static final int rightkIZone = 50;
 	
 	//NEW TALON SRX STUFF
-	public static int timeout = 20;
+	public static int timeout = 10;
 	public static int slotIdx = 0;
 	public static int pidIdx = 0;
 	

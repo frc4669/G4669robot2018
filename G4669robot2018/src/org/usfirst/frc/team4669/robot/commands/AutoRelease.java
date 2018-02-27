@@ -2,33 +2,35 @@ package org.usfirst.frc.team4669.robot.commands;
 
 import org.usfirst.frc.team4669.robot.Robot;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.TimedCommand;
 
 /**
  *
  */
-public class AutoRelease extends Command {
+public class AutoRelease extends TimedCommand {
 
+    public AutoRelease(double timeout) {
+        // Use requires() here to declare subsystem dependencies
+    	// eg. requires(chassis);
+    	super(timeout);
+        requires(Robot.cubeIntake);
+    }
+    
     public AutoRelease() {
         // Use requires() here to declare subsystem dependencies
     	// eg. requires(chassis);
+    	super(1);
         requires(Robot.cubeIntake);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.cubeIntake.releaseCube();
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
-    }
-
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        //return Robot.cubeIntake.getUltrasonicInches()>10.0;
-    	return true;
+    	Robot.cubeIntake.releaseCube();
     }
 
     // Called once after isFinished returns true

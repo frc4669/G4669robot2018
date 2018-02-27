@@ -38,8 +38,8 @@ public class DriveTrain extends Subsystem {
 		topRightMotor = new WPI_TalonSRX(RobotMap.driveTrainTopRight);
 		bottomRightMotor = new WPI_TalonSRX(RobotMap.driveTrainBottomRight);
 		
-		int velocity = 1365; //About 200 RPM, vel units are in sensor units per 100ms
-		int accel = 1365;
+		int velocity = 2600; //About 200 RPM, vel units are in sensor units per 100ms
+		int accel = 5200;
 		
 		topRightMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,RobotMap.pidIdx,RobotMap.timeout);
 		topLeftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,RobotMap.pidIdx,RobotMap.timeout);
@@ -163,14 +163,14 @@ public class DriveTrain extends Subsystem {
     }
     
     public void driveMotionMagic(double targetEncPosition) {
-    	topLeftMotor.set(ControlMode.MotionMagic,-targetEncPosition);
-    	topRightMotor.set(ControlMode.MotionMagic,-targetEncPosition);
+    	topLeftMotor.set(ControlMode.MotionMagic,targetEncPosition);
+    	topRightMotor.set(ControlMode.MotionMagic,targetEncPosition);
     }
     
     public void turn(double angle) {
 		//double d = ((RobotMap.wheelBase * Math.PI) * (angle / 360.0) / RobotMap.wheelDiameter / Math.PI * 360*4)/40.8;
 //		double d = (((RobotMap.wheelBase * Math.PI) * (angle / 360.0)) / RobotMap.distancePerRotation)*4096;
-    	double d = (((RobotMap.wheelBase * Math.PI) * (angle / 360.0)) / RobotMap.encoderCountConstant);
+    	double d = (((RobotMap.wheelBase * Math.PI) * (angle / 360.0)) / RobotMap.inchToEncoder);
 		topLeftMotor.set(ControlMode.MotionMagic,d);
     	topRightMotor.set(ControlMode.MotionMagic,-d);
 	}
@@ -188,7 +188,7 @@ public class DriveTrain extends Subsystem {
 
 	public double getPosition() {
 		// TODO Auto-generated method stub
-		return topLeftMotor.getSensorCollection().getQuadraturePosition();
+		return topRightMotor.getSensorCollection().getQuadraturePosition();
 	}
 	
 	public double getLeftCurrent() {

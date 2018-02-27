@@ -35,6 +35,7 @@ public class ElevatorControl extends Command {
     	}
     	if (Robot.oi.getLeftRawButton(RobotMap.stopElevatorButton)){
     		Robot.elevator.stop();
+    		motionMagicRunning = false;
     	} 
     	else {
     		if (Robot.oi.getLeftRawButton(RobotMap.zeroEncoderElevatorButton) && !motionMagicRunning){
@@ -61,7 +62,7 @@ public class ElevatorControl extends Command {
     			motionMagicRunning = true;
     		}
 			else if (motionMagicRunning 
-					&& Math.abs(targetPos-Robot.elevator.getEncoderPos()) < 2) {
+					&& Math.abs(targetPos-Robot.elevator.getEncoderPos()) < 200) {
 					motionMagicRunning = false;
 			}
     		

@@ -23,7 +23,7 @@ public class DriveMotionMagic extends Command {
     // Called once when the command executes
     protected void initialize() {
     	Robot.driveTrain.zeroEncoders();
-    	Robot.driveTrain.driveMotionMagic(distance/RobotMap.encoderCountConstant); //Converts inches to encoder ticks
+    	Robot.driveTrain.driveMotionMagic(distance/RobotMap.inchToEncoder); //Converts inches to encoder ticks
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -32,7 +32,7 @@ public class DriveMotionMagic extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return ((Math.abs(distance/RobotMap.encoderCountConstant - Robot.driveTrain.getPosition()) < 33)
+    	return ((Math.abs(distance/RobotMap.inchToEncoder - Robot.driveTrain.getPosition()) < 200)
     			||Robot.f310.getRedButton());
     }
 

@@ -5,8 +5,9 @@ import org.usfirst.frc.team4669.robot.commands.DoNothing;
 import org.usfirst.frc.team4669.robot.commands.DriveForward;
 import org.usfirst.frc.team4669.robot.commands.DriveMotionMagic;
 import org.usfirst.frc.team4669.robot.commands.DriveSpeedControl;
+import org.usfirst.frc.team4669.robot.commands.FiveFeetMotion;
 import org.usfirst.frc.team4669.robot.commands.LeftAllScale;
-import org.usfirst.frc.team4669.robot.commands.LeftSideToRightScalePath;
+//import org.usfirst.frc.team4669.robot.commands.LeftSideToRightScalePath;
 import org.usfirst.frc.team4669.robot.commands.LeftSwitch;
 import org.usfirst.frc.team4669.robot.commands.LeftSwitchLeftScale;
 import org.usfirst.frc.team4669.robot.commands.RightAllScale;
@@ -68,7 +69,6 @@ public class Robot extends TimedRobot {
 	 */
 	public void robotInit() {
 		driveTrain.calibrateGyro();
-		
 		driveTrain.zeroEncoders();
 		
 		chooser = new SendableChooser<String>();
@@ -82,6 +82,7 @@ public class Robot extends TimedRobot {
 		chooser.addObject("Right Switch or Scale", "Right Switch or Scale");
 		chooser.addObject("Right Switch", "Right Switch");
 		chooser.addObject("Left To Right Scale", "Left To Right Scale");
+		chooser.addObject("5 Feets", "Five Feet Motion");
 		
 		SmartDashboard.putData("Auto mode", chooser);
 		
@@ -98,7 +99,6 @@ public class Robot extends TimedRobot {
 
 	public void disabledPeriodic() {
 		driverStation = DriverStation.getInstance();
-		time = driverStation.getMatchTime();
 		updateSmartDashboard();
 		Scheduler.getInstance().run();
 		if (autonomousCommand != null) autonomousCommand.cancel();
@@ -150,6 +150,9 @@ public class Robot extends TimedRobot {
 		else if(autonomousString.equals("Left To Right Scale")){
 //			autonomousCommand = new LeftSideToRightScalePath();
 		}
+		else if(autonomousString.equals("Five Feet Motion")){
+			autonomousCommand = new FiveFeetMotion();
+		}
 		
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null) autonomousCommand.start();
@@ -159,7 +162,6 @@ public class Robot extends TimedRobot {
 	 * This function is called periodically during autonomous
 	 */
 	public void autonomousPeriodic() {
-		time = driverStation.getMatchTime();
 		updateSmartDashboard();
 		Scheduler.getInstance().run();
 	}
@@ -176,7 +178,6 @@ public class Robot extends TimedRobot {
 	 * This function is called periodically during operator control
 	 */
 	public void teleopPeriodic() {
-		time = driverStation.getMatchTime();
 		updateSmartDashboard();
 		Scheduler.getInstance().run();
 	}

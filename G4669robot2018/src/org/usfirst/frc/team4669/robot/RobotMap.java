@@ -95,8 +95,11 @@ public class RobotMap {
 	 * 
 	 */
     public static final double wheelCircumference = Math.PI * wheelDiameter;
+    public static final int encoderTicksPerRotation = 4096;
+    
+	public static final double inchToEncoder  = wheelCircumference / encoderTicksPerRotation; //Used to convert inches to encoder ticks
 	
-	public static final double encoderCountConstant  = wheelCircumference / 4096; //Used to convert inches to encoder ticks
+	public static final int baseTrajPeriodMs = 0;
 	// If you are using multiple modules, make sure to define both the port
 	// number and the module. For example you with a rangefinder:
 	// public static int rangefinderPort = 1;

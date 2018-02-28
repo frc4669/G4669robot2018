@@ -7,6 +7,7 @@ import org.usfirst.frc.team4669.robot.commands.ArcadeDrive;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
@@ -29,8 +30,8 @@ public class DriveTrain extends Subsystem {
 	public WPI_TalonSRX topRightMotor;
 	private WPI_TalonSRX bottomRightMotor;
 	
-	public PIDController leftGyroPID;
-	public PIDController rightGyroPID;
+	public PIDController gyroPID;
+	private PIDOutputWrapper turnOutput;
 	
 	int velocity = 2300; //About 200 RPM, vel units are in sensor units per 100ms
 	int accel = 2300;
@@ -46,20 +47,14 @@ public class DriveTrain extends Subsystem {
 		topRightMotor = new WPI_TalonSRX(RobotMap.driveTrainTopRight);
 		bottomRightMotor = new WPI_TalonSRX(RobotMap.driveTrainBottomRight);
 		
-		leftGyroPID = new PIDController(RobotMap.leftkPGyro,RobotMap.leftkIGyro,RobotMap.leftkDGyro,(PIDSource) analogGyro,topLeftMotor);
-		rightGyroPID = new PIDController(RobotMap.rightkPGyro,RobotMap.rightkIGyro,RobotMap.rightkDGyro,(PIDSource) analogGyro,topRightMotor);
+		gyroPID = new PIDController(RobotMap.kPGyro,RobotMap.kIGyro,RobotMap.kDGyro,(PIDSource) analogGyro,turnOutput);		
+		gyroPID.setInputRange(-180, 180);
 		
-		leftGyroPID.setInputRange(-180, 180);
-		rightGyroPID.setInputRange(-180, 180);
+		gyroPID.setContinuous(true);
 		
-		leftGyroPID.setContinuous(true);
-		rightGyroPID.setContinuous(true);
+		gyroPID.setOutputRange(-0.5, 0.5);
 		
-		leftGyroPID.setOutputRange(-0.5, 0.5);
-		rightGyroPID.setOutputRange(-0.5, 0.5);
-		
-		leftGyroPID.setAbsoluteTolerance(2);
-		rightGyroPID.setAbsoluteTolerance(2);
+		gyroPID.setAbsoluteTolerance(2);
 		
 		topRightMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,RobotMap.pidIdx,RobotMap.timeout);
 		topLeftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,RobotMap.pidIdx,RobotMap.timeout);
@@ -230,21 +225,17 @@ public class DriveTrain extends Subsystem {
 	}
 	
 	public void enableTurnPID(){
-		leftGyroPID.reset();
-		rightGyroPID.reset();
-		leftGyroPID.enable();
-		rightGyroPID.enable();
+		gyroPID.reset();
+		gyroPID.enable();
 		
 	}
 	
 	public void disableTurnPID(){
-		leftGyroPID.disable();
-		rightGyroPID.disable();
+		gyroPID.disable();
 	}
 	
 	public void setTurnAngle(double angle){
-		leftGyroPID.setSetpoint(angle);
-		rightGyroPID.setSetpoint(-angle);
+		gyroPID.setSetpoint(angle);
 	}
 	
 	public double getAngle(){
@@ -263,17 +254,17 @@ public class DriveTrain extends Subsystem {
 	}
 	
 	public boolean getTurnDone(){
-	    return leftGyroPID.onTarget()&&invertedOnTarget(rightGyroPID);
+	    return gyroPID.onTarget();
 	}
 
 	public double getTurnPIDError()
 	{
-		return leftGyroPID.getError();
+		return gyroPID.getError();
 	}
 	
-	public boolean invertedOnTarget(PIDController controller){
-		return -controller.getSetpoint()-getAngleFixed()<2;
-		
+	public double getTurnOutput()
+	{
+		return turnOutput.getOutput();
 	}
 	
 	public void setMode(ControlMode mode, double value){

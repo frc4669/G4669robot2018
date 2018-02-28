@@ -82,13 +82,9 @@ public class RobotMap {
 	public static final double rightkD = 20;
 	public static final int rightkIZone = 50;
 	
-	public static final double leftkPGyro = 0.3;
-	public static final double leftkIGyro = 0;
-	public static final double leftkDGyro = 0;
-	
-	public static final double rightkPGyro = 0.3;
-	public static final double rightkIGyro = 0;
-	public static final double rightkDGyro = 0;
+	public static final double kPGyro = 0.3;
+	public static final double kIGyro = 0;
+	public static final double kDGyro = 0;
 	
 	//NEW TALON SRX STUFF
 	public static int timeout = 10;

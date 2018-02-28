@@ -26,13 +26,12 @@ public class Turn extends Command {
 //    	Robot.driveTrain.calibrateGyro();
     	Robot.driveTrain.stop();
     	Robot.driveTrain.enableTurnPID();
-
-
+    	Robot.driveTrain.setTurnAngle(degree);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveTrain.setTurnAngle(degree);
+    	Robot.driveTrain.driveForward(Robot.driveTrain.getTurnOutput(), -Robot.driveTrain.getTurnOutput());
     	System.out.println(Robot.driveTrain.getTurnPIDError());
     }
 

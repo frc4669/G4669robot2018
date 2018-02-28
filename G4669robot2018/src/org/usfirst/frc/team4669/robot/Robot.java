@@ -191,8 +191,7 @@ public class Robot extends TimedRobot {
 
 	public void updateSmartDashboard() {
     	SmartDashboard.putData("Gyro",(Sendable) driveTrain.analogGyro);
-    	SmartDashboard.putData("LeftTurnPID",(Sendable) driveTrain.leftGyroPID);
-    	SmartDashboard.putData("rightTurnPID",(Sendable) driveTrain.rightGyroPID);
+    	SmartDashboard.putData("TurnPID",(Sendable) driveTrain.gyroPID);
     	SmartDashboard.putBoolean("Has Cube", cubeIntake.hasCube());
     	SmartDashboard.putData(new TurnMotionMagic(SmartDashboard.getNumber("TurnAngle", 90)));
     	SmartDashboard.putData(new Turn(SmartDashboard.getNumber("TurnAngle", 90)));

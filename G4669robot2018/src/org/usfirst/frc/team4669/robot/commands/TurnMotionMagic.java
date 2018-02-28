@@ -32,7 +32,7 @@ public class TurnMotionMagic extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return ((Math.abs((((RobotMap.wheelBase * Math.PI) * (angle / 360.0)) / RobotMap.distancePerRotation)*4096 - Robot.driveTrain.getPosition()) < 16)
+        return ((Math.abs(((-(RobotMap.wheelBase * Math.PI) * (angle / 360.0)) / RobotMap.inchToEncoder) - Robot.driveTrain.getPosition()) < 50)
         		|| Robot.f310.getRedButton());
     }
 

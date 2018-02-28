@@ -1,12 +1,13 @@
 package org.usfirst.frc.team4669.robot.commands;
 
 import org.usfirst.frc.team4669.robot.Robot;
+import org.usfirst.frc.team4669.robot.RobotMap;
 import org.usfirst.frc.team4669.robot.motionProfile.MotionProfileExample;
 import org.usfirst.frc.team4669.robot.motionProfile.Profile;
 import org.usfirst.frc.team4669.robot.motionProfile.Trajectories;
 
-import com.ctre.phoenix.motion.SetValueMotionProfile;
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -27,6 +28,9 @@ public class FiveFeetMotion extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	motion = new MotionProfileExample(fiveFeetAndTurn,Robot.driveTrain.topLeftMotor,Robot.driveTrain.topRightMotor);
+    	motion.control();
+    	Robot.driveTrain.topLeftMotor.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 50, RobotMap.timeout);
+    	Robot.driveTrain.topRightMotor.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 50, RobotMap.timeout);
     	Robot.driveTrain.topLeftMotor.set(ControlMode.MotionProfile, 1);
     	Robot.driveTrain.topRightMotor.set(ControlMode.MotionProfile, 1);
     	motion.startMotionProfile();
@@ -34,13 +38,14 @@ public class FiveFeetMotion extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//motion.control();
+    	motion.control();
 
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
 //    	return false;
+    	System.out.println("Finishing");
         return motion.isLastL()&&motion.isLastR();
     }
 

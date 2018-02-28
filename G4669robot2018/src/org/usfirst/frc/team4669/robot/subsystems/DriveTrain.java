@@ -6,6 +6,8 @@ import org.usfirst.frc.team4669.robot.commands.TankDrive;
 import org.usfirst.frc.team4669.robot.commands.ArcadeDrive;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 
@@ -27,6 +29,12 @@ public class DriveTrain extends Subsystem {
 	public WPI_TalonSRX topRightMotor;
 	private WPI_TalonSRX bottomRightMotor;
 	
+	public PIDController leftGyroPID;
+	public PIDController rightGyroPID;
+	
+	int velocity = 2300; //About 200 RPM, vel units are in sensor units per 100ms
+	int accel = 2300;
+	
 	public Gyro analogGyro;
 	
 	public DriveTrain() {
@@ -38,8 +46,20 @@ public class DriveTrain extends Subsystem {
 		topRightMotor = new WPI_TalonSRX(RobotMap.driveTrainTopRight);
 		bottomRightMotor = new WPI_TalonSRX(RobotMap.driveTrainBottomRight);
 		
-		int velocity = 2600; //About 200 RPM, vel units are in sensor units per 100ms
-		int accel = 5200;
+		leftGyroPID = new PIDController(RobotMap.leftkPGyro,RobotMap.leftkIGyro,RobotMap.leftkDGyro,(PIDSource) analogGyro,topLeftMotor);
+		rightGyroPID = new PIDController(RobotMap.rightkPGyro,RobotMap.rightkIGyro,RobotMap.rightkDGyro,(PIDSource) analogGyro,topRightMotor);
+		
+		leftGyroPID.setInputRange(-180, 180);
+		rightGyroPID.setInputRange(-180, 180);
+		
+		leftGyroPID.setContinuous(true);
+		rightGyroPID.setContinuous(true);
+		
+		leftGyroPID.setOutputRange(-0.5, 0.5);
+		rightGyroPID.setOutputRange(-0.5, 0.5);
+		
+		leftGyroPID.setAbsoluteTolerance(2);
+		rightGyroPID.setAbsoluteTolerance(2);
 		
 		topRightMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,RobotMap.pidIdx,RobotMap.timeout);
 		topLeftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,RobotMap.pidIdx,RobotMap.timeout);
@@ -163,16 +183,26 @@ public class DriveTrain extends Subsystem {
     }
     
     public void driveMotionMagic(double targetEncPosition) {
+    	setMotionVelAccel(this.velocity,this.accel);
     	topLeftMotor.set(ControlMode.MotionMagic,targetEncPosition);
     	topRightMotor.set(ControlMode.MotionMagic,targetEncPosition);
+    }
+    
+    public void setMotionVelAccel(int velocity,int accel) {
+		topLeftMotor.configMotionCruiseVelocity(velocity,RobotMap.timeout);
+		topLeftMotor.configMotionAcceleration(accel,RobotMap.timeout);
+		topRightMotor.configMotionCruiseVelocity(velocity,RobotMap.timeout);
+		topRightMotor.configMotionAcceleration(accel,RobotMap.timeout);
     }
     
     public void turn(double angle) {
 		//double d = ((RobotMap.wheelBase * Math.PI) * (angle / 360.0) / RobotMap.wheelDiameter / Math.PI * 360*4)/40.8;
 //		double d = (((RobotMap.wheelBase * Math.PI) * (angle / 360.0)) / RobotMap.distancePerRotation)*4096;
-    	double d = (((RobotMap.wheelBase * Math.PI) * (angle / 360.0)) / RobotMap.inchToEncoder);
-		topLeftMotor.set(ControlMode.MotionMagic,d);
-    	topRightMotor.set(ControlMode.MotionMagic,-d);
+    	setMotionVelAccel(1365,6825);
+    	double d = -(((RobotMap.wheelBase * Math.PI) * (angle / 360.0)) / RobotMap.inchToEncoder);
+		topLeftMotor.set(ControlMode.MotionMagic,-d);
+    	topRightMotor.set(ControlMode.MotionMagic,d);
+    	System.out.println(d);
 	}
     
     public void turnTo(boolean clockwise) {
@@ -197,6 +227,58 @@ public class DriveTrain extends Subsystem {
 	
 	public double getRightCurrent() {
 		return topRightMotor.getOutputCurrent();
+	}
+	
+	public void enableTurnPID(){
+		leftGyroPID.reset();
+		rightGyroPID.reset();
+		leftGyroPID.enable();
+		rightGyroPID.enable();
+		
+	}
+	
+	public void disableTurnPID(){
+		leftGyroPID.disable();
+		rightGyroPID.disable();
+	}
+	
+	public void setTurnAngle(double angle){
+		leftGyroPID.setSetpoint(angle);
+		rightGyroPID.setSetpoint(-angle);
+	}
+	
+	public double getAngle(){
+		return analogGyro.getAngle();
+	}
+	
+	public double getAngleFixed(){
+		double angle = analogGyro.getAngle();
+		while(angle>180){
+			angle-=180;
+		}
+		while(angle<-180){
+			angle+=180;
+		}
+		return angle;
+	}
+	
+	public boolean getTurnDone(){
+	    return leftGyroPID.onTarget()&&invertedOnTarget(rightGyroPID);
+	}
+
+	public double getTurnPIDError()
+	{
+		return leftGyroPID.getError();
+	}
+	
+	public boolean invertedOnTarget(PIDController controller){
+		return -controller.getSetpoint()-getAngleFixed()<2;
+		
+	}
+	
+	public void setMode(ControlMode mode, double value){
+		topLeftMotor.set(mode, value);
+		topRightMotor.set(mode, value);
 	}
 	
 }

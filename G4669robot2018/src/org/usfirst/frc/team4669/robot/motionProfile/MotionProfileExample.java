@@ -129,8 +129,8 @@ public class MotionProfileExample {
 		 * since our MP is 10ms per point, set the control frame rate and the
 		 * notifer to half that
 		 */
-		_talonL.changeMotionControlFramePeriod(5);
-		_talonR.changeMotionControlFramePeriod(5);
+		_talonL.changeMotionControlFramePeriod(10);
+		_talonR.changeMotionControlFramePeriod(10);
 		_notifer.startPeriodic(0.005);
 	}
 
@@ -353,7 +353,9 @@ public class MotionProfileExample {
 			pointR.isLastPoint = false;
 			if ((i + 1) == totalCntL){
 				pointL.isLastPoint = true; /* set this to true on the last point  */
-				pointR.isLastPoint = true;
+			}
+			if ((i + 1) == totalCntR){
+				pointR.isLastPoint = true; /* set this to true on the last point  */
 			}
 			_talonL.pushMotionProfileTrajectory(pointL);
 			_talonR.pushMotionProfileTrajectory(pointR);
@@ -383,6 +385,6 @@ public class MotionProfileExample {
 	}
 	
 	public boolean isLastR(){
-		return _statusL.isLast;
+		return _statusR.isLast;
 	}
 }

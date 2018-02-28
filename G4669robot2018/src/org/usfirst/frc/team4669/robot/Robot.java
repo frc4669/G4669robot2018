@@ -13,6 +13,7 @@ import org.usfirst.frc.team4669.robot.commands.LeftSwitchLeftScale;
 import org.usfirst.frc.team4669.robot.commands.RightAllScale;
 import org.usfirst.frc.team4669.robot.commands.RightSwitch;
 import org.usfirst.frc.team4669.robot.commands.RightSwitchRightScale;
+import org.usfirst.frc.team4669.robot.commands.Turn;
 import org.usfirst.frc.team4669.robot.commands.TurnMotionMagic;
 import org.usfirst.frc.team4669.robot.subsystems.Climber;
 import org.usfirst.frc.team4669.robot.subsystems.CubeIntake;
@@ -190,8 +191,11 @@ public class Robot extends TimedRobot {
 
 	public void updateSmartDashboard() {
     	SmartDashboard.putData("Gyro",(Sendable) driveTrain.analogGyro);
+    	SmartDashboard.putData("LeftTurnPID",(Sendable) driveTrain.leftGyroPID);
+    	SmartDashboard.putData("rightTurnPID",(Sendable) driveTrain.rightGyroPID);
     	SmartDashboard.putBoolean("Has Cube", cubeIntake.hasCube());
-//    	SmartDashboard.putData(new TurnMotionMagic(SmartDashboard.getNumber("TurnAngle", 90)));
+    	SmartDashboard.putData(new TurnMotionMagic(SmartDashboard.getNumber("TurnAngle", 90)));
+    	SmartDashboard.putData(new Turn(SmartDashboard.getNumber("TurnAngle", 90)));
 //    	SmartDashboard.putData(new DriveMotionMagic(SmartDashboard.getNumber("MotionMagicDistance", 0)));
 //    	SmartDashboard.putData(new DriveSpeedControl(SmartDashboard.getNumber("Drive Left Speed", 0),SmartDashboard.getNumber("Drive Right Speed", 0)));
     	SmartDashboard.putNumber("Left Position", driveTrain.getLeftEncoder());

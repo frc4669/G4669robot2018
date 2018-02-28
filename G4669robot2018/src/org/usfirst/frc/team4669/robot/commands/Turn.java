@@ -23,38 +23,28 @@ public class Turn extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	//Robot.driveTrain.calibrateGyro();
+//    	Robot.driveTrain.calibrateGyro();
+    	Robot.driveTrain.stop();
+    	Robot.driveTrain.enableTurnPID();
+
+
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//If degrees is negative, turn clockwise
-    	if (degree < 0) {
-    		Robot.driveTrain.driveForward(0.5, -0.5);
-    	}
-    	//If it is positive, turn counterclockwise
-    	else if (degree > 0) {
-    		Robot.driveTrain.driveForward(-0.5, 0.5);
-    	}
-    	else end();
+    	Robot.driveTrain.setTurnAngle(degree);
+    	System.out.println(Robot.driveTrain.getTurnPIDError());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	//Stop turning once robot turns past specified angle
-        if (degree < 0 && Robot.driveTrain.getGyroAngle() <= degree + initialAngle) {
-    		return true;
-    	}
-    	else if (degree > 0 && Robot.driveTrain.getGyroAngle() >= degree + initialAngle) {
-    		return true;
-    	}
-    	else {
-    		return false;
-    	}
+        return Robot.driveTrain.getTurnDone()||Robot.f310.getRedButton();
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.driveTrain.disableTurnPID();
     	Robot.driveTrain.stop();
     }
 

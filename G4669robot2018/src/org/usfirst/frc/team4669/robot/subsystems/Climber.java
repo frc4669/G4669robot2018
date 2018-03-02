@@ -32,10 +32,24 @@ public class Climber extends Subsystem {
     	setDefaultCommand(new ClimberControl());
     }
     
-    public void climb() {
-    	centerClimber.set(0.8);
-    	rightClimber.set(0.8);
-    	leftClimber.set(0.8);
+    public void climbAll() {
+    	centerClimber.set(0.3);
+    	rightClimber.set(0.3);
+    	leftClimber.set(0.3);
+    }
+    public void climbCenter(boolean climb){
+    	if (climb) centerClimber.set(0.3);
+    	else centerClimber.set(0);
+    }
+    
+    public void climbRight(boolean climb){
+    	if (climb) rightClimber.set(0.3);
+    	else rightClimber.set(0);
+    }
+    
+    public void climbLeft(boolean climb){
+    	if (climb) leftClimber.set(0.3);
+    	else leftClimber.set(0);
     }
     
     public void stop() {

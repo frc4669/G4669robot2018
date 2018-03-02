@@ -29,21 +29,23 @@ public class CenterSwitch extends CommandGroup {
         // arm.
     	if(Robot.gameData.length()>0){
 	    	if (Robot.gameData.charAt(0)=='L') {
-	    		addSequential(new DriveForward());
-	    		addSequential(new TurnMotionMagic(-90));
+	    		addSequential(new DriveMotionMagic(RobotMap.distToSwitchSides-45));
+	    		addSequential(new TurnTo(270));
 	    		addSequential(new DriveMotionMagic(RobotMap.distSwitchSidesFromCenter));
-	    		addSequential(new TurnMotionMagic(90));
-	    		addSequential(new DriveMotionMagic(RobotMap.distFwdToSwitchCenter));
+	    		addSequential(new TurnTo(0));
+	    		addSequential(new DriveMotionMagic(40));
 	    		addSequential(new AutoElevator(RobotMap.elevatorSwitch));
+	    		addSequential(new DriveMotionMagic(10));
 	    		addSequential(new AutoRelease());
 	    	}
-	    	else {
-	    		addSequential(new DriveForward());
-	    		addSequential(new TurnMotionMagic(90));
+	    	else if(Robot.gameData.charAt(0)=='R'){
+	    		addSequential(new DriveMotionMagic(RobotMap.distToSwitchSides-45));
+	    		addSequential(new TurnTo(90));
 	    		addSequential(new DriveMotionMagic(RobotMap.distSwitchSidesFromCenter));
-	    		addSequential(new TurnMotionMagic(-90));
-	    		addSequential(new DriveMotionMagic(RobotMap.distFwdToSwitchCenter));
+	    		addSequential(new TurnTo(0));
+	    		addSequential(new DriveMotionMagic(40));
 	    		addSequential(new AutoElevator(RobotMap.elevatorSwitch));
+	    		addSequential(new DriveMotionMagic(10));
 	    		addSequential(new AutoRelease());
 	    	}
     	}

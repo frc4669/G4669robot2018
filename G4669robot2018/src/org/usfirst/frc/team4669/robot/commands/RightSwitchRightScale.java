@@ -30,18 +30,15 @@ public class RightSwitchRightScale extends CommandGroup {
     	if(Robot.gameData.length()>0){
 	    	if (Robot.gameData.charAt(1)=='R'){
 	    		addSequential(new DriveMotionMagic(RobotMap.distToScaleStraight));
-	    		addSequential(new TurnMotionMagic(-90-Robot.driveTrain.getGyroAngle()));
+	    		addSequential(new TurnTo(270));
 	    		addSequential(new AutoElevator(RobotMap.elevatorMid));
 	    		addSequential(new DriveMotionMagic(10));
 	    		addSequential(new AutoRelease());
+	    		addSequential(new DriveMotionMagic(-10));
 	    		addSequential(new AutoElevator(0));
 	    	}
 	    	else if(Robot.gameData.charAt(1)=='L'&&Robot.gameData.charAt(0)=='R'){
-	    		addSequential(new DriveMotionMagic(RobotMap.distToSwitchSides));
-	    		addSequential(new TurnMotionMagic(-90-Robot.driveTrain.getGyroAngle()));
-	    		addSequential(new AutoElevator(RobotMap.elevatorSwitch));
-	    		addSequential(new AutoRelease());
-	    		addSequential(new AutoElevator(0));
+	    		addSequential(new RightSwitch());
 	    	}
     	}
     }

@@ -23,9 +23,9 @@ public class RobotMap {
 	public static final int leftIntake = 1;
 	public static final int rightIntake = 2;
 	public static final int elevator = 3;
-	public static final int rightClimber = 13;
-	public static final int centerClimber = 6;
-	public static final int leftClimber = 9;
+	public static final int rightClimber = 9;
+	public static final int centerClimber = 13;
+	public static final int leftClimber = 6;
 	
 	//Sensors
 	public static final int forwardLimitSwitch = 1;
@@ -46,8 +46,11 @@ public class RobotMap {
 	public static final int maxElevatorButton= 3;
 	public static final int midElevatorButton= 4;
 	public static final int switchElevatorButton= 5;
+	public static final int leftClimb = 6;
+	public static final int centerClimb = 7;
 	public static final int zeroEncoderElevatorButton = 9;
-	public static final int motionMagicTest = 10;
+	public static final int stopClimb = 10;
+	public static final int rightClimb = 11;
 	
 	//CONSTANTS
 	public static final int elevatorVel = 785;
@@ -60,11 +63,11 @@ public class RobotMap {
 	public static final double gain = 0.3; //Speed to take off top for arcade drive throttle
 	
 	//FIELD MEASUREMENTS
-	public static final int distToSwitchSides = 217;
+	public static final int distToSwitchSides = 88;
 	public static final int distToScaleStraight = 230;
 	public static final int distLeftAndRightScales = 210;
-	public static final int distFwdToSwitchCenter= 150;
 	public static final int distSwitchSidesFromCenter= 40;
+	public static final int distBaseLine = 82;
 	
 	//DRIVE TRAIN SPEED PROPORTION
 	public static final double driveTrainSpeedProportion = 0.85;
@@ -82,9 +85,9 @@ public class RobotMap {
 	public static final double rightkD = 20;
 	public static final int rightkIZone = 50;
 	
-	public static final double kPGyro = 0.3;
+	public static final double kPGyro = 0.009;
 	public static final double kIGyro = 0;
-	public static final double kDGyro = 0;
+	public static final double kDGyro = 0.0025;
 	
 	//NEW TALON SRX STUFF
 	public static int timeout = 10;

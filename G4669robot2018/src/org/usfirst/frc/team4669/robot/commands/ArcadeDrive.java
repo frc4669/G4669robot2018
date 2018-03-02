@@ -67,16 +67,18 @@ public class ArcadeDrive extends Command {
     		
     		//Turns the Robot to D-Pad angle
     		if (Robot.f310.getDPadPOV()!=-1 && !turnRunning) {
-    			turnAngle = Robot.f310.getDPadPOV() - Robot.driveTrain.getGyroAngle()%360;
+    			turnAngle = Robot.f310.getDPadPOV();
+    			Robot.driveTrain.setTurnAngle(turnAngle);
     			turnRunning = true;
 	    	}
-	    	else if (turnRunning &&
-	    			((Math.abs(turnAngle%360-Robot.driveTrain.getGyroAngle()%360)<RobotMap.angleTolerance)))
+	    	else if (turnRunning &&Robot.driveTrain.getTurnDone())
 	    	{
+	    		Robot.driveTrain.stop();
 	    		turnRunning = false;
 	    	}
 	    	else if (turnRunning) {
-	    		Robot.driveTrain.turn(turnAngle);
+	    		Robot.driveTrain.setTurnAngle(turnAngle);
+	    		Robot.driveTrain.driveForward(Robot.driveTrain.getTurnOutput(), -Robot.driveTrain.getTurnOutput());
 	    	}
     		
 	    	//Joystick driving

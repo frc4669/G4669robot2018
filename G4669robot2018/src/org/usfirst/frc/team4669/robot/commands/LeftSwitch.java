@@ -29,14 +29,14 @@ public class LeftSwitch extends CommandGroup {
         // arm.
     	if(Robot.gameData.length()>0){
 	    	if(Robot.gameData.charAt(0)=='L'){
-	    		addSequential(new DriveMotionMagic(88));
+	    		addSequential(new DriveMotionMagic(RobotMap.distToSwitchSides));
 	    		addSequential(new AutoElevator(RobotMap.elevatorSwitch));
 	    		addSequential(new DriveMotionMagic(10));
 	    		addSequential(new AutoRelease());
 	    		addSequential(new DriveMotionMagic(-10));
 	    		addSequential(new AutoElevator(0));
 	    	} else{
-	    		addSequential(new DriveMotionMagic(82));
+	    		addSequential(new DriveForward());
 	    	}
     	}
     }

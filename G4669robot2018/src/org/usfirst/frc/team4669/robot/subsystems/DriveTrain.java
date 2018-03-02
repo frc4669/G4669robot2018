@@ -47,8 +47,10 @@ public class DriveTrain extends Subsystem {
 		topRightMotor = new WPI_TalonSRX(RobotMap.driveTrainTopRight);
 		bottomRightMotor = new WPI_TalonSRX(RobotMap.driveTrainBottomRight);
 		
+		turnOutput = new PIDOutputWrapper();
+		
 		gyroPID = new PIDController(RobotMap.kPGyro,RobotMap.kIGyro,RobotMap.kDGyro,(PIDSource) analogGyro,turnOutput);		
-		gyroPID.setInputRange(-180, 180);
+		gyroPID.setInputRange(0, 360);
 		
 		gyroPID.setContinuous(true);
 		

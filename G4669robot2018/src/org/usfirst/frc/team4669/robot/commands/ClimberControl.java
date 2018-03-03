@@ -24,13 +24,34 @@ public class ClimberControl extends Command {
     protected void execute() {
     	if (Robot.oi.getLeftRawButton(RobotMap.stopClimb)) {
     		Robot.climber.stop();
+    	} else {
+	    	if (Robot.oi.getLeftRawButton(8)) {
+	    		System.out.println(Robot.climber.getAccelX()+" "+Robot.climber.getAccelY());
+	    		if (Math.abs(Robot.climber.getAccelX())<0.1&&Math.abs(Robot.climber.getAccelY())<0.1){
+	    			Robot.climber.climbAll();
+	    		} else if(Robot.climber.getAccelY()<-0.1){
+	    			Robot.climber.climbCenter(false);
+	    			Robot.climber.climbLeft(true);
+	    			Robot.climber.climbRight(true);
+	    		} else if(Robot.climber.getAccelY()>0.1){
+	    			Robot.climber.climbLeft(false);
+	    			Robot.climber.climbRight(false);
+	    			Robot.climber.climbCenter(true);
+	    		} else if(Robot.climber.getAccelX()>0.1){
+	    			Robot.climber.climbCenter(false);
+	    			Robot.climber.climbRight(false);
+	    			Robot.climber.climbLeft(true);
+	    		} else if(Robot.climber.getAccelX()<-0.1){
+	    			Robot.climber.climbCenter(false);
+	    			Robot.climber.climbLeft(false);
+	    			Robot.climber.climbRight(true);
+	    		}
+	    	} else {
+				Robot.climber.climbCenter(Robot.oi.getLeftRawButton(RobotMap.centerClimb));
+				Robot.climber.climbLeft(Robot.oi.getLeftRawButton(RobotMap.leftClimb));
+				Robot.climber.climbRight(Robot.oi.getLeftRawButton(RobotMap.rightClimb));
+	    	}
     	}
-    	if (Robot.f310.getRightShoulderButton()) {
-    		Robot.climber.climbAll();
-    	}
-		Robot.climber.climbCenter(Robot.oi.getLeftRawButton(RobotMap.centerClimb));
-		Robot.climber.climbLeft(Robot.oi.getLeftRawButton(RobotMap.leftClimb));
-		Robot.climber.climbRight(Robot.oi.getLeftRawButton(RobotMap.rightClimb));
     }
 
     // Make this return true when this Command no longer needs to run execute()

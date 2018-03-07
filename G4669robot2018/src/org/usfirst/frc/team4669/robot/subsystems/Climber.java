@@ -39,17 +39,17 @@ public class Climber extends Subsystem {
     }
     
     public void climbAll() {
-    	centerClimber.set(0.3);
-    	rightClimber.set(0.3);
-    	leftClimber.set(0.3);
+    	centerClimber.set(0.5);
+    	rightClimber.set(0.5);
+    	leftClimber.set(0.5);
     }
     public void climbCenter(boolean climb){
-    	if (climb) centerClimber.set(0.3);
+    	if (climb) centerClimber.set(0.5);
     	else centerClimber.set(0);
     }
     
     public void climbRight(boolean climb){
-    	if (climb) rightClimber.set(0.3);
+    	if (climb) rightClimber.set(0.5);
     	else rightClimber.set(0);
     }
     
@@ -69,7 +69,6 @@ public class Climber extends Subsystem {
     public double getAccelZ(){
     	return accel.getZ();
     }
-
     
     public void stop() {
     	centerClimber.set(0);

@@ -115,8 +115,8 @@ public class CubeIntake extends Subsystem {
     
     public void releaseCube(){
 //    	double speed = SmartDashboard.getNumber("CubeReleaseVel", 1750);
-		leftIntakeMotor.set(ControlMode.PercentOutput,0.2);
-		rightIntakeMotor.set(ControlMode.PercentOutput,0.2);
+		leftIntakeMotor.set(ControlMode.PercentOutput,0.3);
+		rightIntakeMotor.set(ControlMode.PercentOutput,0.3);
 //    	leftIntakeMotor.set(ControlMode.Velocity,-speed);
 //    	rightIntakeMotor.set(ControlMode.Velocity,-speed);
     }

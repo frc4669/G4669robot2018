@@ -68,16 +68,17 @@ public class ArcadeDrive extends Command {
     		//Turns the Robot to D-Pad angle
     		if (Robot.f310.getDPadPOV()!=-1 && !turnRunning) {
     			turnAngle = Robot.f310.getDPadPOV();
+    			Robot.driveTrain.enableTurnPID();
     			Robot.driveTrain.setTurnAngle(turnAngle);
     			turnRunning = true;
 	    	}
 	    	else if (turnRunning &&Robot.driveTrain.getTurnDone())
 	    	{
+	    		Robot.driveTrain.disableTurnPID();
 	    		Robot.driveTrain.stop();
 	    		turnRunning = false;
 	    	}
 	    	else if (turnRunning) {
-	    		Robot.driveTrain.setTurnAngle(turnAngle);
 	    		Robot.driveTrain.driveForward(Robot.driveTrain.getTurnOutput(), -Robot.driveTrain.getTurnOutput());
 	    	}
     		
@@ -107,7 +108,7 @@ public class ArcadeDrive extends Command {
 		    		}
 		    	}
 //	    		Robot.driveTrain.setSpeed(left*2400, right*2400);
-		    	Robot.driveTrain.driveForward(0.8*left, 0.8*right);
+		    	Robot.driveTrain.driveForward(0.6*left, 0.6*right);
 	    	}
     	}
     }

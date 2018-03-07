@@ -27,6 +27,7 @@ public class CenterSwitch extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
+		addSequential(new ReleaseArms());
     	if(Robot.gameData.length()>0){
 	    	if (Robot.gameData.charAt(0)=='L') {
 	    		addSequential(new DriveMotionMagic(RobotMap.distToSwitchSides-45));

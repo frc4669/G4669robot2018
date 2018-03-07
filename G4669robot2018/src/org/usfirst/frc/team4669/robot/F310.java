@@ -14,9 +14,17 @@ public class F310 {
 	public double getLeftX() {
 		return deadzone(0);
 	}
-	//TankDrive
+	
+	public double getLeftXSquared() {
+		return Math.pow(getLeftX(),3);
+	}
+	
 	public double getLeftY() {
 		return -deadzone(1);
+	}
+	
+	public double getLeftYCubed() {
+		return Math.pow(getLeftY(),3);
 	}
 	
 	public double getLeftTrigger() {
@@ -30,6 +38,12 @@ public class F310 {
 	public double getRightX() {
 		return deadzone(4);
 	}
+	
+	public double getRightXCubed() {
+		return Math.pow(getRightX(),3);
+	}
+	
+	
 	
 	//ControlWinch
 	public double getRightY() {

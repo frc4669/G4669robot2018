@@ -29,6 +29,7 @@ public class RightSwitchRightScale extends CommandGroup {
         // arm.
     	if(Robot.gameData.length()>0){
 	    	if (Robot.gameData.charAt(1)=='R'){
+	    		addSequential(new ReleaseArms());
 	    		addSequential(new DriveMotionMagic(RobotMap.distToScaleStraight));
 	    		addSequential(new TurnTo(270));
 	    		addSequential(new AutoElevator(RobotMap.elevatorMid));
@@ -39,6 +40,9 @@ public class RightSwitchRightScale extends CommandGroup {
 	    	}
 	    	else if(Robot.gameData.charAt(1)=='L'&&Robot.gameData.charAt(0)=='R'){
 	    		addSequential(new RightSwitch());
+	    	}
+	    	else{
+	    		addSequential(new DriveForward());
 	    	}
     	}
     }

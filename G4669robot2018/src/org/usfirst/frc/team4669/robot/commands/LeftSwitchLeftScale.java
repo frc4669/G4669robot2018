@@ -29,6 +29,7 @@ public class LeftSwitchLeftScale extends CommandGroup {
         // arm.
     	if(Robot.gameData.length()>0){
 	    	if (Robot.gameData.charAt(1)=='L'){
+	    		addSequential(new ReleaseArms());
 	    		addSequential(new DriveMotionMagic(RobotMap.distToScaleStraight));
 	    		addSequential(new TurnTo(90));
 	    		addSequential(new AutoElevator(RobotMap.elevatorMid));

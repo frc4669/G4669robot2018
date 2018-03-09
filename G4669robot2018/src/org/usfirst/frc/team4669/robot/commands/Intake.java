@@ -32,7 +32,10 @@ public class Intake extends Command {
     	} 
 		else if(Robot.f310.getOrangeButton()){
     		Robot.cubeIntake.releaseCube();
-    	} 
+    	}
+		else if(Robot.f310.getRightTrigger()!=0){
+    		Robot.cubeIntake.set(0.7);
+    	}
 		else {
     		Robot.cubeIntake.stopIntake();
     	}

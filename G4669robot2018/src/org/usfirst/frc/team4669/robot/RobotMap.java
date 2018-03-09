@@ -22,7 +22,7 @@ public class RobotMap {
 	//Other subsystem motors
 	public static final int leftIntake = 1;
 	public static final int rightIntake = 2;
-	public static final int elevator = 3;
+	public static final int elevator = 11;
 	public static final int rightClimber = 9;
 	public static final int centerClimber = 13;
 	public static final int leftClimber = 6;
@@ -43,8 +43,8 @@ public class RobotMap {
 	//Joystick Controls
 	public static final int stopElevatorButton= 1;
 	public static final int groundElevatorButton= 2;
-	public static final int maxElevatorButton= 3;
-	public static final int midElevatorButton= 4;
+	public static final int midElevatorButton= 3;
+	public static final int exchangeElevatorButton= 4;
 	public static final int switchElevatorButton= 5;
 	public static final int leftClimb = 6;
 	public static final int centerClimb = 7;
@@ -53,10 +53,11 @@ public class RobotMap {
 	public static final int rightClimb = 11;
 	
 	//CONSTANTS
-	public static final int elevatorVel = 785;
+	public static final int elevatorVel = 1200;
 	public static final int elevatorAccel = 3140;
 	
 	public static final int elevatorSwitch = -9000;
+	public static final int elevatorExchange = -2450;
 	public static final int elevatorMid = -19379;
 	public static final int elevatorMax = -26787;
 	
@@ -86,7 +87,7 @@ public class RobotMap {
 	public static final int rightkIZone = 50;
 	
 	public static final double kPGyro = 0.009;
-	public static final double kIGyro = 0;
+	public static final double kIGyro = 0.00001;
 	public static final double kDGyro = 0.0025;
 	
 	//NEW TALON SRX STUFF

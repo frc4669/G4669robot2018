@@ -68,9 +68,9 @@ public class Robot extends TimedRobot {
 	 * used for any initialization code.
 	 */
 	public void robotInit() {
-		driveTrain.calibrateGyro();
 		driveTrain.zeroEncoders();
-		
+		driveTrain.resetGyro();
+		driveTrain.calibrateGyro();
 		chooser = new SendableChooser<String>();
 		chooser.addDefault("Do Nothing", "Do Nothing");
 		chooser.addObject("Drive Forward", "Drive Forward");
@@ -120,6 +120,9 @@ public class Robot extends TimedRobot {
 	public void autonomousInit() {
 		gameData = driverStation.getGameSpecificMessage();
 		autonomousString = (String) chooser.getSelected();
+		driveTrain.zeroEncoders();
+		driveTrain.resetGyro();
+		driveTrain.calibrateGyro();
 		if(autonomousString.equals("Do Nothing")){
 			autonomousCommand = new DoNothing();
 		}

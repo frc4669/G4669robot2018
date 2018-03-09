@@ -65,6 +65,10 @@ public class Elevator extends Subsystem {
 		
 		//Zero encoders on fwd limit
 		elevatorMotor.configSetParameter(ParamEnum.eClearPositionOnLimitF, 1, 0, 0, 10);
+		
+		//Set reverse soft limit 
+		elevatorMotor.configReverseSoftLimitThreshold(RobotMap.elevatorMax, RobotMap.timeout); 
+		elevatorMotor.configReverseSoftLimitEnable(true, RobotMap.timeout);
 
 	}
 	

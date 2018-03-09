@@ -87,7 +87,7 @@ public class ArcadeDrive extends Command {
 //		    	left = Robot.f310.getLeftY() + Robot.f310.getRightX();
 //		    	right = Robot.f310.getLeftY() - Robot.f310.getRightX();
 		    	
-	    		t_left = Robot.f310.getLeftY() + Robot.f310.getRightX();;
+	    		t_left = Robot.f310.getLeftY() + Robot.f310.getRightX();
 	    		t_right = Robot.f310.getLeftY() - Robot.f310.getRightX();
 
 	    		left = t_left + skim(t_right);
@@ -106,9 +106,12 @@ public class ArcadeDrive extends Command {
 		    		if (right<-0.3){
 		    			right = -0.3;
 		    		}
+		    		Robot.driveTrain.driveForward(left, right);
+		    	} else{
+		    		Robot.driveTrain.driveForward(0.6*left, 0.6*right);
 		    	}
 //	    		Robot.driveTrain.setSpeed(left*2400, right*2400);
-		    	Robot.driveTrain.driveForward(0.6*left, 0.6*right);
+		    	
 	    	}
     	}
     }

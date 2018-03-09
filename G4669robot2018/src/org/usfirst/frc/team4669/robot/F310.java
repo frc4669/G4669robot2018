@@ -28,11 +28,11 @@ public class F310 {
 	}
 	
 	public double getLeftTrigger() {
-		return f310.getRawAxis(2);
+		return deadzone(2);
 	}
 	
 	public double getRightTrigger() {
-		return f310.getRawAxis(3);
+		return deadzone(3);
 	}
 	
 	public double getRightX() {

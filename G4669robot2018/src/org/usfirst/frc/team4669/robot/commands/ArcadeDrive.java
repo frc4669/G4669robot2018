@@ -93,20 +93,8 @@ public class ArcadeDrive extends Command {
 	    		left = t_left + skim(t_right);
 	    		right = t_right + skim(t_left);
 		    		
-		    	if (Robot.elevator.getEncoderPos()<-9500){
-		    		if(left>0.3){
-		    			left = 0.3;
-		    		}
-		    		if (right>0.3){
-		    			right = 0.3;
-		    		}
-		    		if(left<-0.3){
-		    			left = -0.3;
-		    		}
-		    		if (right<-0.3){
-		    			right = -0.3;
-		    		}
-		    		Robot.driveTrain.driveForward(left, right);
+		    	if (Robot.elevator.getEncoderPos()<-9500||Robot.f310.getRightShoulderButton()){
+		    		Robot.driveTrain.driveForward(0.3*left, 0.3*right);
 		    	} else{
 		    		Robot.driveTrain.driveForward(0.6*left, 0.6*right);
 		    	}

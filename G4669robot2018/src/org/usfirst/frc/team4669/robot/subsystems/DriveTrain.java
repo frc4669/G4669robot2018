@@ -34,7 +34,7 @@ public class DriveTrain extends Subsystem {
 	private PIDOutputWrapper turnOutput;
 	
 	int velocity = 2300; //About 200 RPM, vel units are in sensor units per 100ms
-	int accel = 2300;
+	int accel = 4600;
 	
 	public Gyro analogGyro;
 	

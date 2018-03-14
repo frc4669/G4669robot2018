@@ -7,32 +7,33 @@ import edu.wpi.first.wpilibj.command.TimedCommand;
 /**
  *
  */
-public class AutoIntake extends TimedCommand {
+public class ShootCube extends TimedCommand {
 
-    public AutoIntake(double timeout) {
-        super(timeout);
+    public ShootCube(double timeout) {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-        requires(Robot.cubeIntake);
-    }
-
-    public AutoIntake() {
-        super(0.5);
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+    	// eg. requires(chassis);
+    	super(timeout);
         requires(Robot.cubeIntake);
     }
     
+    public ShootCube() {
+        // Use requires() here to declare subsystem dependencies
+    	// eg. requires(chassis);
+    	super(1);
+        requires(Robot.cubeIntake);
+    }
+
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.cubeIntake.intake();
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Robot.cubeIntake.set(0.6);
     }
 
-    // Called once after timeout
+    // Called once after isFinished returns true
     protected void end() {
     	Robot.cubeIntake.stopIntake();
     }

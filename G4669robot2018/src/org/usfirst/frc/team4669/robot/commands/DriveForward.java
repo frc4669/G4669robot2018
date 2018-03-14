@@ -29,5 +29,6 @@ public class DriveForward extends CommandGroup {
         // arm.
     	addSequential(new ReleaseArms());
     	addSequential(new DriveMotionMagic(RobotMap.distBaseLine));
+
     }
 }

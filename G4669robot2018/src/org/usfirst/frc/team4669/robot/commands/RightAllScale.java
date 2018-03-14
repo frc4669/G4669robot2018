@@ -27,25 +27,28 @@ public class RightAllScale extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addSequential(new ReleaseArms());
     	if(Robot.gameData.length()>0){
 	    	if (Robot.gameData.charAt(1)=='R'){
+	    		addSequential(new ReleaseArms());
 	    		addSequential(new DriveMotionMagic(RobotMap.distToScaleStraight));
+	    		addSequential(new AutoIntake());
+	    		addSequential(new AutoElevator(RobotMap.elevatorScaleMid));
 	    		addSequential(new TurnTo(270));
-	    		addSequential(new AutoElevator(RobotMap.elevatorMid));
-	    		addSequential(new DriveMotionMagic(10));
-	    		addSequential(new AutoRelease());
-	    		addSequential(new DriveMotionMagic(-10));
+	    		addSequential(new DriveMotionMagic(20));
+	    		addSequential(new ShootCube());
+	    		addSequential(new DriveMotionMagic(-20));
 	    		addSequential(new AutoElevator(0));
 	    	}
 	    	else if(Robot.gameData.charAt(1)=='L'){
-	    		addSequential(new DriveMotionMagic(RobotMap.distToScaleStraight-50));
+	    		addSequential(new ReleaseArms());
+	    		addSequential(new DriveMotionMagic(RobotMap.distToScaleStraight-80));
 	    		addSequential(new TurnTo(270));
-	    		addSequential(new DriveMotionMagic(RobotMap.distLeftAndRightScales));
+	    		addSequential(new DriveMotionMagic(RobotMap.distHorizontalScales));
 	    		addSequential(new TurnTo(0));
-	    		addSequential(new AutoElevator(RobotMap.elevatorMid));
-	    		addSequential(new DriveMotionMagic(45));
-	    		addSequential(new AutoRelease());
+	    		addSequential(new AutoIntake());
+	    		addSequential(new AutoElevator(RobotMap.elevatorScaleMid));
+	    		addSequential(new DriveMotionMagic(85));
+	    		addSequential(new ShootCube());
 	    		addSequential(new AutoElevator(0));
 	    	}
 	    	else{

@@ -68,10 +68,10 @@ public class OI {
 
 		//SmartDashboard commands
 		SmartDashboard.putData("Zero Sensors", new ZeroSensors());
-		SmartDashboard.putNumber("MotionMagicDistance", 0);
-		SmartDashboard.putNumber("TurnAngle", 90);
-//		SmartDashboard.putNumber("Drive Left Speed", 0);
-//		SmartDashboard.putNumber("Drive Right Speed", 0);
+//		SmartDashboard.putNumber("MotionMagicDistance", 0);
+//		SmartDashboard.putNumber("TurnAngle", 90);
+		SmartDashboard.putNumber("Drive Left Speed", 0);
+		SmartDashboard.putNumber("Drive Right Speed", 0);
 //		//PID SmartDashboard vals
 //		SmartDashboard.putNumber("PID_P_LEFT", TALON_P_LEFT.get());
 //		SmartDashboard.putNumber("PID_I_LEFT", TALON_I_LEFT.get());

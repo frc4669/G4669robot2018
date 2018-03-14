@@ -57,8 +57,8 @@ public class ElevatorControl extends Command {
     			motionMagicRunning = true;
     		}
     		else if(Robot.oi.getLeftRawButton(RobotMap.midElevatorButton) && !motionMagicRunning){
-    			Robot.elevator.setHeight(RobotMap.elevatorMid);
-    			targetPos = RobotMap.elevatorMid;
+    			Robot.elevator.setHeight(RobotMap.elevatorScaleMid);
+    			targetPos = RobotMap.elevatorScaleMid;
     			motionMagicRunning = true;
     		}
 			else if (motionMagicRunning 

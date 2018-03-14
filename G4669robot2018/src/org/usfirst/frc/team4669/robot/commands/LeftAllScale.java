@@ -33,20 +33,22 @@ public class LeftAllScale extends CommandGroup {
 	    	if (Robot.gameData.charAt(1)=='L'){
 	    		addSequential(new DriveMotionMagic(RobotMap.distToScaleStraight));
 	    		addSequential(new TurnTo(90));
-	    		addSequential(new AutoElevator(RobotMap.elevatorMid));
-	    		addSequential(new DriveMotionMagic(10));
-	    		addSequential(new AutoRelease());
-	    		addSequential(new DriveMotionMagic(-10));
+	    		addSequential(new AutoIntake());
+	    		addSequential(new AutoElevator(RobotMap.elevatorScaleMid));
+	    		addSequential(new DriveMotionMagic(20));
+	    		addSequential(new ShootCube());
+	    		addSequential(new DriveMotionMagic(-20));
 	    		addSequential(new AutoElevator(0));
 	    	}
 	    	else if(Robot.gameData.charAt(1)=='R'){
-	    		addSequential(new DriveMotionMagic(RobotMap.distToScaleStraight-50));
+	    		addSequential(new DriveMotionMagic(RobotMap.distToScaleStraight-80));
 	    		addSequential(new TurnTo(90));
-	    		addSequential(new DriveMotionMagic(RobotMap.distLeftAndRightScales));
+	    		addSequential(new DriveMotionMagic(RobotMap.distHorizontalScales));
 	    		addSequential(new TurnTo(0));
-	    		addSequential(new AutoElevator(RobotMap.elevatorMid));
-	    		addSequential(new DriveMotionMagic(45));
-	    		addSequential(new AutoRelease());
+	    		addSequential(new AutoIntake());
+	    		addSequential(new AutoElevator(RobotMap.elevatorScaleMid));
+	    		addSequential(new DriveMotionMagic(80));
+	    		addSequential(new ShootCube());
 	    		addSequential(new AutoElevator(0));
 	    	}
 	    	else{

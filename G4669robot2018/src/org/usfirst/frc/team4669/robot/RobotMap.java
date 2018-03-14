@@ -56,17 +56,17 @@ public class RobotMap {
 	public static final int elevatorVel = 1200;
 	public static final int elevatorAccel = 3140;
 	
-	public static final int elevatorSwitch = -9000;
+	public static final int elevatorSwitch = -9400;
 	public static final int elevatorExchange = -2450;
-	public static final int elevatorMid = -19379;
+	public static final int elevatorScaleMid = -22000;
 	public static final int elevatorMax = -26787;
 	
 	public static final double gain = 0.15; //Speed to take off top for arcade drive throttle
 	
-	//FIELD MEASUREMENTS
-	public static final int distToSwitchSides = 103;
-	public static final int distToScaleStraight = 230;
-	public static final int distLeftAndRightScales = 210;
+	//FIELD MEASUREMENTS, in inches
+	public static final int distToSwitchSides = 133;
+	public static final int distToScaleStraight = 300;
+	public static final int distHorizontalScales = 190; //distance between the left and right scale
 	public static final int distSwitchSidesFromCenter= 40;
 	public static final int distBaseLine = 82;
 	

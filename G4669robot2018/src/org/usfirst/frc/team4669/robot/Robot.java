@@ -196,11 +196,11 @@ public class Robot extends TimedRobot {
 //    	SmartDashboard.putData(new TurnMotionMagic(SmartDashboard.getNumber("TurnAngle", 90)));
 //    	SmartDashboard.putData(new TurnTo(SmartDashboard.getNumber("TurnAngle", 90)));
 //    	SmartDashboard.putData(new DriveMotionMagic(SmartDashboard.getNumber("MotionMagicDistance", 0)));
-    	SmartDashboard.putData(new DriveSpeedControl(SmartDashboard.getNumber("Drive Left Speed", 0),SmartDashboard.getNumber("Drive Right Speed", 0)));
+//    	SmartDashboard.putData(new DriveSpeedControl(SmartDashboard.getNumber("Drive Left Speed", 0),SmartDashboard.getNumber("Drive Right Speed", 0)));
 //    	SmartDashboard.putNumber("Left Position", driveTrain.getLeftEncoder());
 //    	SmartDashboard.putNumber("Right Position", driveTrain.getRightEncoder());
-    	SmartDashboard.putNumber("Left Velocity", Robot.driveTrain.getLeftEncoderSpeed());
-    	SmartDashboard.putNumber("Right Velocity", Robot.driveTrain.getRightEncoderSpeed());
+//    	SmartDashboard.putNumber("Left Velocity", Robot.driveTrain.getLeftEncoderSpeed());
+//    	SmartDashboard.putNumber("Right Velocity", Robot.driveTrain.getRightEncoderSpeed());
     	SmartDashboard.putData("Accelerometer",(Sendable) climber.accel);
 //    	SmartDashboard.putNumber("POV Angle", Robot.f310.getDPadPOV());
 //    	SmartDashboard.putNumber("Intake Left Enc", Robot.cubeIntake.getLeftEncoder());

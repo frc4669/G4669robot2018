@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.SensorTerm;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 /**
@@ -58,7 +59,18 @@ public class DriveTrain extends Subsystem {
 		
 		gyroPID.setAbsoluteTolerance(2);
 		
+//		topRightMotor.configSensorTerm(SensorTerm.Sum0, FeedbackDevice.RemoteSensor0, RobotMap.timeout);
+//		topRightMotor.configSensorTerm(SensorTerm.Sum1, FeedbackDevice.QuadEncoder, RobotMap.timeout);
+//		topRightMotor.configSensorTerm(SensorTerm.Diff1, FeedbackDevice.RemoteSensor0, RobotMap.timeout);
+//		topRightMotor.configSensorTerm(SensorTerm.Diff0, FeedbackDevice.QuadEncoder, RobotMap.timeout);
+//		topRightMotor.configSelectedFeedbackSensor(FeedbackDevice.SensorSum,RobotMap.pidIdx,RobotMap.timeout);
 		topRightMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,RobotMap.pidIdx,RobotMap.timeout);
+		
+//		topLeftMotor.configSensorTerm(SensorTerm.Sum0, FeedbackDevice.RemoteSensor0, RobotMap.timeout);
+//		topLeftMotor.configSensorTerm(SensorTerm.Sum1, FeedbackDevice.QuadEncoder, RobotMap.timeout);
+//		topLeftMotor.configSensorTerm(SensorTerm.Diff1, FeedbackDevice.RemoteSensor0, RobotMap.timeout);
+//		topLeftMotor.configSensorTerm(SensorTerm.Diff0, FeedbackDevice.QuadEncoder, RobotMap.timeout);
+//		topLeftMotor.configSelectedFeedbackSensor(FeedbackDevice.SensorSum,RobotMap.pidIdx,RobotMap.timeout);
 		topLeftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,RobotMap.pidIdx,RobotMap.timeout);
 		
 		topRightMotor.setInverted(true);

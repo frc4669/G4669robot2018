@@ -75,14 +75,14 @@ public class RobotMap {
 	
 	//DRIVE TRAIN PIDF VALUES
 	public static final double leftkF = 0.3343;
-	public static final double leftkP = 0.45;
+	public static final double leftkP = 0.4;
 	public static final double leftkI = 0.0003;
 	public static final double leftkD = 20;
 	public static final int leftkIZone = 50;
 	
 	public static final double rightkF = 0.3343;
 	public static final double rightkP = 0.4;
-	public static final double rightkI = 0;
+	public static final double rightkI = 0.0003;
 	public static final double rightkD = 20;
 	public static final int rightkIZone = 50;
 	

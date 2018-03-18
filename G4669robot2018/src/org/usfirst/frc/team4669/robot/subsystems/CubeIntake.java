@@ -106,8 +106,8 @@ public class CubeIntake extends Subsystem {
     public void intake(){
 //    	double speed = SmartDashboard.getNumber("CubeIntakeVel", 2500);
     	if(Robot.cubeIntake.getDistance()<2.3){
-			leftIntakeMotor.set(ControlMode.PercentOutput,-0.5);
-			rightIntakeMotor.set(ControlMode.PercentOutput,-0.5);
+			leftIntakeMotor.set(ControlMode.PercentOutput,-0.4);
+			rightIntakeMotor.set(ControlMode.PercentOutput,-0.4);
     	}
 //    	leftIntakeMotor.set(ControlMode.Velocity,speed);
 //    	rightIntakeMotor.set(ControlMode.Velocity,speed);

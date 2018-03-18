@@ -24,7 +24,7 @@ public class ElevatorControl extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.elevator.zeroEncoders();
+//    	Robot.elevator.zeroEncoders();
     	motionMagicRunning = false;
     }
 
@@ -72,7 +72,7 @@ public class ElevatorControl extends Command {
     				positionRunning = true;
     			} 
     			if (Robot.oi.leftY()!=0){
-    				Robot.elevator.customHeight(Robot.oi.leftY());
+    				Robot.elevator.customHeight(0.55*Robot.oi.leftY());
     				positionRunning = false;
     			}
     		}

@@ -34,9 +34,9 @@ public class RightAllScale extends CommandGroup {
 	    		addSequential(new AutoIntake());
 	    		addSequential(new AutoElevator(RobotMap.elevatorScaleMid));
 	    		addSequential(new TurnTo(270));
-	    		addSequential(new DriveMotionMagic(20));
+	    		addSequential(new DriveMotionMagic(10));
 	    		addSequential(new ShootCube());
-	    		addSequential(new DriveMotionMagic(-20));
+	    		addSequential(new DriveMotionMagic(-10));
 	    		addSequential(new AutoElevator(0));
 	    	}
 	    	else if(Robot.gameData.charAt(1)=='L'){

@@ -69,6 +69,11 @@ public class Elevator extends Subsystem {
 		//Set reverse soft limit 
 		elevatorMotor.configReverseSoftLimitThreshold(RobotMap.elevatorMax, RobotMap.timeout); 
 		elevatorMotor.configReverseSoftLimitEnable(true, RobotMap.timeout);
+		
+//		//Set forward soft limit 
+//		elevatorMotor.configForwardSoftLimitThreshold(0, RobotMap.timeout); 
+		elevatorMotor.configForwardSoftLimitEnable(false, RobotMap.timeout);
+
 
 	}
 	

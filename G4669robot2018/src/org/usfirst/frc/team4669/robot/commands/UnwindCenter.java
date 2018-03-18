@@ -7,35 +7,29 @@ import edu.wpi.first.wpilibj.command.TimedCommand;
 /**
  *
  */
-public class AutoRelease extends TimedCommand {
+public class UnwindCenter extends TimedCommand {
+	
+	String motor;
 
-    public AutoRelease(double timeout) {
+    public UnwindCenter(double timeout) {
+        super(timeout);
         // Use requires() here to declare subsystem dependencies
-    	// eg. requires(chassis);
-    	super(timeout);
-        requires(Robot.cubeIntake);
-    }
-    
-    public AutoRelease() {
-        // Use requires() here to declare subsystem dependencies
-    	// eg. requires(chassis);
-    	super(3);
-        requires(Robot.cubeIntake);
+        // eg. requires(chassis);
+        requires(Robot.climber);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
+    	Robot.climber.unwindCenter(true);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.cubeIntake.releaseCube();
     }
 
-    // Called once after isFinished returns true
+    // Called once after timeout
     protected void end() {
-    	Robot.cubeIntake.stopIntake();
+    	Robot.climber.unwindCenter(false);
     }
 
     // Called when another command which requires one or more of the same

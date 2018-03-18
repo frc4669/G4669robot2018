@@ -53,22 +53,22 @@ public class RobotMap {
 	public static final int rightClimb = 11;
 	
 	//CONSTANTS
-	public static final int elevatorVel = 1200;
-	public static final int elevatorAccel = 3140;
+	public static final int elevatorVel = 900;
+	public static final int elevatorAccel = 3000;
 	
-	public static final int elevatorSwitch = -9400;
+	public static final int elevatorSwitch = -10000;
 	public static final int elevatorExchange = -2450;
-	public static final int elevatorScaleMid = -22000;
-	public static final int elevatorMax = -26787;
+	public static final int elevatorScaleMid = -23000;
+	public static final int elevatorMax = -28300;
 	
 	public static final double gain = 0.15; //Speed to take off top for arcade drive throttle
 	
 	//FIELD MEASUREMENTS, in inches
 	public static final int distToSwitchSides = 133;
-	public static final int distToScaleStraight = 300;
-	public static final int distHorizontalScales = 190; //distance between the left and right scale
-	public static final int distSwitchSidesFromCenter= 40;
-	public static final int distBaseLine = 82;
+	public static final int distToScaleStraight = 290;
+	public static final int distHorizontalScales = 210; //distance between the left and right scale
+	public static final int distSwitchSidesFromCenter= 35;
+	public static final int distBaseLine = 85;
 	
 	//DRIVE TRAIN SPEED PROPORTION
 	public static final double driveTrainSpeedProportion = 0.85;
@@ -87,7 +87,7 @@ public class RobotMap {
 	public static final int rightkIZone = 50;
 	
 	public static final double kPGyro = 0.009;
-	public static final double kIGyro = 0.00001;
+	public static final double kIGyro = 0.00002;
 	public static final double kDGyro = 0.0025;
 	
 	//NEW TALON SRX STUFF

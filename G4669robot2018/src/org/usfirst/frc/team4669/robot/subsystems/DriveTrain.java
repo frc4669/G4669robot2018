@@ -57,7 +57,7 @@ public class DriveTrain extends Subsystem {
 		
 		gyroPID.setOutputRange(-0.5, 0.5);
 		
-		gyroPID.setAbsoluteTolerance(2);
+		gyroPID.setAbsoluteTolerance(5);
 		
 //		topRightMotor.configSensorTerm(SensorTerm.Sum0, FeedbackDevice.RemoteSensor0, RobotMap.timeout);
 //		topRightMotor.configSensorTerm(SensorTerm.Sum1, FeedbackDevice.QuadEncoder, RobotMap.timeout);
@@ -146,6 +146,7 @@ public class DriveTrain extends Subsystem {
     	topLeftMotor.set(ControlMode.Velocity,leftSpeed);
     	topRightMotor.set(ControlMode.Velocity,rightSpeed);
     }
+    
     
     public void stop() {
     	topLeftMotor.set(ControlMode.PercentOutput,0);

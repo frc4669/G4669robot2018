@@ -13,7 +13,11 @@ import org.usfirst.frc.team4669.robot.commands.LeftSwitchLeftScale;
 import org.usfirst.frc.team4669.robot.commands.RightAllScale;
 import org.usfirst.frc.team4669.robot.commands.RightSwitch;
 import org.usfirst.frc.team4669.robot.commands.RightSwitchRightScale;
+import org.usfirst.frc.team4669.robot.commands.StopClimber;
 import org.usfirst.frc.team4669.robot.commands.TurnTo;
+import org.usfirst.frc.team4669.robot.commands.UnwindCenter;
+import org.usfirst.frc.team4669.robot.commands.UnwindLeft;
+import org.usfirst.frc.team4669.robot.commands.UnwindRight;
 import org.usfirst.frc.team4669.robot.commands.TurnMotionMagic;
 import org.usfirst.frc.team4669.robot.subsystems.Climber;
 import org.usfirst.frc.team4669.robot.subsystems.CubeIntake;
@@ -51,12 +55,12 @@ public class Robot extends TimedRobot {
 //	public static FuelDoor door = new FuelDoor();
 //	public static RopeWinch ropeWinch = new RopeWinch();
 //	public static FuelAgitator fuelAgitator = new FuelAgitator();
-	public static OI oi = new OI();
-	public static F310 f310 = new F310();
 	public static DriverStation driverStation;
 	public static CubeIntake cubeIntake =  new CubeIntake();
 	public static Elevator elevator = new Elevator();
 	public static Climber climber = new Climber();
+	public static OI oi = new OI();
+	public static F310 f310 = new F310();
 	public static String gameData = "";
 
 	Command autonomousCommand;
@@ -184,10 +188,14 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance().run();
 	}
 
+	public void testInit(){
+	}
+	
 	/**
 	 * This function is called periodically during test mode
 	 */
 	public void testPeriodic() {
+
 	}
 
 	public void updateSmartDashboard() {

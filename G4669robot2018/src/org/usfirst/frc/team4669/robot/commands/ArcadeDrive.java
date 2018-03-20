@@ -93,9 +93,11 @@ public class ArcadeDrive extends Command {
 	    		left = t_left + skim(t_right);
 	    		right = t_right + skim(t_left);
 		    		
-		    	if (Robot.elevator.getEncoderPos()<-22000||Robot.f310.getRightShoulderButton()){
+		    	if (Robot.elevator.getEncoderPos()<-22000||Robot.f310.getRightShoulderButton()||Robot.f310.getGreenButton()){
 		    		Robot.driveTrain.driveForward(0.3*left, 0.3*right);
-		    	} else{
+		    	} else if (Robot.elevator.getEncoderPos()<RobotMap.elevatorExchange+300){
+		    		Robot.driveTrain.driveForward(0.45*left, 0.45*right);
+		    	}	else{
 		    		Robot.driveTrain.driveForward(0.6*left, 0.6*right);
 		    	}
 //	    		Robot.driveTrain.setSpeed(left*2400, right*2400);

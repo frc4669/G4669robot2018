@@ -38,8 +38,10 @@ public class ElevatorControl extends Command {
     		motionMagicRunning = false;
     	} 
     	else {
-    		if (Robot.oi.getLeftRawButton(RobotMap.zeroEncoderElevatorButton) && !motionMagicRunning){
-    			Robot.elevator.zeroEncoders();
+    		if (Robot.cubeIntake.hasCube()){
+    			Robot.elevator.setHeight(RobotMap.elevatorExchange/2);
+    			targetPos = RobotMap.elevatorExchange/2;
+    			motionMagicRunning = true;
     		}
     		if (Robot.oi.getLeftRawButton(RobotMap.groundElevatorButton) && !motionMagicRunning){
     			Robot.elevator.setHeight(0);

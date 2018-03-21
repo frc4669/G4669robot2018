@@ -15,8 +15,8 @@ public class ArcadeDrive extends Command {
 	
 	double left; //left motor
 	double right; //right motor
-	double t_left;
-	double t_right;
+	double turn;
+	double drive;
 	
 	boolean motionMagicRunning = false;
 	boolean turnRunning = false;
@@ -84,23 +84,25 @@ public class ArcadeDrive extends Command {
     		
 	    	//Joystick driving
 			else if (!motionMagicRunning && !turnRunning){
-//		    	left = Robot.f310.getLeftY() + Robot.f310.getRightX();
-//		    	right = Robot.f310.getLeftY() - Robot.f310.getRightX();
-		    	
-	    		t_left = Robot.f310.getLeftY() + Robot.f310.getRightX();
-	    		t_right = Robot.f310.getLeftY() - Robot.f310.getRightX();
-
-	    		left = t_left + skim(t_right);
-	    		right = t_right + skim(t_left);
-		    		
-		    	if (Robot.elevator.getEncoderPos()<-22000||Robot.f310.getRightShoulderButton()||Robot.f310.getGreenButton()){
-		    		Robot.driveTrain.driveForward(0.3*left, 0.3*right);
-		    	} else if (Robot.elevator.getEncoderPos()<RobotMap.elevatorExchange+300){
-		    		Robot.driveTrain.driveForward(0.45*left, 0.45*right);
-		    	}	else{
-		    		Robot.driveTrain.driveForward(0.6*left, 0.6*right);
+				drive = Robot.f310.getLeftY();
+				turn = Robot.f310.getRightX();
+				
+				if (Robot.elevator.getEncoderPos()<-22000||Robot.f310.getRightShoulderButton()||Robot.f310.getGreenButton()){
+		    		drive = 0.3*Robot.f310.getLeftY();
+					turn = 0.3*Robot.f310.getRightX();
 		    	}
-//	    		Robot.driveTrain.setSpeed(left*2400, right*2400);
+				else if (Robot.elevator.getEncoderPos()<RobotMap.elevatorExchange+300||Robot.cubeIntake.hasCube()){
+	    			drive = 0.7*Robot.f310.getLeftY();
+		    		turn = 0.3*Robot.f310.getRightX();
+	    		}
+		    	else{
+		    		drive = 0.7*Robot.f310.getLeftY();
+		    		turn = 0.5*Robot.f310.getRightX();
+		    	}
+		    	
+		    	left = drive + turn;
+		    	right = drive - turn;
+		    	Robot.driveTrain.driveForward(left, right);
 		    	
 	    	}
     	}
@@ -120,12 +122,12 @@ public class ArcadeDrive extends Command {
     protected void interrupted() {
     }
     
-    double skim(double v) {
-		  // gain determines how much to skim off the top
-		  if (v > 1.0)
-		    return -((v - 1.0) * RobotMap.gain);
-		  else if (v < -1.0)
-		    return -((v + 1.0) * RobotMap.gain);
-		  return 0;
-		}
+//    double skim(double v) {
+//		  // gain determines how much to skim off the top
+//		  if (v > 1.0)
+//		    return -((v - 1.0) * RobotMap.gain);
+//		  else if (v < -1.0)
+//		    return -((v + 1.0) * RobotMap.gain);
+//		  return 0;
+//		}
 }

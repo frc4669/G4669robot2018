@@ -23,7 +23,8 @@ public class CubeIntake extends Subsystem {
 	private WPI_TalonSRX leftIntakeMotor;
 	private WPI_TalonSRX rightIntakeMotor;
 	private Servo ropeServo;
-	private AnalogInput distSensor;
+	private AnalogInput distSensorLeft;
+	private AnalogInput distSensorRight;
 	
 	private int timeout = RobotMap.timeout;
 	private int slotIdx = RobotMap.slotIdx;
@@ -36,7 +37,8 @@ public class CubeIntake extends Subsystem {
 	public CubeIntake(){
 		super();
 		
-		distSensor = new AnalogInput(0);
+		distSensorLeft = new AnalogInput(0);
+		distSensorRight = new AnalogInput(1);
 		ropeServo = new Servo(0);
 		
 		leftIntakeMotor =  new WPI_TalonSRX(RobotMap.leftIntake);
@@ -105,7 +107,7 @@ public class CubeIntake extends Subsystem {
     
     public void intake(){
 //    	double speed = SmartDashboard.getNumber("CubeIntakeVel", 2500);
-    	if(Robot.cubeIntake.getDistance()<2.3){
+    	if(Robot.cubeIntake.hasCube()){
 			leftIntakeMotor.set(ControlMode.PercentOutput,-0.4);
 			rightIntakeMotor.set(ControlMode.PercentOutput,-0.4);
     	}
@@ -114,16 +116,13 @@ public class CubeIntake extends Subsystem {
     }
     
     public void releaseCube(){
-//    	double speed = SmartDashboard.getNumber("CubeReleaseVel", 1750);
 		leftIntakeMotor.set(ControlMode.PercentOutput,0.3);
 		rightIntakeMotor.set(ControlMode.PercentOutput,0.3);
-//    	leftIntakeMotor.set(ControlMode.Velocity,-speed);
-//    	rightIntakeMotor.set(ControlMode.Velocity,-speed);
     }
     
     public void turnCube(){
-		leftIntakeMotor.set(ControlMode.PercentOutput,-0.5);
-		rightIntakeMotor.set(ControlMode.PercentOutput,0.5);
+		leftIntakeMotor.set(ControlMode.PercentOutput,-0.2);
+		rightIntakeMotor.set(ControlMode.PercentOutput,0.2);
     }
     
     public void set(double output){
@@ -161,11 +160,14 @@ public class CubeIntake extends Subsystem {
     	return rightIntakeMotor.getSensorCollection().getQuadratureVelocity();
     }
     
-    public double getDistance() {
-    	return distSensor.getVoltage(); // reads the range on the distance sensor in voltage, 0 is farther
+    public double getLeftDistance() {
+    	return distSensorLeft.getVoltage(); // reads the range on the distance sensor in voltage, 0 is farther
+    }
+    public double getRightDistance() {
+    	return distSensorRight.getVoltage(); // reads the range on the distance sensor in voltage, 0 is farther
     }
     public boolean hasCube(){
-    	return getDistance() > 1;
+    	return getLeftDistance() > 1 && getRightDistance() > 1;
     }
 }
 

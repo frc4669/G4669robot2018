@@ -30,7 +30,9 @@ public class RobotMap {
 	//Sensors
 	public static final int forwardLimitSwitch = 1;
 	public static final int reverseLimitSwitch = 2;
-	public static final int distanceSensor = 1;
+	public static final int distanceSensorLeft = 0;
+	public static final int distanceSensorRight = 1;
+
 	
 	//DRIVER STATION	
 	// Reverse output of motors if moving backwards

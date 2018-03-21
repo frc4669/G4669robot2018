@@ -27,7 +27,10 @@ public class Intake extends Command {
     	else if(!Robot.f310.getLeftShoulderButton()){
     		Robot.cubeIntake.stopServo();
     	}
-		if(Robot.f310.getGreenButton()){
+    	if(Robot.f310.getBlueButton()){
+    		Robot.cubeIntake.turnCube();
+    	} 
+    	else if(Robot.f310.getGreenButton()){
     		Robot.cubeIntake.intake();
     	} 
 		else if(Robot.f310.getOrangeButton()){

@@ -15,6 +15,7 @@ public class ElevatorControl extends Command {
 	double targetPos;
 	boolean motionMagicRunning = false;
 	boolean positionRunning = false;
+	boolean hasCubeRunning = false;
 
     public ElevatorControl() {
         // Use requires() here to declare subsystem dependencies
@@ -38,12 +39,16 @@ public class ElevatorControl extends Command {
     		motionMagicRunning = false;
     	} 
     	else {
-    		if (Robot.cubeIntake.hasCube()){
+    		if (Robot.cubeIntake.hasCube() && !motionMagicRunning && !hasCubeRunning){
     			Robot.elevator.setHeight(RobotMap.elevatorExchange/2);
     			targetPos = RobotMap.elevatorExchange/2;
     			motionMagicRunning = true;
+    			hasCubeRunning = true;
+    		} 
+    		else if(!Robot.cubeIntake.hasCube()&&hasCubeRunning){
+    			hasCubeRunning = false;
     		}
-    		if (Robot.oi.getLeftRawButton(RobotMap.groundElevatorButton) && !motionMagicRunning){
+    		else if (Robot.oi.getLeftRawButton(RobotMap.groundElevatorButton) && !motionMagicRunning){
     			Robot.elevator.setHeight(0);
     			targetPos = 0;
     			motionMagicRunning = true;

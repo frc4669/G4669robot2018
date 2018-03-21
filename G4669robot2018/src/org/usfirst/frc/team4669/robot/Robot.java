@@ -199,7 +199,7 @@ public class Robot extends TimedRobot {
 	}
 
 	public void updateSmartDashboard() {
-    	SmartDashboard.putData("Gyro",(Sendable) driveTrain.analogGyro);
+    	SmartDashboard.putData("Gyro", (Sendable) driveTrain.analogGyro);
     	SmartDashboard.putBoolean("Has Cube", cubeIntake.hasCube());
 //    	SmartDashboard.putData(new TurnMotionMagic(SmartDashboard.getNumber("TurnAngle", 90)));
 //    	SmartDashboard.putData(new TurnTo(SmartDashboard.getNumber("TurnAngle", 90)));

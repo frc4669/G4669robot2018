@@ -107,7 +107,7 @@ public class CubeIntake extends Subsystem {
     
     public void intake(){
 //    	double speed = SmartDashboard.getNumber("CubeIntakeVel", 2500);
-    	if(Robot.cubeIntake.hasCube()){
+    	if(!Robot.cubeIntake.hasCube()){
 			leftIntakeMotor.set(ControlMode.PercentOutput,-0.4);
 			rightIntakeMotor.set(ControlMode.PercentOutput,-0.4);
     	}
@@ -121,8 +121,8 @@ public class CubeIntake extends Subsystem {
     }
     
     public void turnCube(){
-		leftIntakeMotor.set(ControlMode.PercentOutput,-0.2);
-		rightIntakeMotor.set(ControlMode.PercentOutput,0.2);
+		leftIntakeMotor.set(ControlMode.PercentOutput,-0.3);
+		rightIntakeMotor.set(ControlMode.PercentOutput,0.3);
     }
     
     public void set(double output){
@@ -167,7 +167,8 @@ public class CubeIntake extends Subsystem {
     	return distSensorRight.getVoltage(); // reads the range on the distance sensor in voltage, 0 is farther
     }
     public boolean hasCube(){
-    	return getLeftDistance() > 1 && getRightDistance() > 1;
+//    	return getLeftDistance() > 1 && getRightDistance() > 1;
+    	return getLeftDistance() > 1;
     }
 }
 

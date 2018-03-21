@@ -46,11 +46,11 @@ public class RobotMap {
 	public static final int stopElevatorButton= 1;
 	public static final int groundElevatorButton= 2;
 	public static final int midElevatorButton= 3;
-	public static final int exchangeElevatorButton= 4;
+	public static final int exchangeElevatorButton= 7;
 	public static final int switchElevatorButton= 5;
 	public static final int leftClimb = 6;
-	public static final int centerClimb = 7;
-	public static final int zeroEncoderElevatorButton = 9;
+	public static final int hasCubeElevatorButton = 4;
+	public static final int button9Elevator = 9;
 	public static final int stopClimb = 10;
 	public static final int rightClimb = 11;
 	

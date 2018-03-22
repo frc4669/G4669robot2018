@@ -30,7 +30,7 @@ public class ShootCube extends TimedCommand {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.cubeIntake.set(0.6);
+    	Robot.cubeIntake.set(-0.6);
     }
 
     // Called once after isFinished returns true

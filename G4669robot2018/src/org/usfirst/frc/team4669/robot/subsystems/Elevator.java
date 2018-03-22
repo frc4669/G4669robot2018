@@ -67,8 +67,8 @@ public class Elevator extends Subsystem {
 		elevatorMotor.configSetParameter(ParamEnum.eClearPositionOnLimitF, 1, 0, 0, 10);
 		
 		//Set reverse soft limit 
-		elevatorMotor.configReverseSoftLimitThreshold(RobotMap.elevatorMax, RobotMap.timeout); 
-		elevatorMotor.configReverseSoftLimitEnable(true, RobotMap.timeout);
+//		elevatorMotor.configReverseSoftLimitThreshold(RobotMap.elevatorMax, RobotMap.timeout); 
+		elevatorMotor.configReverseSoftLimitEnable(false, RobotMap.timeout);
 		
 //		//Set forward soft limit 
 //		elevatorMotor.configForwardSoftLimitThreshold(0, RobotMap.timeout); 
@@ -88,7 +88,16 @@ public class Elevator extends Subsystem {
     }
     
     public void setHeight(double height)  {
+    	elevatorMotor.configMotionCruiseVelocity(RobotMap.elevatorVel, RobotMap.timeout);
+		elevatorMotor.configMotionAcceleration(RobotMap.elevatorAccel, RobotMap.timeout);
     	elevatorMotor.set(ControlMode.MotionMagic, height);
+    }
+    
+    public void groundHeight()  {
+    	elevatorMotor.configMotionCruiseVelocity(RobotMap.elevatorDownVel, RobotMap.timeout);
+		elevatorMotor.configMotionAcceleration(RobotMap.elevatorDownAccel, RobotMap.timeout);
+    	elevatorMotor.set(ControlMode.MotionMagic, 0);
+
     }
     
     public double getClosedLoopError(){
@@ -122,9 +131,7 @@ public class Elevator extends Subsystem {
     public boolean getReverseLimit(){
     	return elevatorMotor.getSensorCollection().isRevLimitSwitchClosed();
     }
-    public void positionControl(double d){
-    	elevatorMotor.set(ControlMode.Position, d);
-    }
+    
     public void zeroVelocity(){
     	elevatorMotor.set(ControlMode.Velocity, 0);
     }

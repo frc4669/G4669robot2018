@@ -49,7 +49,7 @@ public class ElevatorControl extends Command {
 //    			hasCubeRunning = false;
 //    		}
     		if (Robot.oi.getLeftRawButton(RobotMap.groundElevatorButton) && !motionMagicRunning){
-    			Robot.elevator.setHeight(0);
+    			Robot.elevator.groundHeight();
     			targetPos = 0;
     			motionMagicRunning = true;
     		}
@@ -64,13 +64,18 @@ public class ElevatorControl extends Command {
     			motionMagicRunning = true;
     		}
     		else if(Robot.oi.getLeftRawButton(RobotMap.hasCubeElevatorButton) && !motionMagicRunning){
-    			Robot.elevator.setHeight(RobotMap.elevatorExchange/2);
-    			targetPos = RobotMap.elevatorExchange/2;
+    			Robot.elevator.setHeight(RobotMap.elevatorLift);
+    			targetPos = RobotMap.elevatorLift;
     			motionMagicRunning = true;
     		}
     		else if(Robot.oi.getLeftRawButton(RobotMap.midElevatorButton) && !motionMagicRunning){
     			Robot.elevator.setHeight(RobotMap.elevatorScaleMid);
     			targetPos = RobotMap.elevatorScaleMid;
+    			motionMagicRunning = true;
+    		}
+    		else if(Robot.oi.getLeftRawButton(RobotMap.maxElevatorButton) && !motionMagicRunning){
+    			Robot.elevator.setHeight(RobotMap.elevatorMax);
+    			targetPos = RobotMap.elevatorMax;
     			motionMagicRunning = true;
     		}
 			else if (motionMagicRunning 

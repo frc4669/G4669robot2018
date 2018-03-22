@@ -57,7 +57,7 @@ public class DriveTrain extends Subsystem {
 		
 		gyroPID.setOutputRange(-0.5, 0.5);
 		
-		gyroPID.setAbsoluteTolerance(5);
+		gyroPID.setAbsoluteTolerance(3);
 		
 //		topRightMotor.configSensorTerm(SensorTerm.Sum0, FeedbackDevice.RemoteSensor0, RobotMap.timeout);
 //		topRightMotor.configSensorTerm(SensorTerm.Sum1, FeedbackDevice.QuadEncoder, RobotMap.timeout);

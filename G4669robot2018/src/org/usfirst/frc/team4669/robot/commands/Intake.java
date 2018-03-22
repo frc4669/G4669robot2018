@@ -28,8 +28,10 @@ public class Intake extends Command {
     		Robot.cubeIntake.stopServo();
     	}
     	if(Robot.f310.getBlueButton()){
-    		Robot.cubeIntake.turnCube();
-    	} 
+    		Robot.cubeIntake.turnCubeLeft();
+    	} else if(Robot.f310.getRedButton()){
+    		Robot.cubeIntake.turnCubeRight();
+    	}
     	else if(Robot.f310.getGreenButton()){
     		Robot.cubeIntake.intake();
     	} 
@@ -37,7 +39,7 @@ public class Intake extends Command {
     		Robot.cubeIntake.releaseCube();
     	}
 		else if(Robot.f310.getRightTrigger()!=0){
-    		Robot.cubeIntake.set(0.7);
+    		Robot.cubeIntake.set(-0.7);
     	}
 		else {
     		Robot.cubeIntake.stopIntake();

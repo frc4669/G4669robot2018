@@ -20,8 +20,8 @@ import edu.wpi.first.wpilibj.Ultrasonic;
  */
 public class CubeIntake extends Subsystem {
 	
-	private WPI_TalonSRX leftIntakeMotor;
 	private WPI_TalonSRX rightIntakeMotor;
+	private WPI_TalonSRX leftIntakeMotor;
 	private Servo ropeServo;
 	private AnalogInput distSensorLeft;
 	private AnalogInput distSensorRight;
@@ -41,62 +41,62 @@ public class CubeIntake extends Subsystem {
 		distSensorRight = new AnalogInput(1);
 		ropeServo = new Servo(0);
 		
-		leftIntakeMotor =  new WPI_TalonSRX(RobotMap.leftIntake);
-		rightIntakeMotor =  new WPI_TalonSRX(RobotMap.rightIntake);
-		
-		leftIntakeMotor.configNominalOutputForward(0, timeout);
-		leftIntakeMotor.configNominalOutputReverse(0, timeout);
+		rightIntakeMotor =  new WPI_TalonSRX(RobotMap.leftIntake);
+		leftIntakeMotor =  new WPI_TalonSRX(RobotMap.rightIntake);
 		
 		rightIntakeMotor.configNominalOutputForward(0, timeout);
 		rightIntakeMotor.configNominalOutputReverse(0, timeout);
 		
-		leftIntakeMotor.configPeakOutputForward(1, timeout);
-		leftIntakeMotor.configPeakOutputReverse(-1, timeout);
+		leftIntakeMotor.configNominalOutputForward(0, timeout);
+		leftIntakeMotor.configNominalOutputReverse(0, timeout);
 		
 		rightIntakeMotor.configPeakOutputForward(1, timeout);
 		rightIntakeMotor.configPeakOutputReverse(-1, timeout);
 		
+		leftIntakeMotor.configPeakOutputForward(1, timeout);
+		leftIntakeMotor.configPeakOutputReverse(-1, timeout);
+		
 		//Configuring PID Values
-		leftIntakeMotor.selectProfileSlot(slotIdx,pidIdx);
-		leftIntakeMotor.config_kF(slotIdx,0.097,timeout); //0.03
-		leftIntakeMotor.config_kP(slotIdx,0.22,timeout); //0.17
-		leftIntakeMotor.config_kI(slotIdx,0.0011,timeout); //0
-		leftIntakeMotor.config_kD(slotIdx,30,timeout); //20
-		
 		rightIntakeMotor.selectProfileSlot(slotIdx,pidIdx);
-		rightIntakeMotor.config_kF(slotIdx,0.097,timeout);
-		rightIntakeMotor.config_kP(slotIdx,0.22,timeout);
-		rightIntakeMotor.config_kI(slotIdx,0.0011,timeout); 
-		rightIntakeMotor.config_kD(slotIdx,22,timeout);
+		rightIntakeMotor.config_kF(slotIdx,0.097,timeout); //0.03
+		rightIntakeMotor.config_kP(slotIdx,0.22,timeout); //0.17
+		rightIntakeMotor.config_kI(slotIdx,0.0011,timeout); //0
+		rightIntakeMotor.config_kD(slotIdx,30,timeout); //20
 		
-		leftIntakeMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,pidIdx,timeout);
+		leftIntakeMotor.selectProfileSlot(slotIdx,pidIdx);
+		leftIntakeMotor.config_kF(slotIdx,0.097,timeout);
+		leftIntakeMotor.config_kP(slotIdx,0.22,timeout);
+		leftIntakeMotor.config_kI(slotIdx,0.0011,timeout); 
+		leftIntakeMotor.config_kD(slotIdx,22,timeout);
+		
 		rightIntakeMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,pidIdx,timeout);
+		leftIntakeMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,pidIdx,timeout);
 		
-		leftIntakeMotor.setSelectedSensorPosition(0,pidIdx,timeout);
 		rightIntakeMotor.setSelectedSensorPosition(0,pidIdx,timeout);
+		leftIntakeMotor.setSelectedSensorPosition(0,pidIdx,timeout);
 		
 //		leftIntakeMotor.configMotionCruiseVelocity(200, timeout);
 //		leftIntakeMotor.configMotionAcceleration(50, timeout);
 //		rightIntakeMotor.configMotionCruiseVelocity(200, timeout);
 //		rightIntakeMotor.configMotionAcceleration(50, timeout);
 		
-		leftIntakeMotor.setSensorPhase(true);
-		rightIntakeMotor.setSensorPhase(false);
+		rightIntakeMotor.setSensorPhase(true);
+		leftIntakeMotor.setSensorPhase(false);
 		
-		leftIntakeMotor.setInverted(true);
 		rightIntakeMotor.setInverted(false);
+		leftIntakeMotor.setInverted(true);
 		
 		//Setting Current limits
-		
-		leftIntakeMotor.configContinuousCurrentLimit(12, timeout);
-		leftIntakeMotor.configPeakCurrentLimit(15, timeout);
-		leftIntakeMotor.configPeakCurrentDuration(100, timeout);
-		leftIntakeMotor.enableCurrentLimit(true);
 		
 		rightIntakeMotor.configContinuousCurrentLimit(12, timeout);
 		rightIntakeMotor.configPeakCurrentLimit(15, timeout);
 		rightIntakeMotor.configPeakCurrentDuration(100, timeout);
 		rightIntakeMotor.enableCurrentLimit(true);
+		
+		leftIntakeMotor.configContinuousCurrentLimit(12, timeout);
+		leftIntakeMotor.configPeakCurrentLimit(15, timeout);
+		leftIntakeMotor.configPeakCurrentDuration(100, timeout);
+		leftIntakeMotor.enableCurrentLimit(true);
 	}
 	
     public void initDefaultCommand() {
@@ -107,32 +107,37 @@ public class CubeIntake extends Subsystem {
     
     public void intake(){
 //    	double speed = SmartDashboard.getNumber("CubeIntakeVel", 2500);
-    	if(!Robot.cubeIntake.hasCube()){
-			leftIntakeMotor.set(ControlMode.PercentOutput,-0.4);
-			rightIntakeMotor.set(ControlMode.PercentOutput,-0.4);
+    	if(!(Robot.cubeIntake.getLeftDistance()>1.2)){
+			rightIntakeMotor.set(ControlMode.PercentOutput,0.4);
+			leftIntakeMotor.set(ControlMode.PercentOutput,0.4);
     	}
 //    	leftIntakeMotor.set(ControlMode.Velocity,speed);
 //    	rightIntakeMotor.set(ControlMode.Velocity,speed);
     }
     
     public void releaseCube(){
-		leftIntakeMotor.set(ControlMode.PercentOutput,0.3);
-		rightIntakeMotor.set(ControlMode.PercentOutput,0.3);
+		rightIntakeMotor.set(ControlMode.PercentOutput,-0.3);
+		leftIntakeMotor.set(ControlMode.PercentOutput,-0.3);
     }
     
-    public void turnCube(){
-		leftIntakeMotor.set(ControlMode.PercentOutput,-0.3);
-		rightIntakeMotor.set(ControlMode.PercentOutput,0.3);
+    public void turnCubeRight(){
+		rightIntakeMotor.set(ControlMode.PercentOutput,0.4);
+		//rightIntakeMotor.set(ControlMode.PercentOutput,0.4);
+    }
+    
+    public void turnCubeLeft(){
+		leftIntakeMotor.set(ControlMode.PercentOutput,0.4);
+		//rightIntakeMotor.set(ControlMode.PercentOutput,0.4);
     }
     
     public void set(double output){
-    	leftIntakeMotor.set(ControlMode.PercentOutput,output);
     	rightIntakeMotor.set(ControlMode.PercentOutput,output);
+    	leftIntakeMotor.set(ControlMode.PercentOutput,output);
     }
     
     public void stopIntake(){
-		leftIntakeMotor.set(0);
 		rightIntakeMotor.set(0);
+		leftIntakeMotor.set(0);
     }
     
     public void releaseArms() {
@@ -145,19 +150,19 @@ public class CubeIntake extends Subsystem {
     
     //Getting  encoder velocities and position, distance sensor range
     public double getLeftEncoder() {
-    	return leftIntakeMotor.getSensorCollection().getQuadraturePosition();
-    }
-    
-    public double getRightEncoder() {
     	return rightIntakeMotor.getSensorCollection().getQuadraturePosition();
     }
     
+    public double getRightEncoder() {
+    	return leftIntakeMotor.getSensorCollection().getQuadraturePosition();
+    }
+    
     public double getLeftEncoderSpeed() {
-    	return leftIntakeMotor.getSensorCollection().getQuadratureVelocity();
+    	return rightIntakeMotor.getSensorCollection().getQuadratureVelocity();
     }
     
     public double getRightEncoderSpeed() {
-    	return rightIntakeMotor.getSensorCollection().getQuadratureVelocity();
+    	return leftIntakeMotor.getSensorCollection().getQuadratureVelocity();
     }
     
     public double getLeftDistance() {

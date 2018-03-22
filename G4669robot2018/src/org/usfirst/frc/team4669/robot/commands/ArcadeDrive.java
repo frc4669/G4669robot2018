@@ -39,7 +39,7 @@ public class ArcadeDrive extends Command {
     protected void execute() {
     	
     	//Red Button to stop driving
-    	if(Robot.f310.getRedButton()){
+    	if(Robot.f310.getBackButton()){
     		turnRunning = false;
     		motionMagicRunning = false;
     		Robot.driveTrain.stop();

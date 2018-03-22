@@ -48,18 +48,22 @@ public class RobotMap {
 	public static final int midElevatorButton= 3;
 	public static final int exchangeElevatorButton= 7;
 	public static final int switchElevatorButton= 5;
-	public static final int leftClimb = 6;
+	public static final int maxElevatorButton = 6;
 	public static final int hasCubeElevatorButton = 4;
 	public static final int button9Elevator = 9;
 	public static final int stopClimb = 10;
 	public static final int rightClimb = 11;
 	
 	//CONSTANTS
-	public static final int elevatorVel = 900;
-	public static final int elevatorAccel = 3000;
+	public static final int elevatorVel = 1100;
+	public static final int elevatorAccel = 1500;
+	
+	public static final int elevatorDownVel = 1300;
+	public static final int elevatorDownAccel = 2900;
 	
 	public static final int elevatorSwitch = -10000;
 	public static final int elevatorExchange = -2450;
+	public static final int elevatorLift = -1400;
 	public static final int elevatorScaleMid = -23000;
 	public static final int elevatorMax = -28300;
 	

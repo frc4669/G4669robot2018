@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class RightSwitchRightScale extends CommandGroup {
+public class TwoCubeAfterRightSwitch extends CommandGroup {
 
-    public RightSwitchRightScale() {
+    public TwoCubeAfterRightSwitch() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -28,14 +28,17 @@ public class RightSwitchRightScale extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	if(Robot.gameData.length()>0){
-	    	if (Robot.gameData.charAt(1)=='R'){
-	    		addSequential(new RightScale());
-	    	}
-	    	else if(Robot.gameData.charAt(1)=='L'&&Robot.gameData.charAt(0)=='R'){
-	    		addSequential(new RightSwitch());
-	    	}
-	    	else{
-	    		addSequential(new DriveForward());
+	    	if (Robot.gameData.charAt(0)=='L'){
+	    		addSequential(new DriveMotionMagic(RobotMap.distPastSwitch2Cube));
+	    		addSequential(new TurnTo(225));
+	    		addSequential(new DriveMotionMagic(RobotMap.distToCube2Cube));
+	    		addParallel(new DriveMotionMagic(13));
+	    		addSequential(new AutoIntake());
+	    		addSequential(new AutoElevator(RobotMap.elevatorSwitch));
+	    		addSequential(new DriveMotionMagic(5));
+	    		addSequential(new AutoRelease());
+	    		addSequential(new DriveMotionMagic(-5));
+	    		addSequential(new AutoElevator(0));
 	    	}
     	}
     }

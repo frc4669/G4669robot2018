@@ -33,7 +33,17 @@ public class Intake extends Command {
     		Robot.cubeIntake.turnCubeRight();
     	}
     	else if(Robot.f310.getGreenButton()){
-    		Robot.cubeIntake.intake();
+//    		Robot.cubeIntake.intake();
+    		//Attempt at autorotate and intake
+    		if ((Robot.cubeIntake.getLeftDistance()>1)&&!(Robot.cubeIntake.getRightDistance()>1)) { //If cube is recognized on left but not right, turn right motors
+        		Robot.cubeIntake.stopLeft();
+        		Robot.cubeIntake.turnCubeRight();
+        	} else if (!(Robot.cubeIntake.getLeftDistance()>1)&&(Robot.cubeIntake.getRightDistance()>1)) { //If cube is recognized on right but not  left, turn left motors
+        		Robot.cubeIntake.stopRight();
+        		Robot.cubeIntake.turnCubeLeft();
+        	} else {
+        		Robot.cubeIntake.intake();
+        	}
     	} 
 		else if(Robot.f310.getOrangeButton()){
     		Robot.cubeIntake.releaseCube();

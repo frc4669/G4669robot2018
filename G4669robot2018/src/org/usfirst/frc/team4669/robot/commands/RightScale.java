@@ -8,10 +8,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class LeftAllScale extends CommandGroup {
-	
-	
-    public LeftAllScale() {
+public class RightScale extends CommandGroup {
+
+    public RightScale() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -29,26 +28,18 @@ public class LeftAllScale extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	if(Robot.gameData.length()>0){
-	    	if (Robot.gameData.charAt(1)=='L'){
-	    		addSequential(new LeftScale());
-	    	}
-	    	else if(Robot.gameData.charAt(1)=='R'){
+	    	if(Robot.gameData.charAt(1)=='R'){
 	    		addSequential(new ReleaseArms());
-	    		addSequential(new AutoElevator(RobotMap.elevatorLift)); //Try lifting cube a little bit so it doesn't drag, comment out if it doesn't work
-	    		addSequential(new DriveMotionMagic(RobotMap.distToInFrontSwitch));
-	    		addSequential(new TurnTo(90));
-	    		addSequential(new DriveMotionMagic(RobotMap.distBwtnScales));
-	    		addSequential(new TurnTo(0));
-	    		addSequential(new DriveMotionMagic(RobotMap.distToScaleStraight-RobotMap.distBwtnScales));
-//	    		addSequential(new AutoIntake());
+//	    		addSequential(new AutoElevator(RobotMap.elevatorLift)); //Try lifting cube a little bit so it doesn't drag, comment out if it doesn't work
+	    		addSequential(new DriveMotionMagic(RobotMap.distToScaleStraight));
+	    		addSequential(new AutoIntake());
 	    		addSequential(new AutoElevator(RobotMap.elevatorScaleMid));
 	    		addSequential(new TurnTo(270));
 //	    		addSequential(new DriveMotionMagic(7));
 	    		addSequential(new ShootCube());
 //	    		addSequential(new DriveMotionMagic(-7));
 	    		addSequential(new AutoElevator(0));
-	    	}
-	    	else{
+	    	} else{
 	    		addSequential(new DriveForward());
 	    	}
     	}

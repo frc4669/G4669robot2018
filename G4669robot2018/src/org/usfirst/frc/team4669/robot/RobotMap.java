@@ -63,18 +63,23 @@ public class RobotMap {
 	
 	public static final int elevatorSwitch = -10000;
 	public static final int elevatorExchange = -2450;
-	public static final int elevatorLift = -1400;
+	public static final int elevatorLift = -1200;
 	public static final int elevatorScaleMid = -23000;
 	public static final int elevatorMax = -28300;
 	
 	public static final double gain = 0.15; //Speed to take off top for arcade drive throttle
 	
 	//FIELD MEASUREMENTS, in inches
-	public static final int distToSwitchSides = 133;
-	public static final int distToScaleStraight = 290;
-	public static final int distHorizontalScales = 210; //distance between the left and right scale
-	public static final int distSwitchSidesFromCenter= 35;
-	public static final int distBaseLine = 85;
+	public static final double distToSwitchSides = 140;
+	public static final double distPastSwitch2Cube = 69+22; // Dist to be parallel to cube = 69, dist to go past to grab = 22.5
+	public static final double distToCube2Cube = 22*Math.sqrt(2); // Dist to the cube in 2 cube 
+	public static final double distToScaleStraight = 300;
+	public static final double distBwtnScales = 240; //Distance between the left and right scale
+	public static final double distBtwnSwitch= 35; //Distance to the left or right switch from the center, horizontally
+	public static final double distToInFrontSwitch= 220; //Distance to the open area in front of the switch
+	public static final double distBaseLine = 85;
+	public static final double distSwitchFromCenter = 90;
+	
 	
 	//DRIVE TRAIN SPEED PROPORTION
 	public static final double driveTrainSpeedProportion = 0.85;

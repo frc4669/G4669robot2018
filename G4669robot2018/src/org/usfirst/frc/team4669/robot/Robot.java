@@ -9,9 +9,11 @@ import org.usfirst.frc.team4669.robot.commands.FiveFeetMotion;
 import org.usfirst.frc.team4669.robot.commands.LeftAllScale;
 //import org.usfirst.frc.team4669.robot.commands.LeftSideToRightScalePath;
 import org.usfirst.frc.team4669.robot.commands.LeftSwitch;
+import org.usfirst.frc.team4669.robot.commands.LeftSwitch2Cube;
 import org.usfirst.frc.team4669.robot.commands.LeftSwitchLeftScale;
 import org.usfirst.frc.team4669.robot.commands.RightAllScale;
 import org.usfirst.frc.team4669.robot.commands.RightSwitch;
+import org.usfirst.frc.team4669.robot.commands.RightSwitch2Cube;
 import org.usfirst.frc.team4669.robot.commands.RightSwitchRightScale;
 import org.usfirst.frc.team4669.robot.commands.StopClimber;
 import org.usfirst.frc.team4669.robot.commands.TurnTo;
@@ -81,12 +83,14 @@ public class Robot extends TimedRobot {
 		chooser.addObject("Left Both Scales", "Left Both Scales");
 		chooser.addObject("Left Switch or Scale", "Left Switch or Scale");
 		chooser.addObject("Left Switch", "Left Switch");
+		chooser.addObject("Left Switch 2 Cube", "Left Switch 2 Cube");
 		chooser.addObject("Center Switch", "Center Switch");
 		chooser.addObject("Right Both Scales", "Right Both Scales");
 		chooser.addObject("Right Switch or Scale", "Right Switch or Scale");
 		chooser.addObject("Right Switch", "Right Switch");
-		chooser.addObject("Left To Right Scale", "Left To Right Scale");
-		chooser.addObject("5 Feets", "Five Feet Motion");
+		chooser.addObject("Right Switch 2 Cube", "Right Switch 2 Cube");
+//		chooser.addObject("Left To Right Scale", "Left To Right Scale");
+//		chooser.addObject("5 Feets", "Five Feet Motion");
 		
 		SmartDashboard.putData("Auto mode", chooser);
 		
@@ -141,6 +145,9 @@ public class Robot extends TimedRobot {
 		else if(autonomousString.equals("Left Switch")){
 			autonomousCommand = new LeftSwitch();
 		}
+		else if(autonomousString.equals("Left Switch 2 Cube")){
+			autonomousCommand = new LeftSwitch2Cube();
+		}
 		else if(autonomousString.equals("Center Switch")){
 			autonomousCommand = new CenterSwitch();
 		}
@@ -153,12 +160,15 @@ public class Robot extends TimedRobot {
 		else if(autonomousString.equals("Right Switch")){
 			autonomousCommand = new RightSwitch();
 		}
-		else if(autonomousString.equals("Left To Right Scale")){
+		else if(autonomousString.equals("Right Switch 2 Cube")){
+			autonomousCommand = new RightSwitch2Cube();
+		}
+//		else if(autonomousString.equals("Left To Right Scale")){
 //			autonomousCommand = new LeftSideToRightScalePath();
-		}
-		else if(autonomousString.equals("Five Feet Motion")){
-			autonomousCommand = new FiveFeetMotion();
-		}
+//		}
+//		else if(autonomousString.equals("Five Feet Motion")){
+//			autonomousCommand = new FiveFeetMotion();
+//		}
 		
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null) autonomousCommand.start();

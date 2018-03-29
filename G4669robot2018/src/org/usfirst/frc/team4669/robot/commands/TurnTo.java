@@ -21,7 +21,7 @@ public class TurnTo extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-//    	Robot.driveTrain.calibrateGyro();
+    	setTimeout(1.8);
     	Robot.driveTrain.stop();
     	Robot.driveTrain.enableTurnPID();
     	Robot.driveTrain.setTurnAngle(degree);
@@ -36,7 +36,7 @@ public class TurnTo extends Command {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	//Stop turning once robot turns past specified angle
-        return Robot.driveTrain.getTurnDone()||Robot.f310.getRedButton();
+        return Robot.driveTrain.getTurnDone()||isTimedOut();
     }
 
     // Called once after isFinished returns true

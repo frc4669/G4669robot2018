@@ -140,6 +140,14 @@ public class CubeIntake extends Subsystem {
 		leftIntakeMotor.set(0);
     }
     
+    public void stopLeft(){
+		leftIntakeMotor.set(0);
+    }
+    
+    public void stopRight(){
+		rightIntakeMotor.set(0);
+    }
+    
     public void releaseArms() {
     	ropeServo.set(0);//0 means rotate full counter-clockwise, 1 means full clockwise
     }

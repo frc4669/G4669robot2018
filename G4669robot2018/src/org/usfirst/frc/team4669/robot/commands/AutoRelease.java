@@ -19,7 +19,7 @@ public class AutoRelease extends TimedCommand {
     public AutoRelease() {
         // Use requires() here to declare subsystem dependencies
     	// eg. requires(chassis);
-    	super(3);
+    	super(2);
         requires(Robot.cubeIntake);
     }
 
@@ -41,5 +41,6 @@ public class AutoRelease extends TimedCommand {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }

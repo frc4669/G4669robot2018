@@ -4,8 +4,6 @@ import org.usfirst.frc.team4669.robot.commands.CenterSwitch;
 import org.usfirst.frc.team4669.robot.commands.DoNothing;
 import org.usfirst.frc.team4669.robot.commands.DriveForward;
 import org.usfirst.frc.team4669.robot.commands.DriveMotionMagic;
-import org.usfirst.frc.team4669.robot.commands.DriveSpeedControl;
-import org.usfirst.frc.team4669.robot.commands.FiveFeetMotion;
 import org.usfirst.frc.team4669.robot.commands.LeftAllScale;
 //import org.usfirst.frc.team4669.robot.commands.LeftSideToRightScalePath;
 import org.usfirst.frc.team4669.robot.commands.LeftSwitch;
@@ -15,21 +13,11 @@ import org.usfirst.frc.team4669.robot.commands.RightAllScale;
 import org.usfirst.frc.team4669.robot.commands.RightSwitch;
 import org.usfirst.frc.team4669.robot.commands.RightSwitch2Cube;
 import org.usfirst.frc.team4669.robot.commands.RightSwitchRightScale;
-import org.usfirst.frc.team4669.robot.commands.StopClimber;
 import org.usfirst.frc.team4669.robot.commands.TurnTo;
-import org.usfirst.frc.team4669.robot.commands.UnwindCenter;
-import org.usfirst.frc.team4669.robot.commands.UnwindLeft;
-import org.usfirst.frc.team4669.robot.commands.UnwindRight;
 import org.usfirst.frc.team4669.robot.commands.TurnMotionMagic;
 import org.usfirst.frc.team4669.robot.subsystems.Climber;
 import org.usfirst.frc.team4669.robot.subsystems.CubeIntake;
-//import org.usfirst.frc.team4669.robot.commands.LaunchAndMoveAuto;
 import org.usfirst.frc.team4669.robot.subsystems.DriveTrain;
-//import org.usfirst.frc.team4669.robot.subsystems.FuelAgitator;
-//import org.usfirst.frc.team4669.robot.subsystems.FuelDoor;
-//import org.usfirst.frc.team4669.robot.subsystems.FuelIntakeElevator;
-//import org.usfirst.frc.team4669.robot.subsystems.FuelLauncher;
-//import org.usfirst.frc.team4669.robot.subsystems.RopeWinch;
 import org.usfirst.frc.team4669.robot.subsystems.Elevator;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -210,8 +198,8 @@ public class Robot extends TimedRobot {
 
 	public void updateSmartDashboard() {
     	SmartDashboard.putData("Gyro", (Sendable) driveTrain.analogGyro);
-    	SmartDashboard.putNumber("Left Sensor", cubeIntake.getLeftDistance());
-    	SmartDashboard.putNumber("Right Sensor", cubeIntake.getRightDistance());
+//    	SmartDashboard.putNumber("Left Sensor", cubeIntake.getLeftDistance());
+//    	SmartDashboard.putNumber("Right Sensor", cubeIntake.getRightDistance());
     	SmartDashboard.putBoolean("Has Cube", cubeIntake.hasCube());
 //    	SmartDashboard.putData(new TurnMotionMagic(SmartDashboard.getNumber("TurnAngle", 90)));
 //    	SmartDashboard.putData(new TurnTo(SmartDashboard.getNumber("TurnAngle", 90)));
@@ -221,7 +209,7 @@ public class Robot extends TimedRobot {
 //    	SmartDashboard.putNumber("Right Position", driveTrain.getRightEncoder());
 //    	SmartDashboard.putNumber("Left Velocity", Robot.driveTrain.getLeftEncoderSpeed());
 //    	SmartDashboard.putNumber("Right Velocity", Robot.driveTrain.getRightEncoderSpeed());
-    	SmartDashboard.putData("Accelerometer",(Sendable) climber.accel);
+//    	SmartDashboard.putData("Accelerometer",(Sendable) climber.accel);
 //    	SmartDashboard.putNumber("POV Angle", Robot.f310.getDPadPOV());
 //    	SmartDashboard.putNumber("Intake Left Enc", Robot.cubeIntake.getLeftEncoder());
 //    	SmartDashboard.putNumber("Intake Right Enc", Robot.cubeIntake.getRightEncoder());

@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class DriveMotionMagic extends Command {
 
 	private double distance;
+	private double timeOut = 0;
 
 	public DriveMotionMagic(double distance) {
         super();
@@ -19,10 +20,22 @@ public class DriveMotionMagic extends Command {
         this.distance = distance;
         requires(Robot.driveTrain);
     }
+	
+	public DriveMotionMagic(double distance,double timeOut) {
+        super();
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+        this.timeOut = timeOut;
+        this.distance = distance;
+        requires(Robot.driveTrain);
+    }
 
     // Called once when the command executes
     protected void initialize() {
     	Robot.driveTrain.zeroEncoders();
+    	if (timeOut != 0){
+    		setTimeout(timeOut);
+    	}
     	Robot.driveTrain.driveMotionMagic(distance/RobotMap.inchToEncoder); //Converts inches to encoder ticks
     }
 

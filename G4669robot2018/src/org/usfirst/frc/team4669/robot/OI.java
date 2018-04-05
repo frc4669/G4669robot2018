@@ -79,6 +79,9 @@ public class OI {
 		SmartDashboard.putData("Unwind Right", new UnwindRight(5));
 		SmartDashboard.putData("Unwind Center", new UnwindCenter(5));
 		SmartDashboard.putData("Stop Climber", new StopClimber());
+		SmartDashboard.putBoolean("Invert Wind", false);
+		
+//		SmartDashboard.putData("Turn PID", Robot.driveTrain.gyroPID);
 
 //		SmartDashboard.putNumber("MotionMagicDistance", 0);
 //		SmartDashboard.putNumber("TurnAngle", 90);

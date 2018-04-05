@@ -47,9 +47,7 @@ public class ClimberControl extends Command {
 	    			Robot.climber.climbRight(true);
 	    		}
 	    	} else {
-//				Robot.climber.climbCenter(Robot.oi.getLeftRawButton(RobotMap.centerClimb));
-//				Robot.climber.climbLeft(Robot.oi.getLeftRawButton(RobotMap.leftClimb));
-//				Robot.climber.climbRight(Robot.oi.getLeftRawButton(RobotMap.rightClimb));
+				Robot.climber.stop();
 	    	}
     	}
     }

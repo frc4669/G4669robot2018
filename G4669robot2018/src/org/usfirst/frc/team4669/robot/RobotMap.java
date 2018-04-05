@@ -45,10 +45,10 @@ public class RobotMap {
 	//Joystick Controls
 	public static final int stopElevatorButton= 1;
 	public static final int groundElevatorButton= 2;
-	public static final int midElevatorButton= 3;
+	public static final int midElevatorButton= 6;
 	public static final int exchangeElevatorButton= 7;
 	public static final int switchElevatorButton= 5;
-	public static final int maxElevatorButton = 6;
+	public static final int maxElevatorButton = 3;
 	public static final int hasCubeElevatorButton = 4;
 	public static final int button9Elevator = 9;
 	public static final int stopClimb = 10;
@@ -56,7 +56,7 @@ public class RobotMap {
 	
 	//CONSTANTS
 	public static final int elevatorVel = 1100;
-	public static final int elevatorAccel = 1500;
+	public static final int elevatorAccel = 1300;
 	
 	public static final int elevatorDownVel = 1300;
 	public static final int elevatorDownAccel = 2900;
@@ -65,7 +65,7 @@ public class RobotMap {
 	public static final int elevatorExchange = -2450;
 	public static final int elevatorLift = -1200;
 	public static final int elevatorScaleMid = -23000;
-	public static final int elevatorMax = -28300;
+	public static final int elevatorMax = -27295;
 	
 	public static final double gain = 0.15; //Speed to take off top for arcade drive throttle
 	
@@ -74,8 +74,8 @@ public class RobotMap {
 	public static final double distPastSwitch2Cube = 69+22; // Dist to be parallel to cube = 69, dist to go past to grab = 22.5
 	public static final double distToCube2Cube = 22*Math.sqrt(2); // Dist to the cube in 2 cube 
 	public static final double distToScaleStraight = 300;
-	public static final double distBwtnScales = 240; //Distance between the left and right scale
-	public static final double distBtwnSwitch= 35; //Distance to the left or right switch from the center, horizontally
+	public static final double distBwtnScales = 264; //Distance between the left and right scale
+	public static final double distBtwnSwitch= 42; //Distance to the left or right switch from the center, horizontally
 	public static final double distToInFrontSwitch= 220; //Distance to the open area in front of the switch
 	public static final double distBaseLine = 85;
 	public static final double distSwitchFromCenter = 90;
@@ -97,9 +97,9 @@ public class RobotMap {
 	public static final double rightkD = 20;
 	public static final int rightkIZone = 50;
 	
-	public static final double kPGyro = 0.009;
-	public static final double kIGyro = 0.00002;
-	public static final double kDGyro = 0.0025;
+	public static final double kPGyro = 0.025;
+	public static final double kIGyro = 0.0;
+	public static final double kDGyro = 0.045;
 	
 	//NEW TALON SRX STUFF
 	public static int timeout = 10;

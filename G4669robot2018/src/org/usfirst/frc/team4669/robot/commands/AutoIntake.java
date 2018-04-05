@@ -18,22 +18,21 @@ public class AutoIntake extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	setTimeout(0.35);
-//    	Robot.cubeIntake.intake();
+    	Robot.cubeIntake.intake();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
     	//Attempt at autorotate
-    	if ((Robot.cubeIntake.getLeftDistance()>1)&&!(Robot.cubeIntake.getRightDistance()>1)) { //If cube is recognized on left but not right, turn right motors
-    		Robot.cubeIntake.stopLeft();
-    		Robot.cubeIntake.turnCubeRight();
-    	} else if (!(Robot.cubeIntake.getLeftDistance()>1)&&(Robot.cubeIntake.getRightDistance()>1)) { //If cube is recognized on right but not  left, turn left motors
-    		Robot.cubeIntake.stopRight();
-    		Robot.cubeIntake.turnCubeLeft();
-    	} else {
-    		Robot.cubeIntake.intake();
-    	}
+//    	if ((Robot.cubeIntake.getLeftDistance()>0.7)&&!(Robot.cubeIntake.getRightDistance()>0.7)) { //If cube is recognized on left but not right, turn right motors
+//    		Robot.cubeIntake.stopLeft();
+//    		Robot.cubeIntake.turnCubeRight();
+//    	} else if (!(Robot.cubeIntake.getLeftDistance()>0.7)&&(Robot.cubeIntake.getRightDistance()>0.7)) { //If cube is recognized on right but not  left, turn left motors
+//    		Robot.cubeIntake.stopRight();
+//    		Robot.cubeIntake.turnCubeLeft();
+//    	} else {
+//    		Robot.cubeIntake.intake();
+//    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -49,5 +48,7 @@ public class AutoIntake extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	Robot.cubeIntake.stopIntake();
+    	end();
     }
 }

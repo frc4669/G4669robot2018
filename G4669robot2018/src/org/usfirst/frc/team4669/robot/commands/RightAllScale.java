@@ -38,9 +38,9 @@ public class RightAllScale extends CommandGroup {
 	    		addSequential(new TurnTo(270));
 	    		addSequential(new DriveMotionMagic(RobotMap.distBwtnScales));
 	    		addSequential(new TurnTo(0));
-	    		addSequential(new DriveMotionMagic(RobotMap.distToScaleStraight-RobotMap.distBwtnScales));
+	    		addSequential(new DriveMotionMagic(RobotMap.distToScaleStraight-RobotMap.distToInFrontSwitch));
 //	    		addSequential(new AutoIntake());
-	    		addSequential(new AutoElevator(RobotMap.elevatorScaleMid));
+	    		addSequential(new AutoElevator(RobotMap.elevatorMax));
 	    		addSequential(new TurnTo(90));
 //	    		addSequential(new DriveMotionMagic(7));
 	    		addSequential(new ShootCube());

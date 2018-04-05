@@ -118,13 +118,13 @@ public class DriveTrain extends Subsystem {
 		
 		//Set Current limit 
 		topRightMotor.configContinuousCurrentLimit(20, RobotMap.timeout);
-		topRightMotor.configPeakCurrentLimit(25, RobotMap.timeout);
-		topRightMotor.configPeakCurrentDuration(100, RobotMap.timeout);
+		topRightMotor.configPeakCurrentLimit(22, RobotMap.timeout);
+		topRightMotor.configPeakCurrentDuration(50, RobotMap.timeout);
 		topRightMotor.enableCurrentLimit(true);
 		
 		topLeftMotor.configContinuousCurrentLimit(20, RobotMap.timeout);
-		topLeftMotor.configPeakCurrentLimit(25, RobotMap.timeout);
-		topLeftMotor.configPeakCurrentDuration(100, RobotMap.timeout);
+		topLeftMotor.configPeakCurrentLimit(22, RobotMap.timeout);
+		topLeftMotor.configPeakCurrentDuration(50, RobotMap.timeout);
 		topLeftMotor.enableCurrentLimit(true);
 		
 		//Setting bottom motors to follow top

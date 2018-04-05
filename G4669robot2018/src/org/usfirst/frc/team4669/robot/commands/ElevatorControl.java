@@ -79,8 +79,9 @@ public class ElevatorControl extends Command {
     			motionMagicRunning = true;
     		}
 			else if (motionMagicRunning 
-					&& Math.abs(targetPos-Robot.elevator.getEncoderPos()) < 200) {
-					motionMagicRunning = false;
+					&& Math.abs(targetPos-Robot.elevator.getEncoderPos()) < 200||Robot.elevator.getReverseLimit()) {
+				Robot.elevator.zeroVelocity();
+				motionMagicRunning = false;
 			}
     		
     		else if (!motionMagicRunning) {

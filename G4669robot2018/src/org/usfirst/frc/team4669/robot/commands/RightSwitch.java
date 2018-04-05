@@ -34,9 +34,9 @@ public class RightSwitch extends CommandGroup {
 	    		addSequential(new AutoIntake());
 	    		addSequential(new AutoElevator(RobotMap.elevatorSwitch));
 	    		addSequential(new TurnTo(270));
-	    		addSequential(new DriveMotionMagic(20));
+	    		addSequential(new DriveMotionMagic(29,2));
 	    		addSequential(new AutoRelease());
-	    		addSequential(new DriveMotionMagic(-20));
+	    		addSequential(new DriveMotionMagic(-29,2));
 	    		addSequential(new AutoElevator(0));
 	    	} else{
 	    		addSequential(new DriveForward());

@@ -28,11 +28,12 @@ public class RightSwitchRightScale extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	if(Robot.gameData.length()>0){
-	    	if (Robot.gameData.charAt(1)=='R'){
-	    		addSequential(new RightScale());
-	    	}
-	    	else if(Robot.gameData.charAt(1)=='L'&&Robot.gameData.charAt(0)=='R'){
+	    	
+	    	if(Robot.gameData.charAt(0)=='R'){
 	    		addSequential(new RightSwitch());
+	    	} 
+	    	else if (Robot.gameData.charAt(1)=='R'){
+	    		addSequential(new RightScale());
 	    	}
 	    	else{
 	    		addSequential(new DriveForward());

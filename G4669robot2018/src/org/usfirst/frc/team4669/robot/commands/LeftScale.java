@@ -33,12 +33,12 @@ public class LeftScale extends CommandGroup {
 //	    		addSequential(new AutoElevator(RobotMap.elevatorLift)); //Try lifting cube a little bit so it doesn't drag, comment out if it doesn't work
 	    		addSequential(new DriveMotionMagic(RobotMap.distToScaleStraight));
 	    		addSequential(new AutoIntake());
-	    		addSequential(new AutoElevator(RobotMap.elevatorScaleMid));
-	    		addSequential(new TurnTo(90));
-//	    		addSequential(new DriveMotionMagic(7));
-	    		addSequential(new ShootCube());
-//	    		addSequential(new DriveMotionMagic(-7));
-	    		addSequential(new AutoElevator(0));
+//	    		addSequential(new AutoElevator(RobotMap.elevatorMax));
+//	    		addSequential(new TurnTo(90));
+////	    		addSequential(new DriveMotionMagic(7));
+//	    		addSequential(new ShootCube());
+////	    		addSequential(new DriveMotionMagic(-7));
+//	    		addSequential(new AutoElevator(0));
 	    	} else{
 	    		addSequential(new DriveForward());
 	    	}

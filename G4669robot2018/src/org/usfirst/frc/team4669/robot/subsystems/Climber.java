@@ -59,17 +59,32 @@ public class Climber extends Subsystem {
     }
     
     public void unwindLeft(boolean unwind){
-    	if (unwind) leftClimber.set(-0.4);
+    	if (unwind) leftClimber.set(-0.3);
     	else leftClimber.set(0);
     }
     
     public void unwindRight(boolean unwind){
-    	if (unwind) rightClimber.set(-0.4);
+    	if (unwind) rightClimber.set(-0.3);
     	else rightClimber.set(0);
     }
     
     public void unwindCenter(boolean unwind){
-    	if (unwind) centerClimber.set(-0.4);
+    	if (unwind) centerClimber.set(-0.3);
+    	else centerClimber.set(0);
+    }
+    
+    public void windLeft(boolean unwind){
+    	if (unwind) leftClimber.set(0.3);
+    	else leftClimber.set(0);
+    }
+    
+    public void windRight(boolean unwind){
+    	if (unwind) rightClimber.set(0.3);
+    	else rightClimber.set(0);
+    }
+    
+    public void windCenter(boolean unwind){
+    	if (unwind) centerClimber.set(0.3);
     	else centerClimber.set(0);
     }
     

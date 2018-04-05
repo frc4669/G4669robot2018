@@ -28,11 +28,11 @@ public class LeftSwitchLeftScale extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	if(Robot.gameData.length()>0){
-	    	if (Robot.gameData.charAt(1)=='L'){
-	    		addSequential(new LeftScale());
-	    	}
-	    	else if(Robot.gameData.charAt(1)=='R'&&Robot.gameData.charAt(0)=='L'){
+	    	if(Robot.gameData.charAt(0)=='L'){
 	    		addSequential(new LeftSwitch());
+	    	} 
+	    	else if (Robot.gameData.charAt(1)=='L'){
+	    		addSequential(new LeftScale());
 	    	}
 	    	else{
 	    		addSequential(new DriveForward());

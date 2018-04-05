@@ -93,11 +93,11 @@ public class ArcadeDrive extends Command {
 		    	}
 				else if (Robot.elevator.getEncoderPos()<RobotMap.elevatorExchange+300||Robot.cubeIntake.hasCube()){
 	    			drive = 0.7*Robot.f310.getLeftY();
-		    		turn = 0.3*Robot.f310.getRightX();
+		    		turn = 0.45*Robot.f310.getRightX();
 	    		}
 		    	else{
 		    		drive = 0.7*Robot.f310.getLeftY();
-		    		turn = 0.5*Robot.f310.getRightX();
+		    		turn = 0.6*Robot.f310.getRightX();
 		    	}
 		    	
 		    	left = drive + turn;

@@ -69,7 +69,7 @@ public class MotionProfileExample {
 	 * timeout. Getting time-stamps would certainly work too, this is just
 	 * simple (no need to worry about timer overflows).
 	 */
-	private int _loopTimeout = -1;
+	private int _loopTimeout = 10;
 	/**
 	 * If start() gets called, this flag is set and in the control() we will
 	 * service it.
@@ -131,7 +131,7 @@ public class MotionProfileExample {
 		 */
 		_talonL.changeMotionControlFramePeriod(10);
 		_talonR.changeMotionControlFramePeriod(10);
-		_notifer.startPeriodic(0.005);
+		_notifer.startPeriodic(0.01);
 	}
 
 	/**
@@ -287,7 +287,6 @@ public class MotionProfileExample {
 	}
 	/** Start filling the MPs to all of the involved Talons. */
 	private void startFilling() {
-		/* since this example only has one talon, just update that one */
 		System.out.println("Begin filling with points");
 		startFilling(_path.getLeft(),_path.getRight(), _path.kNumPointsL(),_path.kNumPointsR());
 		
@@ -376,7 +375,7 @@ public class MotionProfileExample {
 	 *         motion-profile output, 1 for enable motion-profile, 2 for hold
 	 *         current motion profile trajectory point.
 	 */
-	SetValueMotionProfile getSetValue() {
+	public SetValueMotionProfile getSetValue() {
 		return _setValue;
 	}
 	

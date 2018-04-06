@@ -4,6 +4,7 @@ import org.usfirst.frc.team4669.robot.commands.CenterSwitch;
 import org.usfirst.frc.team4669.robot.commands.DoNothing;
 import org.usfirst.frc.team4669.robot.commands.DriveForward;
 import org.usfirst.frc.team4669.robot.commands.DriveMotionMagic;
+import org.usfirst.frc.team4669.robot.commands.FiveFeetMotion;
 import org.usfirst.frc.team4669.robot.commands.LeftAllScale;
 //import org.usfirst.frc.team4669.robot.commands.LeftSideToRightScalePath;
 import org.usfirst.frc.team4669.robot.commands.LeftSwitch;
@@ -19,6 +20,7 @@ import org.usfirst.frc.team4669.robot.subsystems.Climber;
 import org.usfirst.frc.team4669.robot.subsystems.CubeIntake;
 import org.usfirst.frc.team4669.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4669.robot.subsystems.Elevator;
+
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Sendable;
@@ -78,7 +80,7 @@ public class Robot extends TimedRobot {
 		chooser.addObject("Right Switch", "Right Switch");
 		chooser.addObject("Right Switch 2 Cube", "Right Switch 2 Cube");
 //		chooser.addObject("Left To Right Scale", "Left To Right Scale");
-//		chooser.addObject("5 Feets", "Five Feet Motion");
+		chooser.addObject("5 Feets", "Five Feet Motion");
 		
 		SmartDashboard.putData("Auto mode", chooser);
 		
@@ -154,9 +156,9 @@ public class Robot extends TimedRobot {
 //		else if(autonomousString.equals("Left To Right Scale")){
 //			autonomousCommand = new LeftSideToRightScalePath();
 //		}
-//		else if(autonomousString.equals("Five Feet Motion")){
-//			autonomousCommand = new FiveFeetMotion();
-//		}
+		else if(autonomousString.equals("Five Feet Motion")){
+			autonomousCommand = new FiveFeetMotion();
+		}
 		
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null) autonomousCommand.start();

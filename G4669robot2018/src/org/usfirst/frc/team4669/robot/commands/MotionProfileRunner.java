@@ -16,21 +16,23 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class FiveFeetMotion extends Command {
+public class MotionProfileRunner extends Command {
 		MotionProfileExample motion;
-		Profile fiveFeetAndTurn = new Profile(Trajectories.fiveFeetL,Trajectories.fiveFeetR);
+		Profile motionProfile;
 		SetValueMotionProfile setOutput;
 		int runProfile = 0;
 
-    public FiveFeetMotion() {
+    public MotionProfileRunner(double[][] leftTraj, double[][] rightTraj) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	motionProfile = new Profile(leftTraj,rightTraj);
     	requires(Robot.driveTrain);
+
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	motion = new MotionProfileExample(fiveFeetAndTurn,Robot.driveTrain.topLeftMotor,Robot.driveTrain.topRightMotor);
+    	motion = new MotionProfileExample(motionProfile,Robot.driveTrain.topLeftMotor,Robot.driveTrain.topRightMotor);
     	Robot.driveTrain.topLeftMotor.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 50, 10);
     	Robot.driveTrain.topRightMotor.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 50, 10);
     	

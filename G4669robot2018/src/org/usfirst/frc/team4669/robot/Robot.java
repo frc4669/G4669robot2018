@@ -4,7 +4,7 @@ import org.usfirst.frc.team4669.robot.commands.CenterSwitch;
 import org.usfirst.frc.team4669.robot.commands.DoNothing;
 import org.usfirst.frc.team4669.robot.commands.DriveForward;
 import org.usfirst.frc.team4669.robot.commands.DriveMotionMagic;
-import org.usfirst.frc.team4669.robot.commands.FiveFeetMotion;
+import org.usfirst.frc.team4669.robot.commands.MotionProfileRunner;
 import org.usfirst.frc.team4669.robot.commands.LeftAllScale;
 //import org.usfirst.frc.team4669.robot.commands.LeftSideToRightScalePath;
 import org.usfirst.frc.team4669.robot.commands.LeftSwitch;
@@ -15,6 +15,7 @@ import org.usfirst.frc.team4669.robot.commands.RightSwitch;
 import org.usfirst.frc.team4669.robot.commands.RightSwitch2Cube;
 import org.usfirst.frc.team4669.robot.commands.RightSwitchRightScale;
 import org.usfirst.frc.team4669.robot.commands.TurnTo;
+import org.usfirst.frc.team4669.robot.motionProfile.Trajectories;
 import org.usfirst.frc.team4669.robot.commands.TurnMotionMagic;
 import org.usfirst.frc.team4669.robot.subsystems.Climber;
 import org.usfirst.frc.team4669.robot.subsystems.CubeIntake;
@@ -79,7 +80,7 @@ public class Robot extends TimedRobot {
 		chooser.addObject("Right Switch or Scale", "Right Switch or Scale");
 		chooser.addObject("Right Switch", "Right Switch");
 		chooser.addObject("Right Switch 2 Cube", "Right Switch 2 Cube");
-//		chooser.addObject("Left To Right Scale", "Left To Right Scale");
+		chooser.addObject("Left To Right Switch", "Left To Right Switch");
 		chooser.addObject("5 Feets", "Five Feet Motion");
 		
 		SmartDashboard.putData("Auto mode", chooser);
@@ -153,11 +154,11 @@ public class Robot extends TimedRobot {
 		else if(autonomousString.equals("Right Switch 2 Cube")){
 			autonomousCommand = new RightSwitch2Cube();
 		}
-//		else if(autonomousString.equals("Left To Right Scale")){
-//			autonomousCommand = new LeftSideToRightScalePath();
-//		}
+		else if(autonomousString.equals("Left To Right Switch")){
+			autonomousCommand = new MotionProfileRunner(Trajectories.leftToRightSwitchL,Trajectories.leftToRightSwitchR);
+		}
 		else if(autonomousString.equals("Five Feet Motion")){
-			autonomousCommand = new FiveFeetMotion();
+			autonomousCommand = new MotionProfileRunner(Trajectories.fiveFeetL,Trajectories.fiveFeetR);
 		}
 		
 		// schedule the autonomous command (example)

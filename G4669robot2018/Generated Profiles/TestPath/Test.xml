@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Trajectory acceleration="0.25" driveBase="TANK" dt="0.05"
+    fitMethod="HERMITE_CUBIC" jerk="60.0" units="FEET" velocity="0.5"
+    wheelBaseD="0.0" wheelBaseW="1.85417">
+    <Waypoint>
+        <X>0.0</X>
+        <Y>13.0</Y>
+        <Angle>0.0</Angle>
+    </Waypoint>
+    <Waypoint>
+        <X>3.0</X>
+        <Y>13.0</Y>
+        <Angle>0.0</Angle>
+    </Waypoint>
+    <Waypoint>
+        <X>5.0</X>
+        <Y>11.0</Y>
+        <Angle>1.5707963267948966</Angle>
+    </Waypoint>
+    <Waypoint>
+        <X>5.0</X>
+        <Y>10.0</Y>
+        <Angle>1.5707963267948966</Angle>
+    </Waypoint>
+    <Waypoint>
+        <X>7.0</X>
+        <Y>8.0</Y>
+        <Angle>0.0</Angle>
+    </Waypoint>
+    <Waypoint>
+        <X>9.0</X>
+        <Y>8.0</Y>
+        <Angle>0.0</Angle>
+    </Waypoint>
+</Trajectory>

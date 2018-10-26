@@ -107,7 +107,7 @@ public class RobotMap {
 	public static int pidIdx = 0;
 	
 	// OTHER, units are inches
-	public static final double wheelDiameter = 4;
+	public static final double wheelDiameter = 4; //in inches
 	public static final double wheelBase = 22.25; //figure out real distance later
 	/**
 	 * Calculates circumference of wheel given diameter.
@@ -127,6 +127,7 @@ public class RobotMap {
 	public static final double distancePerRotation = wheelBase*Math.PI/4;
 	
 	public static final int angleTolerance = 2;
+	public static final double kCollisionThresholdDeltaG = 3;
 
 }
 

@@ -85,13 +85,11 @@ public class ElevatorControl extends Command {
 			}
     		
     		else if (!motionMagicRunning) {
-    			if (Robot.oi.leftY()==0&&!positionRunning){
+    			if (Robot.oi.leftY()==0){
     				Robot.elevator.zeroVelocity();
-    				positionRunning = true;
     			} 
     			if (Robot.oi.leftY()!=0){
     				Robot.elevator.customHeight(0.55*Robot.oi.leftY());
-    				positionRunning = false;
     			}
     		}
     	}

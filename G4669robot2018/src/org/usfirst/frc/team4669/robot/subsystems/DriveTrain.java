@@ -11,21 +11,19 @@ import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.SensorTerm;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.kauailabs.navx.frc.AHRS;
 
 /**
  *
  */
 public class DriveTrain extends Subsystem {
     
-	private static final double kAngleSetpoint = 0.0;
-	private static final double kP = 0.005;
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
 	public WPI_TalonSRX topLeftMotor;
 	private WPI_TalonSRX bottomLeftMotor;
 	public WPI_TalonSRX topRightMotor;
@@ -37,7 +35,7 @@ public class DriveTrain extends Subsystem {
 	int velocity = 2300; //About 200 RPM, vel units are in sensor units per 100ms
 	int accel = 4600;
 	
-	public Gyro analogGyro;
+	private Gyro analogGyro;
 	
 	public DriveTrain() {
 		super();
@@ -59,18 +57,7 @@ public class DriveTrain extends Subsystem {
 		
 		gyroPID.setAbsoluteTolerance(3);
 		
-//		topRightMotor.configSensorTerm(SensorTerm.Sum0, FeedbackDevice.RemoteSensor0, RobotMap.timeout);
-//		topRightMotor.configSensorTerm(SensorTerm.Sum1, FeedbackDevice.QuadEncoder, RobotMap.timeout);
-//		topRightMotor.configSensorTerm(SensorTerm.Diff1, FeedbackDevice.RemoteSensor0, RobotMap.timeout);
-//		topRightMotor.configSensorTerm(SensorTerm.Diff0, FeedbackDevice.QuadEncoder, RobotMap.timeout);
-//		topRightMotor.configSelectedFeedbackSensor(FeedbackDevice.SensorSum,RobotMap.pidIdx,RobotMap.timeout);
 		topRightMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,RobotMap.pidIdx,RobotMap.timeout);
-		
-//		topLeftMotor.configSensorTerm(SensorTerm.Sum0, FeedbackDevice.RemoteSensor0, RobotMap.timeout);
-//		topLeftMotor.configSensorTerm(SensorTerm.Sum1, FeedbackDevice.QuadEncoder, RobotMap.timeout);
-//		topLeftMotor.configSensorTerm(SensorTerm.Diff1, FeedbackDevice.RemoteSensor0, RobotMap.timeout);
-//		topLeftMotor.configSensorTerm(SensorTerm.Diff0, FeedbackDevice.QuadEncoder, RobotMap.timeout);
-//		topLeftMotor.configSelectedFeedbackSensor(FeedbackDevice.SensorSum,RobotMap.pidIdx,RobotMap.timeout);
 		topLeftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,RobotMap.pidIdx,RobotMap.timeout);
 		
 		topRightMotor.setInverted(true);
@@ -165,11 +152,6 @@ public class DriveTrain extends Subsystem {
     	return analogGyro.getAngle();
     }
     
-    public double calculateTurningValue(double direction) {
-    	double turningValue = kAngleSetpoint - analogGyro.getAngle() * kP;
-    	turningValue = Math.copySign(turningValue, direction);
-    	return turningValue;
-    }
     
     public int getLeftEncoder() {
     	return topLeftMotor.getSensorCollection().getQuadraturePosition();
@@ -206,8 +188,6 @@ public class DriveTrain extends Subsystem {
     }
     
     public void turn(double angle) {
-		//double d = ((RobotMap.wheelBase * Math.PI) * (angle / 360.0) / RobotMap.wheelDiameter / Math.PI * 360*4)/40.8;
-//		double d = (((RobotMap.wheelBase * Math.PI) * (angle / 360.0)) / RobotMap.distancePerRotation)*4096;
     	setMotionVelAccel(1365,6825);
     	double d = -(((RobotMap.wheelBase * Math.PI) * (angle / 360.0)) / RobotMap.inchToEncoder);
 		topLeftMotor.set(ControlMode.MotionMagic,-d);
@@ -285,6 +265,10 @@ public class DriveTrain extends Subsystem {
 	public void setMode(ControlMode mode, double value){
 		topLeftMotor.set(mode, value);
 		topRightMotor.set(mode, value);
+	}
+	
+	public Gyro getGyro(){
+		return analogGyro;
 	}
 	
 }

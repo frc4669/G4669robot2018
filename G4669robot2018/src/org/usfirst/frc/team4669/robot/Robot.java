@@ -6,6 +6,7 @@ import org.usfirst.frc.team4669.robot.commands.DriveForward;
 import org.usfirst.frc.team4669.robot.commands.DriveMotionMagic;
 import org.usfirst.frc.team4669.robot.commands.MotionProfileRunner;
 import org.usfirst.frc.team4669.robot.commands.LeftAllScale;
+import org.usfirst.frc.team4669.robot.commands.TestPath;
 //import org.usfirst.frc.team4669.robot.commands.LeftSideToRightScalePath;
 import org.usfirst.frc.team4669.robot.commands.LeftSwitch;
 import org.usfirst.frc.team4669.robot.commands.LeftSwitch2Cube;
@@ -82,6 +83,7 @@ public class Robot extends TimedRobot {
 		chooser.addObject("Right Switch 2 Cube", "Right Switch 2 Cube");
 		chooser.addObject("Left To Right Switch", "Left To Right Switch");
 		chooser.addObject("5 Feets", "Five Feet Motion");
+		chooser.addObject("Test Path", "LeftSideToRightScalePath");
 		
 		SmartDashboard.putData("Auto mode", chooser);
 		
@@ -160,6 +162,9 @@ public class Robot extends TimedRobot {
 		else if(autonomousString.equals("Five Feet Motion")){
 			autonomousCommand = new MotionProfileRunner(Trajectories.fiveFeetL,Trajectories.fiveFeetR);
 		}
+		else if(autonomousString.equals("LeftSideToRightScalePath")){
+			autonomousCommand = new TestPath();
+		}
 		
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null) autonomousCommand.start();
@@ -200,7 +205,7 @@ public class Robot extends TimedRobot {
 	}
 
 	public void updateSmartDashboard() {
-    	SmartDashboard.putData("Gyro", (Sendable) driveTrain.analogGyro);
+    	SmartDashboard.putData("Gyro", (Sendable) driveTrain.getGyro());
 //    	SmartDashboard.putNumber("Left Sensor", cubeIntake.getLeftDistance());
 //    	SmartDashboard.putNumber("Right Sensor", cubeIntake.getRightDistance());
     	SmartDashboard.putBoolean("Has Cube", cubeIntake.hasCube());

@@ -35,6 +35,10 @@ public class F310 {
 		return deadzone(3);
 	}
 	
+	/**
+	 * This function gets the value for the x axis of right joystick
+	 * .
+	 */
 	public double getRightX() {
 		return deadzone(4);
 	}

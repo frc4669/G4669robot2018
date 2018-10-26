@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import jaci.pathfinder.Pathfinder;
 import jaci.pathfinder.Trajectory;
 import jaci.pathfinder.Waypoint;
+import jaci.pathfinder.followers.DistanceFollower;
 import jaci.pathfinder.followers.EncoderFollower;
 import jaci.pathfinder.modifiers.TankModifier;
 
@@ -18,36 +19,26 @@ import jaci.pathfinder.modifiers.TankModifier;
  */
 public class TestPath extends Command {
 	
-	Trajectory trajectory;
-	Trajectory.Config config;
-	TankModifier modifier;
-	EncoderFollower left;
-	EncoderFollower right;
-	double l;
-	double r;
-	double gyro_heading;
-	double desired_heading;
-	double angleDifference;
-	double turn;
+//	Trajectory trajectory;
+//	Trajectory.Config config;
+//	TankModifier modifier;
+	DistanceFollower left;
+	DistanceFollower right;
+	double l,r, turn;
+	double gyro_heading, desired_heading, angleDifference;
+	int intEncPosR, intEncPosL;
 
     public TestPath() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.driveTrain);
-    	File leftCSV = new File("/home/lvuser/Profiles/Test Path_left_Jaci.csv");
-    	File rightCSV = new File("/home/lvuser/Profiles/Test Path_right_Jaci.csv");
-    	left = new EncoderFollower(Pathfinder.readFromCSV(leftCSV));
-    	right = new EncoderFollower(Pathfinder.readFromCSV(rightCSV));
-       	
-    	left.configureEncoder(Robot.driveTrain.getLeftEncoder(), 4096, RobotMap.wheelDiameter/12);
-    	right.configureEncoder(Robot.driveTrain.getRightEncoder(), 4096, RobotMap.wheelDiameter/12);
-    	
-    	left.configurePIDVA(0.4, 0, 0, 1/.5, 0);
-    	right.configurePIDVA(0.4, 0, 0, 1/.5, 0);
 
-//    	modifier = new TankModifier(trajectory).modify(1.85417); //Wheelbase in ft
-//    	left = new EncoderFollower(modifier.getLeftTrajectory());
-//    	right = new EncoderFollower(modifier.getRightTrajectory());
+    	/*left.configureEncoder(Robot.driveTrain.getLeftEncoder(), 4096, RobotMap.wheelDiameter/12);
+    	right.configureEncoder(Robot.driveTrain.getRightEncoder(), 4096, RobotMap.wheelDiameter/12);    	
+
+    	modifier = new TankModifier(trajectory).modify(1.85417); //Wheelbase in ft
+    	left = new EncoderFollower(modifier.getLeftTrajectory());
+    	right = new EncoderFollower(modifier.getRightTrajectory());*/
     	
     }
 
@@ -55,15 +46,27 @@ public class TestPath extends Command {
     protected void initialize() {
     	Robot.driveTrain.zeroEncoders();
     	Robot.driveTrain.resetGyro();
+    	
+    	/*Getting the left and right trajectories from the CSV files*/
+    	File leftCSV = new File("/home/lvuser/Profiles/Test Path_left_Jaci.csv");
+    	File rightCSV = new File("/home/lvuser/Profiles/Test Path_right_Jaci.csv");
+    	left = new DistanceFollower(Pathfinder.readFromCSV(leftCSV));
+    	right = new DistanceFollower(Pathfinder.readFromCSV(rightCSV));
+    	
+    	intEncPosL = Robot.driveTrain.getLeftEncoder();
+    	intEncPosR = Robot.driveTrain.getRightEncoder();
+    	
+    	left.configurePIDVA(RobotMap.leftkP, RobotMap.leftkI, RobotMap.leftkD, 1/.5, 0);
+    	right.configurePIDVA(RobotMap.rightkP, RobotMap.rightkI, RobotMap.rightkD, 1/.5, 0);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
 //    	System.out.println("Running Command");
- 
-    	
-    	l = left.calculate(Robot.driveTrain.getLeftEncoder());
-    	r = right.calculate(Robot.driveTrain.getRightEncoder());
+    	double leftDistCovered = (Robot.driveTrain.getLeftEncoder()-intEncPosL)/RobotMap.encoderToInch;
+    	double rightDistCovered = (Robot.driveTrain.getRightEncoder()-intEncPosR)/RobotMap.encoderToInch;
+    	l = left.calculate(leftDistCovered);
+    	r = right.calculate(rightDistCovered);
     	
     	gyro_heading = Robot.driveTrain.getGyroAngle(); // Assuming the gyro is giving a value in degrees
     	desired_heading = Pathfinder.r2d(left.getHeading());  // Should also be in degrees
